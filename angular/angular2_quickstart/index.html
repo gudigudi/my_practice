@@ -1,0 +1,22 @@
+<!-- index.html -->
+<html>
+<head>
+  <title>Angular 2 Quickatart</title>
+  <script src="./quickstart/dist/es6-shim.js"></script>
+</head>
+<body>
+  <!-- The app component created in app.es6 -->
+  <my-app></my-app>
+
+  <script>
+    // Rewrite the paths to load the files
+    System.paths = {
+      'angular2/*':'./quickstart/angular2/*.js'
+      'rtts_assert/*': './quickstart/rtts_assert/*.js'
+      'app': 'app.es6'
+    };
+
+    System.import('app');
+  </script>
+</body>
+</html>
