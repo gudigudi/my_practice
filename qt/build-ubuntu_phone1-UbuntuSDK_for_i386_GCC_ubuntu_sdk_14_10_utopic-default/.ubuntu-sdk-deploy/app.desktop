@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=app
+Exec=./qtc_device_debughelper.py app "ubuntu-html5-app-launcher $@ --www=www --inspector"
+Icon=ubuntu_phone1.png
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+
