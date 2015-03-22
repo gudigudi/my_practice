@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Title</title>
+  <meta charset="utf-8">
+  <meta name="keywords" content="web Content" />
+  <meta name="description" content="web Description" />
+  <meta name="revised" content="author, writed Time" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scale=no ">
+
+  <!-- CSS -->
+  
+</head>
+<body>
+  <ul>
+    <li [ng-repeat|item]="todos">
+      ${item.text}
+    </li>
+  </ul>
+  <span>There are ${todos.length} todos.</span>
+</body>
+</html>
