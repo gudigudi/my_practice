@@ -1,4 +1,4 @@
-### my programming practices ###
+### my programming practices
 These are my personal programming practice:
 1. **C** low-level programming language
   * OS kernel development
@@ -21,6 +21,6 @@ These are my personal programming practice:
   * PHP
   * opengl
 
-###License###
+###License
 my source code: GPL2
 source from others: License from others
