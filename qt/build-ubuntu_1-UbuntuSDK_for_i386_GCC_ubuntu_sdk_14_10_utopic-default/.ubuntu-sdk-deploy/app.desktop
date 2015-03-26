@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=app
-Exec=./qtc_device_debughelper.py app "qmlscene $@ Main.qml"
-Icon=ubuntu_1.png
-Terminal=false
-Type=Application
-X-Ubuntu-Touch=true
-
