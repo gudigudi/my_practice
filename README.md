@@ -24,3 +24,13 @@ These are my personal programming practice:
 ###License
 my source code: GPL2
 source from others: License from others
+
+### GIT commet information
+```bash
+git add <filename>
+git commet -m "
+simple information about this commet
+
+all information about this commet: 1. fixed 2. new
+"
+```
