@@ -4,8 +4,6 @@ These are my personal programming practice:
   * OS kernel development
   * low-level framework development)
 2. **python** easy startup and framework-designing programming language 
-  * flask
-  * django
 3. **Go** server programming language 
 4. **android-Java** just for mobile development 
 5. web building language(html5, CSS3, Javascript)
