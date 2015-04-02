@@ -3,10 +3,10 @@
  */
 #include <stdio.h>
 
-int Fibter(int n)
+long Fibter(long n)
 {
-    int i = 1, j = 0;
-    for (int k = 0; k < n; ++k) {
+    long i = 1, j = 0;
+    for (long k = 0; k < n; ++k) {
         j = i + j;
         i = j - i;
     }
@@ -15,8 +15,8 @@ int Fibter(int n)
 
 int main(void)
 {
-    for (int i = 0; i < (1 << 5); ++i) {
-        printf("%10d\n", Fibter(i));
+    for (long i = 0; i < (1 << 16); ++i) {
+        printf("%16ld\n", Fibter(i));
     }
     return 0;
 }
