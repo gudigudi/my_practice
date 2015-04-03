@@ -11,7 +11,6 @@ These are my personal programming practice:
 7. OS shell script-language(bash)
 8. other interesting tech:
   * git 
-  * vim
   * ACM
   * algothrim
   * w3cschool: web language and Tech
