@@ -24,3 +24,19 @@ var c1 = new Child("child");
 console.log(c1.getId());
 // 由于c1从原型链上"继承"到了getName方法, 因此可以访问
 console.log(c1.getName());
+
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+
+    this.getName = function() {
+        return this.name;
+    }
+    this.getAge = function() {
+        return this.age;
+    }
+}
+
+var tom = new Person("Tom", 38);
+var jerry = new Person("Jerry", 6);
+console.log(tom, jerry);
