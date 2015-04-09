@@ -15,7 +15,7 @@ These are my personal programming practice:
   * algothrim
   * w3cschool: web language and Tech
   * nodejs
-  * PHP
+  * PHP: a ugly language
   * opengl
 
 ###License
