@@ -9,3 +9,5 @@ node_modules
 *.pyc
 __pycache__
 CMakeFiles
+CMakeCache.txt
+out
