@@ -9,6 +9,6 @@ public class PrintSquare {
         int square;
 
         System.out.print("Please type a number: ");
-        
+
     }
 }
