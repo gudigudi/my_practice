@@ -10,4 +10,5 @@ node_modules
 __pycache__
 CMakeFiles
 CMakeCache.txt
+cmake_install.cmake
 out
