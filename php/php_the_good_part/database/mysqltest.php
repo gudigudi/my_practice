@@ -6,7 +6,7 @@
  * Time: 5:04 PM
  */
 
-$mydb = new mysqli('localhost', 'root', 'ZBQ%@!dfsq', 'book');
+$mydb = new mysqli('localhost', 'user', 'password', 'book');
 $sql = "select * from library";
 
 $result = $mydb->query($sql);
