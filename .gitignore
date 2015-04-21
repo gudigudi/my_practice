@@ -6,6 +6,7 @@
 *.o
 *.class
 node_modules
+bower_components
 *.pyc
 __pycache__
 CMakeFiles
