@@ -8,33 +8,10 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="js/controllers.js"></script>
 </head>
-<body ng-controller="PhoneListCtrl">
-
-  <ul>
-    <li ng-repeat="phone in phones">
-      <span>{{phone.name}}</span>
-      <p>{{phone.snippet}}</p>
-    </li>
-    
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-2">
-          <!--Sidebar contene-->
-          
-          Search: <input ng-model="query"/>
-        </div>
-        <div class="col-md-10">
-          <!--Body content-->
-
-          <ul class="phones">
-            <li ng-repeat="phone in phones | filter:query">
-              {{phone.name}}
-              <p>{{phone.snippet}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </ul>
+<body>
+  
+<div class="container-fluid">
+  <div class="span"></div>
+</div>
 </body>
 </html>
