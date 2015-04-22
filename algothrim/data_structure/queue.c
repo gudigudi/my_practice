@@ -73,6 +73,51 @@ int queue_size(const queue_t *q)
 void queue_push(queue_t *q, const queue_elem_t x)
 {
     if ((q->rear+1) % q->capacity == q->front) {
-
+        queue_elem_t* tmp = (queue_elem_t*)malloc(
+                q->capacity * 2 * sizeof(queue_elem_t));
+        if (q->front < q->rear) {
+            memcpy(tmp, q->elems + q->front,
+                    (q->rear - q->front) * sizeof(queue_elem_t));
+            q->rear -= q->front;
+            q->front = 0;
+        } else if (q->front > q->rear) {
+            // copy date between q->front and q->capacity
+            memcpy(tmp, q->elems + q->front,
+                    (q->capacity - q->front) * sizeof(queue_elem_t));
+            // copy data between q->data[0] and q->data[rear]
+            memcpy(tmp +
+                    (q->capacity - q->front),
+                    q->elems, q->rear * sizeof(queue_elem_t));
+            q->rear += q->capacity - q->front;
+            q->front = 0;
+        }
+        free(q->elems);
+        q->elems = tmp;
+        q->capacity *= 2;
     }
+    q->elems[q->rear] = x;
+    q->rear = (q->rear + 1) % q->capacity;
 }
+
+/**
+ * @brief 在对头删除元素.
+ * @param[in] 队列结构体的指针
+ * @param[out] x 存放退出队列的元素
+ * @return 无
+ */
+void queue_pop(queue_t *q)
+{
+    q->front = (q->front + 1) % q->capacity;
+}
+
+/**
+ * @brief 活取队首元素.
+ * @param[in] q 队列对象的指针
+ * @return 队首元素
+ */
+queue_elem_t queue_front(const queue_t *q)
+{
+    return q->elems[q->rear - 1];
+}
+
+
