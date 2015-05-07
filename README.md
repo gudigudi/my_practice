@@ -13,6 +13,8 @@ These are my personal programming practice:
   * git 
   * ACM
   * algothrim
+  * cocos_2d
+  * angularJS
   * w3cschool: web language and Tech
   * nodejs
   * PHP: a ugly language
