@@ -57,4 +57,16 @@ class Timer {
         return $instance;
     }
 }
+
+
+class mysqlx extends mysqli {
+    function query($query, $resultmode)
+    {
+        $timer = Timer::getInstance();
+        $timer->startTime('MySQL');
+        $res = parent::query($query, $resultmode);
+        $timer->stopTime('MySQL', "Query: $query\n");
+        return $res;
+    }
+}
 ?>
