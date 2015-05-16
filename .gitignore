@@ -1,16 +1,24 @@
-#
-# ignore .idea directory
-# 
+# IntelliJ IDEA
 .idea
+# C and C++
 *.out
 *.o
+# Java
 *.class
+# nodejs, npm
 node_modules
+# bower
 bower_components
+# python and python3
 *.pyc
 __pycache__
+# Cmake
 CMakeFiles
 CMakeCache.txt
 cmake_install.cmake
+# Project build and out directory
 out
 build
+# Qt build directory
+build*Debug
+build*Release
