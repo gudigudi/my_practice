@@ -19,6 +19,7 @@ These are my personal programming practice:
   * nodejs
   * PHP: a ugly language
   * opengl
+  * MySQL
 
 ###License
 my source code: GPL2
