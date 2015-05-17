@@ -16,7 +16,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QRadioButton *btn1 = new QRadioButton("hello", this);
-    QWidgetWindow widgetWindow = new QWidgetWindow();
-    widgetWindow.show();
+    ui->radioButton->actions();
 }
