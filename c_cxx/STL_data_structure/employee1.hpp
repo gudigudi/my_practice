@@ -16,6 +16,7 @@ public:
     void printOut() const;
     void getCopyOf(const Employee& otherEmployee);
     bool makesMoreThan(const Employee& otherEmployee) const;
+    bool operator>(const Employee& otherEmployee)const;
 protected:
     string name;
     double grossPay;

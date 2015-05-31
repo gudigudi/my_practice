@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include "employee1.h"
+#include "employee1.hpp"
 
 Employee::Employee()
 {
@@ -40,3 +40,10 @@ bool Employee::makesMoreThan(const Employee& otherEmployee) const
 {
     return grossPay > otherEmployee.grossPay;
 }
+bool Employee::operator>(const Employee& otherEmployee) const
+
+{
+    return grossPay > otherEmployee.grossPay;
+}
+
+
