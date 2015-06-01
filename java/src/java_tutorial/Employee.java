@@ -1,3 +1,5 @@
+package java_tutorial;
+
 public class Employee {
     // this instance variable is visible for any child class.
     public String name;

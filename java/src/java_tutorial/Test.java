@@ -1,3 +1,5 @@
+package java_tutorial;
+
 public class Test {
     public void pupAge() {
         int age = 0;

@@ -1,3 +1,5 @@
+package java_tutorial;
+
 public class ToDegrees {
     public static void main(String[] args) {
         double x = 45.0;

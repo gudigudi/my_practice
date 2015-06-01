@@ -1,3 +1,5 @@
+package java_tutorial;
+
 public class ParseInt {
     public static void main(String[] args) {
         int x = Integer.parseInt("9");

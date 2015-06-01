@@ -1,3 +1,5 @@
+package java_tutorial;
+
 public class Ceil {
     public static void main(String[] args) {
         double d = -100.675;

@@ -1,3 +1,5 @@
+package java_tutorial;
+
 public class Employee2 {
     // salary variable is a private static variable
     private static double salary;

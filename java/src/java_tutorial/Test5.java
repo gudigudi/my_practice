@@ -1,3 +1,5 @@
+package java_tutorial;
+
 public class Test5 {
     public static void main(String[] args) {
         int x = 10;

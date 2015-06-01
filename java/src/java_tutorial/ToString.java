@@ -1,3 +1,5 @@
+package java_tutorial;
+
 public class ToString {
     public static void main(String[] args) {
         Integer x = 5;

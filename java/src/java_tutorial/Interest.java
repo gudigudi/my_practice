@@ -1,3 +1,5 @@
+package java_tutorial;
+
 import java.lang.System;
 
 public class Interest {

@@ -1,3 +1,5 @@
+package java_tutorial;
+
 public class ValueOf {
     public static void main(String[] args) {
         Integer x = Integer.valueOf(9);

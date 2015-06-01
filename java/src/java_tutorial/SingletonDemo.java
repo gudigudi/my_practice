@@ -1,3 +1,7 @@
+package java_tutorial;
+
+import java_tutorial.Singleton;
+
 import java.lang.String;
 
 public class SingletonDemo {
