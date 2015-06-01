@@ -21,6 +21,6 @@ public class Client extends Thread {
 
         PrintStream out = null;
 
-        Utilities.printMsg("creating output stream");
+        //Utilities.printMsg("creating output stream");
     }
 }
