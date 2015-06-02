@@ -33,6 +33,5 @@ public class ListFiles {
         }
         if (fileIn != null)
             fileIn.close();
-
     }
 }
