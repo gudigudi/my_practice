@@ -17,7 +17,7 @@ These are my personal programming practice:
   * angularJS
   * w3cschool: web language and Tech
   * nodejs
-  * PHP: a ugly language
+  * PHP: a ugly but easy-powerful language for web development
   * opengl
   * MySQL
   * boost
