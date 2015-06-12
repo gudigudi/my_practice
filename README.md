@@ -23,7 +23,7 @@ These are my personal programming practice:
   * boost
   * bootstrap3
   * CUDA
-
+  * design pattern
 ###License
 my source code: GPL2
 source from others: License from others
