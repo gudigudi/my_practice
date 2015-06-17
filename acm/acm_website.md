@@ -5,3 +5,4 @@
 4. http://acm.sgu.ru/
 5. http://uva.onlinejudge.org/
 6. http://codeforces.com/
+7. http://code.google.com/codejam/
