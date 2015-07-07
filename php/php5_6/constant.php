@@ -1,17 +1,16 @@
 <?php
-const ONE = 1;
-const TWO = ONE * 2;
 
-class C {
-    const THREE = TWO + 1;
-    const ONE_THIRD = ONE / self::THREE;
-    const SENTENCE = 'The value of ' . THREE . ' is 3';
+define("MINSIZE", 50);
+echo MINSIZE;
+echo constant("MINSIZE");
 
-    public function f($a = ONE + self::THREE) {
-        return $a;
-    }
+
+// Micro
+echo __LINE__;
+echo __FILE__;
+function echoFunctionName() {
+  echo __FUNCTION__;
 }
+echoFunctionName();
 
-echo (new C)->f() . "\n";
-echo C::SENTENCE;
 ?>
