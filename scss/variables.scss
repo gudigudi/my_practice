@@ -1,0 +1,13 @@
+$width: 5em;
+#main {
+  width: $width;
+}
+
+#main {
+  $width: 5em !global;
+  width: $width;
+}
+
+#sidebar {
+  width: $width;
+}

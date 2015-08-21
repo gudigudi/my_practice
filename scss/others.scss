@@ -1,0 +1,17 @@
+p {
+  width: 1em + (2em * 3);
+}
+
+p {
+  color: hsl(0, 100%, 50%);
+}
+
+p {
+  color: hsl($hue: 0, $saturation: 100%, $lightness: 50%);
+}
+
+$name: foo;
+$attr: border;
+p.#{$name} {
+  #{$attr}-color: blue;
+}
