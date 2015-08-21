@@ -1,0 +1,18 @@
+#main {
+  color: black;
+  &-sidebar { border: 1px solid; }
+}
+
+.funky {
+  font: {
+    family: fontasy;
+    size: 30em;
+    weight: bold;
+  }
+}
+
+.funky {
+  font: 20px/24px fantasy {
+    weight: bold;
+  }
+}
