@@ -22,3 +22,5 @@ build
 # Qt build directory
 build*Debug
 build*Release
+# scss, sass
+.sass-cache
