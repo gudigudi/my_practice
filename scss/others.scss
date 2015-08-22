@@ -1,17 +1,24 @@
-p {
-  width: 1em + (2em * 3);
+.sidebar {
+  width: 300px;
+  @media screen and (orientation: landscape) {
+    width: 500px;
+  }
 }
 
-p {
-  color: hsl(0, 100%, 50%);
+@media screen {
+  .sidebar {
+    @media (orientation: landscape) {
+      width: 500px;
+    }
+  }
 }
 
-p {
-  color: hsl($hue: 0, $saturation: 100%, $lightness: 50%);
-}
+$media: screen;
+$feature: -webkit-min-device-pixel-ratio;
+$value: 1.5;
 
-$name: foo;
-$attr: border;
-p.#{$name} {
-  #{$attr}-color: blue;
+@media #{$media} and ($feature: $value) {
+  .sidebar {
+    width: 500px;
+  }
 }
