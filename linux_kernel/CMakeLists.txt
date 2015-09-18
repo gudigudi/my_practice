@@ -13,6 +13,9 @@ set(SOURCE_FILES
     thread.c
     UDS_client.c
     UDS_server.c
-    poll.c)
+    poll.c
+    writev.c
+    readv.c
+    mmap.c)
 
 add_executable(linux_kernel ${SOURCE_FILES})
