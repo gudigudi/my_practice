@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="uft-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" constent="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  <title></title>
+  <link href="http://localhost/css/bootstrap.min.css" rel="stylesheet">
+<!-- CSS here -->
+  <style>
+
+  </style>
+</head>
+<body>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Edit</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="user in users">
+        <td>
+          <button class="btn" ng-click="editUser(user.id)">
+            <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+          </button>
+        </td>
+        <td>{{ user.fName }}</td>
+        <td>{{ user.lName }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <script src="http://localhost/js/jquery.min.js"></script>
+  <script src="http://localhost/js/bootstrap.min.js"></script>
+  <script src="http://localhost/js/angular.min.js"></script>
+  <script>
+  
+  </script>
+</body>
+</html>

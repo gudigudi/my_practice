@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap</title>
+  <meta charset="utf-8">
+  <meta name="keywords" content="web Content" />
+  <meta name="description" content="web Description" />
+  <meta name="revised" content="author, writed Time" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scale=no ">
+  <link rel="stylesheet" href="http://localhost/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost/bootstrap/css/bootstrap-theme.min.css">
+  <!-- CSS -->
+  <style type="text/css" media="screen">
+    body {
+      font: lem Verdana, Geneva, sans-serif;
+      padding: 0;
+      margin: 5px;
+      color: Black;
+      background-color: WhiteSmoke;
+    }
+    div {
+      padding: 0;
+      margin: 0;
+    }
+    button {
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    #app {
+      margin: 4px;
+      background-color: #bbc;
+    }
+    #app>header {
+      padding: 0 0 .5em;
+      font-size: 1.5em;
+      color: WhiteSmoke;
+      background-color: #006;
+    }
+    #app->footer {
+      padding: 0.25em;
+      color: WhiteSmoke;
+      background-color: #006;
+    }
+    #main {
+      margin: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div id='app'> 
+    <header>App</header>
+    <div id='main'></div>
+    <footer></footer>
+  </div>
+
+  <script src="http://localhost/jquery/jquery.min.js"></script>
+  <script src="http://localhost/bootstrap/js/bootstrap.min.js"></script>
+  <!-- javascript -->
+  <script type="text/javascript" charset="utf-8">
+    "use struct";
+
+    function MyApp() {
+        var version = "v1.0";
+
+        function setStatus(message) {
+            $("#app>footer").text(message);
+        }
+
+        this.start = function() {
+            $("#app>header").append(version);
+            setStatus("ready");
+        };
+    }
+
+    var myApp = {
+        version: "v1.0",
+        setStatus: function(message) {
+            $("#app>footer").text(message);
+        },
+        start: function() {
+            $("#app>header").append(this.version);
+            this.setStatus("ready");
+        };
+    };
+  </script>
+</body>
+</html>
