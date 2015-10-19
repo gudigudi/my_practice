@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400" height="400">
+    <text x="0" y="50" fill="red" font-size="50">I love SVG</text>
+    <text x="150" y="150" fill="red" font-size="50" transform="rotate(30, 20, 40)">I love SVG</text>
+
+</svg>

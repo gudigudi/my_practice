@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="uft-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" constent="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  <title>Chapter 2 :: jQuery Events</title>
+  <link href="http://localhost/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <select id="names">
+    <option value="Leon">Leon</option>
+    <option value="Allyce">Allyce</option>
+    <option value="Jane">Jane</option>
+  </select>
+  <input type="text" value="The large cat sat on the mat" id="cat"/>
+  <script src="http://localhost/js/jquery.min.js"></script>
+  <script src="http://localhost/js/bootstrap.min.js"></script>
+  <script>
+    $('#names').change(function(){
+      var newValue = $(this).val();
+      alert("Input value changed to: " + newValue);
+    });
+    $('#cat').change(function(){
+      var newValue = $(this).val();
+      alert("Input value changed to: " + newValue);
+    })
+  </script>
+</body>
+</html>

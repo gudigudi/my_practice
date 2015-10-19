@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap</title>
+  <meta charset="utf-8">
+  <meta name="keywords" content="web Content" />
+  <meta name="description" content="web Description" />
+  <meta name="revised" content="author, writed Time" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scale=no ">
+  <link rel="stylesheet" href="http://localhost/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost/bootstrap/css/bootstrap-theme.min.css">
+  <!-- CSS -->
+  <style type="text/css" media="screen">
+    .page {
+      Position: absolute;
+      width: 100%;
+      height: 100%;
+      /* activate the GPU for compositing each page */
+      -webkit-transform: translate3d(0, 0, 0);
+    }
+    .stage-left {
+      left: 100%;
+    }
+    .stage-right {
+      left: 100%;
+    }
+    .stage-center {
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id='home-page' class="page"> 
+    <h1>Home Page</h1>
+  </div>
+
+  <div id='products-page' class="page stage-right"> 
+    <h1>Products Page</h1>
+  </div>
+
+  <div id='about-page' class='page stage-left'> 
+    <h1>About Page</h1>
+  </div>
+
+  <script src="http://localhost/jquery/jquery.min.js"></script>
+  <script src="http://localhost/bootstrap/js/bootstrap.min.js"></script>
+  <!-- javascript -->
+  <script type="text/javascript" charset="utf-8">
+    function slideTo(id) {
+        // 1. ) the page we are bringing into focus dictates how
+        // the current page will exit. So let's see what classes
+        // our incoming page is using.
+        // We know it will have stage[right|left|etc...]
+        var classes = getElement(id).className.split(' ');
+
+        var stageType = classes.indexOf('stage-left');
+
+        if (FOCUS_PAGE == null) {
+            FOCUS_PAGE = getElement('home-page');
+        }
+
+        if (stageType > 0) {
+            FOCUS_PAGE.className = 'page transition stage-right';
+        } else {
+            FOCUS_PAGE.className = 'page transition stage-left';
+        }
+
+        FOCUS_PAGE = getElement(id);
+
+        FOCUS_PAGE.className = 'page transition stage-center';
+    }
+
+    FOCUS_PAGE.style.transform = "translate(X, Y)";
+
+    var getTransformProperty = function(node) {
+        var properties = [
+            'transform',
+            'webkitTransform',
+            'msTransform',
+            'OTransform'
+        ];
+        var p;
+        while (p = properties.shift()) {
+            if (typeof node.style[p] != 'undefined') {
+                document.querySelector("#log").innerHTML += p + "<br/>";
+            }
+        }
+        return false;
+    };
+  </script>
+</body>
+</html>

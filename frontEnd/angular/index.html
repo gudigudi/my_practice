@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <meta charset="uft-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" constent="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  <title></title>
+  <link href="http://localhost/css/bootstrap.min.css" rel="stylesheet">
+<!-- CSS here -->
+  <style>
+
+  </style>
+</head>
+<body>
+
+  <div ng-comtroller="InvoiceCntl">
+    <b>Invoice:</b>
+    <br>
+    <br>
+    <table>
+      <tr><td>Quantity</td><td>Cost</td></tr>
+      <tr>
+        <td>
+          <input type="integer" min="0" ng-model="qty" required>
+        </td>
+        <td>
+          <input type="number" ng-model="cost" required>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <b>Total:</b> {{qty * cosst | currency}}
+  </div>
+
+  <script src="http://localhost/js/jquery.min.js"></script>
+  <script src="http://localhost/js/bootstrap.min.js"></script>
+  <script src="http://localhost/js/angular.min.js"></script>
+  <script>
+    function InvoiceCntl($scope) {
+      $scope.qty = 1;
+      $scope.cost = 19.95;
+    }
+
+    // end-to-end test
+    it('should show of angular binding', function() {
+      expect(binding('qty * cost')).toEqual('$19.95');
+      input('qty').enter('2');
+      input('cost').enter('5.00');
+      expect(binding('qty * cost')).toEqual('$10.00');
+    });
+  </script>
+</body>
+</html>
