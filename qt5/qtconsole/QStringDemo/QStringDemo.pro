@@ -1,7 +1,7 @@
 QT += core
-# QT -= gui
+QT -= gui
 
-TARGET = analogclock
+TARGET = QStringDemo
 CONFIG += console
 CONFIG -= app_bundle
 

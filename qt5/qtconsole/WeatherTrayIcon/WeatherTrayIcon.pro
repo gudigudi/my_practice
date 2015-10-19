@@ -12,9 +12,7 @@ TARGET = WeatherTrayIcon
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += weathertrayicon.cpp \
+    main.cpp
 
-HEADERS  += mainwindow.h
-
-FORMS    += mainwindow.ui
+HEADERS += weathertrayicon.h

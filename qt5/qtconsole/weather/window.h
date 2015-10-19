@@ -1,15 +1,25 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <QWidget>
 
-class Window
+class QPushButton;
+class Window : public QWidget
 {
+    Q_OBJECT
 public:
-    Window();
+    explicit Window(QWidget *parent = 0);
 
 signals:
+    void counterReached();
 
-public slots:
+private slots:
+    void slotButtonClicked(bool checked);
+    void aboutQt(bool checked);
+
+private:
+    int m_counter;
+    QPushButton *m_button;
 };
 
 #endif // WINDOW_H

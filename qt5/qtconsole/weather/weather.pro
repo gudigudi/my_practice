@@ -12,9 +12,10 @@ TARGET = weather
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += main.cpp \
+    window.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += \
+    window.h
 
-FORMS    += mainwindow.ui
+FORMS    +=
