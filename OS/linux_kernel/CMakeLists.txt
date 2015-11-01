@@ -16,6 +16,8 @@ set(SOURCE_FILES
     poll.c
     writev.c
     readv.c
-    mmap.c)
+    mmap.c tcp_seq_show.c)
 
 add_executable(linux_kernel ${SOURCE_FILES})
+
+include_directories("/usr/src/linux-headers-$(uname -a)/include")
