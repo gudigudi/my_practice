@@ -4,6 +4,7 @@
 *.out
 *.o
 # Java
+out
 *.class
 # nodejs, npm
 node_modules
