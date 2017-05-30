@@ -1,6 +1,8 @@
-var counter1 = require('./util/counter');
-var counter2 = require('./util/counter');
+var fs = require("fs");
 
-console.log(counter1.count());
-console.log(counter2.count());
-console.log(counter2.count());
+fs.readFile('input.txt', function(err, data) {
+  if (err) return console.log(err);
+  console.log(data.toString());
+});
+
+console.log("program execute end!");
