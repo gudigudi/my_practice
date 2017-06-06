@@ -1,0 +1,64 @@
+group 'sb11'
+version '1.0-SNAPSHOT'
+
+buildscript{
+    repositories{
+        mavenLocal()
+        maven { url "https://repo.spring.io/milestone" }
+        mavenCentral()
+    }
+    dependencies {
+        ext.SpringBootVersion="1.5.3.RELEASE"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${SpringBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven { url "https://repo.spring.io/milestone" }
+    mavenCentral()
+}
+
+dependencies {
+    ext.SpringBootVersion="1.5.3.RELEASE"
+    // web.
+    compile("org.springframework.boot:spring-boot-starter-web:${SpringBootVersion}")
+    // devtool.
+    compile("org.springframework.boot:spring-boot-devtools:${SpringBootVersion}")
+    // restful api.
+    compile("org.springframework.boot:spring-boot-starter-data-rest:${SpringBootVersion}")
+    // jpa
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${SpringBootVersion}")
+    // mysql.
+    compile("org.springframework.boot:spring-boot-starter-jdbc:${SpringBootVersion}")
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0")
+    compile("mysql:mysql-connector-java:6.0.5")
+    compile("com.alibaba:druid:1.0.28")
+    // redis NOSQL as cache.
+    compile("org.springframework.boot:spring-boot-starter-cache:${SpringBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-data-redis:${SpringBootVersion}")
+    // web template.
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf:${SpringBootVersion}")
+    // test.
+    compile("org.springframework.boot:spring-boot-starter-test:${SpringBootVersion}")
+    // log.
+    compile("org.springframework.boot:spring-boot-starter-logging:${SpringBootVersion}")
+    // email.
+//    compile("org.springframework.boot:spring-boot-starter-mail:${SpringBootVersion}")
+//    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.6'
+    // monitor.
+    compile("org.springframework.boot:spring-boot-starter-actuator:${SpringBootVersion}")
+    // oauth2
+//    compile("org.springframework.boot:spring-boot-starter-security:${SpringBootVersion}")
+//    compile("org.springframework.security.oauth:spring-security-oauth2:2.0.12.RELEASE")
+
+    testCompile("junit:junit:4.12")
+}
