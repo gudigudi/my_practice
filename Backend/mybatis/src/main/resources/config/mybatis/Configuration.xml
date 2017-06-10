@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+       <typeAlias alias="User" type="com.gudigudigudi.mybatis.model.User"/>
+       <typeAlias alias="Article" type="com.gudigudigudi.mybatis.model.Article"/>
+    </typeAliases>
+    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://114.215.134.219:3306/mydb?useSSL=false"/>
+                <property name="username" value="dba001"/>
+                <property name="password" value="ZBQ521dfsq"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/gudigudigudi/mybatis/model/User.xml"/>
+    </mappers>
+
+    <!--分页插件-->
+    <plugins>
+        <plugin interceptor="com.gudigudigudi.mybatis.plugin.PagePlugin">
+            <property name="dialect" value="mysql" />
+            <property name="pageSqlId" value=".*ListPage.*" />
+        </plugin>
+    </plugins>
+</configuration>
