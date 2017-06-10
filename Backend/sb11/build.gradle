@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    ext.SpringBootVersion="1.5.3.RELEASE"
+    ext.SpringBootVersion="1.5.4.RELEASE"
     // web.
     compile("org.springframework.boot:spring-boot-starter-web:${SpringBootVersion}")
     // devtool.
