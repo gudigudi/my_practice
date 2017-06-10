@@ -2,7 +2,6 @@ import com.gudigudigudi.mybatis.inter.IUserOperation;
 import com.gudigudigudi.mybatis.model.Article;
 import com.gudigudigudi.mybatis.model.User;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -17,7 +16,7 @@ public class Test {
 
     static {
         try {
-            reader = Resources.getResourceAsReader("Configuration.xml");
+            reader = Resources.getResourceAsReader("config/mybatis/Configuration.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
         } catch (Exception e) {
             e.printStackTrace();
