@@ -39,36 +39,34 @@
     </delete>
 
 
-
     <!--<resultMap id="resultUserArticleList" type="Article">-->
-        <!--<id property="id" column="aid"/>-->
-        <!--<result property="title" column="title"/>-->
-        <!--<result property="content" column="content"/>-->
-        <!--<association property="user" javaType="User">-->
-            <!--<id property="id" column="id"/>-->
-            <!--<result property="userName" column="userName"/>-->
-            <!--<result property="userAddress" column="userAddress"/>-->
-        <!--</association>-->
+    <!--<id property="id" column="aid"/>-->
+    <!--<result property="title" column="title"/>-->
+    <!--<result property="content" column="content"/>-->
+    <!--<association property="user" javaType="User">-->
+    <!--<id property="id" column="id"/>-->
+    <!--<result property="userName" column="userName"/>-->
+    <!--<result property="userAddress" column="userAddress"/>-->
+    <!--</association>-->
     <!--</resultMap>-->
     <!--<select id="getUserArticles" parameterType="int" resultMap="resultUserArticleList">-->
-        <!--SELECT-->
-            <!--user.id,-->
-            <!--user.userName,-->
-            <!--user.userAddress,-->
-            <!--article.id aid,-->
-            <!--article.title,-->
-            <!--article.content-->
-        <!--FROM user, article-->
-        <!--WHERE user.id = article.userid AND user.id = #{id}-->
+    <!--SELECT-->
+    <!--user.id,-->
+    <!--user.userName,-->
+    <!--user.userAddress,-->
+    <!--article.id aid,-->
+    <!--article.title,-->
+    <!--article.content-->
+    <!--FROM user, article-->
+    <!--WHERE user.id = article.userid AND user.id = #{id}-->
     <!--</select>-->
 
 
-
     <!--<resultMap id="resultListUser" type="User">-->
-        <!--<id column="id" property="id"/>-->
-        <!--<result column="userName" property="userName"/>-->
-        <!--<result column="userAge" property="userAge"/>-->
-        <!--<result column="userAddress" property="userAddress"/>-->
+    <!--<id column="id" property="id"/>-->
+    <!--<result column="userName" property="userName"/>-->
+    <!--<result column="userAge" property="userAge"/>-->
+    <!--<result column="userAddress" property="userAddress"/>-->
     <!--</resultMap>-->
     <resultMap id="resultUserArticleList" type="Article">
         <id property="id" column="aid"/>
@@ -88,5 +86,18 @@
         WHERE user.id = article.userid AND user.id = #{id}
     </select>
 
+    <!--分页查询-->
+    <select id="getUserArticlesInPage" parameterType="int" resultMap="resultUserArticleList">
+        SELECT
+            user.id,
+            user.userName,
+            user.userAddress,
+            article.id aid,
+            article.title,
+            article.content
+        FROM user, article
+        WHERE user.id = article.userid AND user.id = #{id}
+        LIMIT #{offset},#{pagesize}
+    </select>
 
 </mapper>
