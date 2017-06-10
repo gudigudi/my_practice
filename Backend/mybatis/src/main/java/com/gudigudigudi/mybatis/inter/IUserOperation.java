@@ -2,6 +2,7 @@ package com.gudigudigudi.mybatis.inter;
 
 import com.gudigudigudi.mybatis.model.Article;
 import com.gudigudigudi.mybatis.model.User;
+import com.gudigudigudi.mybatis.plugin.PageInfo;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface IUserOperation {
     public void deleteUser(int id);
 
     public List<Article> getUserArticles(int id);
+
+    public List<Article> selectArticleListPage(PageInfo pageInfo,int currentPage);
 }
