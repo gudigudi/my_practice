@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gudigudigudi.mybatis.model.Blog">
+    <!--if-->
+    <select id="dynamicIfTest" parameterType="Blog" resultType="Blog">
+        SELECT * FROM blog WHERE 1=1
+        <if test="title!=null">AND title=#{title}</if>
+        <if test="content!=null">AND content=#{content}</if>
+        <if test="owner!=null">AND owner=#{owner}</if>
+    </select>
+
+    <!--choose-->
+    <select id="dynamicChooseTest" parameterType="Blog" resultType="Blog">
+        SELECT * FROM blog WHERE 1=1
+        <choose>
+            <when test="title!=null">AND title=#{title}</when>
+            <when test="content!=null">AND content=#{content}</when>
+            <otherwise>AND owner="owner1"</otherwise>
+        </choose>
+    </select>
+
+    <!--trim:对包含的内容加上prefix/suffix,常用来替代where-->
+    <select id="dynamicTrimTest" parameterType="Blog" resultType="Blog">
+        SELECT * FROM blog
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="title!=null">title=#{title}</if>
+            <if test="content!=#{content}">and content=#{content}</if>
+            <if test="owner!=null">or owner=#{owner}</if>
+        </trim>
+    </select>
+
+
+</mapper>
