@@ -14,7 +14,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "vue": "^2.3.3",
+    "vue": "^2.3.4",
     "vue-router": "^2.5.3",
     "vuex": "^2.3.1"
   },
@@ -78,7 +78,7 @@
     "url-loader": "^0.5.8",
     "vue-loader": "^11.3.4",
     "vue-style-loader": "^2.0.5",
-    "vue-template-compiler": "^2.2.6",
+    "vue-template-compiler": "^2.3.4",
     "webpack": "^2.6.1",
     "webpack-bundle-analyzer": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
