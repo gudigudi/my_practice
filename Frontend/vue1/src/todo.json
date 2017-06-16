@@ -1,0 +1,12 @@
+{
+  id:String, // 单条待办项唯一标示
+  title:String, // 标题
+  count:Number,// 未完成待办项数目
+  isDelete:Boolean, // 是否删除(物理删除)
+  locked:Boolean, // 是否锁定
+  record:[
+    text:String, // 文字内容
+    isDelete: Boolean, // 是否删除(物理删除)
+    checked:Boolean // 是否完成
+  ]
+}
