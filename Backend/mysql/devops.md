@@ -33,4 +33,20 @@
 * 合理分页
 
 ## 数据库运维规范
-* SQL
+* SQL审核,DDL审核和操作时间,尤其是OnlineDDL
+* 高危操作检查,Drop前做好数据备份
+* 权限控制和审计
+* 日志分析,Mysql慢日志/错误日志
+* 高可用方案
+* 数据备份方案
+
+### InnoDB优化
+* innodbfileper_table=1
+* innodbbufferpool_size: 根据数据量和内存合理设置
+* innodbflushlog_attrxcommit=0 1 2
+* innodblogfile_size: 设置大点
+* innodbpagesize
+* innodbflushmetod=o_direct
+* innodbundodirectory: 放在高速设备上
+* innodbbufferpool_dump
+* atshutdown,bufferpool dump
