@@ -1,0 +1,7 @@
+[package]
+name = "ruststarter"
+version = "0.1.0"
+authors = ["Jiade Dai <huolingdfsq@gmail.com>"]
+
+[dependencies]
+rand = "0.3.15"
