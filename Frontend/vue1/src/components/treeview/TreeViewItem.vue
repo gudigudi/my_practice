@@ -2,8 +2,10 @@
 
 </template>
 <script>
+  import _ from 'lodash'
+
   export default {
-    name: 'TreeView',
+    name: 'TreeViewItem',
     props: {
       data: Object,
       'max-depth': Number,
@@ -25,26 +27,26 @@
         if (Number.isInteger(value.key)) {
           return value.key + ':'
         } else {
-          return "\"" + value.key + "\":"
+          return '"' + value.key + '":'
         }
       },
       getValue (value) {
         if (Number.isFinite(value.value)) {
           return value.value
         }
-        if (isNull(value.value)) {
-          return "null"
+        if (_.isNull(value.value)) {
+          return 'null'
         }
-        if (isString(valule.value)) {
-          return "\"" + value.value + "\""
+        if (_.isString(value.value)) {
+          return '"' + value.value + '"'
         }
         return value.value
       },
       getValueType (value) {
-        let prefix = "tree-view-item-value-"
+        let prefix = 'tree-view-item-value-'
 
         if (Number.isFinite(value.value)) {
-          return prefix + "number"
+          return prefix + 'number'
         }
       }
     }
