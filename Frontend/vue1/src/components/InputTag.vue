@@ -1,5 +1,15 @@
 <template>
-
+  <div @click="focusNewTag()" v-bind:class="{'read-only': readOnly}"
+       class="input-tag-wrapper">
+    <span v-for="(tag, index) in tags" class="input-tag">
+      <span>{{tag}}</span>
+      <a v-if="!readOnly" @click.prevent.stop="remove(index)"
+         class="remove"></a>
+    </span>
+    <input type="text" v-if="!readOnly" v-bind:placeholder="placeholder"
+           v-model="newTag" v-on:keydown.delete.stop="removeLastTag()"
+           v-on:keydown.enter.188.prevent.stop="addNew(newTag)" class="new-tag"/>
+  </div>
 </template>
 <script>
   import {validators} from '../utils/validators'
@@ -73,4 +83,56 @@
     }
   }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .input-tag-wrapper {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    padding-left: 4px;
+    padding-top: 4px;
+    cursor: text;
+    text-align: left;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    .input-tag {
+      background-color: #cde69c;
+      border-radius: 2px;
+      border: 1px solid #a5d24a;
+      color: #638421;
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 400;
+      margin-bottom: 4px;
+      margin-right: 4px;
+      padding: 3px;
+      .remove {
+        cursor: pointer;
+        font-weight: bold;
+        color: #638421;
+        &:hover {
+          text-decoration: none;
+        }
+        &:before {
+          content: " x";
+        }
+      }
+    }
+    .new-tag {
+      background: transparent;
+      border: 0;
+      color: #777;
+      font-size: 13px;
+      font-weight: 400;
+      margin-bottom: 6px;
+      margin-top: 1px;
+      outline: none;
+      padding: 4px;
+      padding-left: 0;
+      width: 80px;
+    }
+    .read-only {
+      cursor: default;
+    }
+  }
+</style>
