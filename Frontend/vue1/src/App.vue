@@ -16,9 +16,8 @@
       <button @click="increateB">{{b.count}}</button>
     </p>
     <button @click="increateAsyncA">actions</button>
-
     <select-search></select-search>
-
+    <tree-view></tree-view>
     <app-footer></app-footer>
   </div>
 </template>
@@ -32,10 +31,12 @@
 
   import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
   import SelectSearch from './components/selectSearch.vue'
+  import TreeView from './components/treeview/TreeView.vue'
 
   export default {
     name: 'app',
     components: {
+      TreeView,
       SelectSearch,
       AppFooter,
       Loading,
