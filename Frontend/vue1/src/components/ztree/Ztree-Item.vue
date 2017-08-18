@@ -127,14 +127,25 @@
         return this.isChildren && this.model.children ? 'level' + this.num + ' line' : 'level' + this.num
       }
     },
-    update () {
-      this.vm.parent.initTreeData()
-    },
-    mounted () {
-      this.vm.nextTick(() => {
-        this.vm.parent.initTreeData()
-      })
-    }
   }
 </script>
-<style></style>
+<style lang="scss" scoped>
+  .expandIcon {
+    background-position: -74px -36px;
+    line-height: 0;
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 0 none;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    top: 4px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-image: url("../../assets/image/ztreestandard.png");
+  }
+</style>
