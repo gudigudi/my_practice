@@ -65,15 +65,15 @@
       }
     },
     watch: {
-      format: renderFormat,
+      'format': 'renderFormat',
       minuteInterval (newInterval) {
         this.renderList('minute', newInterval)
       },
       secondInterval (newInterval) {
         this.renderList('second', newInterval)
       },
-      value: readValues,
-      displayTime: fillValues
+      'value': 'readValues',
+      'displayTime': 'fillValues'
     },
     methods: {
       formatValue (type, i) {
@@ -140,9 +140,9 @@
         }
       },
       renderList (listType, interval) {
-        if (listType == 'second') {
+        if (listType === 'second') {
           interval = interval || this.secondInterval
-        } else if (listType == 'minute') {
+        } else if (listType === 'minute') {
           interval = interval || this.minuteInterval
         } else {
           return
@@ -234,6 +234,22 @@
             case 'HH':
               if (!String(hourValue).length) {
                 fullValues[token] = ''
+                return
+              } else if (baseOnTwelveHours) {
+                if (apmValue === 'pm') {
+                  value = hourValue < 12 ? hourValue + 12 : hourValue
+                } else {
+                  value = hourValue % 12
+                }
+              } else {
+                value = hourValue % 24
+              }
+              fullValues[token] = (token === 'HH' && value < 10) ? `0${value}` : String(value)
+              break
+            case 'k':
+            case 'kk':
+              if (!String(hourValue).length) {
+
               }
           }
         })
