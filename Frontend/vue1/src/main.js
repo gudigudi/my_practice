@@ -4,10 +4,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
 import router from './router'
+import lodash from './plugins/lodash'
+import axios from './plugins/axios'
 
 Vue.config.productionTip = false
 
-// Vue.use(Vuex)
+Vue.use(Vuex)
+Vue.use(lodash)
+Vue.use(axios)
 
 // defined modules
 const ModuleA = {
