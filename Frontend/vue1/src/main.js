@@ -6,12 +6,14 @@ import App from './App'
 import router from './router'
 import lodash from './plugins/lodash'
 import axios from './plugins/axios'
+import moment from './plugins/moment'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuex)
 Vue.use(lodash)
 Vue.use(axios)
+Vue.use(moment)
 
 // defined modules
 const ModuleA = {
