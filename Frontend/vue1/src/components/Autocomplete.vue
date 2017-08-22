@@ -1,16 +1,23 @@
 <template>
   <div class="autocomplete">
-    <div class="autocomplete-input-group">
-
+    <div class="autocomplete-input-group"
+         :class="{'auto-complete-selected': value}">
+      <input type="search" v-model="searchText" :placeholder="placeholder"
+             :class="inputClass" :disable="disabled" @blur="blur" @focus="focus" @input="inputChange"/>
+    </div>
+    <div class="autocomplete-list" v-if="showList && internalItems.length">
+      <div class="autocomplete-list-item" v-for="item in internalItems" @click="onClickItem(item)">
+        <div :is="componentItem" :item="item"></div>
+      </div>
     </div>
   </div>
 </template>
 <script>
-
   import Item from './Item.vue'
 
   var minLen = 3
   var wait = 500
+
   //  var timeout = null
 
   function isUpdateItems (text) {
@@ -36,13 +43,17 @@
   export default {
     name: 'autocomplete',
     props: {
-      componentItem: {default: () => Item},
+      componentItem: {
+        type: Function,
+        default: () => Item
+      },
       placeholder: String,
       minLen: {type: Number, default: minLen},
       wait: {type: Number, default: wait},
       value: null,
       getLabel: {
-        type: Function, default: item => item
+        type: Function,
+        default: item => item
       },
       items: Array,
       autoSelectOneItem: {type: Boolean, default: true}
@@ -99,10 +110,21 @@
       },
       setItems (items) {
         this.internalItems = items || []
+      },
+      isSelectedValue (value) {
+        return this.internalItems.length && value === this.internalItems[0] === 1
       }
     }
   }
 </script>
-<style scoped>
-
+<style lang="scss" scoped>
+  .autocomplete {
+    position: relative;
+    .autocomplete-list {
+      position: absolute;
+      .autocomplete-list-item {
+        cursor: pointer;
+      }
+    }
+  }
 </style>
