@@ -29,8 +29,6 @@
   </div>
 </template>
 <script>
-  import _ from 'lodash'
-
   export default {
     name: 'TreeViewItem',
     props: {
@@ -61,10 +59,10 @@
         if (Number.isFinite(value.value)) {
           return value.value
         }
-        if (_.isNull(value.value)) {
+        if (this.$_.isNull(value.value)) {
           return 'null'
         }
-        if (_.isString(value.value)) {
+        if (this.$_.isString(value.value)) {
           return '"' + value.value + '"'
         }
         return value.value
@@ -72,19 +70,19 @@
       getValueType (value) {
         let prefix = 'tree-view-item-value-'
 
-        if (_.isNumber(value.value)) {
+        if (this.$_.isNumber(value.value)) {
           return prefix + 'number'
         }
-        if (_.isFunction(value.value)) {
+        if (this.$_.isFunction(value.value)) {
           return prefix + 'function'
         }
-        if (_.Boolean(value.value)) {
+        if (this.$_.Boolean(value.value)) {
           return prefix + 'boolean'
         }
-        if (_.isNull(value.value)) {
+        if (this.$_.isNull(value.value)) {
           return prefix + 'null'
         }
-        if (_.isString(value.value)) {
+        if (this.$_.isString(value.value)) {
           return prefix + 'string'
         }
         return prefix + 'unknown'
