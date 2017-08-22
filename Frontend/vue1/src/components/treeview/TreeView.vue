@@ -6,7 +6,6 @@
 </template>
 <script>
   import TreeViewItem from './TreeViewItem.vue'
-  import _ from 'lodash'
 
   export default {
     name: 'tree-view',
@@ -38,14 +37,14 @@
         }
       },
       generateChildFromCollection: function (collection) {
-        return _.map(collection, (value, keyOrIndex) => {
-          if (_.isPlainObject(value)) {
+        return this.$_.map(collection, (value, keyOrIndex) => {
+          if (this.$_.isPlainObject(value)) {
             return this.transformObject(value, keyOrIndex)
           }
-          if (_.isArray(value)) {
+          if (this.$_.isArray(value)) {
             return this.transformArray(value, keyOrIndex)
           }
-          if (!_.isPlainObject(value) && !_.isArray(value)) {
+          if (!this.$_.isPlainObject(value) && !this.$_.isArray(value)) {
             return this.transformValue(value, keyOrIndex)
           }
         })
@@ -53,13 +52,13 @@
     },
     computed: {
       allOptions: function () {
-        return _.extend({}, {
+        return this.$_.extend({}, {
           rootObjectKey: 'root',
           maxDepth: 4
         }, (this.options || {}))
       },
       parsedData: function () {
-        if (!_.isPlainObject(this.data) && !_.isArray(this.data)) {
+        if (!this.$_.isPlainObject(this.data) && !this.$_.isArray(this.data)) {
           return this.transformValue(this.data, this.allOptions.rootObjectKey)
         }
         return this.transformObject(this.data, this.allOptions.rootObjectKey, true)
