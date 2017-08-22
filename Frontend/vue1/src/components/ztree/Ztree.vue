@@ -122,7 +122,7 @@
 
   .zTreeMask {
     z-index: 10000;
-    background-color: $cfcfcf;
+    background-color: #cfcfcf;
     opacity: 0.0;
     filter: alpha(opacity=0);
     position: absolute;
