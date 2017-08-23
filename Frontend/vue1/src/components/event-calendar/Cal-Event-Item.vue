@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h3 class="title">{{index + 1}}. {{event.title}}</h3>
+    <h3 class="title">{{index + 1}}._{{event.title}}</h3>
     <p class="time">{{dateTimeFormatter(Date.parse(new Date(event.data)), 'dd/MM/yyyy')}}</p>
     <p class="desc">{{event.desc}}</p>
   </div>
