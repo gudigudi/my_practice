@@ -11284,4 +11284,6 @@ const citys = {
     "cityid": "820000",
     "cityname": "澳门特别行政区"
   }]
-};
+}
+
+export default citys
