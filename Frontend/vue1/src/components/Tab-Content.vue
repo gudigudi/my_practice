@@ -1,5 +1,6 @@
 <template>
-  <section class="tab-container" role="tabpanel" :id="hash" :aria-hidden="!active">
+  <section class="tab-container" role="tabpanel"
+           :id="hash" :aria-hidden="!active">
     <slot></slot>
   </section>
 </template>

@@ -39,7 +39,7 @@
       },
       type: {
         type: String,
-        default: "tab"
+        default: 'tab'
       },
       direction: {
         type: String,
@@ -56,6 +56,133 @@
         activeTabIndex: 0,
         tabs: []
       }
+    },
+    computed: {
+      tabCount () {
+        this.tabs.length
+      },
+      isTabShape () {
+        return this.type === 'tabs'
+      },
+      isStacked () {
+        return this.direction = 'vertical'
+      },
+      classList () {
+        let navType = this.isTabShape ? 'nav-tabs' : 'nav-pills'
+        let centerClass = this.centered ? 'nav-justified' : ''
+        let isStacked = this.isStacked ? 'nav-stacked' : ''
+        let classes = `nav ${navType} ${centerClass} ${isStacked}`
+        return classes
+      },
+      stackedClass () {
+        return this.isStacked ? 'stacked' : ''
+      },
+      activeTabStyle () {
+        return {
+          backgroundColor: this.activeTabColor,
+          color: this.activeTextColor
+        }
+      },
+      activeTitleColor () {
+        return {
+          color: this.activeTabColor
+        }
+      }
+    },
+    mounted () {
+      this.tabs = this.$children.filter((comp) => comp.$options.name === 'tab')
+      if (this.tabs.length > 0 && this.startIndex === 0) {
+        let firstTab = this.tabs[this.activeTabIndex]
+        firstTab.active = true
+        this.tryChangeRoute(firstTab)
+      }
+      if (this.startIndex < this.tabs.length) {
+        let tabToActivate = this.tabs[this.startIndex]
+        this.activeTabIndex = this.startIndex
+        tabToActivate.active = true
+        this.tryChangeRoute(this.tabs[this.startIndex])
+      } else {
+        console.warn(`Prop startIndex set to ${this.startIndex} is greater than the number of tabs - ${this.tabs.length}. Make sure that the starting index is less than the number of tabs registered`)
+      }
+    },
+    methods: {
+      navigateToTab (index) {
+        this.beforeTabChange(this.activeTabIndex, () => {
+          this.changeTab(this.activeTabIndex, index)
+        })
+      },
+      setLoading (value) {
+        this.loading = value
+        this.$emit('on-loading', value)
+      },
+      setValidationError (tab, error) {
+        this.tabs[this.activeTabIndex].validationError = error
+        this.$emit('on-error', error)
+        if (error && tab.$emit) {
+          tab.$emit('on-error', error)
+        }
+      },
+      validateBeforeChange (promiseFn, tab, callback) {
+        this.setValidationError(tab, null)
+        if (promiseFn.then && typeof promiseFn.then === 'function') {
+          this.setLoading(true)
+          promiseFn.then((res) => {
+            this.setLoading(false)
+            let validationResult = res === true
+            this.executeBeforeChange(validationResult, callback)
+          }).catch((error) => {
+            this.setLoading(false)
+            this.setValidationError(tab, error)
+          })
+        } else {
+          let validationResult = promiseFn === true
+          this.executeBeforeChange(validationResult, callback)
+        }
+      },
+      executeBeforeChange (validationResult, callback) {
+        this.$emit('on-validate', validationResult, this.activeTabIndex)
+        if (validationResult) {
+          callback()
+        } else {
+          this.tabs[this.activeTabIndex].validationError = 'error'
+        }
+      },
+      beforeTabChange (index, callback) {
+        if (this.loading) {
+          return
+        }
+        let oldTab = this.tabs[index]
+        if (oldTab && oldTab.beforeChange !== undefined) {
+          let tabChangeRes = oldTab.beforeChange()
+          this.validateBeforeChange(tabChangeRes, oldTab, callback)
+        } else {
+          callback()
+        }
+      },
+      changeTab (oldIndex, newIndex) {
+        if (newIndex < 0 || newIndex >= this.tabCount) {
+          return
+        }
+        let oldTab = this.tabs[oldIndex]
+        let newTab = this.tabs[newIndex]
+        if (oldTab) {
+          oldTab.active = false
+          if (newTab) {
+            newTab.active = true
+          }
+        }
+        this.activeTabIndex = newIndex
+        this.$emit('tab-change', newIndex, newTab, oldTab)
+        this.tryChangeRoute(newTab)
+      },
+      tryChangeRoute (tab) {
+        if (this.$router && tab && tab.route) {
+          this.$router.push(tab.route)
+        }
+      }
     }
   }
 </script>
+<style lang="scss" scoped>
+
+</style>
