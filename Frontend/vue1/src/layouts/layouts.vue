@@ -9,6 +9,7 @@
 
 <script>
   import EuMenu from '../components/menu'
+
   export default {
     components: {EuMenu},
     name: 'layouts'
