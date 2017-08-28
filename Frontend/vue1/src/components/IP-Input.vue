@@ -56,7 +56,7 @@
     return ret
   }
 
-  export default{
+  export default {
     name: 'ip-input',
     props: {
       ip: {type: String, required: true},
@@ -166,6 +166,7 @@
     box-sizing: border-box;
     background-color: #fff;
   }
+
   .ip-segment {
     display: inline-block;
     width: 36px;
@@ -173,7 +174,7 @@
     line-height: normal;
     input {
       width: 24px;
-      height:26px;
+      height: 26px;
       line-height: normal;
       border: none;
       outline: none;

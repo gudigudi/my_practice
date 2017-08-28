@@ -114,6 +114,7 @@
       filter: alpha(opacity=80);
     }
   }
+
   .ztree {
     margin: 0;
     padding: 5px;
