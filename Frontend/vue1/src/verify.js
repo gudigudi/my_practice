@@ -8,7 +8,7 @@ const verify = {
     tip: 'input correct email'
   },
   other: function (checkStr) {
-    if (checkStr === '')return 'not empty'
+    if (checkStr === '') return 'not empty'
     return true
   }
 }
