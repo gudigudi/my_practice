@@ -12,10 +12,10 @@
   </div>
 </template>
 <script>
-  export default{
+  export default {
     name: 'EuMenu'
   }
 </script>
 <style lang="scss">
-  @import "../scss/menu.scss";
+  @import "../style/menu.scss";
 </style>
