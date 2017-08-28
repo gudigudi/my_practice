@@ -17,5 +17,5 @@
 </script>
 
 <style lang="scss">
-  @import "../scss/layouts";
+  @import "../style/layouts";
 </style>
