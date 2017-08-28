@@ -17,6 +17,7 @@
     "axios": "^0.16.2",
     "element-resize-detector": "^1.1.12",
     "lodash": "^4.17.4",
+    "material-colors": "^1.2.5",
     "moment": "^2.18.1",
     "tinycolor2": "^1.4.1",
     "vue": "^2.4.2",
