@@ -109,7 +109,6 @@
             }
 
             if (this.colors.hsl.h !== h) {
-
               this.$emit('change', {
                 h: h,
                 s: this.colors.hsl.s,

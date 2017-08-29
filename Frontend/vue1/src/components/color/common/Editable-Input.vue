@@ -59,14 +59,14 @@
         if (number) {
           let amount = this.arrowOffset || 1
 
-          //Up
+          // Up
           if (e.keyCode === 38) {
             val = number + amount
             this.handleChange(val)
             e.preventDefault()
           }
-          //Down
-          if (e.keyCode == 40) {
+          // Down
+          if (e.keyCode === 40) {
             val = number - amount
             this.handleChange(val)
             e.preventDefault()
