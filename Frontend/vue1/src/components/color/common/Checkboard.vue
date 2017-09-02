@@ -33,6 +33,8 @@
     }
   }
 
+  let _checkboardCache = {}
+
   export default {
     name: 'checkboard',
     props: {
