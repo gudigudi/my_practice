@@ -13,7 +13,7 @@
 </template>
 <script>
   export default {
-    name: 'EuMenu'
+    name: 'my-menu'
   }
 </script>
 <style lang="scss">
