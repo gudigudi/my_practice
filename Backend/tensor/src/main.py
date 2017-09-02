@@ -1,7 +1,12 @@
-import numpy as np
-import matplotlib.pyplot as plt
-# import seaborn as sns; sns.set()
-from sklearn.datasets import make_blobs
+import tensorflow as tf
 
-x,y =make_blobs(100,2, centers=2,random_state=2,cluster_std=1.5)
-plt.scatter(x[:,0],x[:,1],c=y,s=50,cmap='RdBu')
+x1=tf.constant([1,2,3,4])
+x2=tf.constant([5,6,7,8])
+
+result=tf.multiply(x1,x2)
+
+sess=tf.Session()
+
+print(sess.run(result))
+
+sess.close()
