@@ -1,11 +1,31 @@
 <template>
-
+  <div class="carousel">
+    <div class="carousel-wrapper">
+      <div class="carousel-inner" :style="`
+      transform: translateX(${currentOffset}px);
+      transition: ${transitionStyle}
+      flex-basis: ${slideWidth}px;
+      visibility: ${slideWidth ? 'visible' : 'hidden'}
+`">
+        <slot></slot>
+      </div>
+    </div>
+    <pagination v-if="paginationEnabled && pageCount > 0"></pagination>
+    <navigation v-if="navigationEnabled" :clickTargetSize="navigationClickTargetSize"
+                :nextLabel="navigationNextLabel" :prevLabel="navigationPrevLabel"></navigation>
+  </div>
 </template>
 <script>
   import {autoplay} from '../../mixins/autoplay'
+  import Pagination from './Pagination.vue'
+  import Navigation from './Navigation.vue'
 
   export default {
     name: 'carousel',
+    components: {
+      Navigation,
+      Pagination
+    },
     data () {
       return {
         browserWidth: null,
@@ -127,8 +147,7 @@
           const pages = Math.ceil(slideCount / perPage)
           return (pages < 1) ? 1 : pages
         }
-        return (slideCount -（this.currentPerPage - 1
-      )
+        return (slideCount - (this.currentPerPage - 1))
       },
       slideWidth () {
         const width = this.carouselWidth
@@ -170,7 +189,94 @@
         }
       }
     },
-    methods: {}
+    methods: {
+      advancePage (direction) {
+        if (direction && direction === 'backward' && this.canAdvanceBackward) {
+          this.goToPage(this.currentPage - 1)
+        } else if ((!direction || (direction && direction !== 'backward')) && this.canAdvanceForward) {
+          this.goToPage(this.currentPage + 1)
+        }
+      },
+      attachMutationObserver () {
+        if (MutationObserver) {
+          const config = {attributes: true, data: true}
+          this.mutationObserver = new window.MutationObserver(() => {
+            this.vm.$nextTick(() => {
+              this.computeCarouselWidth()
+            })
+          })
+          if (this.$parent.$el) {
+            this.mutationObserver.observe(this.$parent.$el, config)
+          }
+        }
+      },
+      detachMutationObserver () {
+        if (this.mutationObserver) {
+          this.mutationObserver.disconnect()
+        }
+      },
+      getBrowserWidth () {
+        this.browserWidth = window.innerWidth
+        return this.browserWidth
+      },
+      getCarouselWidth () {
+        this.carouselWidth = (this.$el && this.$el.clientWidth) || 0
+        return this.carouselWidth
+      },
+      getSlideCount () {
+        this.slideCount = (
+          this.$slots &&
+          this.$slots.default &&
+          this.$slots.default.filter(slot => slot.tag && slot.tag.indexOf('slide') > -1).length) || 0
+      },
+      goToPage (page) {
+        if ((page >= 0) && (page <= this.pageCount)) {
+          this.currentPage = page
+          this.$emit('pageChange', this.currentPage)
+        }
+      },
+      handleMousedown (e) {
+        if (!e.touches) {
+          e.preventDefault()
+        }
+        this.mousedown = true
+        this.dragStartX = 'ontouchstart' in window ? e.touches[0].clientX : e.clientX
+      },
+      handleMouseup () {
+        this.mousedown = false
+        this.dragOffset = 0
+      },
+      handleMousemove (e) {
+        if (!this.mousedown) {
+          return
+        }
+
+        const eventPosX = 'ontouchstart' in window ? e.touches[0].clientX : e.clientX
+        const deltaX = this.dragStartX - eventPosX
+
+        this.dragOffset = deltaX
+
+        if (this.dragOffset > this.minSwipeDistance) {
+          this.handleMouseup()
+          this.advancePage()
+        } else if (this.dragOffset < -this.minSwipeDistance) {
+          this.handleMouseup()
+          this.advancePage('backward')
+        }
+      },
+      computeCarouselWidth () {
+        this.getSlideCount()
+        this.getBrowserWidth()
+        this.getCarouselWidth()
+        this.setCurrentPageInBounds()
+      },
+      setCurrentPageInBounds () {
+        if (!this.canAdvanceForward) {
+          const setPage = (this.pageCount - 1)
+          this.currentPage = (setPage >= 0) ? setPage : 0
+        }
+      }
+    }
   }
 </script>
 <style lang="scss" scoped>
