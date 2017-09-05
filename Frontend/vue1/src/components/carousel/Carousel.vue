@@ -46,7 +46,7 @@
         default: 'ease'
       },
       minSwipeDistance: {
-        type: String,
+        type: Number,
         default: 8
       },
       navigationClickTargetSize: {
@@ -163,7 +163,7 @@
     },
     mounted () {
       if (!this.$isServer) {
-        window.addEventListener('resize', this.$_.debounce(this.computeCarouseWidth, 16))
+        window.addEventListener('resize', this.$_.debounce(this.computeCarouselWidth, 16))
 
         if ('ontouchstart' in window) {
           this.$el.addEventListener('touchstart', this.handleMousedown)
