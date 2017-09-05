@@ -1,6 +1,6 @@
 <template>
   <div class="tree-view-item">
-    <div v-if="isObject(data)" class="tree-view-item-leaf">
+    <div v-if="this.$_.isObject(data)" class="tree-view-item-leaf">
       <div class="tree-view-item-node" @click.stop="toggleOpen()">
         <span :class="{opened: isOpen()}"
               class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
