@@ -44,4 +44,4 @@ const autoplay = {
     }
   }
 }
-export default autoplay
+export {autoplay}
