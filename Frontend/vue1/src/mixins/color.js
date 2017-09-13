@@ -25,7 +25,7 @@ function _colorChange (data, oldHue) {
   return {
     hsl: hsl,
     hex: color.ToHexString().toUpperCase(),
-    rgba: color.toRgb(),
+    rgba: color.toRgba(),
     hsv: hsv,
     oldHue: data.h || oldHue || hsl.h,
     source: data.source,
