@@ -18,7 +18,7 @@ public class UserDao {
     private final static     String UPDATE_LOGIN_INFO_SQL="UPDATE t_user SET last_visit= ?, last_ip=?, credits=? WHERE user_id=? ";
 
 
-    @Autowired // 自动注入jdbcTemplate的Bean
+//    @Autowired // 自动注入jdbcTemplate的Bean
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
