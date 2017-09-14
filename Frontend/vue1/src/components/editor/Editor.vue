@@ -31,4 +31,49 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+  .editor {
 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+
+    h1, h2, h3, h4, h5, p {
+      margin: 0;
+      padding: 0;
+    }
+    ul, ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      color: black;
+      text-decoration: none;
+    }
+    hr {
+      margin: 10px 0;
+    }
+    label {
+      font-weight: normal;
+    }
+    html {
+      font-size: 16px;
+    }
+    img {
+      max-width: 100%;
+    }
+
+    &[contenteditable="true"] {
+      ul {
+        list-style-type: disc;
+        margin-left: 1em;
+      }
+      ol {
+        list-style-type: decimal;
+        margin-left: 1em;
+      }
+    }
+  }
+</style>
