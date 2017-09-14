@@ -1,5 +1,8 @@
 <template>
-
+  <div class="design" v-show="currentView==='design'">
+    <div contenteditable="true" spellcheck="false" @click="updatePopupDisplay" @keydown="keydownHandler"
+         @keydown="keyupHandler"></div>
+  </div>
 </template>
 <script>
   import {mapActions} from 'vuex'
