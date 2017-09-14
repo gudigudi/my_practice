@@ -1,17 +1,17 @@
 <template>
   <section class="container">
     <section class="menu">
-      <eu-menu></eu-menu>
+      <my-menu></my-menu>
     </section>
     <section class="content-container"></section>
   </section>
 </template>
 
 <script>
-  import EuMenu from '../components/menu'
+  import Menu from '../components/Menu'
 
   export default {
-    components: {EuMenu},
+    components: {Menu},
     name: 'layouts'
   }
 </script>
