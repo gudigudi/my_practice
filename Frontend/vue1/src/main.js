@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueI18n from 'vue-i18n'
 import App from './App'
 import router from './router'
 import lodash from './plugins/lodash'
@@ -11,6 +12,7 @@ import moment from './plugins/moment'
 Vue.config.productionTip = false
 
 Vue.use(Vuex)
+Vue.use(VueI18n)
 Vue.use(lodash)
 Vue.use(axios)
 Vue.use(moment)
