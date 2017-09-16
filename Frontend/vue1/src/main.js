@@ -11,7 +11,7 @@ import moment from './plugins/moment'
 
 Vue.config.productionTip = false
 
-Vue.use(Vuex)
+// Vue.use(Vuex)
 Vue.use(lodash)
 Vue.use(axios)
 Vue.use(moment)
