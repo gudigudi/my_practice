@@ -2,9 +2,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueI18n from 'vue-i18n'
 import App from './App'
 import router from './router'
+import i18n from './i18n'
 import lodash from './plugins/lodash'
 import axios from './plugins/axios'
 import moment from './plugins/moment'
@@ -12,7 +12,6 @@ import moment from './plugins/moment'
 Vue.config.productionTip = false
 
 Vue.use(Vuex)
-Vue.use(VueI18n)
 Vue.use(lodash)
 Vue.use(axios)
 Vue.use(moment)
@@ -72,11 +71,10 @@ const store = new Vuex.Store({
   }
 })
 
-// Vue.use(plugins, {someOption: true})
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  i18n,
   router,
   store,
   template: '<App/>',
