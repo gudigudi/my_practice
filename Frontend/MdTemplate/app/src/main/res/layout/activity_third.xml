@@ -5,15 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gudigudigudi.mdtemplate.SecondActivity">
+    tools:context="com.gudigudigudi.mdtemplate.ThirdActivity">
 
     <Button
-        android:id="@+id/button_2"
+        android:id="@+id/button_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button 2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        android:text="Button 3"/>
 
 </android.support.constraint.ConstraintLayout>
