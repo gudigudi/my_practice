@@ -12,15 +12,14 @@
         <activity
             android:name=".MainActivity"
             android:label="Main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".FirstActivity"
             android:label="First">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".SecondActivity"
@@ -32,9 +31,9 @@
         </activity>
         <activity android:name=".ThirdActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="http" />
+                <data android:scheme="http"/>
             </intent-filter>
         </activity>
     </application>

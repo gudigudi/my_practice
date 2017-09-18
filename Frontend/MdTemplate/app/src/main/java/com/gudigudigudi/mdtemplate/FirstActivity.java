@@ -1,7 +1,6 @@
 package com.gudigudigudi.mdtemplate;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,10 +25,10 @@ public class FirstActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Toast.makeText(FirstActivity.this,"You click Button 1",Toast.LENGTH_SHORT).show();
 //                finish();
-                Intent intent=new Intent(FirstActivity.this,SecondActivity.class);
+                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
 
-                String data="Hello, world!";
-                intent.putExtra("extra_data",data);
+                String data = "Hello, world!";
+                intent.putExtra("extra_data", data);
 //
 //                Intent intent=new Intent("com.gudigudigudi.mdtemplate.ACTION_START");
 //                Intent intent=new Intent(FirstActivity.this,ThirdActivity.class);
@@ -44,24 +43,23 @@ public class FirstActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
+        switch (requestCode) {
             case 1:
-                if (resultCode==RESULT_OK){
-                    String returnedData=""; //=data.getStringExtra("extra_data");
-                    Bundle bundle=data.getExtras();
-                    if (bundle!=null){
-                        returnedData=bundle.getString("extra_data");
-                    }else {
-                        Log.d(TAG,"intent bundle is NULL!");
+                if (resultCode == RESULT_OK) {
+                    String returnedData = ""; //=data.getStringExtra("extra_data");
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        returnedData = bundle.getString("extra_data");
+                    } else {
+                        Log.d(TAG, "intent bundle is NULL!");
                     }
-                    Log.d(TAG,returnedData);
-                }else{
-                    Log.d(TAG,"resultCode is "+String.valueOf(resultCode));
+                    Log.d(TAG, returnedData);
+                } else {
+                    Log.d(TAG, "resultCode is " + String.valueOf(resultCode));
                 }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
 
     @Override

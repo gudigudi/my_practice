@@ -1,12 +1,12 @@
 package com.gudigudigudi.mdtemplate;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG="MainActivity";
+    private static final String TAG = "MainActivity";
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -28,4 +28,8 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+
+    public native void nativeInit();
+
+    public native void nativeFree();
 }
