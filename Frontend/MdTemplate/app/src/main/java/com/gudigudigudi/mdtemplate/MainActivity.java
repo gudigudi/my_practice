@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -79,13 +80,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             actionBar.hide();
         }
 
-//        ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,data);
-
         initFruits(); // init data of fruits
         FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
 
         ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Fruit fruit = fruitList.get(position);
+                Toast.makeText(MainActivity.this, fruit.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
@@ -207,7 +215,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             fruitList.add(strawberry);
             fruitList.add(cherry);
             fruitList.add(mango);
-
         }
     }
 }
