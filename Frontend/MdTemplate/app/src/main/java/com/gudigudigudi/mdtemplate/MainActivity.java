@@ -5,13 +5,18 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -24,6 +29,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private ImageView imageView;
     private Button btn_change_imageview;
     private Button btn_toggle_alertdialog;
+
+    private String[] data = {
+            "Apple", "Banana", "Orange", "Watermelon", "Pear",
+            "Grape", "Pineapple", "Strawberry", "Cherry", "Mango"
+    };
+
+    private List<Fruit> fruitList = new ArrayList<>();
+
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -60,6 +73,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_toast_edittext.setOnClickListener(this);
         btn_change_imageview.setOnClickListener(this);
         btn_toggle_alertdialog.setOnClickListener(this);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (null != actionBar) {
+            actionBar.hide();
+        }
+
+//        ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,data);
+
+        initFruits(); // init data of fruits
+        FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
+
+        ListView listView = (ListView) findViewById(R.id.listview);
+        listView.setAdapter(adapter);
 
     }
 
@@ -146,6 +172,42 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             default:
                 Log.d(TAG, "unknown view clicked");
+        }
+    }
+
+    /**
+     * ==================
+     * Inline methods
+     * ==================
+     */
+    private void initFruits() {
+        /**
+         "Apple","Banana","Orange","Watermelon","Pear",
+         "Grape","Pineapple","Strawberry","Cherry","Mango"
+         **/
+        for (int i = 0; i < 2; i++) {
+            Fruit apple = new Fruit("Apple", R.drawable.ic_arrow_back);
+            Fruit banana = new Fruit("Banana", R.drawable.ic_arrow_back);
+            Fruit orange = new Fruit("Orange", R.drawable.ic_arrow_back);
+            Fruit watermelon = new Fruit("Watermelon", R.drawable.ic_arrow_back);
+            Fruit pear = new Fruit("Pear", R.drawable.ic_arrow_back);
+            Fruit grape = new Fruit("Grape", R.drawable.ic_arrow_back);
+            Fruit pineapple = new Fruit("Pineapple", R.drawable.ic_arrow_back);
+            Fruit strawberry = new Fruit("Strawberry", R.drawable.ic_arrow_back);
+            Fruit cherry = new Fruit("Cherry", R.drawable.ic_arrow_back);
+            Fruit mango = new Fruit("Mango", R.drawable.ic_arrow_back);
+
+            fruitList.add(apple);
+            fruitList.add(banana);
+            fruitList.add(orange);
+            fruitList.add(watermelon);
+            fruitList.add(pear);
+            fruitList.add(grape);
+            fruitList.add(pineapple);
+            fruitList.add(strawberry);
+            fruitList.add(cherry);
+            fruitList.add(mango);
+
         }
     }
 }

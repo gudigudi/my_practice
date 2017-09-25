@@ -11,11 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class FruitAdapter extends ArrayAdapter<Fruit> {
 
     private int resourceId;
 
-    public FruitAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull Fruit[] objects) {
+    public FruitAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<Fruit> objects) {
         super(context, resource, objects);
 
         resourceId = resource;
