@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -61,7 +59,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn1 = (Button) findViewById(R.id.button1);
         btn1.setText(stringFromJNI());
 
-        btn_goto_firstactivity = (Button) findViewById(R.id.button_goto_firstactivity);
+        btn_goto_firstactivity = (Button) findViewById(R.id.button_goto_imactivity);
 
         editText = (EditText) findViewById(R.id.edit_text);
         btn_toast_edittext = (Button) findViewById(R.id.btn_toast_edittext);
@@ -150,9 +148,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.button1:
                 ((Button) view).setText(stringFromJNI());
                 break;
-            case R.id.button_goto_firstactivity:
-                Log.d(TAG, "click button and goto firstactivity");
-                Intent intent = new Intent(MainActivity.this, FirstActivity.class);
+            case R.id.button_goto_imactivity:
+                Log.d(TAG, "click button and goto imactivity");
+                Intent intent = new Intent(MainActivity.this, IMActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_toast_edittext:
