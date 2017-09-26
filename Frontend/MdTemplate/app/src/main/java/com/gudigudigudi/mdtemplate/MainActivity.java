@@ -7,13 +7,15 @@ import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -81,19 +83,34 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
 
         initFruits(); // init data of fruits
-        FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
 
-        ListView listView = (ListView) findViewById(R.id.listview);
-        listView.setAdapter(adapter);
+//        FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
+//
+//        ListView listView = (ListView) findViewById(R.id.listview);
+//        listView.setAdapter(adapter);
+//
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Fruit fruit = fruitList.get(position);
+//                Toast.makeText(MainActivity.this, fruit.getName(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fruit fruit = fruitList.get(position);
-                Toast.makeText(MainActivity.this, fruit.getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+//        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
+//        int spanCount = 4;
+//        GridLayoutManager layoutManager = new GridLayoutManager(this, spanCount, GridLayoutManager.VERTICAL, false);
+
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+
+
+        recyclerView.setLayoutManager(layoutManager);
+
+        FruitRCAdapter adapter = new FruitRCAdapter(fruitList);
+        recyclerView.setAdapter(adapter);
 
     }
 
