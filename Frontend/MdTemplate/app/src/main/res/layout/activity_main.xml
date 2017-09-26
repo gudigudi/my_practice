@@ -43,10 +43,10 @@
         tools:layout_editor_absoluteX="0dp"/>
 
     <Button
-        android:id="@+id/button_goto_firstactivity"
+        android:id="@+id/button_goto_imactivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="goto firstactivity"
+        android:text="goto im activity"
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -68,7 +68,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/btn_toast_edittext"
-        app:layout_constraintTop_toBottomOf="@+id/button_goto_firstactivity"/>
+        app:layout_constraintTop_toBottomOf="@+id/button_goto_imactivity"/>
 
     <Button
         android:id="@+id/btn_toast_edittext"
@@ -82,7 +82,7 @@
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintLeft_toRightOf="@+id/edit_text"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_goto_firstactivity"/>
+        app:layout_constraintTop_toBottomOf="@+id/button_goto_imactivity"/>
 
     <ImageView
         android:id="@+id/image_view"

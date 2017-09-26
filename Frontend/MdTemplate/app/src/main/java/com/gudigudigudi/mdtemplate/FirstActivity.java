@@ -2,7 +2,6 @@ package com.gudigudigudi.mdtemplate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends BaseActivity {
 
     private final static String TAG = "FirstActivity";
 
@@ -19,6 +18,9 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
+        Log.d(TAG, this.toString());
+        Log.d(TAG, "This task id is " + getTaskId());
+
         Button button = findViewById(R.id.button1);
         button.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -26,17 +28,18 @@ public class FirstActivity extends AppCompatActivity {
 //                Toast.makeText(FirstActivity.this,"You click Button 1",Toast.LENGTH_SHORT).show();
 //                finish();
                 Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+//                Intent intent = new Intent(FirstActivity.this, FirstActivity.class);
 
-                String data = "Hello, world!";
-                intent.putExtra("extra_data", data);
+//                String data = "Hello, world!";
+//                intent.putExtra("extra_data", data);
 //
 //                Intent intent=new Intent("com.gudigudigudi.mdtemplate.ACTION_START");
 //                Intent intent=new Intent(FirstActivity.this,ThirdActivity.class);
 //                Intent intent=new Intent(Intent.ACTION_DIAL);
 //                intent.setData(Uri.parse("tel:13967704302"));
 
-//                startActivity(intent);
-                startActivityForResult(intent, 1);
+                startActivity(intent);
+//                startActivityForResult(intent, 1);
             }
         });
     }
