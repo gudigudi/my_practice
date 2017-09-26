@@ -16,6 +16,8 @@ android {
                 arguments "-DANDROID_STL=c++_shared"
             }
         }
+
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
