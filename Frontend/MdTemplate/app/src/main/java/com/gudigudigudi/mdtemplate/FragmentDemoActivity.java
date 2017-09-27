@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class FragmentDemoActivity extends BaseActivity implements LeftFragment.OnFragmentInteractionListener, RightFragment.OnFragmentInteractionListener {
+public class FragmentDemoActivity extends BaseActivity implements LeftFragment.OnFragmentInteractionListener, RightFragment.OnFragmentInteractionListener, Right2Fragment.OnFragmentInteractionListener {
 
     private final static String TAG = "FragmentDemoActivity";
 
@@ -25,6 +25,8 @@ public class FragmentDemoActivity extends BaseActivity implements LeftFragment.O
                 replaceFragment(new Right2Fragment());
             }
         });
+
+        replaceFragment(new RightFragment());
     }
 
     @Override
@@ -35,7 +37,7 @@ public class FragmentDemoActivity extends BaseActivity implements LeftFragment.O
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.right_layout, fragment);
+        transaction.replace(R.id.right_fragment_layout, fragment);
         transaction.commit();
     }
 }
