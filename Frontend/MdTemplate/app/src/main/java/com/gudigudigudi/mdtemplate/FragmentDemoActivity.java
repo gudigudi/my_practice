@@ -1,11 +1,10 @@
 package com.gudigudigudi.mdtemplate;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -38,6 +37,9 @@ public class FragmentDemoActivity extends BaseActivity implements LeftFragment.O
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.right_fragment_layout, fragment);
+        // Enter back key, and go back to last fragment.
+        transaction.addToBackStack(null);
+
         transaction.commit();
     }
 }
