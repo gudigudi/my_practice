@@ -150,7 +150,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.button_goto_imactivity:
                 Log.d(TAG, "click button and goto imactivity");
-                Intent intent = new Intent(MainActivity.this, IMActivity.class);
+                Intent intent = new Intent(MainActivity.this, FragmentDemoActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_toast_edittext:

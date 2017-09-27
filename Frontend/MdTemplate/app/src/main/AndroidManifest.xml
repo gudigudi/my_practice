@@ -44,6 +44,8 @@
         </activity>
         <activity android:name=".IMActivity">
         </activity>
+        <activity android:name=".FragmentDemoActivity">
+        </activity>
     </application>
 
 </manifest>
