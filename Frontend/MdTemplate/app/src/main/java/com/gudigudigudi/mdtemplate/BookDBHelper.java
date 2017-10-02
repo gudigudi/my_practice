@@ -20,6 +20,12 @@ public class BookDBHelper extends SQLiteOpenHelper {
             "price REAL, " +
             "pages INTEGER, " +
             "name TEXT )";
+    public static final String CREATE_CATEGORY = "CREATE TABLE Category (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "category_name TEXT, " +
+            "category_code INTEGER )";
+
+
     private Context context;
 
 
@@ -34,13 +40,19 @@ public class BookDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
 
         database.execSQL(CREATE_SQL);
-        Toast.makeText(context, "Create succeeded", Toast.LENGTH_SHORT).show();
+        database.execSQL(CREATE_CATEGORY);
+
+        Toast.makeText(context, "Create database succeeded", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase database, int i, int i1) {
 
+        database.execSQL("DROP TABLE IF EXISTS Book");
+        database.execSQL("DROP TABLE IF EXISTS Category");
+
+        onCreate(database);
 
     }
 }
