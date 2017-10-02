@@ -1,5 +1,6 @@
 package com.gudigudigudi.mdtemplate;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -140,6 +141,21 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.btn_add_data_to_db:
                 SQLiteDatabase database = dbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("name", "The Da Vinci Code");
+                values.put("author", "Dan Brown");
+                values.put("pages", 454);
+                values.put("price", 16.96);
+                database.insert("Book", null, values);
+
+                values.clear();
+
+                values.put("name", "The Lost Symbol");
+                values.put("author", "Dan Brown");
+                values.put("pages", 510);
+                values.put("price", 19.95);
+                database.insert("Book", null, values);
+
                 break;
             default:
                 Log.d(TAG, "Unknown view is clicked");
