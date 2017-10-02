@@ -1,9 +1,13 @@
 package com.gudigudigudi.mdtemplate;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +25,9 @@ public class DataStoreActivity extends AppCompatActivity {
 
     private EditText editText;
 
+    private Button btn_save_data_by_sharedpreferences;
+    private Button btn_restore_data_by_sharedpreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +42,33 @@ public class DataStoreActivity extends AppCompatActivity {
             editText.setSelection(inputText.length());
             Toast.makeText(this, "Restoring succeeded", Toast.LENGTH_SHORT).show();
         }
+
+        btn_save_data_by_sharedpreferences = (Button) findViewById(R.id.btn_save_data_by_sharedpreferences);
+        btn_save_data_by_sharedpreferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                editor.putString("name", "Tom");
+                editor.putInt("age", 28);
+                editor.putBoolean("married", false);
+                editor.apply();
+            }
+        });
+
+        btn_restore_data_by_sharedpreferences = (Button) findViewById(R.id.btn_restore_data_by_sharedpreferences);
+        btn_restore_data_by_sharedpreferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences prefs = getSharedPreferences("data", MODE_PRIVATE);
+                String name = prefs.getString("name", "");
+                int age = prefs.getInt("age", 0);
+                boolean married = prefs.getBoolean("married", false);
+
+                Log.d(TAG, "name is " + name);
+                Log.d(TAG, "age is " + age);
+                Log.d(TAG, "married is " + married);
+            }
+        });
     }
 
     @Override
