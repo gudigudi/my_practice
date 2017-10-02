@@ -6,5 +6,7 @@
 
 
     <string name="CUSTOM_BROADCAST">com.gudigudigudi.mdtemplate.CUSTOM_BROADCAST</string>
+    <string name="LOCAL_BROADCAST">com.gudigudigudi.mdtemplate.LOCAL_BROADCAST</string>
+
 
 </resources>

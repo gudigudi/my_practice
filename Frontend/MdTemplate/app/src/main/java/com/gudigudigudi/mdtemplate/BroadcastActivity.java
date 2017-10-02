@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,10 @@ public class BroadcastActivity extends AppCompatActivity {
     private IntentFilter intentFilter;
     private NetworkChangeReceiver networkChangeReceiver;
 
+    private IntentFilter intentFilterLocal;
+    private LocalReceiver localReceiver;
+    private LocalBroadcastManager localBroadcastManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,7 @@ public class BroadcastActivity extends AppCompatActivity {
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         networkChangeReceiver = new NetworkChangeReceiver();
         registerReceiver(networkChangeReceiver, intentFilter);
+
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +48,21 @@ public class BroadcastActivity extends AppCompatActivity {
             }
         });
 
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        intentFilterLocal = new IntentFilter();
+        intentFilterLocal.addAction(getString(R.string.LOCAL_BROADCAST));
+        localReceiver = new LocalReceiver();
+        localBroadcastManager.registerReceiver(localReceiver, intentFilterLocal);
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getString(R.string.LOCAL_BROADCAST));
+                localBroadcastManager.sendBroadcast(intent); // send local broadcast.
+            }
+        });
+
+
     }
 
     @Override
@@ -49,6 +70,7 @@ public class BroadcastActivity extends AppCompatActivity {
         super.onDestroy();
 
         unregisterReceiver(networkChangeReceiver);
+        localBroadcastManager.unregisterReceiver(localReceiver);
     }
 
     /**
@@ -69,4 +91,14 @@ public class BroadcastActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 本地广播接收器
+     */
+    class LocalReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(context, "received local broadcast", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

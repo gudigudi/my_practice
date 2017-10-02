@@ -15,5 +15,12 @@
         android:text="Send Custom Broadcast"
         android:textAllCaps="false"/>
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Local Broadcast"
+        android:textAllCaps="false"/>
+
 
 </LinearLayout>
