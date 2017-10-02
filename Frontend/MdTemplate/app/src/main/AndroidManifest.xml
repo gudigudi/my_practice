@@ -50,11 +50,19 @@
         <activity android:name=".NewsTitleActivity">
         </activity>
         <activity android:name=".BroadcastActivity">
+        </activity>
+
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.HOME"/>
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts"/>
         </activity>
 
         <receiver
@@ -64,8 +72,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
-
-                <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>
         <receiver
@@ -76,6 +82,7 @@
                 <action android:name="com.gudigudigudi.mdtemplate.CUSTOM_BROADCAST"/>
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

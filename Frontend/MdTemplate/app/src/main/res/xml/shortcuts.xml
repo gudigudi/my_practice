@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut>
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutId="search"
+        android:shortcutDisabledMessage="@string/SHORTCUT_DISABLE"
+        android:shortcutLongLabel="@string/SHORTCUT_MENU_LABEL"
+        android:shortcutShortLabel="@string/SHORTCUT_LAUNCHER_LABEL">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.gudigudigudi.mdtemplate.MainActivity"
+            android:targetPackage="com.gudigudigudi.mdtemplate"/>
+    </shortcut>
+
+
+</shortcuts>

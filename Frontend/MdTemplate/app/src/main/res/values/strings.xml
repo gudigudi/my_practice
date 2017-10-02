@@ -7,6 +7,12 @@
 
     <string name="CUSTOM_BROADCAST">com.gudigudigudi.mdtemplate.CUSTOM_BROADCAST</string>
     <string name="LOCAL_BROADCAST">com.gudigudigudi.mdtemplate.LOCAL_BROADCAST</string>
+    <string name="FORCE_OFFLINE_BROADCAST">com.gudigudigudi.mdtemplate.FORCE_OFFLINE_BROADCAST</string>
+
+
+    <string name="SHORTCUT_DISABLE">shortcut is disabled</string>
+    <string name="SHORTCUT_MENU_LABEL">shortcut menu label</string>
+    <string name="SHORTCUT_LAUNCHER_LABEL">shortcut launcher label</string>
 
 
 </resources>
