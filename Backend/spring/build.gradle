@@ -5,28 +5,28 @@ apply plugin: 'java'
 apply plugin: 'idea'
 
 sourceCompatibility = 1.8
+targetCompatibility=1.8
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    springVersion = '4.3.11.RELEASE'
+}
+
 dependencies {
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+//    compile "org.springframework:spring-webmvc:$springVersion"
 
-    compile 'org.springframework:spring-core:4.3.11.RELEASE'
-    compile 'org.springframework:spring-context:4.3.11.RELEASE'
+    compile "org.springframework:spring-jdbc:$springVersion"
+    compile "org.apache.commons:commons-dbcp2:2.1.1"
+    compile "mysql:mysql-connector-java:6.0.6"
 
-    compile 'org.springframework:spring-jdbc:4.3.11.RELEASE'
-    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1.1'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+//    compile "org.springframework.security.oauth:spring-security-oauth2:2.2.0.RELEASE"
+//    compile "javax.servlet:javax.servlet-api:4.0.0"
 
-    compile 'org.springframework:spring-webmvc:4.3.11.RELEASE'
-
-    compile 'org.springframework.security.oauth:spring-security-oauth2:2.2.0.RELEASE'
-
-    compile 'javax.servlet:javax.servlet-api:3.1.0'
-
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.8.47'
-
-
+    testCompile "junit:junit:4.12"
+//    testCompile "org.mockito:mockito-core:2.10.0"
 }
