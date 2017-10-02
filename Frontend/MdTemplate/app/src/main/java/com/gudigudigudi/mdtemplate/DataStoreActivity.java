@@ -29,10 +29,12 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
     private Button btn_save_data_by_sharedpreferences;
     private Button btn_restore_data_by_sharedpreferences;
+
+
+    private BookDBHelper dbHelper;
     private Button btn_create_db;
     private Button btn_add_data_to_db;
-    private BookDBHelper dbHelper;
-
+    private Button btn_update_db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
         dbHelper = new BookDBHelper(this, "Book.db", null, 2);
         btn_create_db = (Button) findViewById(R.id.btn_create_db);
         btn_add_data_to_db = (Button) findViewById(R.id.btn_add_data_to_db);
+        btn_update_db = (Button) findViewById(R.id.btn_update_db);
 
     }
 
@@ -118,6 +121,9 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
+        SQLiteDatabase database;
+        ContentValues values;
+
         switch (view.getId()) {
             case R.id.btn_save_data_by_sharedpreferences:
                 SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
@@ -140,8 +146,8 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                 dbHelper.getWritableDatabase();
                 break;
             case R.id.btn_add_data_to_db:
-                SQLiteDatabase database = dbHelper.getWritableDatabase();
-                ContentValues values = new ContentValues();
+                database = dbHelper.getWritableDatabase();
+                values = new ContentValues();
                 values.put("name", "The Da Vinci Code");
                 values.put("author", "Dan Brown");
                 values.put("pages", 454);
@@ -155,6 +161,16 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                 values.put("pages", 510);
                 values.put("price", 19.95);
                 database.insert("Book", null, values);
+
+                values.clear();
+
+                break;
+            case R.id.btn_update_db:
+                database = dbHelper.getWritableDatabase();
+                values = new ContentValues();
+                values.put("price", 10.99);
+                database.update("Book", values, "name = ?", new String[]{"The Da Vinci Code"});
+                values.clear();
 
                 break;
             default:
