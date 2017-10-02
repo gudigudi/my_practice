@@ -30,6 +30,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private ImageView imageView;
     private Button btn_change_imageview;
     private Button btn_toggle_alertdialog;
+    private Button btn_force_offline;
 
     private String[] data = {
             "Apple", "Banana", "Orange", "Watermelon", "Pear",
@@ -69,11 +70,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         btn_toggle_alertdialog = (Button) findViewById(R.id.btn_toggle_alertdialog);
 
+        btn_force_offline = (Button) findViewById(R.id.force_offline);
+
+
+
+
         btn1.setOnClickListener(this);
         btn_goto_firstactivity.setOnClickListener(this);
         btn_toast_edittext.setOnClickListener(this);
         btn_change_imageview.setOnClickListener(this);
         btn_toggle_alertdialog.setOnClickListener(this);
+        btn_force_offline.setOnClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
@@ -193,6 +200,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
                 break;
+            case R.id.force_offline:
+                intent = new Intent(getString(R.string.FORCE_OFFLINE_BROADCAST));
+                sendBroadcast(intent);
             default:
                 Log.d(TAG, "unknown view clicked");
         }
