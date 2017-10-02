@@ -2,6 +2,7 @@ package com.gudigudigudi.mdtemplate;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class DataStoreActivity extends AppCompatActivity {
+public class DataStoreActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "DataStoreActivity";
 
@@ -28,6 +29,7 @@ public class DataStoreActivity extends AppCompatActivity {
     private Button btn_save_data_by_sharedpreferences;
     private Button btn_restore_data_by_sharedpreferences;
     private Button btn_create_db;
+    private Button btn_add_data_to_db;
     private BookDBHelper dbHelper;
 
 
@@ -47,40 +49,12 @@ public class DataStoreActivity extends AppCompatActivity {
         }
 
         btn_save_data_by_sharedpreferences = (Button) findViewById(R.id.btn_save_data_by_sharedpreferences);
-        btn_save_data_by_sharedpreferences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
-                editor.putString("name", "Tom");
-                editor.putInt("age", 28);
-                editor.putBoolean("married", false);
-                editor.apply();
-            }
-        });
-
         btn_restore_data_by_sharedpreferences = (Button) findViewById(R.id.btn_restore_data_by_sharedpreferences);
-        btn_restore_data_by_sharedpreferences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences prefs = getSharedPreferences("data", MODE_PRIVATE);
-                String name = prefs.getString("name", "");
-                int age = prefs.getInt("age", 0);
-                boolean married = prefs.getBoolean("married", false);
 
-                Log.d(TAG, "name is " + name);
-                Log.d(TAG, "age is " + age);
-                Log.d(TAG, "married is " + married);
-            }
-        });
 
-        dbHelper = new BookDBHelper(this, "Book.db", null, 1);
+        dbHelper = new BookDBHelper(this, "Book.db", null, 2);
         btn_create_db = (Button) findViewById(R.id.btn_create_db);
-        btn_create_db.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dbHelper.getWritableDatabase();
-            }
-        });
+        btn_add_data_to_db = (Button) findViewById(R.id.btn_add_data_to_db);
 
     }
 
@@ -141,4 +115,35 @@ public class DataStoreActivity extends AppCompatActivity {
         return content.toString();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_save_data_by_sharedpreferences:
+                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                editor.putString("name", "Tom");
+                editor.putInt("age", 28);
+                editor.putBoolean("married", false);
+                editor.apply();
+                break;
+            case R.id.btn_restore_data_by_sharedpreferences:
+                SharedPreferences prefs = getSharedPreferences("data", MODE_PRIVATE);
+                String name = prefs.getString("name", "");
+                int age = prefs.getInt("age", 0);
+                boolean married = prefs.getBoolean("married", false);
+
+                Log.d(TAG, "name is " + name);
+                Log.d(TAG, "age is " + age);
+                Log.d(TAG, "married is " + married);
+                break;
+            case R.id.btn_create_db:
+                dbHelper.getWritableDatabase();
+                break;
+            case R.id.btn_add_data_to_db:
+                SQLiteDatabase database = dbHelper.getWritableDatabase();
+                break;
+            default:
+                Log.d(TAG, "Unknown view is clicked");
+        }
+
+    }
 }
