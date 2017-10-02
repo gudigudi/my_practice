@@ -27,6 +27,9 @@ public class DataStoreActivity extends AppCompatActivity {
 
     private Button btn_save_data_by_sharedpreferences;
     private Button btn_restore_data_by_sharedpreferences;
+    private Button btn_create_db;
+    private BookDBHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,16 @@ public class DataStoreActivity extends AppCompatActivity {
                 Log.d(TAG, "married is " + married);
             }
         });
+
+        dbHelper = new BookDBHelper(this, "Book.db", null, 1);
+        btn_create_db = (Button) findViewById(R.id.btn_create_db);
+        btn_create_db.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbHelper.getWritableDatabase();
+            }
+        });
+
     }
 
     @Override
