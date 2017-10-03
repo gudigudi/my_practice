@@ -15,4 +15,17 @@
         android:text="Make Call"
         android:textAllCaps="false"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User contact list"
+        android:textSize="18sp"
+        android:textAlignment="center"/>
+
+    <ListView
+        android:id="@+id/contacts_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></ListView>
+
 </LinearLayout>
