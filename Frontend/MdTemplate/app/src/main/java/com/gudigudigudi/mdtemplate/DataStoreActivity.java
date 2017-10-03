@@ -3,6 +3,7 @@ package com.gudigudigudi.mdtemplate;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,9 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
     private Button btn_create_db;
     private Button btn_add_data_to_db;
     private Button btn_update_db;
+    private Button btn_delete_data_from_db;
+    private Button btn_query_data_from_db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,17 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
         btn_create_db = (Button) findViewById(R.id.btn_create_db);
         btn_add_data_to_db = (Button) findViewById(R.id.btn_add_data_to_db);
         btn_update_db = (Button) findViewById(R.id.btn_update_db);
+        btn_delete_data_from_db = (Button) findViewById(R.id.btn_delete_data_from_db);
+        btn_query_data_from_db = (Button) findViewById(R.id.btn_query_data_from_db);
+
+
+        btn_save_data_by_sharedpreferences.setOnClickListener(this);
+        btn_restore_data_by_sharedpreferences.setOnClickListener(this);
+        btn_create_db.setOnClickListener(this);
+        btn_add_data_to_db.setOnClickListener(this);
+        btn_update_db.setOnClickListener(this);
+        btn_delete_data_from_db.setOnClickListener(this);
+        btn_query_data_from_db.setOnClickListener(this);
 
     }
 
@@ -172,6 +187,29 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                 database.update("Book", values, "name = ?", new String[]{"The Da Vinci Code"});
                 values.clear();
 
+                break;
+            case R.id.btn_delete_data_from_db:
+                database = dbHelper.getWritableDatabase();
+                database.delete("Book", "pages > ?", new String[]{"500"});
+
+                break;
+            case R.id.btn_query_data_from_db:
+                database = dbHelper.getWritableDatabase();
+
+                Cursor cursor = database.query("Book", null, null, null, null, null, null);
+                if (cursor.moveToFirst()) {
+                    do {
+                        String name1 = cursor.getString(cursor.getColumnIndex("name"));
+                        String author = cursor.getString(cursor.getColumnIndex("author"));
+                        int pages = cursor.getInt(cursor.getColumnIndex("pages"));
+                        double price = cursor.getDouble(cursor.getColumnIndex("price"));
+                        Log.d(TAG, "book name is " + name1);
+                        Log.d(TAG, "book author is " + author);
+                        Log.d(TAG, "book pages is " + pages);
+                        Log.d(TAG, "book price is " + price);
+
+                    } while (cursor.moveToNext());
+                }
                 break;
             default:
                 Log.d(TAG, "Unknown view is clicked");
