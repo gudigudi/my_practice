@@ -14,16 +14,17 @@ import android.widget.Toast;
  */
 public class BookDBHelper extends SQLiteOpenHelper {
 
-    public static final String CREATE_SQL = "CREATE TABLE Book (" +
+    public static final String CREATE_SQL = "CREATE TABLE book (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "author TEXT, " +
             "price REAL, " +
             "pages INTEGER, " +
-            "name TEXT )";
-    public static final String CREATE_CATEGORY = "CREATE TABLE Category (" +
+            "name TEXT, " +
+            "press TEXT )";
+    public static final String CREATE_CATEGORY = "CREATE TABLE category (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "category_name TEXT, " +
-            "category_code INTEGER )";
+            "name TEXT, " +
+            "code INTEGER )";
 
 
     private Context context;
@@ -49,8 +50,8 @@ public class BookDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, int i, int i1) {
 
-        database.execSQL("DROP TABLE IF EXISTS Book");
-        database.execSQL("DROP TABLE IF EXISTS Category");
+        database.execSQL("DROP TABLE IF EXISTS book");
+        database.execSQL("DROP TABLE IF EXISTS category");
 
         onCreate(database);
 
