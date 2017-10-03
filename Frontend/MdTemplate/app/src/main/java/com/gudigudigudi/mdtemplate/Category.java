@@ -13,25 +13,32 @@ public class Category {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    @ColumnInfo(name = "category_name")
-    private String categoryName;
-    @ColumnInfo(name = "category_code")
-    private int categoryCode;
+    @ColumnInfo(name = "name")
+    private String name;
+    @ColumnInfo(name = "code")
+    private int code;
 
-
-    public String getCategoryName() {
-        return categoryName;
+    public int getId() {
+        return id;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getCategoryCode() {
-        return categoryCode;
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryCode(int categoryCode) {
-        this.categoryCode = categoryCode;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }
