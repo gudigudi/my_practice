@@ -73,8 +73,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_force_offline = (Button) findViewById(R.id.force_offline);
 
 
-
-
         btn1.setOnClickListener(this);
         btn_goto_firstactivity.setOnClickListener(this);
         btn_toast_edittext.setOnClickListener(this);

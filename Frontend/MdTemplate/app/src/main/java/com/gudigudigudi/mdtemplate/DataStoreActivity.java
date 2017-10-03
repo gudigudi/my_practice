@@ -16,6 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gudigudigudi.mdtemplate.db.AppDatabase;
+import com.gudigudigudi.mdtemplate.db.Book;
+import com.gudigudigudi.mdtemplate.db.BookDBHelper;
+import com.gudigudigudi.mdtemplate.db.BookDao;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
