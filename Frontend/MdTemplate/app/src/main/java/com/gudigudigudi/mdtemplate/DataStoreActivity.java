@@ -1,10 +1,12 @@
 package com.gudigudigudi.mdtemplate;
 
+import android.arch.persistence.room.Room;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -39,8 +41,10 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
     private Button btn_delete_data_from_db;
     private Button btn_query_data_from_db;
 
+    private AppDatabase appDatabase;
+    private Button btn_insert_room;
 
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_store);
@@ -59,12 +63,15 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
         btn_restore_data_by_sharedpreferences = (Button) findViewById(R.id.btn_restore_data_by_sharedpreferences);
 
 
-        dbHelper = new BookDBHelper(this, "Book.db", null, 2);
+        dbHelper = new BookDBHelper(this, "book.db", null, 3);
         btn_create_db = (Button) findViewById(R.id.btn_create_db);
         btn_add_data_to_db = (Button) findViewById(R.id.btn_add_data_to_db);
         btn_update_db = (Button) findViewById(R.id.btn_update_db);
         btn_delete_data_from_db = (Button) findViewById(R.id.btn_delete_data_from_db);
         btn_query_data_from_db = (Button) findViewById(R.id.btn_query_data_from_db);
+
+
+        btn_insert_room = (Button) findViewById(R.id.btn_insert_room);
 
 
         btn_save_data_by_sharedpreferences.setOnClickListener(this);
@@ -74,7 +81,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
         btn_update_db.setOnClickListener(this);
         btn_delete_data_from_db.setOnClickListener(this);
         btn_query_data_from_db.setOnClickListener(this);
-
+        btn_insert_room.setOnClickListener(this);
     }
 
     @Override
@@ -167,7 +174,8 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                 values.put("author", "Dan Brown");
                 values.put("pages", 454);
                 values.put("price", 16.96);
-                database.insert("Book", null, values);
+                values.put("press", "Unknown");
+                database.insert("book", null, values);
 
                 values.clear();
 
@@ -175,7 +183,8 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                 values.put("author", "Dan Brown");
                 values.put("pages", 510);
                 values.put("price", 19.95);
-                database.insert("Book", null, values);
+                values.put("press", "Unknown");
+                database.insert("book", null, values);
 
                 values.clear();
 
@@ -184,32 +193,61 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                 database = dbHelper.getWritableDatabase();
                 values = new ContentValues();
                 values.put("price", 10.99);
-                database.update("Book", values, "name = ?", new String[]{"The Da Vinci Code"});
+                database.update("book", values, "name = ?", new String[]{"The Da Vinci Code"});
                 values.clear();
 
                 break;
             case R.id.btn_delete_data_from_db:
                 database = dbHelper.getWritableDatabase();
-                database.delete("Book", "pages > ?", new String[]{"500"});
+                database.delete("book", "pages > ?", new String[]{"500"});
 
                 break;
             case R.id.btn_query_data_from_db:
                 database = dbHelper.getWritableDatabase();
+                Log.d(TAG, "query data from Sqlite db.");
 
-                Cursor cursor = database.query("Book", null, null, null, null, null, null);
+                Log.d(TAG, "book database version is " + database.getVersion());
+
+                Cursor cursor = database.query("book", null, null, null, null, null, null, null);
                 if (cursor.moveToFirst()) {
                     do {
                         String name1 = cursor.getString(cursor.getColumnIndex("name"));
                         String author = cursor.getString(cursor.getColumnIndex("author"));
                         int pages = cursor.getInt(cursor.getColumnIndex("pages"));
                         double price = cursor.getDouble(cursor.getColumnIndex("price"));
+                        String press = cursor.getString(cursor.getColumnIndex("press"));
                         Log.d(TAG, "book name is " + name1);
                         Log.d(TAG, "book author is " + author);
                         Log.d(TAG, "book pages is " + pages);
                         Log.d(TAG, "book price is " + price);
+                        Log.d(TAG, "book press is " + press);
 
                     } while (cursor.moveToNext());
                 }
+                break;
+            case R.id.btn_insert_room:
+                new AsyncTask<Void, Void, Void>() {
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        Book book = new Book();
+                        book.setName("The Dan Vinci Code");
+                        book.setAuthor("Dan Brown");
+                        book.setPages(454);
+                        book.setPrice(16.96);
+                        book.setPress("Unknown");
+
+                        Log.d(TAG, "insert book into Sqlite db: " + book.toString());
+
+                        appDatabase = Room.databaseBuilder(getApplicationContext(),
+                                AppDatabase.class, "book").build();
+                        appDatabase.bookDao().insertBooks(book);
+
+                        return null;
+                    }
+                }.execute();
+
+
                 break;
             default:
                 Log.d(TAG, "Unknown view is clicked");
