@@ -9,7 +9,7 @@ import android.arch.persistence.room.PrimaryKey;
  */
 
 /**
- * CREATE TABLE Book (
+ * CREATE TABLE book (
  * id INTEGER PRIMARY KEY AUTOINCREMENT
  * author TEXT,
  * price REAL,
@@ -18,6 +18,7 @@ import android.arch.persistence.room.PrimaryKey;
  */
 @Entity
 public class Book {
+
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -30,6 +31,27 @@ public class Book {
     private int pages;
     @ColumnInfo(name = "name")
     private String name;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPress() {
+        return press;
+    }
+
+    public void setPress(String press) {
+        this.press = press;
+    }
+
+    @ColumnInfo(name = "press")
+
+    private String press;
 
     public String getAuthor() {
         return author;
@@ -61,5 +83,17 @@ public class Book {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                ", pages=" + pages +
+                ", name='" + name + '\'' +
+                ", press='" + press + '\'' +
+                '}';
     }
 }
