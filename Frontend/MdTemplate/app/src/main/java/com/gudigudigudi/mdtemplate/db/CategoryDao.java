@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.db;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
