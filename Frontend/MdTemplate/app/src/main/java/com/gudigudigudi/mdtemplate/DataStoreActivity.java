@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.List;
 
 public class DataStoreActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -42,7 +43,11 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
     private Button btn_query_data_from_db;
 
     private AppDatabase appDatabase;
+    private BookDao bookDao;
     private Button btn_insert_room;
+    private Button btn_query_room;
+    private Button btn_update_room;
+    private Button btn_delete_room;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +76,29 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
         btn_query_data_from_db = (Button) findViewById(R.id.btn_query_data_from_db);
 
 
+        appDatabase = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "book").build();
+        bookDao = appDatabase.bookDao();
         btn_insert_room = (Button) findViewById(R.id.btn_insert_room);
+        btn_query_room = (Button) findViewById(R.id.btn_query_room);
+        btn_update_room = (Button) findViewById(R.id.btn_update_room);
+        btn_delete_room = (Button) findViewById(R.id.btn_delete_room);
 
 
         btn_save_data_by_sharedpreferences.setOnClickListener(this);
         btn_restore_data_by_sharedpreferences.setOnClickListener(this);
+
         btn_create_db.setOnClickListener(this);
         btn_add_data_to_db.setOnClickListener(this);
         btn_update_db.setOnClickListener(this);
         btn_delete_data_from_db.setOnClickListener(this);
         btn_query_data_from_db.setOnClickListener(this);
+
         btn_insert_room.setOnClickListener(this);
+        btn_query_room.setOnClickListener(this);
+        btn_update_room.setOnClickListener(this);
+        btn_delete_room.setOnClickListener(this);
+
     }
 
     @Override
@@ -239,16 +256,57 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
                         Log.d(TAG, "insert book into Sqlite db: " + book.toString());
 
-                        appDatabase = Room.databaseBuilder(getApplicationContext(),
-                                AppDatabase.class, "book").build();
-                        appDatabase.bookDao().insertBooks(book);
+
+                        bookDao.insertBooks(book);
+
+                        return null;
+                    }
+                }.execute();
+            case R.id.btn_query_room:
+                new AsyncTask<Void, Void, Void>() {
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        List<Book> bookList = bookDao.getAll();
+                        for (Book book : bookList) {
+                            Log.d(TAG, "book is:" + book.toString());
+                        }
+
+                        return null;
+                    }
+                }.execute();
+                break;
+            case R.id.btn_update_room:
+                new AsyncTask<Void, Void, Void>() {
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        double price = 1.01;
+                        String name = "The Dan Vinci Code";
+                        Log.d(TAG, "book to be updated: " + bookDao.getBookByName(name).toString());
+                        bookDao.updatePriceByName("The Dan Vinci Code", price);
+                        Log.d(TAG, "book is updated: " + bookDao.getBookByName(name).toString());
 
                         return null;
                     }
                 }.execute();
 
+                break;
+            case R.id.btn_delete_room:
+                new AsyncTask<Void, Void, Void>() {
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        String name = "The Dan Vinci Code";
+                        bookDao.deleteBook(bookDao.getBookByName(name));
+                        Log.d(TAG, "book number: " + bookDao.getAll().size());
+
+                        return null;
+                    }
+                }.execute();
 
                 break;
+
             default:
                 Log.d(TAG, "Unknown view is clicked");
         }

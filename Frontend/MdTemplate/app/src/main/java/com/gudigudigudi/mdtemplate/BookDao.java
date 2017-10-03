@@ -29,4 +29,7 @@ public interface BookDao {
     @Delete
     void deleteBook(Book book);
 
+    @Query("UPDATE book SET price = :price WHERE name = :name")
+    void updatePriceByName(String name, double price);
+
 }

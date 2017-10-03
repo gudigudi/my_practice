@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:layout_margin="8dp"
     android:orientation="vertical"
     tools:context="com.gudigudigudi.mdtemplate.DataStoreActivity">
 
@@ -17,68 +17,128 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_save_data_by_sharedpreferences"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Save data by shared preferences"
             android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/btn_restore_data_by_sharedpreferences"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Restore data by shared preferences"
             android:textAllCaps="false"/>
     </LinearLayout>
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:gravity="center">-->
-
-    <Button
-        android:id="@+id/btn_create_db"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create Sqlite database"
-        android:textAllCaps="false"/>
+        android:layout_height="200dp"
+        android:scrollbars="vertical"
+        android:fadingEdge="vertical">
 
-    <Button
-        android:id="@+id/btn_add_data_to_db"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CRUD with pure Sqlite"
+                android:textAlignment="center"
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/btn_create_db"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Sqlite database"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_add_data_to_db"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add data to Sqlite database"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_update_db"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Sqlite database"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_delete_data_from_db"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete data from Sqlite database"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_query_data_from_db"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Query data from Sqlite database"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add data to Sqlite database"
-        android:textAllCaps="false"/>
+        android:layout_height="200dp">
 
-    <Button
-        android:id="@+id/btn_update_db"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update Sqlite database"
-        android:textAllCaps="false"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_delete_data_from_db"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Delete data from Sqlite database"
-        android:textAllCaps="false"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CRUD with Room"
+                android:textAlignment="center"
+                android:textSize="18sp"/>
 
-    <Button
-        android:id="@+id/btn_query_data_from_db"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Query data from Sqlite database"
-        android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btn_insert_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Insert data with Room"
+                android:textAllCaps="false"/>
 
-    <!--</LinearLayout>-->
+            <Button
+                android:id="@+id/btn_query_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="query data with Room"
+                android:textAllCaps="false"/>
 
+            <Button
+                android:id="@+id/btn_update_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="update data with Room"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_delete_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="delete data with Room"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
