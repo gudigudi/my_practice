@@ -58,7 +58,6 @@
         <activity android:name=".DataStoreActivity">
         </activity>
         <activity android:name=".ContentProviderActivity">
-
         </activity>
         <activity android:name=".SystemServiceActivity">
             <intent-filter>
@@ -72,7 +71,6 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts"/>
         </activity>
-
 
         <receiver
             android:name=".BootCompleteReceiver"
@@ -92,7 +90,6 @@
             </intent-filter>
         </receiver>
 
-
         <provider
             android:name=".CustomContentProvider"
             android:authorities="com.gudigudigudi.mdtemplate.customprovider"
@@ -106,6 +103,8 @@
             android:exported="true">
         </provider>
 
+        <activity android:name=".NotificationToggledActivity">
+        </activity>
     </application>
 
 </manifest>

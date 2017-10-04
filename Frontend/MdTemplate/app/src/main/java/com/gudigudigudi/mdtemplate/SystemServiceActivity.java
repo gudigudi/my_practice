@@ -2,7 +2,9 @@ package com.gudigudigudi.mdtemplate;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -26,9 +28,13 @@ public class SystemServiceActivity extends AppCompatActivity {
         btn_send_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(SystemServiceActivity.this, NotificationToggledActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(SystemServiceActivity.this, 0, intent, 0);
+
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
                 Notification notification = new NotificationCompat.Builder(getApplicationContext(), null)
+                        .setContentIntent(pendingIntent)
                         .setContentTitle("This is content title")
                         .setContentText("This is content text")
                         .setWhen(System.currentTimeMillis())
