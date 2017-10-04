@@ -105,11 +105,9 @@ public class SystemServiceActivity extends AppCompatActivity {
             case REQUEST_CODE_TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     try {
-                        BitmapFactory.Options options = new BitmapFactory.Options();
-                        options.inSampleSize = 2;
-
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri), null, options);
-                        picture.setImageBitmap(bitmap);
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                        picture.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                                picture.getWidth(), picture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
