@@ -107,7 +107,7 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        dbHelper = new BookDBHelper(getContext(), "book.db", null, 2);
+        dbHelper = new BookDBHelper(getContext(), "book.db", null, 3);
         return true;
     }
 

@@ -1,6 +1,7 @@
 package com.gudigudigudi.mdtemplate;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -21,7 +22,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContentProviderActivity extends AppCompatActivity {
+public class ContentProviderActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "ContentProviderActivity";
 
@@ -34,29 +35,17 @@ public class ContentProviderActivity extends AppCompatActivity {
     List<String> contactList = new ArrayList<>();
     private ListView contactsView;
 
+    private String newId;
+
+    private Button addData, queryData, updateData, deleteData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_provider);
 
         btn_make_call = (Button) findViewById(R.id.make_call);
-
         contactsView = (ListView) findViewById(R.id.contacts_view);
-
-
-        btn_make_call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (ContextCompat.checkSelfPermission(ContentProviderActivity.this,
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(ContentProviderActivity.this,
-                            new String[]{Manifest.permission.CALL_PHONE}, PERMISSION_REQUESTCODE_CALL_PHONE);
-                } else {
-                    make_call();
-                }
-            }
-        });
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contactList);
         contactsView.setAdapter(adapter);
@@ -67,6 +56,18 @@ public class ContentProviderActivity extends AppCompatActivity {
         } else {
             readContacts();
         }
+
+        addData = (Button) findViewById(R.id.add_data);
+        queryData = (Button) findViewById(R.id.query_data);
+        updateData = (Button) findViewById(R.id.update_data);
+        deleteData = (Button) findViewById(R.id.delete_data);
+
+        btn_make_call.setOnClickListener(this);
+        addData.setOnClickListener(this);
+        queryData.setOnClickListener(this);
+        updateData.setOnClickListener(this);
+        deleteData.setOnClickListener(this);
+
     }
 
     @Override
@@ -125,6 +126,65 @@ public class ContentProviderActivity extends AppCompatActivity {
             startActivity(intent);
         } catch (SecurityException e) {
             Log.d(TAG, e.toString());
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        Uri uri = null;
+        ContentValues values = new ContentValues();
+
+        switch (view.getId()) {
+            case R.id.make_call:
+                if (ContextCompat.checkSelfPermission(ContentProviderActivity.this,
+                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(ContentProviderActivity.this,
+                            new String[]{Manifest.permission.CALL_PHONE}, PERMISSION_REQUESTCODE_CALL_PHONE);
+                } else {
+                    make_call();
+                }
+                break;
+            case R.id.add_data:
+                uri = Uri.parse("content://" + DatabaseContentProvider.AUTHORITY + "/book");
+                values.put("name", "A Clash of Kings");
+                values.put("author", "George Martin");
+                values.put("pages", 1040);
+                values.put("price", 22.85);
+                Uri newUri = getContentResolver().insert(uri, values);
+                newId = newUri.getPathSegments().get(1);
+                values.clear();
+                break;
+            case R.id.query_data:
+                uri = Uri.parse("content://" + DatabaseContentProvider.AUTHORITY + "/book");
+                Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+                if (cursor != null) {
+                    while (cursor.moveToNext()) {
+                        String name = cursor.getString(cursor.getColumnIndex("name"));
+                        String author = cursor.getString(cursor.getColumnIndex("author"));
+                        int pages = cursor.getInt(cursor.getColumnIndex("pages"));
+                        double price = cursor.getDouble(cursor.getColumnIndex("price"));
+                        Log.d(TAG, "book name is: " + name);
+                        Log.d(TAG, "author name is: " + author);
+                        Log.d(TAG, "pages name is: " + pages);
+                        Log.d(TAG, "price name is: " + price);
+                    }
+                    cursor.close();
+                }
+                break;
+            case R.id.update_data:
+                uri = Uri.parse("content://" + DatabaseContentProvider.AUTHORITY + "/book/" + newId);
+                values.put("name", "A Storm of Swords");
+                values.put("pages", 1216);
+                values.put("price", 24.05);
+                getContentResolver().update(uri, values, null, null);
+                values.clear();
+                break;
+            case R.id.delete_data:
+                uri = Uri.parse("content://" + DatabaseContentProvider.AUTHORITY + "/book/" + newId);
+                getContentResolver().delete(uri, null, null);
+                break;
+            default:
+                Log.d(TAG, "Unknown view is clicked.");
         }
     }
 }
