@@ -86,8 +86,7 @@ public class SystemServiceActivity extends AppCompatActivity {
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    imageUri = FileProvider.getUriForFile(SystemServiceActivity.this,
-                            FILE_PRIVIDER, outputImage);
+                    imageUri = FileProvider.getUriForFile(SystemServiceActivity.this, FILE_PRIVIDER, outputImage);
                 } else {
                     imageUri = Uri.fromFile(outputImage);
                 }
