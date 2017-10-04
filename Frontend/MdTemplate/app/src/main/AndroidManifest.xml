@@ -88,6 +88,19 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts"/>
         </activity>
+
+        <provider
+            android:name=".CustomContentProvider"
+            android:authorities="com.gudigudigudi.mdtemplate.customprovider"
+            android:enabled="true"
+            android:exported="true">
+        </provider>
+        <provider
+            android:name=".DatabaseContentProvider"
+            android:authorities="com.gudigudigudi.mdtemplate.databaseprovider"
+            android:enabled="true"
+            android:exported="true">
+        </provider>
     </application>
 
 </manifest>
