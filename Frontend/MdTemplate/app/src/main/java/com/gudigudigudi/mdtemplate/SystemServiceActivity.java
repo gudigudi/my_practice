@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -35,11 +37,15 @@ public class SystemServiceActivity extends AppCompatActivity {
 
                 Notification notification = new NotificationCompat.Builder(getApplicationContext(), null)
                         .setContentIntent(pendingIntent)
+                        .setAutoCancel(true)
                         .setContentTitle("This is content title")
                         .setContentText("This is content text")
                         .setWhen(System.currentTimeMillis())
                         .setSmallIcon(R.drawable.ic_arrow_back)
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round))
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .setVibrate(new long[]{0, 1000, 1000, 1000})
+                        .setLights(Color.GREEN, 1000, 1000)
                         .build();
 
                 notificationManager.notify(1, notification);
