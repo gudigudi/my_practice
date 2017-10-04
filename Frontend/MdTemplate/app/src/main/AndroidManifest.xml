@@ -57,6 +57,22 @@
         </activity>
         <activity android:name=".DataStoreActivity">
         </activity>
+        <activity android:name=".ContentProviderActivity">
+
+        </activity>
+        <activity android:name=".SystemServiceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.HOME"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts"/>
+        </activity>
+
 
         <receiver
             android:name=".BootCompleteReceiver"
@@ -76,18 +92,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ContentProviderActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.HOME"/>
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts"/>
-        </activity>
 
         <provider
             android:name=".CustomContentProvider"
@@ -101,6 +105,7 @@
             android:enabled="true"
             android:exported="true">
         </provider>
+
     </application>
 
 </manifest>
