@@ -34,7 +34,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class SystemServiceActivity extends AppCompatActivity {
+public class SystemServiceActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "SystemServiceActivity";
 
@@ -57,73 +57,14 @@ public class SystemServiceActivity extends AppCompatActivity {
 
         btn_send_notification = (Button) findViewById(R.id.send_notification);
 
-        btn_send_notification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SystemServiceActivity.this, NotificationToggledActivity.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(SystemServiceActivity.this, 0, intent, 0);
-
-                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-                Notification notification = new NotificationCompat.Builder(getApplicationContext(), null)
-                        .setContentIntent(pendingIntent)
-                        .setAutoCancel(true)
-                        .setContentTitle("This is content title")
-                        .setContentText("This is content text")
-                        .setWhen(System.currentTimeMillis())
-                        .setSmallIcon(R.drawable.ic_arrow_back)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round))
-                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                        .setVibrate(new long[]{0, 1000, 1000, 1000})
-                        .setLights(Color.GREEN, 1000, 1000)
-                        .build();
-
-                notificationManager.notify(1, notification);
-            }
-        });
-
         btn_take_photo = (Button) findViewById(R.id.take_photo);
-        picture = (ImageView) findViewById(R.id.picture);
-        btn_take_photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
-
-                try {
-                    if (outputImage.exists()) {
-                        outputImage.delete();
-                    }
-                    outputImage.createNewFile();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    imageUri = FileProvider.getUriForFile(SystemServiceActivity.this, FILE_PRIVIDER, outputImage);
-                } else {
-                    imageUri = Uri.fromFile(outputImage);
-                }
-
-                // start camera.
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
-            }
-        });
-
         btn_choose_photo = (Button) findViewById(R.id.choose_from_album);
-        btn_choose_photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ContextCompat.checkSelfPermission(SystemServiceActivity.this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(SystemServiceActivity.this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_CHOOSE_PHOTO);
-                } else {
-                    openAlbum();
-                }
-            }
-        });
+        picture = (ImageView) findViewById(R.id.picture);
+
+
+        btn_send_notification.setOnClickListener(this);
+        btn_take_photo.setOnClickListener(this);
+        btn_choose_photo.setOnClickListener(this);
     }
 
     @Override
@@ -168,6 +109,71 @@ public class SystemServiceActivity extends AppCompatActivity {
                 break;
             default:
                 Log.d(TAG, "Unknown request code.");
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = null;
+        switch (view.getId()) {
+            case R.id.send_notification:
+                intent = new Intent(SystemServiceActivity.this, NotificationToggledActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(SystemServiceActivity.this, 0, intent, 0);
+
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+                Notification notification = new NotificationCompat.Builder(getApplicationContext(), null)
+                        .setContentIntent(pendingIntent)
+                        .setAutoCancel(true)
+                        .setContentTitle("This is content title")
+                        .setContentText("This is content text")
+                        .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.drawable.ic_arrow_back)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round))
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .setVibrate(new long[]{0, 1000, 1000, 1000})
+                        .setLights(Color.GREEN, 1000, 1000)
+                        .build();
+
+                notificationManager.notify(1, notification);
+
+                break;
+            case R.id.take_photo:
+                File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
+
+                try {
+                    if (outputImage.exists()) {
+                        outputImage.delete();
+                    }
+                    outputImage.createNewFile();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    imageUri = FileProvider.getUriForFile(SystemServiceActivity.this, FILE_PRIVIDER, outputImage);
+                } else {
+                    imageUri = Uri.fromFile(outputImage);
+                }
+
+                // start camera.
+                intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
+
+                break;
+            case R.id.choose_from_album:
+                if (ContextCompat.checkSelfPermission(SystemServiceActivity.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(SystemServiceActivity.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_CHOOSE_PHOTO);
+                } else {
+                    openAlbum();
+                }
+
+                break;
+            default:
+                Log.d(TAG, "Unknown view is clicked.");
         }
     }
 
