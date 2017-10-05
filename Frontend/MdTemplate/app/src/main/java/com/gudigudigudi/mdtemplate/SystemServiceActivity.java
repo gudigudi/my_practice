@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -58,6 +59,11 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
     private Button btn_pause;
     private Button btn_stop;
 
+    private Button btn_play_video;
+    private Button btn_pause_video;
+    private Button btn_replay_video;
+    private VideoView videoView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,13 +79,10 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
         btn_pause = (Button) findViewById(R.id.pause);
         btn_stop = (Button) findViewById(R.id.stop);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
-        } else {
-            initMediaPlayer();
-        }
+        btn_play_video = (Button) findViewById(R.id.play_video);
+        btn_pause_video = (Button) findViewById(R.id.pause_video);
+        btn_replay_video = (Button) findViewById(R.id.replay_video);
+        videoView = (VideoView) findViewById(R.id.video_view);
 
         btn_send_notification.setOnClickListener(this);
         btn_take_photo.setOnClickListener(this);
@@ -87,8 +90,31 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
         btn_play.setOnClickListener(this);
         btn_pause.setOnClickListener(this);
         btn_stop.setOnClickListener(this);
+        btn_play_video.setOnClickListener(this);
+        btn_pause_video.setOnClickListener(this);
+        btn_replay_video.setOnClickListener(this);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
+        } else {
+            initMediaPlayer();
+            initVideoView();
+        }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        if (videoView != null) {
+            videoView.suspend();
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,13 +152,13 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openAlbum();
                 } else {
-                    Toast.makeText(SystemServiceActivity.this, "You denied the permission",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "You denied the permission", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case REQUEST_CODE_WRITE_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     initMediaPlayer();
+                    initVideoView();
                 } else {
                     Toast.makeText(this, "You denied the permission.", Toast.LENGTH_SHORT).show();
                     finish();
@@ -219,6 +245,21 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                     initMediaPlayer();
                 }
                 break;
+            case R.id.play_video:
+                if (!videoView.isPlaying()) {
+                    videoView.start();
+                }
+                break;
+            case R.id.pause_video:
+                if (videoView.isPlaying()) {
+                    videoView.pause();
+                }
+                break;
+            case R.id.replay_video:
+                if (videoView.isPlaying()) {
+                    videoView.resume();
+                }
+                break;
             default:
                 Log.d(TAG, "Unknown view is clicked.");
         }
@@ -300,5 +341,10 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void initVideoView() {
+        File file = new File(Environment.getExternalStorageDirectory(), "movie.mp4");
+        videoView.setVideoPath(file.getPath());
     }
 }
