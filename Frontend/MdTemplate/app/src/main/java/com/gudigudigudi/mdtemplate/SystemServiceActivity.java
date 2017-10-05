@@ -13,10 +13,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -41,6 +43,7 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
     public static final String FILE_PRIVIDER = "com.gudigudigudi.mdtemplate.fileprivider";
     private static final int REQUEST_CODE_TAKE_PHOTO = 1;
     private static final int REQUEST_CODE_CHOOSE_PHOTO = 2;
+    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 3;
 
     private Button btn_send_notification;
 
@@ -49,6 +52,11 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
     private ImageView picture;
 
     private Button btn_choose_photo;
+
+    private MediaPlayer mediaPlayer = new MediaPlayer();
+    private Button btn_play;
+    private Button btn_pause;
+    private Button btn_stop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +69,26 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
         btn_choose_photo = (Button) findViewById(R.id.choose_from_album);
         picture = (ImageView) findViewById(R.id.picture);
 
+        btn_play = (Button) findViewById(R.id.play);
+        btn_pause = (Button) findViewById(R.id.pause);
+        btn_stop = (Button) findViewById(R.id.stop);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
+        } else {
+            initMediaPlayer();
+        }
 
         btn_send_notification.setOnClickListener(this);
         btn_take_photo.setOnClickListener(this);
         btn_choose_photo.setOnClickListener(this);
+        btn_play.setOnClickListener(this);
+        btn_pause.setOnClickListener(this);
+        btn_stop.setOnClickListener(this);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -105,6 +128,14 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 } else {
                     Toast.makeText(SystemServiceActivity.this, "You denied the permission",
                             Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case REQUEST_CODE_WRITE_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initMediaPlayer();
+                } else {
+                    Toast.makeText(this, "You denied the permission.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 break;
             default:
@@ -171,6 +202,22 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                     openAlbum();
                 }
 
+                break;
+            case R.id.play:
+                if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer.start();
+                }
+                break;
+            case R.id.pause:
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                }
+                break;
+            case R.id.stop:
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                    initMediaPlayer();
+                }
                 break;
             default:
                 Log.d(TAG, "Unknown view is clicked.");
@@ -242,6 +289,16 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                     picture.getWidth(), picture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
         } else {
             Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void initMediaPlayer() {
+        try {
+            File file = new File(Environment.getExternalStorageDirectory(), "music.mp3");
+            mediaPlayer.setDataSource(file.getPath());
+            mediaPlayer.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

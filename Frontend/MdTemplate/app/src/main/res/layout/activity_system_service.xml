@@ -29,6 +29,37 @@
         android:text="Choose from photo"
         android:textAllCaps="false"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/play"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Play"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/pause"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pause"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Stop"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/picture"
         android:layout_width="match_parent"
