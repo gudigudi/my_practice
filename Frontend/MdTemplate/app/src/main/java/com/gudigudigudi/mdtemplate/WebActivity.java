@@ -115,13 +115,12 @@ public class WebActivity extends AppCompatActivity {
                     Request request = new Request.Builder().url("https://www.baidu.com").build();
                     Response response = null;
                     response = client.newCall(request).execute();
-                    String responseBody = response.body().string();
+                    final String responseBody = response.body().string();
 
-                    final Response finalResponse = response;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            tv_response_text.setText(finalResponse.toString());
+                            tv_response_text.setText(responseBody);
                         }
                     });
                 } catch (IOException e) {
