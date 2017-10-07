@@ -15,15 +15,14 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.Response;
 
 public class WebActivity extends AppCompatActivity {
@@ -52,32 +51,28 @@ public class WebActivity extends AppCompatActivity {
         btn_send_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendRequestWithHttpURLConnection();
-//                sendRequestWithOkHttp();
-//                sendRequestGetXMLWithOkHttp();
-//                sendRequestGetJSONWithOkHttp();
-
+//                sendRequestWithHttpURLConnection();
+                sendRequestWithOkHttp();
+                sendRequestGetXMLWithOkHttp();
+                sendRequestGetJSONWithOkHttp();
             }
         });
 
     }
 
     private void sendRequestGetJSONWithOkHttp() {
-
-        new Thread(new Runnable() {
+        String address = "http://114.215.134.219/get_data.json";
+        HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder().url("http://114.215.134.219/get_data.json").build();
-                    Response response = client.newCall(request).execute();
-//                    parseJSONWithJSONObject(response.body().string());
-                    parseJSONWithGSON(response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
             }
-        }).start();
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                parseJSONWithGSON(response.body().string());
+            }
+        });
     }
 
     private void parseJSONWithGSON(String jsonData) {
@@ -128,19 +123,18 @@ public class WebActivity extends AppCompatActivity {
     }
 
     private void sendRequestWithOkHttp() {
-        new Thread(new Runnable() {
+        String address = "https://www.baidu.com";
+        HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder().url("https://www.baidu.com").build();
-                    Response response = client.newCall(request).execute();
-                    showResponse(response.body().string());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
             }
-        }).start();
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                showResponse(response.body().string());
+            }
+        });
     }
 
     private void showResponse(final String responseData) {
@@ -153,19 +147,18 @@ public class WebActivity extends AppCompatActivity {
     }
 
     private void sendRequestGetXMLWithOkHttp() {
-        new Thread(new Runnable() {
+        String address = "http://114.215.134.219/get_data.xml";
+        HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder().url("http://114.215.134.219/get_data.xml").build();
-                    Response response = client.newCall(request).execute();
-                    parseXMLWithPull(response.body().string());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
             }
-        }).start();
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                parseXMLWithPull(response.body().string());
+            }
+        });
     }
 
     private void parseXMLWithPull(String xmlData) {
@@ -204,9 +197,7 @@ public class WebActivity extends AppCompatActivity {
                 }
                 eventType = parser.next();
             }
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
