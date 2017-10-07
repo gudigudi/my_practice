@@ -9,6 +9,9 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
@@ -22,6 +25,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -72,7 +76,7 @@ public class WebActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder().url("http://114.215.134.219/get_data.json").build();
                     Response response = client.newCall(request).execute();
-                    parseJSONWithJSONObject(response.body().string());
+//                    parseJSONWithJSONObject(response.body().string());
                     parseJSONWithGSON(response.body().string());
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -81,9 +85,16 @@ public class WebActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void parseJSONWithGSON(String string) {
+    private void parseJSONWithGSON(String jsonData) {
+        Gson gson = new Gson();
+        List<App> appList = gson.fromJson(jsonData, new TypeToken<List<App>>() {
+        }.getType());
 
-
+        for (App app : appList) {
+            Log.d(TAG, "id is: " + app.getId());
+            Log.d(TAG, "name is: " + app.getName());
+            Log.d(TAG, "version is: " + app.getVersion());
+        }
     }
 
     private void parseJSONWithJSONObject(String jsonData) {
