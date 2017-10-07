@@ -111,7 +111,18 @@ public class WebActivity extends AppCompatActivity {
             @Override
             public void run() {
                 String address = "https://www.baidu.com";
-                showResponse(HttpUtil.sendHttpRequest(address));
+                HttpUtil.sendHttpRequest(address, new HttpUtil.HttpCallbackListener() {
+                    @Override
+                    public void onFinish(String response) {
+                        showResponse(response);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
             }
         }).start();
     }
