@@ -52,10 +52,10 @@ public class WebActivity extends AppCompatActivity {
         btn_send_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                sendRequestWithHttpURLConnection();
-                sendRequestWithOkHttp();
+                sendRequestWithHttpURLConnection();
+//                sendRequestWithOkHttp();
 //                sendRequestGetXMLWithOkHttp();
-                sendRequestGetJSONWithOkHttp();
+//                sendRequestGetJSONWithOkHttp();
 
             }
         });
