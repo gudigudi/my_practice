@@ -1,6 +1,5 @@
 package com.gudigudigudi.mdtemplate;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +9,8 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -54,17 +55,55 @@ public class WebActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                sendRequestWithHttpURLConnection();
                 sendRequestWithOkHttp();
-                sendRequestGetXMLWithOkHttp();
+//                sendRequestGetXMLWithOkHttp();
+                sendRequestGetJSONWithOkHttp();
+
             }
         });
 
     }
 
-    private void sendRequestWithHttpURLConnection() {
-        new AsyncTask<Void, Void, Void>() {
+    private void sendRequestGetJSONWithOkHttp() {
 
+        new Thread(new Runnable() {
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder().url("http://114.215.134.219/get_data.json").build();
+                    Response response = client.newCall(request).execute();
+                    parseJSONWithJSONObject(response.body().string());
+                    parseJSONWithGSON(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void parseJSONWithGSON(String string) {
+
+
+    }
+
+    private void parseJSONWithJSONObject(String jsonData) {
+        try {
+            JSONArray jsonArray = new JSONArray(jsonData);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Log.d(TAG, "id is: " + jsonObject.getString("id"));
+                Log.d(TAG, "name is: " + jsonObject.getString("name"));
+                Log.d(TAG, "version is: " + jsonObject.getString("version"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendRequestWithHttpURLConnection() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
                 try {
@@ -94,14 +133,12 @@ public class WebActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-
                     if (connection != null) {
                         connection.disconnect();
                     }
                 }
-                return null;
             }
-        }.execute();
+        }).start();
     }
 
     private void sendRequestWithOkHttp() {
