@@ -15,7 +15,7 @@ public class HttpUtil {
     private static final int READ_TIMEOUT = 8000;
 
 
-    public static String sendHttpRequest(String address) {
+    public static void sendHttpRequest(String address, final HttpCallbackListener listener) {
         HttpURLConnection connection = null;
 
         try {
@@ -34,10 +34,12 @@ public class HttpUtil {
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }
-            return response.toString();
+
+            if (listener != null) {
+                listener.onFinish(response.toString());
+            }
         } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
+            listener.onError(e);
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -45,5 +47,10 @@ public class HttpUtil {
         }
     }
 
+    public interface HttpCallbackListener {
+        void onFinish(String response);
+
+        void onError(Exception e);
+    }
 
 }
