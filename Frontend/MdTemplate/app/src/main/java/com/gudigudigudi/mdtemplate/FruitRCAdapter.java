@@ -1,6 +1,7 @@
 package com.gudigudigudi.mdtemplate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,7 +29,7 @@ public class FruitRCAdapter extends RecyclerView.Adapter<FruitRCAdapter.ViewHold
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup group, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup group, final int i) {
 
         if (context == null) {
             context = group.getContext();
@@ -50,6 +51,8 @@ public class FruitRCAdapter extends RecyclerView.Adapter<FruitRCAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "you clicked image " + fruitList.get(viewHolder.getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), FruitContentActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
 
