@@ -1,5 +1,7 @@
 package com.gudigudigudi.mdtemplate;
 
+import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -17,6 +21,7 @@ import java.util.List;
 public class FruitRCAdapter extends RecyclerView.Adapter<FruitRCAdapter.ViewHolder> {
 
     private List<Fruit> fruitList;
+    private Context context;
 
     public FruitRCAdapter(List<Fruit> fruitList) {
         this.fruitList = fruitList;
@@ -24,28 +29,27 @@ public class FruitRCAdapter extends RecyclerView.Adapter<FruitRCAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup group, int i) {
-//        return null;
-        View view = LayoutInflater.from(group.getContext())
+
+        if (context == null) {
+            context = group.getContext();
+        }
+
+        View view = LayoutInflater.from(context)
                 .inflate(R.layout.fruit_item, group, false);
         final ViewHolder viewHolder = new ViewHolder(view);
 
-        viewHolder.fruitView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = viewHolder.getAdapterPosition();
-                Fruit fruit = fruitList.get(position);
-
-                Toast.makeText(view.getContext(), "you clicked view " + fruit.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "you clicked view " +
+                        fruitList.get(viewHolder.getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
         viewHolder.fruitImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = viewHolder.getAdapterPosition();
-                Fruit fruit = fruitList.get(position);
-
-                Toast.makeText(view.getContext(), "you clicked image " + fruit.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "you clicked image " + fruitList.get(viewHolder.getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -55,25 +59,25 @@ public class FruitRCAdapter extends RecyclerView.Adapter<FruitRCAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
         Fruit fruit = fruitList.get(i);
-        holder.fruitImage.setImageResource(fruit.getImageId());
+//        holder.fruitImage.setImageResource(fruit.getImageId());
+        Glide.with(context).load(fruit.getImageId()).into(holder.fruitImage);
         holder.fruitName.setText(fruit.getName());
     }
 
     @Override
     public int getItemCount() {
-//        return 0;
         return fruitList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView fruitImage;
         TextView fruitName;
-        View fruitView;
+        CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            fruitView = itemView;
+            cardView = (CardView) itemView;
             fruitImage = (ImageView) itemView.findViewById(R.id.fruit_image);
             fruitName = (TextView) itemView.findViewById(R.id.fruit_name);
         }
