@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -39,20 +38,15 @@ public class FruitRCAdapter extends RecyclerView.Adapter<FruitRCAdapter.ViewHold
                 .inflate(R.layout.fruit_item, group, false);
         final ViewHolder viewHolder = new ViewHolder(view);
 
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "you clicked view " +
-                        fruitList.get(viewHolder.getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
         viewHolder.fruitImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "you clicked image " + fruitList.get(viewHolder.getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(view.getContext(), FruitContentActivity.class);
-                view.getContext().startActivity(intent);
+                int position = viewHolder.getAdapterPosition();
+                Fruit fruit = fruitList.get(position);
+                Intent intent = new Intent(context, FruitContentActivity.class);
+                intent.putExtra(FruitContentActivity.FRUIT_NAME, fruit.getName());
+                intent.putExtra(FruitContentActivity.FRUIT_IMAGE_ID, fruit.getImageId());
+                context.startActivity(intent);
             }
         });
 
