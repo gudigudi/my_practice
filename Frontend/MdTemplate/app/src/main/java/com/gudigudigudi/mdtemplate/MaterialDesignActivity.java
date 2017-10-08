@@ -1,6 +1,8 @@
 package com.gudigudigudi.mdtemplate;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -16,6 +18,7 @@ public class MaterialDesignActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,32 @@ public class MaterialDesignActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_create);
         }
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_call);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_call:
+                        break;
+                    case R.id.nav_friends:
+                        break;
+                    case R.id.nav_location:
+                        break;
+                    case R.id.nav_mail:
+                        break;
+                    case R.id.nav_task:
+                        break;
+                    default:
+                        Log.d(TAG, "Unknown navigation menu item is clicked.");
+                        break;
+                }
+
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
     }
 
     @Override
