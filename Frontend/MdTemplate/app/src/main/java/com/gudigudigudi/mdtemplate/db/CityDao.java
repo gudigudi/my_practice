@@ -15,4 +15,6 @@ public interface CityDao {
     @Query("SELECT * FROM city")
     List<City> getAll();
 
+    @Query("SELECT * FROM city WHERE provinceId = :provinceId")
+    List<City> getCityInProvince(int provinceId);
 }

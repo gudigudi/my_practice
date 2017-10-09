@@ -15,4 +15,6 @@ public interface CountyDao {
     @Query("SELECT * FROM county")
     List<County> getAll();
 
+    @Query("SELECT * FROM county WHERE cityId = :cityId")
+    List<County> getCountyInCity(int cityId);
 }
