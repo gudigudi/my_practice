@@ -2,7 +2,6 @@ package com.gudigudigudi.mdtemplate;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.orhanobut.logger.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -81,9 +81,7 @@ public class WebActivity extends AppCompatActivity {
         }.getType());
 
         for (App app : appList) {
-            Log.d(TAG, "id is: " + app.getId());
-            Log.d(TAG, "name is: " + app.getName());
-            Log.d(TAG, "version is: " + app.getVersion());
+            Logger.json(gson.toJson(app));
         }
     }
 
@@ -92,9 +90,7 @@ public class WebActivity extends AppCompatActivity {
             JSONArray jsonArray = new JSONArray(jsonData);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                Log.d(TAG, "id is: " + jsonObject.getString("id"));
-                Log.d(TAG, "name is: " + jsonObject.getString("name"));
-                Log.d(TAG, "version is: " + jsonObject.getString("version"));
+                Logger.json(jsonObject.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,9 +111,9 @@ public class WebActivity extends AppCompatActivity {
                     @Override
                     public void onError(Exception e) {
                         e.printStackTrace();
+                        Logger.d(e);
                     }
                 });
-
             }
         }).start();
     }
@@ -187,9 +183,9 @@ public class WebActivity extends AppCompatActivity {
                         break;
                     case XmlPullParser.END_TAG:
                         if ("app".equals(nodeName)) {
-                            Log.d(TAG, "id is: " + id);
-                            Log.d(TAG, "name is: " + name);
-                            Log.d(TAG, "version is: " + version);
+                            Logger.d(TAG + " id is " + id);
+                            Logger.d(TAG + " name is " + name);
+                            Logger.d(TAG + " version is " + version);
                         }
                         break;
                     default:

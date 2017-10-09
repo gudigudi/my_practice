@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -146,19 +148,19 @@ public class MaterialDesignActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.backup:
-                Toast.makeText(this, "You clicked Backup", Toast.LENGTH_SHORT).show();
+                Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "backup");
                 break;
             case R.id.delete:
-                Toast.makeText(this, "You clicked Delete", Toast.LENGTH_SHORT).show();
+                Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "delete");
                 break;
             case R.id.settings:
-                Toast.makeText(this, "You clicked Settings", Toast.LENGTH_SHORT).show();
+                Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "settings");
                 break;
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             default:
-                Log.d(TAG, "Unknown menu item is clicked");
+                Logger.d("Unknown menu item is clicked");
                 break;
         }
         return true;

@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -17,13 +18,11 @@ public class BaseActivity extends AppCompatActivity {
 
     private ForceOfflineReceiver receiver;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d(TAG, "Current Activity is " + getClass().getSimpleName());
-
+        Logger.d(TAG, "Current Activity is " + getClass().getSimpleName());
         ActivityCollector.addActivity(this);
     }
 
@@ -53,7 +52,6 @@ public class BaseActivity extends AppCompatActivity {
 
         ActivityCollector.removeActivity(this);
     }
-
 
     class ForceOfflineReceiver extends BroadcastReceiver {
 

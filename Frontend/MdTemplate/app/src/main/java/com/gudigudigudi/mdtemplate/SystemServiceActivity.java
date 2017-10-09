@@ -27,12 +27,13 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -140,7 +141,7 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 }
                 break;
             default:
-                Log.d(TAG, "Unknown requestCode.");
+                Logger.d(LogUtil.LOG_UNKNOWN_REQUEST_CODE);
                 break;
         }
     }
@@ -165,7 +166,7 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 }
                 break;
             default:
-                Log.d(TAG, "Unknown request code.");
+                Logger.d(LogUtil.LOG_UNKNOWN_REQUEST_CODE);
         }
     }
 
@@ -261,7 +262,7 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 }
                 break;
             default:
-                Log.d(TAG, "Unknown view is clicked.");
+                Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);
         }
     }
 

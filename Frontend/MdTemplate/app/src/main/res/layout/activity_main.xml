@@ -80,12 +80,12 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-    <ImageView
-        android:id="@+id/image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="an image view"
-        android:src="@mipmap/ic_launcher"/>
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="an image view"
+            android:src="@mipmap/ic_launcher"/>
 
         <Button
             android:id="@+id/btn_change_imageview"

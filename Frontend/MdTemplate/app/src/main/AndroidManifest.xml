@@ -71,12 +71,6 @@
         <activity android:name=".NotificationToggledActivity">
         </activity>
         <activity android:name=".WebActivity">
-        </activity>
-        <activity android:name=".ServiceActivity">
-        </activity>
-        <activity
-            android:name=".MaterialDesignActivity"
-            android:label="Material Design Component">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -87,6 +81,12 @@
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts"/>
+        </activity>
+        <activity android:name=".ServiceActivity">
+        </activity>
+        <activity
+            android:name=".MaterialDesignActivity"
+            android:label="Material Design Component">
         </activity>
 
         <receiver
@@ -132,12 +132,6 @@
 
         <activity android:name=".FruitContentActivity">
         </activity>
-
-        <service
-            android:name=".TimingTaskService"
-            android:enabled="true"
-            android:exported="true">
-        </service>
     </application>
 
 </manifest>

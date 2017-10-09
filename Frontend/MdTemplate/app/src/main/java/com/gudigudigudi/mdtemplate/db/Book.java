@@ -30,7 +30,8 @@ public class Book {
     private int pages;
     @ColumnInfo(name = "name")
     private String name;
-
+    @ColumnInfo(name = "press")
+    private String press;
 
     public int getId() {
         return id;
@@ -47,10 +48,6 @@ public class Book {
     public void setPress(String press) {
         this.press = press;
     }
-
-    @ColumnInfo(name = "press")
-
-    private String press;
 
     public String getAuthor() {
         return author;
