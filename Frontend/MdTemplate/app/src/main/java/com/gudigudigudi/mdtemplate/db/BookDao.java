@@ -24,7 +24,10 @@ public interface BookDao {
     Book getBookByName(String name);
 
     @Insert
-    void insertBooks(Book... books);
+    void insertAll(List<Book> books);
+
+    @Insert
+    void insert(Book book);
 
     @Delete
     void deleteBook(Book book);

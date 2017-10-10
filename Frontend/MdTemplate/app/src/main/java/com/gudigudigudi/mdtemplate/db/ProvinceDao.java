@@ -1,6 +1,7 @@
 package com.gudigudigudi.mdtemplate.db;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
@@ -15,4 +16,9 @@ public interface ProvinceDao {
     @Query("SELECT * FROM province")
     List<Province> getAll();
 
+    @Insert
+    void insert(Province province);
+
+    @Insert
+    void insertAll(List<Province> provinces);
 }

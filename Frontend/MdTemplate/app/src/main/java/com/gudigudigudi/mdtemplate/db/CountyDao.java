@@ -1,6 +1,7 @@
 package com.gudigudigudi.mdtemplate.db;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
@@ -17,4 +18,10 @@ public interface CountyDao {
 
     @Query("SELECT * FROM county WHERE cityId = :cityId")
     List<County> getCountyInCity(int cityId);
+
+    @Insert
+    void insert(County county);
+
+    @Insert
+    void insertAll(List<County> counties);
 }
