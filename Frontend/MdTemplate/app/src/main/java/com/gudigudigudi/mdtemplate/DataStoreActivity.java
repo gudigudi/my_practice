@@ -16,9 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 import com.gudigudigudi.mdtemplate.db.AppDatabase;
 import com.gudigudigudi.mdtemplate.db.Book;
-import com.gudigudigudi.mdtemplate.db.BookDBHelper;
 import com.gudigudigudi.mdtemplate.db.BookDao;
 
 import java.io.BufferedReader;
@@ -40,7 +40,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
     private Button btn_restore_data_by_sharedpreferences;
 
 
-    private BookDBHelper dbHelper;
+    private AppDBHelper dbHelper;
     private Button btn_create_db;
     private Button btn_add_data_to_db;
     private Button btn_update_db;
@@ -73,7 +73,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
         btn_restore_data_by_sharedpreferences = (Button) findViewById(R.id.btn_restore_data_by_sharedpreferences);
 
 
-        dbHelper = new BookDBHelper(this, "book.db", null, 3);
+        dbHelper = new AppDBHelper(this, "book.db", null, 3);
         btn_create_db = (Button) findViewById(R.id.btn_create_db);
         btn_add_data_to_db = (Button) findViewById(R.id.btn_add_data_to_db);
         btn_update_db = (Button) findViewById(R.id.btn_update_db);
@@ -261,8 +261,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
                         Log.d(TAG, "insert book into Sqlite db: " + book.toString());
 
-
-                        bookDao.insertBooks(book);
+                        bookDao.insert(book);
 
                         return null;
                     }

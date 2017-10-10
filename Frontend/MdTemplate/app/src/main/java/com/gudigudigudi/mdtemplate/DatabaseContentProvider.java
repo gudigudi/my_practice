@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
-import com.gudigudigudi.mdtemplate.db.BookDBHelper;
+import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 
 public class DatabaseContentProvider extends ContentProvider {
 
@@ -25,7 +25,7 @@ public class DatabaseContentProvider extends ContentProvider {
 
     private static UriMatcher uriMatcher;
 
-    private BookDBHelper dbHelper;
+    private AppDBHelper dbHelper;
 
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -107,7 +107,7 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        dbHelper = new BookDBHelper(getContext(), "book.db", null, 3);
+        dbHelper = new AppDBHelper(getContext(), "book.db", null, 3);
         return true;
     }
 
