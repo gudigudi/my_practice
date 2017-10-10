@@ -7,6 +7,13 @@ import android.arch.persistence.room.PrimaryKey;
 /**
  * Created by gu on 10/9/17.
  */
+
+/**
+ * CREATE TABLE province (
+ * id INTEGER PRIMARY KEY AUTOINCREMENT,
+ * name TEXT,
+ * code INTEGER );
+ */
 @Entity
 public class Province {
 

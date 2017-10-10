@@ -2,19 +2,27 @@ package com.gudigudigudi.mdtemplate.db;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by gu on 10/9/17.
  */
 
-@Entity(foreignKeys = {
-        @ForeignKey(entity = City.class,
-                parentColumns = "id",
-                childColumns = "cityId",
-                onDelete = ForeignKey.CASCADE)
-})
+/**
+ * CREATE TABLE county (
+ * id INTEGER PRIMARY KEY AUTOINCREMENT,
+ * name TEXT,
+ * weatherId TEXT,
+ * cityId INTEGER );
+ */
+
+//@Entity(foreignKeys = {
+//        @ForeignKey(entity = City.class,
+//                parentColumns = "id",
+//                childColumns = "cityId",
+//                onDelete = ForeignKey.CASCADE)
+//})
+@Entity
 public class County {
 
     @PrimaryKey(autoGenerate = true)
@@ -23,7 +31,7 @@ public class County {
     private String name;
     @ColumnInfo(name = "weatherId")
     private String weatherId;
-
+    @ColumnInfo(name = "cityId")
     private int cityId;
 
     public int getId() {
