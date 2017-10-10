@@ -3,6 +3,8 @@ package com.gudigudigudi.mdtemplate.db;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
+import com.gudigudigudi.mdtemplate.BaseApplication;
+
 /**
  * Created by gu on 10/3/17.
  */
@@ -10,11 +12,10 @@ import android.arch.persistence.room.RoomDatabase;
 @Database(entities = {
         Book.class,
         Category.class,
-        ProvinceDao.class,
-        CityDao.class,
-        CountyDao.class},
-        version = 3,
-        exportSchema = false)
+        Province.class,
+        City.class,
+        County.class},
+        version = BaseApplication.APP_DB_VERSION)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract BookDao bookDao();
@@ -26,5 +27,4 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CityDao cityDao();
 
     public abstract CountyDao countyDao();
-
 }
