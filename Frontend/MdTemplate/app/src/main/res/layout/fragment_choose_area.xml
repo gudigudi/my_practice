@@ -29,6 +29,12 @@
             android:background="@drawable/ic_create"/>
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Province:City:County"
+        android:textSize="18sp"
+        android:textAlignment="center"/>
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"

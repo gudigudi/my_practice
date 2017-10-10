@@ -17,10 +17,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.gudigudigudi.mdtemplate.db.AppDatabase;
 import com.gudigudigudi.mdtemplate.db.City;
 import com.gudigudigudi.mdtemplate.db.County;
 import com.gudigudigudi.mdtemplate.db.Province;
+import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -101,7 +104,7 @@ public class ChooseAreaFragment extends Fragment {
         listView.setAdapter(adapter);
 
         appDatabase = Room.databaseBuilder(getContext(),
-                AppDatabase.class, "province").build();
+                AppDatabase.class, "app").build();
 
         return view;
     }
@@ -139,10 +142,20 @@ public class ChooseAreaFragment extends Fragment {
             public void onItemClick(AdapterView<?> view, View view1, int i, long l) {
                 if (currentLevel == LEVEL_PROVINCE) {
                     currentProvince = provinceList.get(i);
-                    queryCities();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            queryCities();
+                        }
+                    }).start();
                 } else if (currentLevel == LEVEL_CITY) {
                     currentCity = cityList.get(i);
-                    queryCounties();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            queryCounties();
+                        }
+                    }).start();
                 }
             }
         });
@@ -150,21 +163,39 @@ public class ChooseAreaFragment extends Fragment {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "button back");
                 if (currentLevel == LEVEL_COUNTY) {
                     queryCities();
                 } else if (currentLevel == LEVEL_CITY) {
                     queryProvinces();
+                } else if (currentLevel == LEVEL_PROVINCE) {
+                    queryProvinces();
                 }
             }
         });
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                queryProvinces();
+            }
+        }).start();
+        adapter.notifyDataSetChanged();
     }
 
     private void queryProvinces() {
-        titleText.setText("中国");
-        btn_back.setVisibility(View.GONE);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                titleText.setText("中国");
+                btn_back.setVisibility(View.GONE);
+            }
+        });
+
         provinceList = appDatabase.provinceDao().getAll();
 
         if (provinceList.size() > 0) {
+            Logger.d("query from local db.");
             dataList.clear();
 
             for (Province province : provinceList) {
@@ -174,14 +205,20 @@ public class ChooseAreaFragment extends Fragment {
             listView.setSelection(0);
             currentLevel = LEVEL_PROVINCE;
         } else {
+            Logger.d("query from server api.");
             String address = "http://guolin.tech/api/china";
             queryFromServer(address, "province");
         }
     }
 
     private void queryCities() {
-        titleText.setText(currentProvince.getName());
-        btn_back.setVisibility(View.VISIBLE);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                titleText.setText(currentProvince.getName());
+                btn_back.setVisibility(View.VISIBLE);
+            }
+        });
 
         cityList = appDatabase.cityDao().getCityInProvince(currentProvince.getId());
 
@@ -197,13 +234,20 @@ public class ChooseAreaFragment extends Fragment {
         } else {
             int provinceCode = currentProvince.getCode();
             String address = "http://guolin.tech/api/china/" + provinceCode;
+            Logger.d(address);
             queryFromServer(address, "city");
         }
     }
 
     private void queryCounties() {
-        titleText.setText(currentCity.getName());
-        btn_back.setVisibility(View.VISIBLE);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                titleText.setText(currentCity.getName());
+                btn_back.setVisibility(View.VISIBLE);
+            }
+        });
+
         countyList = appDatabase.countyDao().getCountyInCity(currentCity.getId());
 
         if (countyList.size() > 0) {
@@ -241,13 +285,44 @@ public class ChooseAreaFragment extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseBody = response.body().string();
-                boolean result = true;
-                if ("privince".equals(queryLevelCode)) {
-//                    result=;
+                Logger.json(responseBody);
+                Gson gson = new Gson();
+                Logger.d(queryLevelCode);
+
+                if ("province".equals(queryLevelCode)) {
+                    List<Province> provinces = gson.fromJson(responseBody, new TypeToken<List<Province>>() {
+                    }.getType());
+                    appDatabase.provinceDao().insertAll(provinces);
+                    Logger.d("query server api: province");
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            queryProvinces();
+                        }
+                    }).start();
+                } else if ("city".equals(queryLevelCode)) {
+                    List<City> cities = gson.fromJson(responseBody, new TypeToken<List<City>>() {
+                    }.getType());
+                    appDatabase.cityDao().insertAll(cities);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            queryCities();
+                        }
+                    }).start();
+                } else if ("county".equals(queryLevelCode)) {
+                    List<County> counties = gson.fromJson(responseBody, new TypeToken<List<County>>() {
+                    }.getType());
+                    appDatabase.countyDao().insertAll(counties);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            queryCounties();
+                        }
+                    }).start();
                 }
             }
         });
-
     }
 
     /**
