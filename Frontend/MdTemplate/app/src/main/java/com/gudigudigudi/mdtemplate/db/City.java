@@ -4,6 +4,8 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by gu on 10/9/17.
  */
@@ -25,20 +27,21 @@ import android.arch.persistence.room.PrimaryKey;
 public class City {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int _id;
     @ColumnInfo(name = "name")
     private String name;
     @ColumnInfo(name = "code")
+    @SerializedName("id")
     private int code;
     @ColumnInfo(name = "provinceId")
     private int provinceId;
 
-    public int getId() {
-        return id;
+    public int get_id() {
+        return _id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void set_id(int _id) {
+        this._id = _id;
     }
 
     public String getName() {
