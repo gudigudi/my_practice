@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -142,34 +143,48 @@ public class ChooseAreaFragment extends Fragment {
             public void onItemClick(AdapterView<?> view, View view1, int i, long l) {
                 if (currentLevel == LEVEL_PROVINCE) {
                     currentProvince = provinceList.get(i);
-                    new Thread(new Runnable() {
+                    new AsyncTask<Void, Void, Void>() {
                         @Override
-                        public void run() {
+                        protected Void doInBackground(Void... voids) {
                             queryCities();
+                            return null;
                         }
-                    }).start();
+                    }.execute();
                 } else if (currentLevel == LEVEL_CITY) {
                     currentCity = cityList.get(i);
-                    new Thread(new Runnable() {
+                    new AsyncTask<Void, Void, Void>() {
                         @Override
-                        public void run() {
+                        protected Void doInBackground(Void... voids) {
                             queryCounties();
+                            return null;
                         }
-                    }).start();
+                    }.execute();
                 }
             }
         });
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "button back");
                 if (currentLevel == LEVEL_COUNTY) {
-                    queryCities();
+                    new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            queryCities();
+                            return null;
+                        }
+                    }.execute();
                 } else if (currentLevel == LEVEL_CITY) {
-                    queryProvinces();
+                    new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            queryProvinces();
+                            return null;
+                        }
+                    }.execute();
                 } else if (currentLevel == LEVEL_PROVINCE) {
-                    queryProvinces();
+                    btn_back.setVisibility(View.GONE);
                 }
             }
         });
@@ -180,7 +195,12 @@ public class ChooseAreaFragment extends Fragment {
                 queryProvinces();
             }
         }).start();
-        adapter.notifyDataSetChanged();
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void queryProvinces() {
@@ -200,9 +220,16 @@ public class ChooseAreaFragment extends Fragment {
 
             for (Province province : provinceList) {
                 dataList.add(province.getName());
+                Gson gson = new Gson();
+                Logger.json(gson.toJson(province));
             }
-            adapter.notifyDataSetChanged();
-            listView.setSelection(0);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                    listView.setSelection(0);
+                }
+            });
             currentLevel = LEVEL_PROVINCE;
         } else {
             Logger.d("query from server api.");
@@ -220,16 +247,23 @@ public class ChooseAreaFragment extends Fragment {
             }
         });
 
-        cityList = appDatabase.cityDao().getCityInProvince(currentProvince.getId());
+        cityList = appDatabase.cityDao().getCityInProvince(currentProvince.getCode());
 
         if (cityList.size() > 0) {
             dataList.clear();
 
             for (City city : cityList) {
                 dataList.add(city.getName());
+                Gson gson = new Gson();
+                Logger.json(gson.toJson(city));
             }
-            adapter.notifyDataSetChanged();
-            listView.setSelection(0);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                    listView.setSelection(0);
+                }
+            });
             currentLevel = LEVEL_CITY;
         } else {
             int provinceCode = currentProvince.getCode();
@@ -248,16 +282,22 @@ public class ChooseAreaFragment extends Fragment {
             }
         });
 
-        countyList = appDatabase.countyDao().getCountyInCity(currentCity.getId());
+        countyList = appDatabase.countyDao().getCountyInCity(currentCity.getCode());
 
         if (countyList.size() > 0) {
             dataList.clear();
             for (County county : countyList) {
                 dataList.add(county.getName());
+                Gson gson = new Gson();
+                Logger.json(gson.toJson(county));
             }
-            adapter.notifyDataSetChanged();
-
-            listView.setSelection(0);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                    listView.setSelection(0);
+                }
+            });
             currentLevel = LEVEL_COUNTY;
         } else {
             int provinceCode = currentProvince.getCode();
@@ -303,6 +343,10 @@ public class ChooseAreaFragment extends Fragment {
                 } else if ("city".equals(queryLevelCode)) {
                     List<City> cities = gson.fromJson(responseBody, new TypeToken<List<City>>() {
                     }.getType());
+                    for (City city : cities) {
+                        Logger.json(gson.toJson(city));
+                        city.setProvinceId(currentProvince.getCode());
+                    }
                     appDatabase.cityDao().insertAll(cities);
                     new Thread(new Runnable() {
                         @Override
@@ -313,6 +357,11 @@ public class ChooseAreaFragment extends Fragment {
                 } else if ("county".equals(queryLevelCode)) {
                     List<County> counties = gson.fromJson(responseBody, new TypeToken<List<County>>() {
                     }.getType());
+                    for (County county : counties) {
+                        Logger.json(gson.toJson(counties));
+                        county.setCityId(currentCity.getCode());
+                    }
+
                     appDatabase.countyDao().insertAll(counties);
                     new Thread(new Runnable() {
                         @Override
