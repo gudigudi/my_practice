@@ -3,6 +3,7 @@ package com.gudigudigudi.mdtemplate;
 import android.app.AlertDialog;
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -159,6 +160,12 @@ public class ChooseAreaFragment extends Fragment {
                             return null;
                         }
                     }.execute();
+                } else if (currentLevel == LEVEL_COUNTY) {
+                    String weatherId = countyList.get(i).getWeatherId();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id", weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -189,12 +196,14 @@ public class ChooseAreaFragment extends Fragment {
             }
         });
 
-        new Thread(new Runnable() {
+        new AsyncTask<Void, Void, Void>() {
             @Override
-            public void run() {
+            protected Void doInBackground(Void... voids) {
                 queryProvinces();
+                return null;
             }
-        }).start();
+        }.execute();
+
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -220,8 +229,6 @@ public class ChooseAreaFragment extends Fragment {
 
             for (Province province : provinceList) {
                 dataList.add(province.getName());
-                Gson gson = new Gson();
-                Logger.json(gson.toJson(province));
             }
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -334,41 +341,42 @@ public class ChooseAreaFragment extends Fragment {
                     }.getType());
                     appDatabase.provinceDao().insertAll(provinces);
                     Logger.d("query server api: province");
-                    new Thread(new Runnable() {
+                    new AsyncTask<Void, Void, Void>() {
                         @Override
-                        public void run() {
+                        protected Void doInBackground(Void... voids) {
                             queryProvinces();
+                            return null;
                         }
-                    }).start();
+                    }.execute();
                 } else if ("city".equals(queryLevelCode)) {
                     List<City> cities = gson.fromJson(responseBody, new TypeToken<List<City>>() {
                     }.getType());
                     for (City city : cities) {
-                        Logger.json(gson.toJson(city));
                         city.setProvinceId(currentProvince.getCode());
                     }
                     appDatabase.cityDao().insertAll(cities);
-                    new Thread(new Runnable() {
+                    new AsyncTask<Void, Void, Void>() {
                         @Override
-                        public void run() {
+                        protected Void doInBackground(Void... voids) {
                             queryCities();
+                            return null;
                         }
-                    }).start();
+                    }.execute();
                 } else if ("county".equals(queryLevelCode)) {
                     List<County> counties = gson.fromJson(responseBody, new TypeToken<List<County>>() {
                     }.getType());
                     for (County county : counties) {
-                        Logger.json(gson.toJson(counties));
                         county.setCityId(currentCity.getCode());
                     }
 
                     appDatabase.countyDao().insertAll(counties);
-                    new Thread(new Runnable() {
+                    new AsyncTask<Void, Void, Void>() {
                         @Override
-                        public void run() {
+                        protected Void doInBackground(Void... voids) {
                             queryCounties();
+                            return null;
                         }
-                    }).start();
+                    }.execute();
                 }
             }
         });
