@@ -15,7 +15,7 @@ import com.gudigudigudi.mdtemplate.BaseApplication;
         Province.class,
         City.class,
         County.class},
-        version = BaseApplication.APP_DB_VERSION)
+        version = BaseApplication.APP_DB_VERSION, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract BookDao bookDao();
