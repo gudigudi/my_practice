@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate.gson;
+package com.gudigudigudi.mdtemplate.model;
 
 /**
  * Created by gu on 10/11/17.

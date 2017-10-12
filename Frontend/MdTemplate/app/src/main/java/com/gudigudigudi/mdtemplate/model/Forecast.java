@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate.gson;
+package com.gudigudigudi.mdtemplate.model;
 
 import com.google.gson.annotations.SerializedName;
 
