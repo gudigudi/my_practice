@@ -21,7 +21,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
@@ -44,9 +44,12 @@ android {
         abi {
             enable true
             reset()
-            include "x86", "armeabi-v7a"
+            include "mips", "mips64", "x86", "x86_64", "armeabi", "armeabi-v7a", "arm64-v8a"
             universalApk false
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -65,7 +68,6 @@ dependencies {
     compile 'android.arch.lifecycle:extensions:1.0.0-beta1'
     compile 'android.arch.persistence.room:runtime:1.0.0-beta1'
     compile 'android.arch.paging:runtime:1.0.0-alpha2'
-    compile 'com.facebook.fresco:fresco:1.5.0'
     compile 'com.github.bumptech.glide:glide:4.2.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.google.code.gson:gson:2.8.0'
