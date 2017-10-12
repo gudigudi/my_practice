@@ -123,6 +123,8 @@
         <activity android:name=".FruitContentActivity">
         </activity>
         <activity android:name=".WeatherActivity">
+        </activity>
+        <activity android:name=".ChooseAreaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
