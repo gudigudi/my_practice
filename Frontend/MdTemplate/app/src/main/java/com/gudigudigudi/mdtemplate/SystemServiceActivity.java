@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.gudigudigudi.mdtemplate.util.LogUtil;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;

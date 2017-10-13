@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.gudigudigudi.mdtemplate.model.Forecast;
 import com.gudigudigudi.mdtemplate.model.Weather;
+import com.gudigudigudi.mdtemplate.util.HttpUtil;
 import com.orhanobut.logger.Logger;
 
 import org.json.JSONException;

@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.gudigudigudi.mdtemplate.util.LogUtil;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;

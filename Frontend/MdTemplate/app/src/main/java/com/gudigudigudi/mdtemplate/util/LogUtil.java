@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.util;
 
 /**
  * Created by gu on 10/9/17.

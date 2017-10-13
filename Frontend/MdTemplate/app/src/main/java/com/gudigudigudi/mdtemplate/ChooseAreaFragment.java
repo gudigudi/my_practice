@@ -25,6 +25,8 @@ import com.gudigudigudi.mdtemplate.db.AppDatabase;
 import com.gudigudigudi.mdtemplate.db.City;
 import com.gudigudigudi.mdtemplate.db.County;
 import com.gudigudigudi.mdtemplate.db.Province;
+import com.gudigudigudi.mdtemplate.util.HttpUtil;
+import com.gudigudigudi.mdtemplate.util.LogUtil;
 import com.orhanobut.logger.Logger;
 
 import java.io.IOException;

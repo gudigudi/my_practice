@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.gudigudigudi.mdtemplate.util.HttpUtil;
 import com.orhanobut.logger.Logger;
 
 import org.json.JSONArray;
