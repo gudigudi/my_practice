@@ -83,17 +83,22 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        String weatherString = preferences.getString("weather", null);
-//        if (weatherString != null) {
-//            Gson gson = new Gson();
-//            Weather weather = gson.fromJson(weatherString, Weather.class);
-//            weatherId = weather.basic.weatherId;
-//            showWeatherInfo(weather);
-//        } else {
+        String weatherString = preferences.getString("weather", null);
+        if (weatherString != null) {
+            Gson gson = new Gson();
+            Weather weather = null;
+            try {
+                weather = gson.fromJson(new JSONObject(weatherString).getJSONArray("HeWeather").getJSONObject(0).toString(), Weather.class);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            weatherId = weather.basic.weatherId;
+            showWeatherInfo(weather);
+        } else {
             weatherId = getIntent().getStringExtra("weather_id");
             weatherLayout.setVisibility(View.INVISIBLE);
             requestWeather(weatherId);
-//        }
+        }
 
         String bingPic = preferences.getString("bing_pic", null);
         if (bingPic != null) {
@@ -120,7 +125,6 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
     }
 
     @Override
@@ -157,13 +161,12 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
 
                 Logger.json(new Gson().toJson(weather));
 
-                final String finalWeatherContent = weatherContent;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (weather != null && "ok".equals(weather.status)) {
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
-                            editor.putString("weather", finalWeatherContent);
+                            editor.putString("weather", responseText);
                             editor.apply();
                             showWeatherInfo(weather);
                         } else {
