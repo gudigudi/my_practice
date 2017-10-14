@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.service;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -10,7 +10,7 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.gudigudigudi.mdtemplate.model.Weather;
+import com.gudigudigudi.mdtemplate.model.weather.Weather;
 import com.gudigudigudi.mdtemplate.util.HttpUtil;
 
 import org.json.JSONException;
