@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.base;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +10,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import com.gudigudigudi.mdtemplate.ActivityCollector;
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.activity.LoginActivity;
 import com.orhanobut.logger.Logger;
 
 public class BaseActivity extends AppCompatActivity {

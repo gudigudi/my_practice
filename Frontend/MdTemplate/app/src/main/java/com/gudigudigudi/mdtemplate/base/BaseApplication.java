@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.base;
 
 import android.app.Application;
 import android.content.Context;
