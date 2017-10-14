@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.activity.NewsContentActivity;
+import com.gudigudigudi.mdtemplate.model.News;
 
 import java.util.ArrayList;
 import java.util.List;

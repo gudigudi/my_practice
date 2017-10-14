@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.fragment;
 
 import android.app.AlertDialog;
 import android.arch.persistence.room.Room;
@@ -21,6 +21,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.activity.ChooseAreaActivity;
+import com.gudigudigudi.mdtemplate.activity.WeatherActivity;
 import com.gudigudigudi.mdtemplate.db.AppDatabase;
 import com.gudigudigudi.mdtemplate.db.City;
 import com.gudigudigudi.mdtemplate.db.County;
