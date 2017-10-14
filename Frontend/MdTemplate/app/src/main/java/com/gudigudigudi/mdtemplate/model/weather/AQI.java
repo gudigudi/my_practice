@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate.model;
+package com.gudigudigudi.mdtemplate.model.weather;
 
 /**
  * Created by gu on 10/11/17.

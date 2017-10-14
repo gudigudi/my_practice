@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.model;
 
 /**
  * Fruit: model for fruit listview

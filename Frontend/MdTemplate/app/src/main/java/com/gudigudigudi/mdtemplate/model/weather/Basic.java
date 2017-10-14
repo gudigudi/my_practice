@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate.model;
+package com.gudigudigudi.mdtemplate.model.weather;
 
 import com.google.gson.annotations.SerializedName;
 
