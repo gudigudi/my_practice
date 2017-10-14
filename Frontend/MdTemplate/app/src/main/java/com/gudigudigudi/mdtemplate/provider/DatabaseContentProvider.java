@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
