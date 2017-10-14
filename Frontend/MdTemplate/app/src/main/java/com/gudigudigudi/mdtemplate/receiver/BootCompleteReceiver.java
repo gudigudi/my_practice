@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
