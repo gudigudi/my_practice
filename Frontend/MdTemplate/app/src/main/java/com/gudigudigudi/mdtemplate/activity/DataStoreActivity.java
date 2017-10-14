@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.activity;
 
 import android.arch.persistence.room.Room;
 import android.content.ContentValues;
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gudigudigudi.mdtemplate.R;
 import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 import com.gudigudigudi.mdtemplate.db.AppDatabase;
 import com.gudigudigudi.mdtemplate.db.Book;

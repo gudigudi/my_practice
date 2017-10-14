@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.gudigudigudi.mdtemplate.R;
 import com.gudigudigudi.mdtemplate.util.LogUtil;
 import com.orhanobut.logger.Logger;
 

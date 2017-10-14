@@ -1,10 +1,16 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
+
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.base.BaseActivity;
+import com.gudigudigudi.mdtemplate.fragment.LeftFragment;
+import com.gudigudigudi.mdtemplate.fragment.Right2Fragment;
+import com.gudigudigudi.mdtemplate.fragment.RightFragment;
 
 public class FragmentDemoActivity extends BaseActivity implements LeftFragment.OnFragmentInteractionListener, RightFragment.OnFragmentInteractionListener, Right2Fragment.OnFragmentInteractionListener {
 

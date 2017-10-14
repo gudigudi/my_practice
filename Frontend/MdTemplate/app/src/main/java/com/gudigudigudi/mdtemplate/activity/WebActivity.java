@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.model.App;
 import com.gudigudigudi.mdtemplate.util.HttpUtil;
 import com.orhanobut.logger.Logger;
 

@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,8 +22,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.gudigudigudi.mdtemplate.model.Forecast;
-import com.gudigudigudi.mdtemplate.model.Weather;
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.fragment.ChooseAreaFragment;
+import com.gudigudigudi.mdtemplate.model.weather.Forecast;
+import com.gudigudigudi.mdtemplate.model.weather.Weather;
+import com.gudigudigudi.mdtemplate.service.WeatherAutoUpdateService;
 import com.gudigudigudi.mdtemplate.util.HttpUtil;
 import com.orhanobut.logger.Logger;
 

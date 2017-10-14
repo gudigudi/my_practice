@@ -1,7 +1,9 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.gudigudigudi.mdtemplate.R;
 
 public class NotificationToggledActivity extends AppCompatActivity {
 

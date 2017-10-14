@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.adapter.FruitRCAdapter;
+import com.gudigudigudi.mdtemplate.base.BaseActivity;
+import com.gudigudigudi.mdtemplate.model.Fruit;
 
 import java.util.ArrayList;
 import java.util.List;

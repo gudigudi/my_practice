@@ -1,10 +1,13 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.fragment.NewsContentFragment;
 
 public class NewsContentActivity extends AppCompatActivity implements NewsContentFragment.OnFragmentInteractionListener {
 
