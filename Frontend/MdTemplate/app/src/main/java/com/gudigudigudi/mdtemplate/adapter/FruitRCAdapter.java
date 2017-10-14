@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.activity.FruitContentActivity;
+import com.gudigudigudi.mdtemplate.model.Fruit;
 
 import java.util.List;
 

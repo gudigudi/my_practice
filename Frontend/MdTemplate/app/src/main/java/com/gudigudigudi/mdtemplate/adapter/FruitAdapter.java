@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate;
+package com.gudigudigudi.mdtemplate.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.model.Fruit;
 
 import java.util.List;
 
