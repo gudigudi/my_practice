@@ -69,6 +69,7 @@ public class DownloadTask extends AsyncTask {
             if (response != null) {
 
                 is = response.body().byteStream();
+                savedFile = new RandomAccessFile(file, "rw");
                 savedFile.seek(downloadLength);
                 byte[] b = new byte[1024];
                 int total = 0;
@@ -92,6 +93,7 @@ public class DownloadTask extends AsyncTask {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return TYPE_FAILED;
     }
 
