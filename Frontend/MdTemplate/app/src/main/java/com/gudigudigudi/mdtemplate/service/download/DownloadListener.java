@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate.service;
+package com.gudigudigudi.mdtemplate.service.download;
 
 /**
  * Created by gu on 10/14/17.

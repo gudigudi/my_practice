@@ -1,9 +1,7 @@
-package com.gudigudigudi.mdtemplate.service.task;
+package com.gudigudigudi.mdtemplate.service.download;
 
 import android.os.AsyncTask;
 import android.os.Environment;
-
-import com.gudigudigudi.mdtemplate.service.DownloadListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -142,5 +140,13 @@ public class DownloadTask extends AsyncTask {
             return contentLength;
         }
         return 0;
+    }
+
+    public void pauseDownload() {
+        isPaused = true;
+    }
+
+    public void cancelDownload() {
+        isCanceled = true;
     }
 }
