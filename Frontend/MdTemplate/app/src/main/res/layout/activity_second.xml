@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gudigudigudi.mdtemplate.SecondActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.SecondActivity">
 
     <Button
         android:id="@+id/button"

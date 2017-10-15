@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.gudigudigudi.mdtemplate.NewsContentActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.NewsContentActivity">
 
     <fragment
         android:id="@+id/news_content_fragment"
-        android:name="com.gudigudigudi.mdtemplate.NewsContentFragment"
+        android:name="com.gudigudigudi.mdtemplate.fragment.NewsContentFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

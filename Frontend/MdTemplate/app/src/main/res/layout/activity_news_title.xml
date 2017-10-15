@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/news_title_layout"
-    tools:context="com.gudigudigudi.mdtemplate.NewsTitleActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.NewsTitleActivity">
 
     <fragment
         android:id="@+id/news_title_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.gudigudigudi.mdtemplate.NewsTitleFragment"/>
+        android:name="com.gudigudigudi.mdtemplate.fragment.NewsTitleFragment"/>
 
 </FrameLayout>

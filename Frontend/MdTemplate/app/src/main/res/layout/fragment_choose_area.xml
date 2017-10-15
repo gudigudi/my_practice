@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:background="#fff"
-              tools:context="com.gudigudigudi.mdtemplate.ChooseAreaFragment">
+              tools:context="com.gudigudigudi.mdtemplate.fragment.ChooseAreaFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

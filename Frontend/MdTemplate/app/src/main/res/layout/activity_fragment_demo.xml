@@ -5,21 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="com.gudigudigudi.mdtemplate.FragmentDemoActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.FragmentDemoActivity">
 
     <fragment
         android:id="@+id/left_fragment"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:name="com.gudigudigudi.mdtemplate.LeftFragment"/>
+        android:name="com.gudigudigudi.mdtemplate.fragment.LeftFragment"/>
 
     <!--<fragment-->
     <!--android:id="@+id/right_fragment"-->
     <!--android:layout_width="0dp"-->
     <!--android:layout_weight="1"-->
     <!--android:layout_height="match_parent"-->
-    <!--android:name="com.gudigudigudi.mdtemplate.RightFragment"/>-->
+    <!--android:name="com.gudigudigudi.mdtemplate.fragment.RightFragment"/>-->
     <FrameLayout
         android:id="@+id/right_fragment_layout"
         android:layout_width="0dp"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#11ff0000"
-    tools:context="com.gudigudigudi.mdtemplate.FirstActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.FirstActivity">
 
     <Button
         android:id="@+id/button1"

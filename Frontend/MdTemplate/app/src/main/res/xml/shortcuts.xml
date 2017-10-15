@@ -10,7 +10,7 @@
         android:shortcutShortLabel="@string/SHORTCUT_LAUNCHER_LABEL">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.gudigudigudi.mdtemplate.MainActivity"
+            android:targetClass="com.gudigudigudi.mdtemplate.activity.MainActivity"
             android:targetPackage="com.gudigudigudi.mdtemplate"/>
     </shortcut>
 

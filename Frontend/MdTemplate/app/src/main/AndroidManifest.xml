@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
-        android:name=".BaseApplication"
+        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_weather"
         android:label="@string/app_name"
@@ -23,16 +23,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="Main">
         </activity>
         <activity
-            android:name=".FirstActivity"
+            android:name=".activity.FirstActivity"
             android:label="First"
             android:launchMode="singleTask">
         </activity>
         <activity
-            android:name=".SecondActivity"
+            android:name=".activity.SecondActivity"
             android:label="Second"
             android:launchMode="singleInstance">
             <intent-filter>
@@ -41,7 +41,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ThirdActivity">
+        <activity android:name=".activity.ThirdActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -50,37 +50,35 @@
                 <data android:scheme="http"/>
             </intent-filter>
         </activity>
-        <activity android:name=".IMActivity">
+        <activity android:name=".activity.IMActivity">
         </activity>
-        <activity android:name=".FragmentDemoActivity">
+        <activity android:name=".activity.FragmentDemoActivity">
         </activity>
-        <activity android:name=".NewsContentActivity">
+        <activity android:name=".activity.NewsContentActivity">
         </activity>
-        <activity android:name=".NewsTitleActivity">
+        <activity android:name=".activity.NewsTitleActivity">
         </activity>
-        <activity android:name=".BroadcastActivity">
+        <activity android:name=".activity.BroadcastActivity">
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.LoginActivity">
         </activity>
-        <activity android:name=".DataStoreActivity">
+        <activity android:name=".activity.DataStoreActivity">
         </activity>
-        <activity android:name=".ContentProviderActivity">
+        <activity android:name=".activity.ContentProviderActivity">
         </activity>
-        <activity android:name=".SystemServiceActivity">
+        <activity android:name=".activity.SystemServiceActivity">
         </activity>
-        <activity android:name=".NotificationToggledActivity">
+        <activity android:name=".activity.NotificationToggledActivity">
         </activity>
-        <activity android:name=".WebActivity">
-        </activity>
-        <activity android:name=".ServiceActivity">
+        <activity android:name=".activity.WebActivity">
         </activity>
         <activity
-            android:name=".MaterialDesignActivity"
+            android:name=".activity.MaterialDesignActivity"
             android:label="Material Design Component">
         </activity>
 
         <receiver
-            android:name=".BootCompleteReceiver"
+            android:name=".receiver.BootCompleteReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -89,7 +87,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".CustomBroadcastReceiver"
+            android:name=".receiver.CustomBroadcastReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -98,13 +96,13 @@
         </receiver>
 
         <provider
-            android:name=".CustomContentProvider"
+            android:name=".provider.CustomContentProvider"
             android:authorities="com.gudigudigudi.mdtemplate.customprovider"
             android:enabled="true"
             android:exported="true">
         </provider>
         <provider
-            android:name=".DatabaseContentProvider"
+            android:name=".provider.DatabaseContentProvider"
             android:authorities="com.gudigudigudi.mdtemplate.databaseprovider"
             android:enabled="true"
             android:exported="true">
@@ -120,11 +118,25 @@
                 android:resource="@xml/file_paths"/>
         </provider>
 
-        <activity android:name=".FruitContentActivity">
+        <activity android:name=".activity.FruitContentActivity">
         </activity>
-        <activity android:name=".WeatherActivity">
+        <activity android:name=".activity.WeatherActivity">
         </activity>
-        <activity android:name=".ChooseAreaActivity">
+        <activity android:name=".activity.ChooseAreaActivity">
+        </activity>
+
+        <service
+            android:name=".service.WeatherAutoUpdateService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".service.download.DownloadService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
+        <activity android:name=".activity.DownloadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -136,12 +148,6 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts"/>
         </activity>
-
-        <service
-            android:name=".WeatherAutoUpdateService"
-            android:enabled="true"
-            android:exported="true">
-        </service>
     </application>
 
 </manifest>

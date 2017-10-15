@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.gudigudigudi.mdtemplate.NewsTitleFragment">
+              tools:context="com.gudigudigudi.mdtemplate.fragment.NewsTitleFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/news_title_recyclerview"

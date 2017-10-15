@@ -1,13 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gudigudigudi.mdtemplate.ServiceActivity">
+    android:orientation="vertical"
+    tools:context="com.gudigudigudi.mdtemplate.activity.ServiceActivity">
 
     <Button
-        android:id="@+id/change_text"
+        android:id="@+id/btn_start_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Service"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_stop_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop Service"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_bind_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bind Service"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_unbind_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Unbind Service"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_change_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Change text"
@@ -21,4 +50,4 @@
         android:text="Hello, world"
         android:textAlignment="center"
         android:textSize="20sp"/>
-</RelativeLayout>
+</LinearLayout>

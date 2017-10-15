@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.gudigudigudi.mdtemplate.WeatherActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.WeatherActivity">
 
     <ImageView
         android:id="@+id/bing_pic_img"
@@ -52,7 +52,7 @@
 
         <fragment
             android:id="@+id/fragment_choose_area"
-            android:name="com.gudigudigudi.mdtemplate.ChooseAreaFragment"
+            android:name="com.gudigudigudi.mdtemplate.fragment.ChooseAreaFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"/>

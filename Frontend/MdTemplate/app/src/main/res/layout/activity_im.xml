@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#d8e0e8"
     android:orientation="vertical"
-    tools:context="com.gudigudigudi.mdtemplate.IMActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.IMActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/msg_recycler_view"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    tools:context="com.gudigudigudi.mdtemplate.ContentProviderActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.ContentProviderActivity">
 
     <Button
         android:id="@+id/make_call"

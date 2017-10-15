@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.gudigudigudi.mdtemplate.MainActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.MainActivity">
 
-    <com.gudigudigudi.mdtemplate.TitleLayout
+    <com.gudigudigudi.mdtemplate.view.TitleLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="48dp"/>

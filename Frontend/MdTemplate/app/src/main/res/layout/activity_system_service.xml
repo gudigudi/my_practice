@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:orientation="vertical"
-    tools:context="com.gudigudigudi.mdtemplate.SystemServiceActivity">
+    tools:context="com.gudigudigudi.mdtemplate.activity.SystemServiceActivity">
 
     <Button
         android:id="@+id/send_notification"

@@ -3,7 +3,7 @@ package com.gudigudigudi.mdtemplate.db;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-import com.gudigudigudi.mdtemplate.BaseApplication;
+import com.gudigudigudi.mdtemplate.base.BaseApplication;
 
 /**
  * Created by gu on 10/3/17.
