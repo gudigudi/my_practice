@@ -71,7 +71,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         }
         switch (view.getId()) {
             case R.id.start_download:
-                String url = "https://raw.githubusercontent.com/guolindev/eclipse/master/eclipse-inst-win64.exe";
+                String url = "https://www.baidu.com";
                 downloadBinder.startDownload(url);
                 break;
             case R.id.pause_download:
