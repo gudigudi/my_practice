@@ -222,16 +222,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
          "Grape","Pineapple","Strawberry","Cherry","Mango"
          **/
         for (int i = 0; i < 2; i++) {
-            Fruit apple = new Fruit("Apple", R.drawable.ic_arrow_back);
-            Fruit banana = new Fruit("Banana", R.drawable.ic_arrow_back);
-            Fruit orange = new Fruit("Orange", R.drawable.ic_arrow_back);
-            Fruit watermelon = new Fruit("Watermelon", R.drawable.ic_arrow_back);
-            Fruit pear = new Fruit("Pear", R.drawable.ic_arrow_back);
-            Fruit grape = new Fruit("Grape", R.drawable.ic_arrow_back);
-            Fruit pineapple = new Fruit("Pineapple", R.drawable.ic_arrow_back);
-            Fruit strawberry = new Fruit("Strawberry", R.drawable.ic_arrow_back);
-            Fruit cherry = new Fruit("Cherry", R.drawable.ic_arrow_back);
-            Fruit mango = new Fruit("Mango", R.drawable.ic_arrow_back);
+            Fruit apple = new Fruit("Apple", R.drawable.apple);
+            Fruit banana = new Fruit("Banana", R.drawable.banana);
+            Fruit orange = new Fruit("Orange", R.drawable.orange);
+            Fruit watermelon = new Fruit("Watermelon", R.drawable.watermellon);
+            Fruit pear = new Fruit("Pear", R.drawable.pear);
+            Fruit grape = new Fruit("Grape", R.drawable.grapes);
+            Fruit pineapple = new Fruit("Pineapple", R.drawable.pineapple);
+            Fruit strawberry = new Fruit("Strawberry", R.drawable.strawberry);
+            Fruit cherry = new Fruit("Cherry", R.drawable.cherry);
+            Fruit mango = new Fruit("Mango", R.drawable.mango);
 
             fruitList.add(apple);
             fruitList.add(banana);
