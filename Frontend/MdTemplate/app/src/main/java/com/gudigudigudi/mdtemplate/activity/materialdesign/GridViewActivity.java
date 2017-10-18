@@ -1,19 +1,14 @@
 package com.gudigudigudi.mdtemplate.activity.materialdesign;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.gudigudigudi.mdtemplate.R;
-import com.gudigudigudi.mdtemplate.adapter.FruitAdapter;
+import com.gudigudigudi.mdtemplate.adapter.GridFruitAdapter;
 import com.gudigudigudi.mdtemplate.model.Fruit;
 
 import java.util.ArrayList;
@@ -22,7 +17,7 @@ import java.util.List;
 public class GridViewActivity extends AppCompatActivity {
 
     private GridView gridView;
-    private FruitAdapter fruitAdapter;
+    private GridFruitAdapter gridFruitAdapter;
     private List<Fruit> fruitList = new ArrayList<Fruit>();
 
     @Override
@@ -34,31 +29,40 @@ public class GridViewActivity extends AppCompatActivity {
 
         initFruits();
 
-        fruitAdapter = new FruitAdapter(GridViewActivity.this, R.layout.fruit_item, fruitList);
+        gridFruitAdapter = new GridFruitAdapter(GridViewActivity.this, R.layout.fruit_item_grid);
 
-        gridView.setAdapter(fruitAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setAdapter(gridFruitAdapter);
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> view, View view1, int i, long l) {
+//                String name = fruitList.get(i).getName();
+//                ImageView imageView = new ImageView(GridViewActivity.this);
+//                imageView.setScaleType(ImageView.ScaleType.CENTER);
+//                imageView.setLayoutParams(new LinearLayout.LayoutParams(
+//                        ViewGroup.LayoutParams.WRAP_CONTENT,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT));
+//                imageView.setImageResource(fruitList.get(i).getImageId());
+//
+//                Dialog dialog = new AlertDialog.Builder(GridViewActivity.this)
+//                        .setIcon(R.drawable.apple)
+//                        .setTitle("The fruit is")
+//                        .setView(imageView)
+//                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface anInterface, int i) {
+//
+//                            }
+//                        }).create();
+//                dialog.show();
+//            }
+//        });
+        gridView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> view, View view1, int i, long l) {
-                String name = fruitList.get(i).getName();
-                ImageView imageView = new ImageView(GridViewActivity.this);
-                imageView.setScaleType(ImageView.ScaleType.CENTER);
-                imageView.setLayoutParams(new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT));
-                imageView.setImageResource(fruitList.get(i).getImageId());
-
-                Dialog dialog = new AlertDialog.Builder(GridViewActivity.this)
-                        .setIcon(R.drawable.apple)
-                        .setTitle("The fruit is")
-                        .setView(imageView)
-                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface anInterface, int i) {
-
-                            }
-                        }).create();
-                dialog.show();
+            public boolean onLongClick(View view) {
+                ImageView imageView = view.findViewById(R.id.iv_delete_fruit);
+                imageView.setVisibility(View.VISIBLE);
+                Toast.makeText(GridViewActivity.this, "long clicked", Toast.LENGTH_SHORT).show();
+                return true;
             }
         });
     }
