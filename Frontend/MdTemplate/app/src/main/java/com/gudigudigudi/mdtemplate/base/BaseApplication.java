@@ -2,6 +2,8 @@ package com.gudigudigudi.mdtemplate.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 
 import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -24,6 +26,10 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // Emoji.
+        EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
+        EmojiCompat.init(config);
 
         context = getApplicationContext();
 
