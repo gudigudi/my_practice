@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.gudigudigudi.mdtemplate.ActivityCollector;
 import com.gudigudigudi.mdtemplate.R;
@@ -18,6 +19,8 @@ import com.orhanobut.logger.Logger;
 public class BaseActivity extends AppCompatActivity {
 
     private final static String TAG = "BaseActivity";
+
+    private long mExitTime;
 
     private ForceOfflineReceiver receiver;
 
@@ -54,6 +57,15 @@ public class BaseActivity extends AppCompatActivity {
         super.onDestroy();
 
         ActivityCollector.removeActivity(this);
+    }
+
+    private void doubleBackToExit() {
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "Click again to leave", Toast.LENGTH_SHORT).show();
+            mExitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 
     class ForceOfflineReceiver extends BroadcastReceiver {
