@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#d8e0e8"
     android:orientation="vertical"
     tools:context="com.gudigudigudi.mdtemplate.activity.IMActivity">
@@ -12,7 +13,8 @@
         android:id="@+id/msg_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        app:fastScrollEnabled="true"/>
 
     <LinearLayout
         android:layout_width="match_parent"
