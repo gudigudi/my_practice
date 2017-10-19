@@ -11,11 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.view.PagerTitleStrip
-            android:id="@+id/pts"
+        <!--<android.support.v4.view.PagerTitleStrip-->
+        <!--android:id="@+id/pager_title_strip"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="36dp">-->
+        <!--</android.support.v4.view.PagerTitleStrip>-->
+
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_tab_strip"
             android:layout_width="match_parent"
-            android:layout_height="36dp">
-        </android.support.v4.view.PagerTitleStrip>
+            android:layout_height="36dp"
+            android:layout_gravity="bottom">
+
+        </android.support.v4.view.PagerTabStrip>
 
     </android.support.v4.view.ViewPager>
 </RelativeLayout>
