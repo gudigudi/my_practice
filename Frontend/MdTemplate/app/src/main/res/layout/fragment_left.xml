@@ -6,10 +6,27 @@
               tools:context="com.gudigudigudi.mdtemplate.fragment.LeftFragment">
 
     <Button
-        android:id="@id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/replace"
+        android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Button"/>
+        android:text="Replace"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/remove"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Remove"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/hide"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Hide"
+        android:textAllCaps="false"/>
 
 </LinearLayout>
