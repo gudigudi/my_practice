@@ -198,6 +198,26 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 notificationManager.notify(1, notification);
 
                 break;
+            case R.id.send_headsup_notification:
+
+                intent = new Intent(SystemServiceActivity.this, NotificationToggledActivity.class);
+                PendingIntent pi1 = PendingIntent.getActivity(SystemServiceActivity.this, 0, intent, 0);
+
+                NotificationManager notificationManager1 = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+                Notification notification1 = new NotificationCompat.Builder(getApplicationContext(), null)
+                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                        .setSmallIcon(R.drawable.ic_create)
+                        .addAction(R.drawable.ic_arrow_back, "Previous", pi1)
+                        .addAction(R.drawable.ic_arrow_back, "Pause", pi1)
+                        .addAction(R.drawable.ic_arrow_back, "Next", pi1)
+                        .setContentTitle("Heads-up notice")
+                        .setContentText("Heads Up!")
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.apple))
+                        .build();
+
+                notificationManager1.notify(2, notification1);
+                break;
             case R.id.take_photo:
                 File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
 
