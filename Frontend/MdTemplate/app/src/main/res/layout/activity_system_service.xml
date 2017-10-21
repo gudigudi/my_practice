@@ -9,10 +9,10 @@
     tools:context="com.gudigudigudi.mdtemplate.activity.SystemServiceActivity">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="left">
         <Button
             android:id="@+id/send_notification"
             android:layout_width="wrap_content"
@@ -22,10 +22,16 @@
 
         <Button
             android:id="@+id/send_headsup_notification"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send heads-up notice"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/send_fold_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send fold notice"
             android:textAllCaps="false"/>
 
     </LinearLayout>
