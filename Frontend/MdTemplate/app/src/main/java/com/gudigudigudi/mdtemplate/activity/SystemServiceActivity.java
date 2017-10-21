@@ -30,6 +30,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -50,6 +51,8 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
     private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 3;
 
     private Button btn_send_notification;
+    private Button btn_send_headsup_notification;
+    private Button btn_send_fold_notification;
 
     private Button btn_take_photo;
     private Uri imageUri;
@@ -73,6 +76,8 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_system_service);
 
         btn_send_notification = (Button) findViewById(R.id.send_notification);
+        btn_send_headsup_notification = (Button) findViewById(R.id.send_headsup_notification);
+        btn_send_fold_notification = (Button) findViewById(R.id.send_fold_notification);
 
         btn_take_photo = (Button) findViewById(R.id.take_photo);
         btn_choose_photo = (Button) findViewById(R.id.choose_from_album);
@@ -88,6 +93,8 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
         videoView = (VideoView) findViewById(R.id.video_view);
 
         btn_send_notification.setOnClickListener(this);
+        btn_send_headsup_notification.setOnClickListener(this);
+        btn_send_fold_notification.setOnClickListener(this);
         btn_take_photo.setOnClickListener(this);
         btn_choose_photo.setOnClickListener(this);
         btn_play.setOnClickListener(this);
@@ -175,15 +182,16 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         Intent intent = null;
+        PendingIntent pi = null;
+        Notification notification = null;
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
         switch (view.getId()) {
             case R.id.send_notification:
                 intent = new Intent(SystemServiceActivity.this, NotificationToggledActivity.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(SystemServiceActivity.this, 0, intent, 0);
-
-                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-                Notification notification = new NotificationCompat.Builder(getApplicationContext(), null)
-                        .setContentIntent(pendingIntent)
+                pi = PendingIntent.getActivity(SystemServiceActivity.this, 0, intent, 0);
+                notification = new NotificationCompat.Builder(getApplicationContext(), null)
+                        .setContentIntent(pi)
                         .setAutoCancel(true)
                         .setContentTitle("This is content title")
                         .setContentText("This is content text")
@@ -194,29 +202,29 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                         .setVibrate(new long[]{0, 1000, 1000, 1000})
                         .setLights(Color.GREEN, 1000, 1000)
                         .build();
-
-                notificationManager.notify(1, notification);
-
                 break;
             case R.id.send_headsup_notification:
-
-                intent = new Intent(SystemServiceActivity.this, NotificationToggledActivity.class);
-                PendingIntent pi1 = PendingIntent.getActivity(SystemServiceActivity.this, 0, intent, 0);
-
-                NotificationManager notificationManager1 = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-                Notification notification1 = new NotificationCompat.Builder(getApplicationContext(), null)
+                notification = new NotificationCompat.Builder(getApplicationContext(), null)
                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                         .setSmallIcon(R.drawable.ic_create)
-                        .addAction(R.drawable.ic_arrow_back, "Previous", pi1)
-                        .addAction(R.drawable.ic_arrow_back, "Pause", pi1)
-                        .addAction(R.drawable.ic_arrow_back, "Next", pi1)
+                        .addAction(R.drawable.ic_arrow_back, "Previous", pi)
+                        .addAction(R.drawable.ic_arrow_back, "Pause", pi)
+                        .addAction(R.drawable.ic_arrow_back, "Next", pi)
                         .setContentTitle("Heads-up notice")
                         .setContentText("Heads Up!")
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.apple))
                         .build();
+                break;
+            case R.id.send_fold_notification:
+                RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_fold);
 
-                notificationManager1.notify(2, notification1);
+                notification = new NotificationCompat.Builder(getApplicationContext(), null)
+                        .setSmallIcon(R.drawable.ic_create)
+                        .setContentTitle("Fold notice")
+                        .setCustomContentView(remoteViews)
+                        .setCustomBigContentView(remoteViews)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.apple))
+                        .build();
                 break;
             case R.id.take_photo:
                 File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
@@ -285,6 +293,10 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 break;
             default:
                 Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);
+        }
+
+        if (notification != null) {
+            notificationManager.notify(1, notification);
         }
     }
 
