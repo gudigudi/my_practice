@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.gudigudigudi.mdtemplate.R;
 
@@ -23,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private CheckBox rememberPass;
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -50,7 +49,11 @@ public class LoginActivity extends AppCompatActivity {
                 String account = accountEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
 
-                if (account.equals("admin") && password.equals("123456")) {
+                if (!account.equals("admin")) {
+                    accountEdit.setError("帐号错误");
+                } else if (!password.equals("123456")) {
+                    passwordEdit.setError("密码错误");
+                } else {
                     editor = preferences.edit();
                     if (rememberPass.isChecked()) {
                         editor.putString("account", account);
@@ -64,8 +67,6 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "account or password is invalid", Toast.LENGTH_SHORT).show();
                 }
             }
         });
