@@ -5,13 +5,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.gudigudigudi.mdtemplate.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentPagerAdapterActivity extends AppCompatActivity {
+public class FragmentPagerAdapterActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     private ViewPager viewPager;
     private PagerTabStrip pagerTabStrip;
@@ -19,7 +20,7 @@ public class FragmentPagerAdapterActivity extends AppCompatActivity {
     private List<Fragment> fragments;
     private List<String> titles;
     private CustomFragmentPagerAdapter fragmentPagerAdapter;
-
+    private CustomFragmentStatePagerAdapter fragmentStatePagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +28,6 @@ public class FragmentPagerAdapterActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         pagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_tab_strip);
-
-//        pagerTabStrip.setDrawFullUnderline(false);
-//        pagerTabStrip.setTabIndicatorColor(Color.WHITE);
-//        pagerTabStrip.setTextColor(Color.WHITE);
-//        pagerTabStrip.setBackgroundResource(android.R.drawable.alert_dark_frame);
 
         // init.
         fragments = new ArrayList<>();
@@ -50,6 +46,24 @@ public class FragmentPagerAdapterActivity extends AppCompatActivity {
         titles.add("page6");
 
         fragmentPagerAdapter = new CustomFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles);
-        viewPager.setAdapter(fragmentPagerAdapter);
+        fragmentStatePagerAdapter = new CustomFragmentStatePagerAdapter(getSupportFragmentManager(), fragments, titles);
+//        viewPager.setAdapter(fragmentPagerAdapter);
+        viewPager.setAdapter(fragmentStatePagerAdapter);
+        viewPager.addOnPageChangeListener(this);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        Toast.makeText(this, "page " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }
