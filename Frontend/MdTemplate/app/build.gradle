@@ -19,14 +19,16 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
-        productFlavors {
-            qihoo {
-                applicationId "com.gudigudigudi.mdtemplate.qihoo"
-            }
-            baidu {
-                applicationId "com.gudigudigudi.mdtemplate.baidu"
-            }
-        }
+//        productFlavors {
+//            qihoo {
+//                applicationId "com.gudigudigudi.mdtemplate.qihoo"
+//            }
+//            baidu {
+//                applicationId "com.gudigudigudi.mdtemplate.baidu"
+//            }
+//        }
+
+
     }
     signingConfigs {
         config {
@@ -47,7 +49,6 @@ android {
             debuggable false
             jniDebuggable false
             renderscriptDebuggable false
-////            signingConfig playStoreConfig //Add your own signing config
             pseudoLocalesEnabled false
             zipAlignEnabled true
         }
@@ -58,7 +59,7 @@ android {
             path "CMakeLists.txt"
         }
     }
-    generatePureSplits = true
+//    generatePureSplits = true
     splits {
         abi {
             enable true
@@ -81,27 +82,53 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+
+    // AndroidJUnitRunner and JUnit Rules
+//        androidTestCompile 'com.android.support.test:runner:0.5'
+//    androidTestCompile 'com.android.support.test:rules:0.5'
+
+    // Espresso dependencies
+//    androidTestCompile'com.android.support.test.espresso:espresso-core:2.2.2'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-accessibility:2.2.2'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.2'
+//    androidTestCompile 'com.android.support.test.espresso.idling:idling-concurrent:2.2.2'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-idling-resource:2.2.2'
+
+    // Arch dependencies
+    //    testCompile 'android.arch.persistence.room:testing:1.0.0-rc1'
+
+    // Third-pirty dependencies
+    compile("com.github.hotchemi:permissionsdispatcher:3.0.1") {
+        // if you don't use android.app.Fragment you can exclude support for them
+        exclude module: "support-v13"
+    }
+    compile 'com.android.support:support-v13:26.1.0'
+    compile 'com.android.support:support-annotations:26.1.0'
+    compile 'com.android.support:support-vector-drawable:26.1.0'
+    compile 'com.android.support:animated-vector-drawable:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:support-v4:26.1.0'
-    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:palette-v7:26.1.0'
     compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:support-emoji:26.1.0'
+    compile 'com.android.support:support-emoji-bundled:26.1.0'
+    compile 'com.android.support:support-emoji-appcompat:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'android.arch.lifecycle:runtime:1.0.0'
-    compile 'android.arch.lifecycle:extensions:1.0.0-beta1'
-    compile 'android.arch.persistence.room:runtime:1.0.0-beta1'
-    compile 'android.arch.paging:runtime:1.0.0-alpha2'
+    compile 'android.arch.lifecycle:extensions:1.0.0-rc1'
+    compile 'android.arch.persistence.room:runtime:1.0.0-rc1'
+    compile 'android.arch.paging:runtime:1.0.0-alpha3'
     compile 'com.github.bumptech.glide:glide:4.2.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.orhanobut:logger:2.1.1'
-    testCompile 'android.arch.persistence.room:testing:1.0.0-beta1'
     testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
+    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0-rc1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-rc1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
-    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0-beta1'
-    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-beta1'
 }
