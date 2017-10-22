@@ -1,12 +1,19 @@
 package com.gudigudigudi.mdtemplate.activity;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,9 +40,9 @@ public class WebActivity extends AppCompatActivity {
     private static final String TAG = "WebActivity";
 
     private WebView webView;
-
-    private Button btn_send_request;
-    private TextView tv_response_text;
+    private EditText editText;
+    private Button btn_load, btn_last_page, btn_next_page, btn_top;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +50,103 @@ public class WebActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web);
 
         webView = (WebView) findViewById(R.id.web_view);
+        editText = (EditText) findViewById(R.id.edit_text);
+        btn_load = (Button) findViewById(R.id.btn_load);
+        btn_last_page = (Button) findViewById(R.id.btn_last_page);
+        btn_next_page = (Button) findViewById(R.id.btn_next_page);
+        btn_top = (Button) findViewById(R.id.btn_top);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        editText.setText("http://www.zhihu.com");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            editText.setFocusedByDefault(false);
+        }
 
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("http://www.baidu.com");
 
-        btn_send_request = (Button) findViewById(R.id.send_request);
-        tv_response_text = (TextView) findViewById(R.id.response_text);
-
-        btn_send_request.setOnClickListener(new View.OnClickListener() {
+        webView.setWebViewClient(new WebViewClient() {
+            @TargetApi(Build.VERSION_CODES.N)
             @Override
-            public void onClick(View view) {
-//                sendRequestWithHttpURLConnection();
-                sendRequestWithOkHttp();
-                sendRequestGetXMLWithOkHttp();
-                sendRequestGetJSONWithOkHttp();
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(request.getUrl().toString());
+                return true;
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                progressBar.setProgress(newProgress);
             }
         });
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            webView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+                    float webViewHeight = webView.getContentHeight() * webView.getScale();
+                    float nowHeight = webView.getHeight() + webView.getScrollY();
+
+                    if (nowHeight == webViewHeight) {
+                        Toast.makeText(WebActivity.this, "being bottom", Toast.LENGTH_SHORT).show();
+                        btn_top.setVisibility(View.VISIBLE);
+                    } else if (webView.getScrollY() == 0) {
+                        Toast.makeText(WebActivity.this, "being top", Toast.LENGTH_SHORT).show();
+                    } else {
+                        btn_top.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
+
+        btn_load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                webView.loadUrl(editText.getText().toString());
+            }
+        });
+        btn_last_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                webView.goBack();
+            }
+        });
+        btn_next_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                webView.goForward();
+            }
+        });
+        btn_top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_top.setVisibility(View.GONE);
+                webView.scrollTo(0, 0);
+            }
+        });
+    }
+
+    /**
+     * rewrite for webview.
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+            webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void sendRequestGetJSONWithOkHttp() {
@@ -108,7 +194,7 @@ public class WebActivity extends AppCompatActivity {
                 HttpUtil.sendHttpRequest(address, new HttpUtil.HttpCallbackListener() {
                     @Override
                     public void onFinish(String response) {
-                        showResponse(response);
+//                        showResponse(response);
                     }
 
                     @Override
@@ -131,16 +217,7 @@ public class WebActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                showResponse(response.body().string());
-            }
-        });
-    }
-
-    private void showResponse(final String responseData) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tv_response_text.setText(responseData);
+//                showResponse(response.body().string());
             }
         });
     }
