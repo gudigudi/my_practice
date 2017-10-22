@@ -10,5 +10,7 @@
     <string name="SHORTCUT_MENU_LABEL">shortcut menu label</string>
     <string name="SHORTCUT_LAUNCHER_LABEL">shortcut launcher label</string>
 
+    <string name="drawer_close">drawer_close</string>
+    <string name="drawer_open">drawer_open</string>
 
 </resources>
