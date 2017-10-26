@@ -80,6 +80,10 @@ android {
     }
 }
 
+ext {
+    ANDROID_SUPPORT_VERSION='26.1.0'
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -104,26 +108,26 @@ dependencies {
         // if you don't use android.app.Fragment you can exclude support for them
         exclude module: "support-v13"
     }
-    compile 'com.android.support:support-v13:26.1.0'
-    compile 'com.android.support:support-annotations:26.1.0'
-    compile 'com.android.support:support-vector-drawable:26.1.0'
-    compile 'com.android.support:animated-vector-drawable:26.1.0'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:palette-v7:26.1.0'
-    compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile 'com.android.support:support-emoji:26.1.0'
-    compile 'com.android.support:support-emoji-bundled:26.1.0'
-    compile 'com.android.support:support-emoji-appcompat:26.1.0'
+    compile "com.android.support:support-v13:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:support-annotations:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:support-vector-drawable:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:animated-vector-drawable:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:appcompat-v7:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:palette-v7:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:cardview-v7:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:recyclerview-v7:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:design:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:support-emoji:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:support-emoji-bundled:$ANDROID_SUPPORT_VERSION"
+    compile "com.android.support:support-emoji-appcompat:$ANDROID_SUPPORT_VERSION"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'android.arch.lifecycle:runtime:1.0.0'
+    compile 'android.arch.lifecycle:runtime:1.0.3'
     compile 'android.arch.lifecycle:extensions:1.0.0-rc1'
     compile 'android.arch.persistence.room:runtime:1.0.0-rc1'
     compile 'android.arch.paging:runtime:1.0.0-alpha3'
     compile 'com.github.bumptech.glide:glide:4.2.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.google.code.gson:gson:2.8.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.orhanobut:logger:2.1.1'
     testCompile 'junit:junit:4.12'
