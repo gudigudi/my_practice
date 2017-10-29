@@ -17,7 +17,7 @@ public class SecondActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        Button button = findViewById(R.id.button);
+        Button button = findViewById(R.id.replace);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
