@@ -27,10 +27,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        accountEdit = (EditText) findViewById(R.id.account);
-        passwordEdit = (EditText) findViewById(R.id.password);
-        login = (Button) findViewById(R.id.login);
-        rememberPass = (CheckBox) findViewById(R.id.remember_pass);
+        accountEdit = findViewById(R.id.account);
+        passwordEdit = findViewById(R.id.password);
+        login = findViewById(R.id.login);
+        rememberPass = findViewById(R.id.remember_pass);
 
         preferences = getSharedPreferences("data", MODE_PRIVATE);
         boolean isRemember = preferences.getBoolean("remember_password", false);
@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
             passwordEdit.setText(password);
             rememberPass.setChecked(true);
         }
-
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +69,5 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 }

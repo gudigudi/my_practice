@@ -20,7 +20,7 @@ public class ViewPagerActivity extends AppCompatActivity {
     private List<String> titleList;
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
-    //    private PagerTitleStrip pagerTitleStrip;
+    // private PagerTitleStrip pagerTitleStrip;
     private PagerTabStrip pagerTabStrip;
 
     @Override
@@ -28,9 +28,9 @@ public class ViewPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
 
-        viewPager = (ViewPager) findViewById(R.id.vp);
-//        pagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
-        pagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_tab_strip);
+        viewPager = findViewById(R.id.vp);
+//        pagerTitleStrip = findViewById(R.id.pager_title_strip);
+        pagerTabStrip = findViewById(R.id.pager_tab_strip);
         pagerTabStrip.setBackgroundColor(Color.BLUE);
         pagerTabStrip.setTabIndicatorColor(Color.RED);
         pagerTabStrip.setTextColor(Color.GREEN);

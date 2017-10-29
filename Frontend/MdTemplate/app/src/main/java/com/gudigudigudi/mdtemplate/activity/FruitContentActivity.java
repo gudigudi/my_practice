@@ -32,10 +32,10 @@ public class FruitContentActivity extends AppCompatActivity {
         String fruitName = intent.getStringExtra(FRUIT_NAME);
         int fruitImageId = intent.getIntExtra(FRUIT_IMAGE_ID, 0);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        fruitImageView = (ImageView) findViewById(R.id.fruit_image_view);
-        fruitContentText = (TextView) findViewById(R.id.fruit_content_text);
+        toolbar = findViewById(R.id.toolbar);
+        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+        fruitImageView = findViewById(R.id.fruit_image_view);
+        fruitContentText = findViewById(R.id.fruit_content_text);
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -46,16 +46,16 @@ public class FruitContentActivity extends AppCompatActivity {
         collapsingToolbarLayout.setTitle(fruitName);
         Glide.with(this).load(fruitImageId).into(fruitImageView);
         fruitContentText.setText(generateFruitContent(fruitName));
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
-            case android.R.id.home:
+            case android.R.id.home: {
                 finish();
                 return true;
+            }
+            default:
         }
         return super.onOptionsItemSelected(item);
     }

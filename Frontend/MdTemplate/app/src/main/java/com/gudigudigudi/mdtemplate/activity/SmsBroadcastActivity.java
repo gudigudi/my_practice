@@ -19,7 +19,7 @@ public class SmsBroadcastActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_broadcast);
 
-        textView = (TextView) findViewById(R.id.text_view);
+        textView = findViewById(R.id.text_view);
         smsBroadcastReceiver = new SmsBroadcastReceiver();
 
         init();

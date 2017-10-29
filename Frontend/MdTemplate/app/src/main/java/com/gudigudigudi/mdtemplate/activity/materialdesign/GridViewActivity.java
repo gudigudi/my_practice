@@ -25,7 +25,7 @@ public class GridViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_view);
 
-        gridView = (GridView) findViewById(R.id.gv);
+        gridView = findViewById(R.id.gv);
 
         initFruits();
 

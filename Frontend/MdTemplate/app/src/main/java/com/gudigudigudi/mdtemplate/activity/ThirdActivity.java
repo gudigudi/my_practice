@@ -15,7 +15,7 @@ public class ThirdActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
 
-        Button btn = (Button) findViewById(R.id.button_3);
+        Button btn = findViewById(R.id.button_3);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

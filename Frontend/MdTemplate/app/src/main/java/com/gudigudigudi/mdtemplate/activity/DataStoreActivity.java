@@ -21,6 +21,8 @@ import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 import com.gudigudigudi.mdtemplate.db.AppDatabase;
 import com.gudigudigudi.mdtemplate.db.Book;
 import com.gudigudigudi.mdtemplate.db.BookDao;
+import com.gudigudigudi.mdtemplate.util.LogUtil;
+import com.orhanobut.logger.Logger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,7 +41,6 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
     private Button btn_save_data_by_sharedpreferences;
     private Button btn_restore_data_by_sharedpreferences;
-
 
     private AppDBHelper dbHelper;
     private Button btn_create_db;
@@ -60,7 +61,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_store);
 
-        editText = (EditText) findViewById(R.id.edit);
+        editText = findViewById(R.id.edit);
 
         String inputText = load();
 
@@ -70,26 +71,23 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(this, "Restoring succeeded", Toast.LENGTH_SHORT).show();
         }
 
-        btn_save_data_by_sharedpreferences = (Button) findViewById(R.id.btn_save_data_by_sharedpreferences);
-        btn_restore_data_by_sharedpreferences = (Button) findViewById(R.id.btn_restore_data_by_sharedpreferences);
-
+        btn_save_data_by_sharedpreferences = findViewById(R.id.btn_save_data_by_sharedpreferences);
+        btn_restore_data_by_sharedpreferences = findViewById(R.id.btn_restore_data_by_sharedpreferences);
 
         dbHelper = new AppDBHelper(this, "book.db", null, 3);
-        btn_create_db = (Button) findViewById(R.id.btn_create_db);
-        btn_add_data_to_db = (Button) findViewById(R.id.btn_add_data_to_db);
-        btn_update_db = (Button) findViewById(R.id.btn_update_db);
-        btn_delete_data_from_db = (Button) findViewById(R.id.btn_delete_data_from_db);
-        btn_query_data_from_db = (Button) findViewById(R.id.btn_query_data_from_db);
-
+        btn_create_db = findViewById(R.id.btn_create_db);
+        btn_add_data_to_db = findViewById(R.id.btn_add_data_to_db);
+        btn_update_db = findViewById(R.id.btn_update_db);
+        btn_delete_data_from_db = findViewById(R.id.btn_delete_data_from_db);
+        btn_query_data_from_db = findViewById(R.id.btn_query_data_from_db);
 
         appDatabase = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "book").build();
         bookDao = appDatabase.bookDao();
-        btn_insert_room = (Button) findViewById(R.id.btn_insert_room);
-        btn_query_room = (Button) findViewById(R.id.btn_query_room);
-        btn_update_room = (Button) findViewById(R.id.btn_update_room);
-        btn_delete_room = (Button) findViewById(R.id.btn_delete_room);
-
+        btn_insert_room = findViewById(R.id.btn_insert_room);
+        btn_query_room = findViewById(R.id.btn_query_room);
+        btn_update_room = findViewById(R.id.btn_update_room);
+        btn_delete_room = findViewById(R.id.btn_delete_room);
 
         btn_save_data_by_sharedpreferences.setOnClickListener(this);
         btn_restore_data_by_sharedpreferences.setOnClickListener(this);
@@ -276,7 +274,6 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                         for (Book book : bookList) {
                             Log.d(TAG, "book is:" + book.toString());
                         }
-
                         return null;
                     }
                 }.execute();
@@ -291,7 +288,6 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                         Log.d(TAG, "book to be updated: " + bookDao.getBookByName(name).toString());
                         bookDao.updatePriceByName("The Dan Vinci Code", price);
                         Log.d(TAG, "book is updated: " + bookDao.getBookByName(name).toString());
-
                         return null;
                     }
                 }.execute();
@@ -305,15 +301,12 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                         String name = "The Dan Vinci Code";
                         bookDao.deleteBook(bookDao.getBookByName(name));
                         Log.d(TAG, "book number: " + bookDao.getAll().size());
-
                         return null;
                     }
                 }.execute();
-
                 break;
-
             default:
-                Log.d(TAG, "Unknown view is clicked");
+                Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);
         }
 
     }

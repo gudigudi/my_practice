@@ -25,9 +25,9 @@ public class TabLayoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab_layout);
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        viewPager = findViewById(R.id.view_pager);
+        toolbar = findViewById(R.id.toolbar);
+        tabLayout = findViewById(R.id.tab_layout);
 
         setSupportActionBar(toolbar);
 

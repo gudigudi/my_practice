@@ -43,9 +43,9 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download);
 
-        btn_start_download = (Button) findViewById(R.id.start_download);
-        btn_pause_download = (Button) findViewById(R.id.pause_download);
-        btn_cancel_download = (Button) findViewById(R.id.cancel_download);
+        btn_start_download = findViewById(R.id.start_download);
+        btn_pause_download = findViewById(R.id.pause_download);
+        btn_cancel_download = findViewById(R.id.cancel_download);
 
         btn_start_download.setOnClickListener(this);
         btn_pause_download.setOnClickListener(this);

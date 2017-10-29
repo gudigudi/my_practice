@@ -27,8 +27,8 @@ public class FragmentPagerAdapterActivity extends AppCompatActivity implements V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_pager_adapter);
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        pagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_tab_strip);
+        viewPager = findViewById(R.id.view_pager);
+        pagerTabStrip = findViewById(R.id.pager_tab_strip);
 
         // init.
         fragments = new ArrayList<>();

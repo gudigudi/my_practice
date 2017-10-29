@@ -32,14 +32,12 @@ public class BroadcastActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_broadcast);
 
-
         intentFilter = new IntentFilter();
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         networkChangeReceiver = new NetworkChangeReceiver();
         registerReceiver(networkChangeReceiver, intentFilter);
 
-
-        Button button = (Button) findViewById(R.id.replace);
+        Button button = findViewById(R.id.replace);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +53,7 @@ public class BroadcastActivity extends AppCompatActivity {
         intentFilterLocal.addAction(getString(R.string.LOCAL_BROADCAST));
         localReceiver = new LocalReceiver();
         localBroadcastManager.registerReceiver(localReceiver, intentFilterLocal);
-        Button button2 = (Button) findViewById(R.id.button2);
+        Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +61,6 @@ public class BroadcastActivity extends AppCompatActivity {
                 localBroadcastManager.sendBroadcast(intent); // send local broadcast.
             }
         });
-
-
     }
 
     @Override

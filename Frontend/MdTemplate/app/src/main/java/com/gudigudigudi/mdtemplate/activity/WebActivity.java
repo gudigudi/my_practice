@@ -49,13 +49,13 @@ public class WebActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
 
-        webView = (WebView) findViewById(R.id.web_view);
-        editText = (EditText) findViewById(R.id.edit_text);
-        btn_load = (Button) findViewById(R.id.btn_load);
-        btn_last_page = (Button) findViewById(R.id.btn_last_page);
-        btn_next_page = (Button) findViewById(R.id.btn_next_page);
-        btn_top = (Button) findViewById(R.id.btn_top);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        webView = findViewById(R.id.web_view);
+        editText = findViewById(R.id.edit_text);
+        btn_load = findViewById(R.id.btn_load);
+        btn_last_page = findViewById(R.id.btn_last_page);
+        btn_next_page = findViewById(R.id.btn_next_page);
+        btn_top = findViewById(R.id.btn_top);
+        progressBar = findViewById(R.id.progressBar);
 
         editText.setText("http://www.zhihu.com");
 

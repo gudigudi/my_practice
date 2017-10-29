@@ -30,7 +30,7 @@ public class PermissionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission);
 
-        btn_call = (Button) findViewById(R.id.btn_call);
+        btn_call = findViewById(R.id.btn_call);
 
         btn_call.setOnClickListener(new View.OnClickListener() {
             @Override

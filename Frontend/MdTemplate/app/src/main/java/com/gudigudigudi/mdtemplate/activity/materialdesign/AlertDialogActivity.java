@@ -36,11 +36,10 @@ public class AlertDialogActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert_dialog);
 
-        btn_toggle_single_choise_alertdialog = (Button) findViewById(R.id.btn_toggle_single_choise_alertdialog);
-        btn_toggle_multi_choises_alertdialog = (Button) findViewById(R.id.btn_toggle_multi_choises_alertdialog);
-        btn_toggle_progress_dialog = (Button) findViewById(R.id.btn_toggle_progress_dialog);
-        btn_toggle_loading_dialog = (Button) findViewById(R.id.btn_toggle_loading_dialog);
-
+        btn_toggle_single_choise_alertdialog = findViewById(R.id.btn_toggle_single_choise_alertdialog);
+        btn_toggle_multi_choises_alertdialog = findViewById(R.id.btn_toggle_multi_choises_alertdialog);
+        btn_toggle_progress_dialog = findViewById(R.id.btn_toggle_progress_dialog);
+        btn_toggle_loading_dialog = findViewById(R.id.btn_toggle_loading_dialog);
 
         btn_toggle_single_choise_alertdialog.setOnClickListener(this);
         btn_toggle_multi_choises_alertdialog.setOnClickListener(this);
@@ -117,8 +116,8 @@ public class AlertDialogActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.btn_toggle_loading_dialog:
                 View loadingView = LayoutInflater.from(this).inflate(R.layout.loading_dialog, null);
-                TextView tv_loading_tip = (TextView) loadingView.findViewById(R.id.loading_tip);
-                ImageView iv_loading = (ImageView) loadingView.findViewById(R.id.loading_image);
+                TextView tv_loading_tip = loadingView.findViewById(R.id.loading_tip);
+                ImageView iv_loading = loadingView.findViewById(R.id.loading_image);
                 Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.loading);
 
                 iv_loading.setVisibility(View.VISIBLE);

@@ -20,6 +20,8 @@ import com.gudigudigudi.mdtemplate.R;
 import com.gudigudigudi.mdtemplate.adapter.FruitRCAdapter;
 import com.gudigudigudi.mdtemplate.base.BaseActivity;
 import com.gudigudigudi.mdtemplate.model.Fruit;
+import com.gudigudigudi.mdtemplate.util.LogUtil;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,22 +63,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             Log.d(TAG, "tmpData : " + tmpData);
         }
 
-        // Example of a call to a native method
-        btn1 = (Button) findViewById(R.id.button1);
+        btn1 = findViewById(R.id.button1);
+        btn_goto_firstactivity = findViewById(R.id.button_goto_imactivity);
+        editText = findViewById(R.id.edit_text);
+        btn_toast_edittext = findViewById(R.id.btn_toast_edittext);
+        imageView = findViewById(R.id.image_view);
+        btn_change_imageview = findViewById(R.id.btn_change_imageview);
+        btn_toggle_alertdialog = findViewById(R.id.btn_toggle_alertdialog);
+        btn_force_offline = findViewById(R.id.force_offline);
+
         btn1.setText(stringFromJNI());
-
-        btn_goto_firstactivity = (Button) findViewById(R.id.button_goto_imactivity);
-
-        editText = (EditText) findViewById(R.id.edit_text);
-        btn_toast_edittext = (Button) findViewById(R.id.btn_toast_edittext);
-
-        imageView = (ImageView) findViewById(R.id.image_view);
-        btn_change_imageview = (Button) findViewById(R.id.btn_change_imageview);
-
-        btn_toggle_alertdialog = (Button) findViewById(R.id.btn_toggle_alertdialog);
-
-        btn_force_offline = (Button) findViewById(R.id.force_offline);
-
 
         btn1.setOnClickListener(this);
         btn_goto_firstactivity.setOnClickListener(this);
@@ -94,7 +90,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 //        FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
 //
-//        ListView listView = (ListView) findViewById(R.id.listview);
+//        ListView listView = findViewById(R.id.listview);
 //        listView.setAdapter(adapter);
 //
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -105,7 +101,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //            }
 //        });
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
 //        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
 //        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
@@ -113,13 +109,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //        GridLayoutManager layoutManager = new GridLayoutManager(this, spanCount, GridLayoutManager.VERTICAL, false);
 
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-
-
         recyclerView.setLayoutManager(layoutManager);
-
         FruitRCAdapter adapter = new FruitRCAdapter(fruitList);
         recyclerView.setAdapter(adapter);
-
     }
 
     /**
@@ -200,14 +192,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             }
                         })
                         .show();
-
-
                 break;
             case R.id.force_offline:
                 intent = new Intent(getString(R.string.FORCE_OFFLINE_BROADCAST));
                 sendBroadcast(intent);
+                break;
             default:
-                Log.d(TAG, "unknown view clicked");
+                Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);
         }
     }
 

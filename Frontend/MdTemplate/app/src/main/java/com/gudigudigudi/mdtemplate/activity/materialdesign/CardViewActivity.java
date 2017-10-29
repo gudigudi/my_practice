@@ -23,10 +23,10 @@ public class CardViewActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_view);
 
-        cardView = (CardView) findViewById(R.id.card_view);
-        seekBar1 = (SeekBar) findViewById(R.id.sb1);
-        seekBar2 = (SeekBar) findViewById(R.id.sb2);
-        seekBar3 = (SeekBar) findViewById(R.id.sb3);
+        cardView = findViewById(R.id.card_view);
+        seekBar1 = findViewById(R.id.sb1);
+        seekBar2 = findViewById(R.id.sb2);
+        seekBar3 = findViewById(R.id.sb3);
 
         cardView.setOnClickListener(this);
         seekBar1.setOnSeekBarChangeListener(this);

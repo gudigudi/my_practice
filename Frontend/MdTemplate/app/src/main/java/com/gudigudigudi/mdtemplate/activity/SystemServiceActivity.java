@@ -75,22 +75,22 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_service);
 
-        btn_send_notification = (Button) findViewById(R.id.send_notification);
-        btn_send_headsup_notification = (Button) findViewById(R.id.send_headsup_notification);
-        btn_send_fold_notification = (Button) findViewById(R.id.send_fold_notification);
+        btn_send_notification = findViewById(R.id.send_notification);
+        btn_send_headsup_notification = findViewById(R.id.send_headsup_notification);
+        btn_send_fold_notification = findViewById(R.id.send_fold_notification);
 
-        btn_take_photo = (Button) findViewById(R.id.take_photo);
-        btn_choose_photo = (Button) findViewById(R.id.choose_from_album);
-        picture = (ImageView) findViewById(R.id.picture);
+        btn_take_photo = findViewById(R.id.take_photo);
+        btn_choose_photo = findViewById(R.id.choose_from_album);
+        picture = findViewById(R.id.picture);
 
-        btn_play = (Button) findViewById(R.id.play);
-        btn_pause = (Button) findViewById(R.id.pause);
-        btn_stop = (Button) findViewById(R.id.stop);
+        btn_play = findViewById(R.id.play);
+        btn_pause = findViewById(R.id.pause);
+        btn_stop = findViewById(R.id.stop);
 
-        btn_play_video = (Button) findViewById(R.id.play_video);
-        btn_pause_video = (Button) findViewById(R.id.pause_video);
-        btn_replay_video = (Button) findViewById(R.id.replay_video);
-        videoView = (VideoView) findViewById(R.id.video_view);
+        btn_play_video = findViewById(R.id.play_video);
+        btn_pause_video = findViewById(R.id.pause_video);
+        btn_replay_video = findViewById(R.id.replay_video);
+        videoView = findViewById(R.id.video_view);
 
         btn_send_notification.setOnClickListener(this);
         btn_send_headsup_notification.setOnClickListener(this);

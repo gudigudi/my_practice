@@ -26,10 +26,10 @@ public class ToolbarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toolbar);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = findViewById(R.id.toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-        tv_close = (TextView) findViewById(R.id.tv_close);
+        tv_close = findViewById(R.id.tv_close);
 
         toolbar.setTitle("Toolbar");
         setSupportActionBar(toolbar);

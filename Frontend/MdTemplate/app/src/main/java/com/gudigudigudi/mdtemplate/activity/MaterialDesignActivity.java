@@ -59,17 +59,17 @@ public class MaterialDesignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_material_design);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_create);
         }
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_call);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -95,7 +95,7 @@ public class MaterialDesignActivity extends AppCompatActivity {
             }
         });
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,13 +110,13 @@ public class MaterialDesignActivity extends AppCompatActivity {
         });
 
         initFruits();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new FruitRCAdapter(fruitList);
         recyclerView.setAdapter(adapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_reflesh);
+        swipeRefreshLayout = findViewById(R.id.swipe_reflesh);
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -164,8 +164,7 @@ public class MaterialDesignActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             default:
-                Logger.d("Unknown menu item is clicked");
-                break;
+                Logger.d(LogUtil.LOG_UNKNOWN_MENU_ITEM_IS_CLICKED);
         }
         return true;
     }

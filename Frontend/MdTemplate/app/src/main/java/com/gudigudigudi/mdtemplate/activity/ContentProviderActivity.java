@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.gudigudigudi.mdtemplate.R;
 import com.gudigudigudi.mdtemplate.provider.DatabaseContentProvider;
+import com.gudigudigudi.mdtemplate.util.LogUtil;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +49,8 @@ public class ContentProviderActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_provider);
 
-        btn_make_call = (Button) findViewById(R.id.make_call);
-        contactsView = (ListView) findViewById(R.id.contacts_view);
+        btn_make_call = findViewById(R.id.make_call);
+        contactsView = findViewById(R.id.contacts_view);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contactList);
         contactsView.setAdapter(adapter);
@@ -60,17 +62,16 @@ public class ContentProviderActivity extends AppCompatActivity implements View.O
             readContacts();
         }
 
-        addData = (Button) findViewById(R.id.add_data);
-        queryData = (Button) findViewById(R.id.query_data);
-        updateData = (Button) findViewById(R.id.update_data);
-        deleteData = (Button) findViewById(R.id.delete_data);
+        addData = findViewById(R.id.add_data);
+        queryData = findViewById(R.id.query_data);
+        updateData = findViewById(R.id.update_data);
+        deleteData = findViewById(R.id.delete_data);
 
         btn_make_call.setOnClickListener(this);
         addData.setOnClickListener(this);
         queryData.setOnClickListener(this);
         updateData.setOnClickListener(this);
         deleteData.setOnClickListener(this);
-
     }
 
     @Override
@@ -187,7 +188,7 @@ public class ContentProviderActivity extends AppCompatActivity implements View.O
                 getContentResolver().delete(uri, null, null);
                 break;
             default:
-                Log.d(TAG, "Unknown view is clicked.");
+                Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);
         }
     }
 }

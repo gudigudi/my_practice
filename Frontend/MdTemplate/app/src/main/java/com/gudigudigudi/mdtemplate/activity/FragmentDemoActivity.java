@@ -28,9 +28,9 @@ public class FragmentDemoActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.activity_fragment_demo);
 
         // Button in LeftFragment.
-        Button btn_replace = (Button) findViewById(R.id.replace);
-        Button btn_remove = (Button) findViewById(R.id.remove);
-        Button btn_hide = (Button) findViewById(R.id.hide);
+        Button btn_replace = findViewById(R.id.replace);
+        Button btn_remove = findViewById(R.id.remove);
+        Button btn_hide = findViewById(R.id.hide);
 
         fragment = new Right2Fragment();
 
