@@ -3,7 +3,8 @@ package com.gudigudigudi.mdtemplate.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -25,13 +26,7 @@ public class AnimationActivity extends AppCompatActivity {
 
         imageView.setBackgroundResource(R.mipmap.ic_launcher);
 
-        final AlphaAnimation animation = new AlphaAnimation(1, 0);
-        // 设置动画持续时间
-        animation.setDuration(2000);
-        // 设置重复次数
-        animation.setRepeatCount(3);
-        // 执行前的等待时间
-        animation.setStartOffset(1000);
+        final Animation animation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.alpha);
 
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
