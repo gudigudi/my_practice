@@ -1,12 +1,19 @@
+import numpy as np
 import tensorflow as tf
 
-x1=tf.constant([1,2,3,4])
-x2=tf.constant([5,6,7,8])
+sess = tf.Session()
 
-result=tf.multiply(x1,x2)
+identify_matrix = tf.diag([1.0, 1.0, 1.0])
+A = tf.truncated_normal([2, 3])
+B = tf.fill([2, 3], 5.0)
+C = tf.random_uniform([3, 2])
+D = tf.convert_to_tensor(np.array([
+    [1., 2., 3.],
+    [-3., -7., -1.],
+    [0., 5., -2.]
+]))
 
-sess=tf.Session()
-
-print(sess.run(result))
+print(sess.run(identify_matrix))
+print(sess.run(A))
 
 sess.close()
