@@ -11,6 +11,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <EditText
             android:id="@+id/account"
             android:layout_width="match_parent"
@@ -22,13 +23,14 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:inputType="textPassword"
-            android:hint="密码"/>
+            android:hint="密码"
+            android:inputType="textPassword"/>
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
@@ -46,9 +48,7 @@
             android:layout_height="wrap_content"
             android:text="Remember password"
             android:textSize="18sp"/>
-
     </LinearLayout>
-
 
     <Button
         android:id="@+id/login"
@@ -56,5 +56,4 @@
         android:layout_height="60dp"
         android:text="Login"
         android:textAllCaps="false"/>
-
 </LinearLayout>
