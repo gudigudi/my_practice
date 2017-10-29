@@ -22,6 +22,10 @@ public class HandlerActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tv_time;
     private Button btn_remove_timer;
 
+    private Handler handler_postDelayed = new Handler();
+    private Button btn_handler_postDelayed;
+    private long time = 0;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -67,12 +71,15 @@ public class HandlerActivity extends AppCompatActivity implements View.OnClickLi
         btn_send_delay_msg = findViewById(R.id.btn_send_delay_msg);
         tv_time = findViewById(R.id.tv_time);
         btn_remove_timer = findViewById(R.id.btn_remove_timer);
+        btn_handler_postDelayed = findViewById(R.id.btn_handler_postDelayed);
+
         btn_send_empty_msg.setOnClickListener(this);
         btn_send_msg_what0.setOnClickListener(this);
         btn_send_msg_what1.setOnClickListener(this);
         btn_send_delay_msg.setOnClickListener(this);
         tv_time.setOnClickListener(this);
         btn_remove_timer.setOnClickListener(this);
+        btn_handler_postDelayed.setOnClickListener(this);
     }
 
     @Override
@@ -118,8 +125,20 @@ public class HandlerActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_remove_timer:
                 handler.removeMessages(3);
                 break;
+            case R.id.btn_handler_postDelayed:
+                handler_postDelayed.postDelayed(new MyRunnable(), 3000);
+                time = System.currentTimeMillis();
+                break;
             default:
                 Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);
+        }
+    }
+
+    private class MyRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            Logger.d("run: time delay = " + (System.currentTimeMillis() - time));
         }
     }
 }

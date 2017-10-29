@@ -42,8 +42,8 @@
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="倒计时开始"
         android:layout_gravity="center"
+        android:text="倒计时开始"
         android:textSize="32dp"/>
 
     <Button
@@ -51,4 +51,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="停止倒计时"/>
+
+    <Button
+        android:id="@+id/btn_handler_postDelayed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="postDelayed方法延时操作"/>
 </LinearLayout>
