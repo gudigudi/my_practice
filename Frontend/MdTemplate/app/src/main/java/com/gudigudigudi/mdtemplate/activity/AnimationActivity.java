@@ -24,7 +24,10 @@ public class AnimationActivity extends AppCompatActivity implements Button.OnCli
     private Button btn_scale;
     private ImageView iv_scale;
 
-    private Animation alphaAnimation, rotateAnimation, scaleAnimation;
+    private Button btn_translate;
+    private ImageView iv_translate;
+
+    private Animation alphaAnimation, rotateAnimation, scaleAnimation, translateAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +41,21 @@ public class AnimationActivity extends AppCompatActivity implements Button.OnCli
         iv_rotate = findViewById(R.id.iv_rotate);
         btn_scale = findViewById(R.id.btn_scale);
         iv_scale = findViewById(R.id.iv_scale);
+        btn_translate = findViewById(R.id.btn_translate);
+        iv_translate = findViewById(R.id.iv_translate);
 
         imageView.setBackgroundResource(R.mipmap.ic_launcher);
 
         alphaAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.alpha);
         rotateAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.rotate);
         scaleAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.scale);
-
+        translateAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.translate);
 
         btn_start.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
         btn_rotate.setOnClickListener(this);
         btn_scale.setOnClickListener(this);
+        btn_translate.setOnClickListener(this);
     }
 
     @Override
@@ -66,6 +72,9 @@ public class AnimationActivity extends AppCompatActivity implements Button.OnCli
                 break;
             case R.id.btn_scale:
                 iv_scale.startAnimation(scaleAnimation);
+                break;
+            case R.id.btn_translate:
+                iv_translate.startAnimation(translateAnimation);
                 break;
             default:
                 Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);

@@ -51,5 +51,17 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/apple"/>
+        android:src="@drawable/apple"/>
+
+    <Button
+        android:id="@+id/btn_translate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="位移动画"/>
+
+    <ImageView
+        android:id="@+id/iv_translate"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/watermellon"/>
 </LinearLayout>
