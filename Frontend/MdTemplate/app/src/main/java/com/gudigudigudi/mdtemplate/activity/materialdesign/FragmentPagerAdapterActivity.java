@@ -21,6 +21,7 @@ public class FragmentPagerAdapterActivity extends AppCompatActivity implements V
     private List<String> titles;
     private CustomFragmentPagerAdapter fragmentPagerAdapter;
     private CustomFragmentStatePagerAdapter fragmentStatePagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
