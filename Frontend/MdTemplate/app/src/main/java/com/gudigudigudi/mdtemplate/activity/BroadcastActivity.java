@@ -39,7 +39,7 @@ public class BroadcastActivity extends AppCompatActivity {
         registerReceiver(networkChangeReceiver, intentFilter);
 
 
-        Button button = (Button) findViewById(R.id.button);
+        Button button = (Button) findViewById(R.id.replace);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +83,7 @@ public class BroadcastActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(context.CONNECTIVITY_SERVICE);
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isAvailable()) {
                 Toast.makeText(context, "network is available", Toast.LENGTH_SHORT).show();
