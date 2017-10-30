@@ -111,6 +111,18 @@
                 android:layout_height="wrap_content"
                 android:text="尺寸动画"/>
 
+            <Button
+                android:id="@+id/btn_listener"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="动画监听器"/>
+
+            <TextView
+                android:id="@+id/tv_listener"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"/>
+
             <ImageView
                 android:id="@+id/iv_scale"
                 android:layout_width="100dp"

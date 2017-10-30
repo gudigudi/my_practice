@@ -13,6 +13,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gudigudigudi.mdtemplate.R;
 import com.gudigudigudi.mdtemplate.util.LogUtil;
@@ -36,6 +37,9 @@ public class AnimationActivity extends AppCompatActivity implements Button.OnCli
     private Animation alphaAnimation, rotateAnimation, scaleAnimation, translateAnimation;
     private Button btn_accelerate_decelerate_interpolator, btn_accelerate_interpolator, btn_decelerate_interpolator, btn_bounce_interpolator, btn_cycle_interpolator, btn_linear_interpolator;
 
+    private Button btn_listener;
+    private TextView tv_listener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,8 @@ public class AnimationActivity extends AppCompatActivity implements Button.OnCli
         btn_bounce_interpolator = findViewById(R.id.btn_bounce_interpolator);
         btn_cycle_interpolator = findViewById(R.id.btn_cycle_interpolator);
         btn_linear_interpolator = findViewById(R.id.btn_linear_interpolator);
+        btn_listener = findViewById(R.id.btn_listener);
+        tv_listener = findViewById(R.id.tv_listener);
 
         imageView.setBackgroundResource(R.mipmap.ic_launcher);
 
@@ -75,6 +81,7 @@ public class AnimationActivity extends AppCompatActivity implements Button.OnCli
         btn_bounce_interpolator.setOnClickListener(this);
         btn_cycle_interpolator.setOnClickListener(this);
         btn_linear_interpolator.setOnClickListener(this);
+        btn_listener.setOnClickListener(this);
     }
 
     @Override
@@ -118,6 +125,25 @@ public class AnimationActivity extends AppCompatActivity implements Button.OnCli
             case R.id.btn_linear_interpolator:
                 rotateAnimation.setInterpolator(new LinearInterpolator());
                 iv_rotate.startAnimation(rotateAnimation);
+                break;
+            case R.id.btn_listener:
+                scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        tv_listener.setText("animation start...");
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        tv_listener.setText("animation end...");
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        tv_listener.setText("animation repeat...");
+                    }
+                });
+                iv_scale.startAnimation(scaleAnimation);
                 break;
             default:
                 Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);
