@@ -128,6 +128,7 @@ public class AlertDialogActivity extends AppCompatActivity implements View.OnCli
                         .setView(loadingView)
                         .create();
                 dialog.show();
+                break;
             default:
                 Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);
         }
