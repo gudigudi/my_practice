@@ -32,7 +32,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_gravity="right|top"
-        app:srcCompat="@drawable/ic_highlight_off_black_48dp"
+        app:srcCompat="@drawable/ic_highlight_off_black"
         android:visibility="gone"/>
 
 </FrameLayout>
