@@ -1,5 +1,7 @@
 package com.gudigudigudi.mdtemplate;
 
+import android.animation.AnimatorInflater;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,9 +30,28 @@ public class AnimatorActivity extends AppCompatActivity {
 //                translateAnimation.setDuration(2000);
 //                translateAnimation.setFillAfter(true);
 //                imageView.startAnimation(translateAnimation);
-                ObjectAnimator.ofFloat(imageView, "translationX", 0, 200)
-                        .setDuration(2000)
-                        .start();
+//                ObjectAnimator.ofFloat(imageView, "translationX", 0, 200)
+//                        .setDuration(2000)
+//                        .start();
+//                ObjectAnimator.ofFloat(imageView,"rotationX",0,360)
+//                        .setDuration(2000)
+//                        .start();
+//                ObjectAnimator.ofFloat(imageView,"rotationY",0,360)
+//                        .setDuration(2000)
+//                        .start();
+//                ObjectAnimator.ofFloat(imageView,"scaleX",1,0.5f)
+//                        .setDuration(2000)
+//                        .start();
+//                ObjectAnimator.ofFloat(imageView,"scaleY",1,0.5f)
+//                        .setDuration(2000)
+//                        .start();
+//                ObjectAnimator.ofFloat(imageView,"alpha",1,0.5f)
+//                        .setDuration(2000)
+//                        .start();
+                ObjectAnimator objectAnimator = (ObjectAnimator) AnimatorInflater.loadAnimator(AnimatorActivity.this, R.animator.background);
+                objectAnimator.setEvaluator(new ArgbEvaluator());
+                objectAnimator.setTarget(imageView);
+                objectAnimator.start();
             }
         });
         imageView.setOnClickListener(new View.OnClickListener() {
