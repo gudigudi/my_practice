@@ -85,55 +85,60 @@ android {
     lintOptions {
         abortOnError false
     }
+    dataBinding{
+        enabled = true
+    }
 }
 
 ext {
-    ANDROID_SUPPORT_VERSION = '26.1.0'
-    ANDROID_ESPRESSO_VERSION = '3.0.1'
-    ANDROID_ARCH_COMPONENT_VERSION='1.0.0'
+    android_support_version = '26.1.0'
+    android_espresso_version = '3.0.1'
+    android_arch_component_version='1.0.0'
+    permissionsdispatcher_version="2.4.0"
+    glide_version="4.3.1"
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile("com.github.hotchemi:permissionsdispatcher:3.0.1") {
+    compile("com.github.hotchemi:permissionsdispatcher:$permissionsdispatcher_version") {
         // if you don't use android.app.Fragment you can exclude support for them
         exclude module: "support-v13"
     }
     androidTestCompile 'com.android.support.test:runner:1.0.1'
     androidTestCompile 'com.android.support.test:rules:1.0.1'
-    androidTestCompile "com.android.support.test.espresso:espresso-core:$ANDROID_ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$ANDROID_ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test.espresso:espresso-intents:$ANDROID_ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test.espresso:espresso-accessibility:$ANDROID_ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test.espresso:espresso-web:$ANDROID_ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test.espresso.idling:idling-concurrent:$ANDROID_ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$ANDROID_ESPRESSO_VERSION"
-    compile "com.android.support:support-v13:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:support-annotations:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:support-vector-drawable:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:animated-vector-drawable:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:appcompat-v7:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:palette-v7:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:cardview-v7:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:recyclerview-v7:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:design:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:support-emoji:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:support-emoji-bundled:$ANDROID_SUPPORT_VERSION"
-    compile "com.android.support:support-emoji-appcompat:$ANDROID_SUPPORT_VERSION"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile "android.arch.lifecycle:runtime:$ANDROID_ARCH_COMPONENT_VERSION"
-    compile "android.arch.lifecycle:extensions:$ANDROID_ARCH_COMPONENT_VERSION"
-    compile "android.arch.persistence.room:runtime:$ANDROID_ARCH_COMPONENT_VERSION"
-    compile "android.arch.paging:runtime:$ANDROID_ARCH_COMPONENT_VERSION-alpha3"
-    compile 'com.github.bumptech.glide:glide:4.3.1'
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-accessibility:$android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-web:$android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso.idling:idling-concurrent:$android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$android_espresso_version"
+    compile "com.android.support:support-v13:$android_support_version"
+    compile "com.android.support:support-annotations:$android_support_version"
+    compile "com.android.support:support-vector-drawable:$android_support_version"
+    compile "com.android.support:animated-vector-drawable:$android_support_version"
+    compile "com.android.support:appcompat-v7:$android_support_version"
+    compile "com.android.support:palette-v7:$android_support_version"
+    compile "com.android.support:cardview-v7:$android_support_version"
+    compile "com.android.support:recyclerview-v7:$android_support_version"
+    compile "com.android.support:design:$android_support_version"
+    compile "com.android.support:support-emoji:$android_support_version"
+    compile "com.android.support:support-emoji-bundled:$android_support_version"
+    compile "com.android.support:support-emoji-appcompat:$android_support_version"
+    compile "android.arch.lifecycle:runtime:$android_arch_component_version"
+    compile "android.arch.lifecycle:extensions:$android_arch_component_version"
+    compile "android.arch.persistence.room:runtime:$android_arch_component_version"
+    compile "android.arch.paging:runtime:$android_arch_component_version-alpha3"
+    compile "com.github.bumptech.glide:glide:$glide_version"
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.google.code.gson:gson:2.8.2'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.orhanobut:logger:2.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    testCompile "android.arch.persistence.room:testing:$ANDROID_ARCH_COMPONENT_VERSION"
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
-    annotationProcessor "android.arch.lifecycle:compiler:$ANDROID_ARCH_COMPONENT_VERSION"
-    annotationProcessor "android.arch.persistence.room:compiler:$ANDROID_ARCH_COMPONENT_VERSION"
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
+    testCompile "android.arch.persistence.room:testing:$android_arch_component_version"
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$permissionsdispatcher_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$android_arch_component_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$android_arch_component_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 }
