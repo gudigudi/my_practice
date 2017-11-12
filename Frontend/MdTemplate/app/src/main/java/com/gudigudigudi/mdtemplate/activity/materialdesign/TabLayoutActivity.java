@@ -3,7 +3,6 @@ package com.gudigudigudi.mdtemplate.activity.materialdesign;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -31,41 +30,31 @@ public class TabLayoutActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        final List<String> titles = new ArrayList<>();
+        final List<String> titleList = new ArrayList<>();
         final List<Fragment> fragmentList = new ArrayList<>();
 
-        titles.add("精选");
-        titles.add("体育");
-        titles.add("巴萨");
-        titles.add("购物");
-        titles.add("明星");
-        titles.add("视频");
-        titles.add("健康");
-        titles.add("励志");
-        titles.add("图文");
-        titles.add("本地");
-        titles.add("动漫");
-        titles.add("搞笑");
-        titles.add("精选");
+        titleList.add("精选");
+        titleList.add("体育");
+        titleList.add("巴萨");
+        titleList.add("购物");
+        titleList.add("明星");
+        titleList.add("视频");
+        titleList.add("健康");
+        titleList.add("励志");
+        titleList.add("图文");
+        titleList.add("本地");
+        titleList.add("动漫");
+        titleList.add("搞笑");
+        titleList.add("精选");
 
-        for (int i = 0; i < titles.size(); i++) {
-            tabLayout.addTab(tabLayout.newTab().setText(titles.get(i)));
-            fragmentList.add(new ListFragment()); //TODO: replace with custom listfragment.
+        for (int i = 0; i < titleList.size(); i++) {
+            tabLayout.addTab(tabLayout.newTab().setText(titleList.get(i)));
+            fragmentList.add(new ListFragment());
         }
 
-        FragmentPagerAdapter fragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int i) {
-                return fragmentList.get(i);
-            }
-
-            @Override
-            public int getCount() {
-                return fragmentList.size();
-            }
-        };
-
-        viewPager.setAdapter(fragmentPagerAdapter);
+        FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList, titleList);
+        viewPager.setAdapter(fragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
+//        tabLayout.setTabsFromPagerAdapter(fragmentAdapter);
     }
 }

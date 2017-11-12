@@ -30,6 +30,6 @@ public class ListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-//        recyclerView.setAdapter();
+        recyclerView.setAdapter(new RecyclerViewAdapter(getActivity()));
     }
 }
