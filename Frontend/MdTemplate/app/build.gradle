@@ -22,6 +22,7 @@ android {
 //        productFlavors {
 //            qihoo {
 //                applicationId "com.gudigudigudi.mdtemplate.qihoo"
+//                  resValue 'string' 'api_key' 'qihoo'
 //            }
 //            baidu {
 //                applicationId "com.gudigudigudi.mdtemplate.baidu"
@@ -85,7 +86,7 @@ android {
     lintOptions {
         abortOnError false
     }
-    dataBinding{
+    dataBinding {
         enabled = true
     }
 }
@@ -93,10 +94,10 @@ android {
 ext {
     android_support_version = '26.1.0'
     android_espresso_version = '3.0.1'
-    android_arch_component_version='1.0.0'
-    permissionsdispatcher_version="2.4.0"
-    glide_version="4.3.1"
-    dagger_version="2.11"
+    android_arch_component_version = '1.0.0'
+    permissionsdispatcher_version = '2.4.0'
+    glide_version = '4.3.1'
+    dagger_version = '2.11'
 }
 
 dependencies {
@@ -126,6 +127,7 @@ dependencies {
     compile "com.android.support:support-emoji:$android_support_version"
     compile "com.android.support:support-emoji-bundled:$android_support_version"
     compile "com.android.support:support-emoji-appcompat:$android_support_version"
+    compile "com.android.support:support-dynamic-animation:$android_support_version"
     compile "android.arch.lifecycle:runtime:$android_arch_component_version"
     compile "android.arch.lifecycle:extensions:$android_arch_component_version"
     compile "android.arch.persistence.room:runtime:$android_arch_component_version"
