@@ -3,6 +3,8 @@ package com.gudigudigudi.mdtemplate.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Scene;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +31,8 @@ public class TransitionActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TransitionManager.go(scene2);
+                Transition transition_fade = TransitionInflater.from(TransitionActivity.this).inflateTransition(R.transition.fade);
+                TransitionManager.go(scene2, transition_fade);
             }
         });
     }
