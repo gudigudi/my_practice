@@ -35,7 +35,7 @@ public class PermissionActivity extends AppCompatActivity {
         btn_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PermissionActivityPermissionsDispatcher.callWithPermissionCheck(PermissionActivity.this);
+                PermissionActivityPermissionsDispatcher.callWithCheck(PermissionActivity.this);
             }
         });
     }
