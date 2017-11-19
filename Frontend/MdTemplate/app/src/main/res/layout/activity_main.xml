@@ -118,7 +118,6 @@
         android:id="@+id/listview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/btn_toggle_alertdialog"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp"/>
 
