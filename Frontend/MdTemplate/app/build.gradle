@@ -94,10 +94,11 @@ android {
 ext {
     android_support_version = '26.1.0'
     android_espresso_version = '3.0.1'
+    android_test_version = '1.0.1'
     android_arch_component_version = '1.0.0'
     permissionsdispatcher_version = '2.4.0'
     glide_version = '4.3.1'
-    dagger_version = '2.11'
+    dagger_version = '2.13'
 }
 
 dependencies {
@@ -106,8 +107,8 @@ dependencies {
         // if you don't use android.app.Fragment you can exclude support for them
         exclude module: "support-v13"
     }
-    androidTestCompile 'com.android.support.test:runner:1.0.1'
-    androidTestCompile 'com.android.support.test:rules:1.0.1'
+    androidTestCompile "com.android.support.test:runner:$android_test_version"
+    androidTestCompile "com.android.support.test:rules:$android_test_version"
     androidTestCompile "com.android.support.test.espresso:espresso-core:$android_espresso_version"
     androidTestCompile "com.android.support.test.espresso:espresso-contrib:$android_espresso_version"
     androidTestCompile "com.android.support.test.espresso:espresso-intents:$android_espresso_version"
@@ -133,7 +134,7 @@ dependencies {
     compile "android.arch.persistence.room:runtime:$android_arch_component_version"
     compile "android.arch.paging:runtime:$android_arch_component_version-alpha3"
     compile "com.github.bumptech.glide:glide:$glide_version"
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.orhanobut:logger:2.1.1'
