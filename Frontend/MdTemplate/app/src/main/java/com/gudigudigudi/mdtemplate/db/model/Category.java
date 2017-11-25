@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate.db;
+package com.gudigudigudi.mdtemplate.db.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

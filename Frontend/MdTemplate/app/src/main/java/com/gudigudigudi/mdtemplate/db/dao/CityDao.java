@@ -1,8 +1,10 @@
-package com.gudigudigudi.mdtemplate.db;
+package com.gudigudigudi.mdtemplate.db.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+
+import com.gudigudigudi.mdtemplate.db.model.City;
 
 import java.util.List;
 
