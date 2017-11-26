@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="swordsman"
+            type="com.gudigudigudi.mdtemplate.mvvm.Swordsman"/>
+
+        <variable
+            name="OnClickListener"
+            type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="name"
+            type="String"/>
+
+        <variable
+            name="age"
+            type="int"/>
+
+        <variable
+            name="man"
+            type="boolean"/>
+
+        <import type="java.util.ArrayList"/>
+
+        <import type="java.util.Map"/>
+
+        <variable
+            name="list"
+            type="ArrayList&lt;String&gt;"/>
+
+        <variable
+            name="map"
+            type="Map&lt;String,String&gt;"/>
+
+        <variable
+            name="arrays"
+            type="String[]"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{swordsman.name}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{swordsman.level}"/>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:onClick="@{OnClickListener}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{name}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(age)}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(man)}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{list.get(1)}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{map.get(`age`)}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{arrays[1]}"/>
+    </LinearLayout>
+</layout>
