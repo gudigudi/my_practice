@@ -19,8 +19,8 @@ import android.widget.Toast;
 import com.gudigudigudi.mdtemplate.R;
 import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 import com.gudigudigudi.mdtemplate.db.AppDatabase;
-import com.gudigudigudi.mdtemplate.db.Book;
-import com.gudigudigudi.mdtemplate.db.BookDao;
+import com.gudigudigudi.mdtemplate.db.dao.BookDao;
+import com.gudigudigudi.mdtemplate.db.model.Book;
 import com.gudigudigudi.mdtemplate.util.LogUtil;
 import com.orhanobut.logger.Logger;
 
@@ -37,71 +37,71 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
     private static final String TAG = "DataStoreActivity";
 
-    private EditText editText;
+    private EditText mEditText;
 
-    private Button btn_save_data_by_sharedpreferences;
-    private Button btn_restore_data_by_sharedpreferences;
+    private Button mBtnSaveDataBySharedpreferences;
+    private Button mBtnRestoreDataBySharedpreferences;
 
-    private AppDBHelper dbHelper;
-    private Button btn_create_db;
-    private Button btn_add_data_to_db;
-    private Button btn_update_db;
-    private Button btn_delete_data_from_db;
-    private Button btn_query_data_from_db;
+    private AppDBHelper mDBHelper;
+    private Button mBtnCreateDB;
+    private Button mBtnAddDataToDB;
+    private Button mBtnUpdateDB;
+    private Button mBtnDeleteDataFromDB;
+    private Button mBtnQueryDataFromDB;
 
-    private AppDatabase appDatabase;
-    private BookDao bookDao;
-    private Button btn_insert_room;
-    private Button btn_query_room;
-    private Button btn_update_room;
-    private Button btn_delete_room;
+    private AppDatabase mAppDatabase;
+    private BookDao mBookDao;
+    private Button mBtnInsertRoom;
+    private Button mBtnQueryRoom;
+    private Button mBtnUpdateRoom;
+    private Button mBtnDeleteRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_store);
 
-        editText = findViewById(R.id.edit);
+        mEditText = findViewById(R.id.edit);
 
         String inputText = load();
 
         if (!TextUtils.isEmpty(inputText)) {
-            editText.setText(inputText);
-            editText.setSelection(inputText.length());
+            mEditText.setText(inputText);
+            mEditText.setSelection(inputText.length());
             Toast.makeText(this, "Restoring succeeded", Toast.LENGTH_SHORT).show();
         }
 
-        btn_save_data_by_sharedpreferences = findViewById(R.id.btn_save_data_by_sharedpreferences);
-        btn_restore_data_by_sharedpreferences = findViewById(R.id.btn_restore_data_by_sharedpreferences);
+        mBtnSaveDataBySharedpreferences = findViewById(R.id.btn_save_data_by_sharedpreferences);
+        mBtnRestoreDataBySharedpreferences = findViewById(R.id.btn_restore_data_by_sharedpreferences);
 
-        dbHelper = new AppDBHelper(this, "book.db", null, 3);
-        btn_create_db = findViewById(R.id.btn_create_db);
-        btn_add_data_to_db = findViewById(R.id.btn_add_data_to_db);
-        btn_update_db = findViewById(R.id.btn_update_db);
-        btn_delete_data_from_db = findViewById(R.id.btn_delete_data_from_db);
-        btn_query_data_from_db = findViewById(R.id.btn_query_data_from_db);
+        mDBHelper = new AppDBHelper(this, "book.db", null, 3);
+        mBtnCreateDB = findViewById(R.id.btn_create_db);
+        mBtnAddDataToDB = findViewById(R.id.btn_add_data_to_db);
+        mBtnUpdateDB = findViewById(R.id.btn_update_db);
+        mBtnDeleteDataFromDB = findViewById(R.id.btn_delete_data_from_db);
+        mBtnQueryDataFromDB = findViewById(R.id.btn_query_data_from_db);
 
-        appDatabase = Room.databaseBuilder(getApplicationContext(),
+        mAppDatabase = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "book").build();
-        bookDao = appDatabase.bookDao();
-        btn_insert_room = findViewById(R.id.btn_insert_room);
-        btn_query_room = findViewById(R.id.btn_query_room);
-        btn_update_room = findViewById(R.id.btn_update_room);
-        btn_delete_room = findViewById(R.id.btn_delete_room);
+        mBookDao = mAppDatabase.bookDao();
+        mBtnInsertRoom = findViewById(R.id.btn_insert_room);
+        mBtnQueryRoom = findViewById(R.id.btn_query_room);
+        mBtnUpdateRoom = findViewById(R.id.btn_update_room);
+        mBtnDeleteRoom = findViewById(R.id.btn_delete_room);
 
-        btn_save_data_by_sharedpreferences.setOnClickListener(this);
-        btn_restore_data_by_sharedpreferences.setOnClickListener(this);
+        mBtnSaveDataBySharedpreferences.setOnClickListener(this);
+        mBtnRestoreDataBySharedpreferences.setOnClickListener(this);
 
-        btn_create_db.setOnClickListener(this);
-        btn_add_data_to_db.setOnClickListener(this);
-        btn_update_db.setOnClickListener(this);
-        btn_delete_data_from_db.setOnClickListener(this);
-        btn_query_data_from_db.setOnClickListener(this);
+        mBtnCreateDB.setOnClickListener(this);
+        mBtnAddDataToDB.setOnClickListener(this);
+        mBtnUpdateDB.setOnClickListener(this);
+        mBtnDeleteDataFromDB.setOnClickListener(this);
+        mBtnQueryDataFromDB.setOnClickListener(this);
 
-        btn_insert_room.setOnClickListener(this);
-        btn_query_room.setOnClickListener(this);
-        btn_update_room.setOnClickListener(this);
-        btn_delete_room.setOnClickListener(this);
+        mBtnInsertRoom.setOnClickListener(this);
+        mBtnQueryRoom.setOnClickListener(this);
+        mBtnUpdateRoom.setOnClickListener(this);
+        mBtnDeleteRoom.setOnClickListener(this);
 
     }
 
@@ -109,7 +109,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
     protected void onDestroy() {
         super.onDestroy();
 
-        String input = editText.getText().toString();
+        String input = mEditText.getText().toString();
         save(input);
     }
 
@@ -186,10 +186,10 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                 Log.d(TAG, "married is " + married);
                 break;
             case R.id.btn_create_db:
-                dbHelper.getWritableDatabase();
+                mDBHelper.getWritableDatabase();
                 break;
             case R.id.btn_add_data_to_db:
-                database = dbHelper.getWritableDatabase();
+                database = mDBHelper.getWritableDatabase();
                 values = new ContentValues();
                 values.put("name", "The Da Vinci Code");
                 values.put("author", "Dan Brown");
@@ -211,7 +211,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
                 break;
             case R.id.btn_update_db:
-                database = dbHelper.getWritableDatabase();
+                database = mDBHelper.getWritableDatabase();
                 values = new ContentValues();
                 values.put("price", 10.99);
                 database.update("book", values, "name = ?", new String[]{"The Da Vinci Code"});
@@ -219,12 +219,12 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
                 break;
             case R.id.btn_delete_data_from_db:
-                database = dbHelper.getWritableDatabase();
+                database = mDBHelper.getWritableDatabase();
                 database.delete("book", "pages > ?", new String[]{"500"});
 
                 break;
             case R.id.btn_query_data_from_db:
-                database = dbHelper.getWritableDatabase();
+                database = mDBHelper.getWritableDatabase();
                 Log.d(TAG, "query data from Sqlite db.");
 
                 Log.d(TAG, "book database version is " + database.getVersion());
@@ -260,7 +260,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
                         Log.d(TAG, "insert book into Sqlite db: " + book.toString());
 
-                        bookDao.insert(book);
+                        mBookDao.insert(book);
 
                         return null;
                     }
@@ -270,7 +270,7 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
 
                     @Override
                     protected Void doInBackground(Void... voids) {
-                        List<Book> bookList = bookDao.getAll();
+                        List<Book> bookList = mBookDao.getAll();
                         for (Book book : bookList) {
                             Log.d(TAG, "book is:" + book.toString());
                         }
@@ -285,9 +285,9 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                     protected Void doInBackground(Void... voids) {
                         double price = 1.01;
                         String name = "The Dan Vinci Code";
-                        Log.d(TAG, "book to be updated: " + bookDao.getBookByName(name).toString());
-                        bookDao.updatePriceByName("The Dan Vinci Code", price);
-                        Log.d(TAG, "book is updated: " + bookDao.getBookByName(name).toString());
+                        Log.d(TAG, "book to be updated: " + mBookDao.getBookByName(name).toString());
+                        mBookDao.updatePriceByName("The Dan Vinci Code", price);
+                        Log.d(TAG, "book is updated: " + mBookDao.getBookByName(name).toString());
                         return null;
                     }
                 }.execute();
@@ -299,8 +299,8 @@ public class DataStoreActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     protected Void doInBackground(Void... voids) {
                         String name = "The Dan Vinci Code";
-                        bookDao.deleteBook(bookDao.getBookByName(name));
-                        Log.d(TAG, "book number: " + bookDao.getAll().size());
+                        mBookDao.deleteBook(mBookDao.getBookByName(name));
+                        Log.d(TAG, "book number: " + mBookDao.getAll().size());
                         return null;
                     }
                 }.execute();

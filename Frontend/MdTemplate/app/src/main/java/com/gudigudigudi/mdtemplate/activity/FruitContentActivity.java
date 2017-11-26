@@ -18,10 +18,10 @@ public class FruitContentActivity extends AppCompatActivity {
     public static final String FRUIT_NAME = "fruit_name";
     public static final String FRUIT_IMAGE_ID = "fruit_image_id";
 
-    private Toolbar toolbar;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
-    private ImageView fruitImageView;
-    private TextView fruitContentText;
+    private Toolbar mToolbar;
+    private CollapsingToolbarLayout mCollapsingToolbarLayout;
+    private ImageView mFruitImageView;
+    private TextView mFruitContentText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +32,20 @@ public class FruitContentActivity extends AppCompatActivity {
         String fruitName = intent.getStringExtra(FRUIT_NAME);
         int fruitImageId = intent.getIntExtra(FRUIT_IMAGE_ID, 0);
 
-        toolbar = findViewById(R.id.toolbar);
-        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
-        fruitImageView = findViewById(R.id.fruit_image_view);
-        fruitContentText = findViewById(R.id.fruit_content_text);
+        mToolbar = findViewById(R.id.toolbar);
+        mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+        mFruitImageView = findViewById(R.id.fruit_image_view);
+        mFruitContentText = findViewById(R.id.fruit_content_text);
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        collapsingToolbarLayout.setTitle(fruitName);
-        Glide.with(this).load(fruitImageId).into(fruitImageView);
-        fruitContentText.setText(generateFruitContent(fruitName));
+        mCollapsingToolbarLayout.setTitle(fruitName);
+        Glide.with(this).load(fruitImageId).into(mFruitImageView);
+        mFruitContentText.setText(generateFruitContent(fruitName));
     }
 
     @Override

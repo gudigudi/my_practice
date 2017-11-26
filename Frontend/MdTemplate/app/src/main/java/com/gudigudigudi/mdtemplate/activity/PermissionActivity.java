@@ -23,16 +23,16 @@ import permissions.dispatcher.RuntimePermissions;
 @RuntimePermissions
 public class PermissionActivity extends AppCompatActivity {
 
-    private Button btn_call;
+    private Button mBtnCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission);
 
-        btn_call = findViewById(R.id.btn_call);
+        mBtnCall = findViewById(R.id.btn_call);
 
-        btn_call.setOnClickListener(new View.OnClickListener() {
+        mBtnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PermissionActivityPermissionsDispatcher.callWithCheck(PermissionActivity.this);

@@ -41,21 +41,21 @@ import okhttp3.Response;
 
 public class WeatherActivity extends AppCompatActivity implements ChooseAreaFragment.OnFragmentInteractionListener {
 
-    public DrawerLayout drawerLayout;
-    private Button navBtn;
-    private ImageView bingPicImg;
-    public SwipeRefreshLayout swipeRefreshLayout;
-    private ScrollView weatherLayout;
-    private TextView titleCity;
-    private TextView titleUpdateTime;
-    private TextView degreeText;
-    private TextView weatherInfoText;
-    private LinearLayout forecastLayout;
-    private TextView aqiText;
-    private TextView pm25Text;
-    private TextView comfortText;
-    private TextView carWashText;
-    private TextView sportText;
+    public DrawerLayout mDrawerLayout;
+    private Button mBtnNav;
+    private ImageView mIVBingPicImg;
+    public SwipeRefreshLayout mSwipeRefreshLayout;
+    private ScrollView mSVWeatherLayout;
+    private TextView mTVTitleCity;
+    private TextView mTVTitleUpdateTime;
+    private TextView mTVDegreeText;
+    private TextView mTVWeatherInfoText;
+    private LinearLayout mLLForecastLayout;
+    private TextView mTVaqiText;
+    private TextView mTVpm25Text;
+    private TextView mTVcomfortText;
+    private TextView mTVcarWashText;
+    private TextView mTVsportText;
 
     public String weatherId;
 
@@ -69,23 +69,23 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
         }
         setContentView(R.layout.activity_weather);
 
-        bingPicImg = findViewById(R.id.bing_pic_img);
-        swipeRefreshLayout = findViewById(R.id.swipe_reflesh);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navBtn = findViewById(R.id.nav_btn);
-        weatherLayout = findViewById(R.id.weather_layout);
-        titleCity = findViewById(R.id.title_city);
-        titleUpdateTime = findViewById(R.id.title_update_time);
-        degreeText = findViewById(R.id.degree_text);
-        weatherInfoText = findViewById(R.id.weather_info_text);
-        forecastLayout = findViewById(R.id.forecast_layout);
-        aqiText = findViewById(R.id.aqi_text);
-        pm25Text = findViewById(R.id.pm25_text);
-        comfortText = findViewById(R.id.comfort_text);
-        carWashText = findViewById(R.id.car_wash_text);
-        sportText = findViewById(R.id.sport_text);
+        mIVBingPicImg = findViewById(R.id.bing_pic_img);
+        mSwipeRefreshLayout = findViewById(R.id.swipe_reflesh);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mBtnNav = findViewById(R.id.nav_btn);
+        mSVWeatherLayout = findViewById(R.id.weather_layout);
+        mTVTitleCity = findViewById(R.id.title_city);
+        mTVTitleUpdateTime = findViewById(R.id.title_update_time);
+        mTVDegreeText = findViewById(R.id.degree_text);
+        mTVWeatherInfoText = findViewById(R.id.weather_info_text);
+        mLLForecastLayout = findViewById(R.id.forecast_layout);
+        mTVaqiText = findViewById(R.id.aqi_text);
+        mTVpm25Text = findViewById(R.id.pm25_text);
+        mTVcomfortText = findViewById(R.id.comfort_text);
+        mTVcarWashText = findViewById(R.id.car_wash_text);
+        mTVsportText = findViewById(R.id.sport_text);
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = preferences.getString("weather", null);
@@ -101,28 +101,28 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
             showWeatherInfo(weather);
         } else {
             weatherId = getIntent().getStringExtra("weather_id");
-            weatherLayout.setVisibility(View.INVISIBLE);
+            mSVWeatherLayout.setVisibility(View.INVISIBLE);
             requestWeather(weatherId);
         }
 
         String bingPic = preferences.getString("bing_pic", null);
         if (bingPic != null) {
-            Glide.with(this).load(bingPic).into(bingPicImg);
+            Glide.with(this).load(bingPic).into(mIVBingPicImg);
         } else {
             loadBingPic();
         }
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 requestWeather(weatherId);
             }
         });
 
-        navBtn.setOnClickListener(new View.OnClickListener() {
+        mBtnNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                mDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
     }
@@ -147,7 +147,7 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
                     @Override
                     public void run() {
                         Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
-                        swipeRefreshLayout.setRefreshing(false);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
@@ -177,7 +177,7 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
                         } else {
                             Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
                         }
-                        swipeRefreshLayout.setRefreshing(false);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
@@ -191,15 +191,15 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
             String degree = weather.now.temperature + " C";
             String weatherInfo = weather.now.more.info;
 
-            titleCity.setText(cityName);
-            titleUpdateTime.setText(updateTime);
-            degreeText.setText(degree);
-            weatherInfoText.setText(weatherInfo);
+            mTVTitleCity.setText(cityName);
+            mTVTitleUpdateTime.setText(updateTime);
+            mTVDegreeText.setText(degree);
+            mTVWeatherInfoText.setText(weatherInfo);
 
-            forecastLayout.removeAllViews();
+            mLLForecastLayout.removeAllViews();
 
             for (Forecast forecast : weather.forecastList) {
-                View view = LayoutInflater.from(this).inflate(R.layout.weather_forecast_item, forecastLayout, false);
+                View view = LayoutInflater.from(this).inflate(R.layout.weather_forecast_item, mLLForecastLayout, false);
                 TextView dateText = (TextView) view.findViewById(R.id.date_text);
                 TextView infoText = (TextView) view.findViewById(R.id.info_text);
                 TextView maxText = (TextView) view.findViewById(R.id.max_text);
@@ -210,22 +210,22 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
                 maxText.setText(forecast.temperature.max);
                 minText.setText(forecast.temperature.min);
 
-                forecastLayout.addView(view);
+                mLLForecastLayout.addView(view);
             }
 
             if (weather.aqi != null) {
-                aqiText.setText(weather.aqi.city.aqi);
-                pm25Text.setText(weather.aqi.city.pm25);
+                mTVaqiText.setText(weather.aqi.city.aqi);
+                mTVpm25Text.setText(weather.aqi.city.pm25);
             }
 
             String comfort = "舒适度: " + weather.suggestion.comfort.info;
             String carWash = "洗车指数: " + weather.suggestion.carWash.info;
             String sport = "运动建议: " + weather.suggestion.sport.info;
-            comfortText.setText(comfort);
-            carWashText.setText(carWash);
-            sportText.setText(sport);
+            mTVcomfortText.setText(comfort);
+            mTVcarWashText.setText(carWash);
+            mTVsportText.setText(sport);
 
-            weatherLayout.setVisibility(View.VISIBLE);
+            mSVWeatherLayout.setVisibility(View.VISIBLE);
 
             Intent intent = new Intent(this, WeatherAutoUpdateService.class);
             startService(intent);
@@ -252,7 +252,7 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Glide.with(WeatherActivity.this).load(bingPic).into(bingPicImg);
+                        Glide.with(WeatherActivity.this).load(bingPic).into(mIVBingPicImg);
                     }
                 });
             }

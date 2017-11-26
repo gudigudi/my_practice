@@ -20,22 +20,22 @@ public class BroadcastActivity extends AppCompatActivity {
 
     private static final String TAG = "BroadcastActivity";
 
-    private IntentFilter intentFilter;
-    private NetworkChangeReceiver networkChangeReceiver;
+    private IntentFilter mIntentFilter;
+    private NetworkChangeReceiver mNetworkChangeReceiver;
 
-    private IntentFilter intentFilterLocal;
-    private LocalReceiver localReceiver;
-    private LocalBroadcastManager localBroadcastManager;
+    private IntentFilter mIntentFilterLocal;
+    private LocalReceiver mLocalReceiver;
+    private LocalBroadcastManager mLocalBroadcastManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_broadcast);
 
-        intentFilter = new IntentFilter();
-        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        networkChangeReceiver = new NetworkChangeReceiver();
-        registerReceiver(networkChangeReceiver, intentFilter);
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        mNetworkChangeReceiver = new NetworkChangeReceiver();
+        registerReceiver(mNetworkChangeReceiver, mIntentFilter);
 
         Button button = findViewById(R.id.replace);
         button.setOnClickListener(new View.OnClickListener() {
@@ -48,17 +48,17 @@ public class BroadcastActivity extends AppCompatActivity {
             }
         });
 
-        localBroadcastManager = LocalBroadcastManager.getInstance(this);
-        intentFilterLocal = new IntentFilter();
-        intentFilterLocal.addAction(getString(R.string.LOCAL_BROADCAST));
-        localReceiver = new LocalReceiver();
-        localBroadcastManager.registerReceiver(localReceiver, intentFilterLocal);
+        mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
+        mIntentFilterLocal = new IntentFilter();
+        mIntentFilterLocal.addAction(getString(R.string.LOCAL_BROADCAST));
+        mLocalReceiver = new LocalReceiver();
+        mLocalBroadcastManager.registerReceiver(mLocalReceiver, mIntentFilterLocal);
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getString(R.string.LOCAL_BROADCAST));
-                localBroadcastManager.sendBroadcast(intent); // send local broadcast.
+                mLocalBroadcastManager.sendBroadcast(intent); // send local broadcast.
             }
         });
     }
@@ -67,8 +67,8 @@ public class BroadcastActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        unregisterReceiver(networkChangeReceiver);
-        localBroadcastManager.unregisterReceiver(localReceiver);
+        unregisterReceiver(mNetworkChangeReceiver);
+        mLocalBroadcastManager.unregisterReceiver(mLocalReceiver);
     }
 
     /**

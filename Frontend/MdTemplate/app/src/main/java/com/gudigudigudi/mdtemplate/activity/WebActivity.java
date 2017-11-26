@@ -39,33 +39,33 @@ public class WebActivity extends AppCompatActivity {
 
     private static final String TAG = "WebActivity";
 
-    private WebView webView;
-    private EditText editText;
-    private Button btn_load, btn_last_page, btn_next_page, btn_top;
-    private ProgressBar progressBar;
+    private WebView mWebView;
+    private EditText mEditText;
+    private Button mBtnLoad, mBtnLastPage, mBtnNextPage, mBtnTop;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
 
-        webView = findViewById(R.id.web_view);
-        editText = findViewById(R.id.edit_text);
-        btn_load = findViewById(R.id.btn_load);
-        btn_last_page = findViewById(R.id.btn_last_page);
-        btn_next_page = findViewById(R.id.btn_next_page);
-        btn_top = findViewById(R.id.btn_top);
-        progressBar = findViewById(R.id.progressBar);
+        mWebView = findViewById(R.id.web_view);
+        mEditText = findViewById(R.id.edit_text);
+        mBtnLoad = findViewById(R.id.btn_load);
+        mBtnLastPage = findViewById(R.id.btn_last_page);
+        mBtnNextPage = findViewById(R.id.btn_next_page);
+        mBtnTop = findViewById(R.id.btn_top);
+        mProgressBar = findViewById(R.id.progressBar);
 
-        editText.setText("http://www.zhihu.com");
+        mEditText.setText("http://www.zhihu.com");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            editText.setFocusedByDefault(false);
+            mEditText.setFocusedByDefault(false);
         }
 
-        webView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setJavaScriptEnabled(true);
 
-        webView.setWebViewClient(new WebViewClient() {
+        mWebView.setWebViewClient(new WebViewClient() {
             @TargetApi(Build.VERSION_CODES.N)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -79,56 +79,56 @@ public class WebActivity extends AppCompatActivity {
                 return true;
             }
         });
-        webView.setWebChromeClient(new WebChromeClient() {
+        mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                progressBar.setProgress(newProgress);
+                mProgressBar.setProgress(newProgress);
             }
         });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            webView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            mWebView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
                 @Override
                 public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                    float webViewHeight = webView.getContentHeight() * webView.getScale();
-                    float nowHeight = webView.getHeight() + webView.getScrollY();
+                    float webViewHeight = mWebView.getContentHeight() * mWebView.getScale();
+                    float nowHeight = mWebView.getHeight() + mWebView.getScrollY();
 
                     if (nowHeight == webViewHeight) {
                         Toast.makeText(WebActivity.this, "being bottom", Toast.LENGTH_SHORT).show();
-                        btn_top.setVisibility(View.VISIBLE);
-                    } else if (webView.getScrollY() == 0) {
+                        mBtnTop.setVisibility(View.VISIBLE);
+                    } else if (mWebView.getScrollY() == 0) {
                         Toast.makeText(WebActivity.this, "being top", Toast.LENGTH_SHORT).show();
                     } else {
-                        btn_top.setVisibility(View.VISIBLE);
+                        mBtnTop.setVisibility(View.VISIBLE);
                     }
                 }
             });
         }
 
-        btn_load.setOnClickListener(new View.OnClickListener() {
+        mBtnLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                webView.loadUrl(editText.getText().toString());
+                mWebView.loadUrl(mEditText.getText().toString());
             }
         });
-        btn_last_page.setOnClickListener(new View.OnClickListener() {
+        mBtnLastPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                webView.goBack();
+                mWebView.goBack();
             }
         });
-        btn_next_page.setOnClickListener(new View.OnClickListener() {
+        mBtnNextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                webView.goForward();
+                mWebView.goForward();
             }
         });
-        btn_top.setOnClickListener(new View.OnClickListener() {
+        mBtnTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn_top.setVisibility(View.GONE);
-                webView.scrollTo(0, 0);
+                mBtnTop.setVisibility(View.GONE);
+                mWebView.scrollTo(0, 0);
             }
         });
     }
@@ -142,8 +142,8 @@ public class WebActivity extends AppCompatActivity {
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
-            webView.goBack();
+        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
+            mWebView.goBack();
             return true;
         }
         return super.onKeyDown(keyCode, event);

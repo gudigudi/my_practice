@@ -30,14 +30,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
-    private Button btn1;
-    private Button btn_goto_firstactivity;
-    private EditText editText;
-    private Button btn_toast_edittext;
-    private ImageView imageView;
-    private Button btn_change_imageview;
-    private Button btn_toggle_alertdialog;
-    private Button btn_force_offline;
+    private Button mBtn1;
+    private Button mBtnGotoFirstactivity;
+    private EditText mEditText;
+    private Button mBtnToastEdittext;
+    private ImageView mImageView;
+    private Button mBtnChangeImageview;
+    private Button mBtnToggleAlertdialog;
+    private Button mBtnForceOffline;
 
     private String[] data = {
             "Apple", "Banana", "Orange", "Watermelon", "Pear",
@@ -63,23 +63,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             Log.d(TAG, "tmpData : " + tmpData);
         }
 
-        btn1 = findViewById(R.id.button1);
-        btn_goto_firstactivity = findViewById(R.id.button_goto_imactivity);
-        editText = findViewById(R.id.edit_text);
-        btn_toast_edittext = findViewById(R.id.btn_toast_edittext);
-        imageView = findViewById(R.id.image_view);
-        btn_change_imageview = findViewById(R.id.btn_change_imageview);
-        btn_toggle_alertdialog = findViewById(R.id.btn_toggle_alertdialog);
-        btn_force_offline = findViewById(R.id.force_offline);
+        mBtn1 = findViewById(R.id.button1);
+        mBtnGotoFirstactivity = findViewById(R.id.button_goto_imactivity);
+        mEditText = findViewById(R.id.edit_text);
+        mBtnToastEdittext = findViewById(R.id.btn_toast_edittext);
+        mImageView = findViewById(R.id.image_view);
+        mBtnChangeImageview = findViewById(R.id.btn_change_imageview);
+        mBtnToggleAlertdialog = findViewById(R.id.btn_toggle_alertdialog);
+        mBtnForceOffline = findViewById(R.id.force_offline);
 
-        btn1.setText(stringFromJNI());
+        mBtn1.setText(stringFromJNI());
 
-        btn1.setOnClickListener(this);
-        btn_goto_firstactivity.setOnClickListener(this);
-        btn_toast_edittext.setOnClickListener(this);
-        btn_change_imageview.setOnClickListener(this);
-        btn_toggle_alertdialog.setOnClickListener(this);
-        btn_force_offline.setOnClickListener(this);
+        mBtn1.setOnClickListener(this);
+        mBtnGotoFirstactivity.setOnClickListener(this);
+        mBtnToastEdittext.setOnClickListener(this);
+        mBtnChangeImageview.setOnClickListener(this);
+        mBtnToggleAlertdialog.setOnClickListener(this);
+        mBtnForceOffline.setOnClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
@@ -88,10 +88,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         initFruits(); // init data of fruits
 
-//        FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
+//        FruitAdapter mAdapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
 //
 //        ListView listView = findViewById(R.id.listview);
-//        listView.setAdapter(adapter);
+//        listView.setAdapter(mAdapter);
 //
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -156,7 +156,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.btn_toast_edittext:
-                String inputText = editText.getText().toString();
+                String inputText = mEditText.getText().toString();
                 if (!inputText.equals("")) {
                     Toast.makeText(MainActivity.this, inputText, Toast.LENGTH_SHORT).show();
                 }
@@ -164,10 +164,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_change_imageview:
                 Drawable ic_launcher = ResourcesCompat.getDrawable(getResources(), R.mipmap.ic_launcher, null);
                 Drawable ic_launcher_round = ResourcesCompat.getDrawable(getResources(), R.mipmap.ic_launcher_round, null);
-                if (imageView.getDrawable().getConstantState().equals(ic_launcher.getConstantState())) {
-                    imageView.setImageResource(R.mipmap.ic_launcher_round);
-                } else if (imageView.getDrawable().getConstantState().equals(ic_launcher_round.getConstantState())) {
-                    imageView.setImageResource(R.mipmap.ic_launcher);
+                if (mImageView.getDrawable().getConstantState().equals(ic_launcher.getConstantState())) {
+                    mImageView.setImageResource(R.mipmap.ic_launcher_round);
+                } else if (mImageView.getDrawable().getConstantState().equals(ic_launcher_round.getConstantState())) {
+                    mImageView.setImageResource(R.mipmap.ic_launcher);
                 } else {
                     Log.d(TAG, "unknown imageview id");
                 }

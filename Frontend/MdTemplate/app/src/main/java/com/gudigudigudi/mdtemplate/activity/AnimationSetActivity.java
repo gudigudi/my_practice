@@ -12,23 +12,23 @@ import com.gudigudigudi.mdtemplate.R;
 
 public class AnimationSetActivity extends AppCompatActivity {
 
-    private ImageView iv_cart, iv_shirt;
+    private ImageView mIvCart, mIvShirt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation_set);
 
-        iv_cart = findViewById(R.id.iv_cart);
-        iv_shirt = findViewById(R.id.iv_shirt);
+        mIvCart = findViewById(R.id.iv_cart);
+        mIvShirt = findViewById(R.id.iv_shirt);
 
-        iv_shirt.setOnClickListener(new View.OnClickListener() {
+        mIvShirt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AnimationSet animationSet = (AnimationSet) AnimationUtils.loadAnimation(AnimationSetActivity.this, R.anim.animation_set);
                 animationSet.setFillAfter(true);
                 animationSet.setInterpolator(new AccelerateInterpolator());
-                iv_shirt.startAnimation(animationSet);
+                mIvShirt.startAnimation(animationSet);
             }
         });
     }

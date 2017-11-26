@@ -16,41 +16,41 @@ public class HandlerActivity extends AppCompatActivity implements View.OnClickLi
 
     private int secondLeft = 6;
 
-    private TextView textView;
-    private Button btn_send_empty_msg, btn_send_msg_what0, btn_send_msg_what1, btn_send_delay_msg;
+    private TextView mTextView;
+    private Button mBtnSendEmptyMsg, mBtnSendMsgWhat0, mBtnSendMsgWhat1, mBtnSendDelayMsg;
 
-    private TextView tv_time;
-    private Button btn_remove_timer;
+    private TextView mTvTime;
+    private Button mBtnRemoveTimer;
 
-    private Handler handler_postDelayed = new Handler();
-    private Button btn_handler_postDelayed;
+    private Handler mHandlerPostDelayed = new Handler();
+    private Button mBtnHandlerPostDelayed;
     private long time = 0;
 
-    private Handler handler = new Handler() {
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case -1:
-                    textView.setText("receiver empty message");
+                    mTextView.setText("receiver empty message");
                     break;
                 case 0:
-                    textView.setText("receiver message with what:0, message's content: " + msg.getData().getString("key"));
+                    mTextView.setText("receiver message with what:0, message's content: " + msg.getData().getString("key"));
                     break;
                 case 1:
-                    textView.setText("receiver message with what:1, message's content: " + msg.getData().getString("key"));
+                    mTextView.setText("receiver message with what:1, message's content: " + msg.getData().getString("key"));
                     break;
                 case 2:
-                    textView.setText("receiver delayed message, message's content: " + msg.getData().getString("key"));
+                    mTextView.setText("receiver delayed message, message's content: " + msg.getData().getString("key"));
                     break;
                 case 3:
                     secondLeft--;
-                    tv_time.setText("" + secondLeft);
+                    mTvTime.setText("" + secondLeft);
                     if (secondLeft > 0) {
-                        Message message = handler.obtainMessage(3);
-                        handler.sendMessageDelayed(message, 1000);
+                        Message message = mHandler.obtainMessage(3);
+                        mHandler.sendMessageDelayed(message, 1000);
                     } else {
-                        tv_time.setText("倒计时结束");
+                        mTvTime.setText("倒计时结束");
                         secondLeft = 6;
                     }
                 default:
@@ -64,22 +64,22 @@ public class HandlerActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handler);
 
-        textView = findViewById(R.id.text_view);
-        btn_send_empty_msg = findViewById(R.id.btn_send_empty_msg);
-        btn_send_msg_what0 = findViewById(R.id.btn_send_msg_what0);
-        btn_send_msg_what1 = findViewById(R.id.btn_send_msg_what1);
-        btn_send_delay_msg = findViewById(R.id.btn_send_delay_msg);
-        tv_time = findViewById(R.id.tv_time);
-        btn_remove_timer = findViewById(R.id.btn_remove_timer);
-        btn_handler_postDelayed = findViewById(R.id.btn_handler_postDelayed);
+        mTextView = findViewById(R.id.text_view);
+        mBtnSendEmptyMsg = findViewById(R.id.btn_send_empty_msg);
+        mBtnSendMsgWhat0 = findViewById(R.id.btn_send_msg_what0);
+        mBtnSendMsgWhat1 = findViewById(R.id.btn_send_msg_what1);
+        mBtnSendDelayMsg = findViewById(R.id.btn_send_delay_msg);
+        mTvTime = findViewById(R.id.tv_time);
+        mBtnRemoveTimer = findViewById(R.id.btn_remove_timer);
+        mBtnHandlerPostDelayed = findViewById(R.id.btn_handler_postDelayed);
 
-        btn_send_empty_msg.setOnClickListener(this);
-        btn_send_msg_what0.setOnClickListener(this);
-        btn_send_msg_what1.setOnClickListener(this);
-        btn_send_delay_msg.setOnClickListener(this);
-        tv_time.setOnClickListener(this);
-        btn_remove_timer.setOnClickListener(this);
-        btn_handler_postDelayed.setOnClickListener(this);
+        mBtnSendEmptyMsg.setOnClickListener(this);
+        mBtnSendMsgWhat0.setOnClickListener(this);
+        mBtnSendMsgWhat1.setOnClickListener(this);
+        mBtnSendDelayMsg.setOnClickListener(this);
+        mTvTime.setOnClickListener(this);
+        mBtnRemoveTimer.setOnClickListener(this);
+        mBtnHandlerPostDelayed.setOnClickListener(this);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class HandlerActivity extends AppCompatActivity implements View.OnClickLi
         Bundle bundle = null;
         switch (view.getId()) {
             case R.id.btn_send_empty_msg:
-                handler.sendEmptyMessage(-1);
+                mHandler.sendEmptyMessage(-1);
                 break;
             case R.id.btn_send_msg_what0:
                 message = Message.obtain();
@@ -96,7 +96,7 @@ public class HandlerActivity extends AppCompatActivity implements View.OnClickLi
                 bundle = new Bundle();
                 bundle.putString("key", "a message with what 0");
                 message.setData(bundle);
-                handler.sendMessage(message);
+                mHandler.sendMessage(message);
                 break;
             case R.id.btn_send_msg_what1:
                 message = Message.obtain();
@@ -104,7 +104,7 @@ public class HandlerActivity extends AppCompatActivity implements View.OnClickLi
                 bundle = new Bundle();
                 bundle.putString("key", "a message with what 1");
                 message.setData(bundle);
-                handler.sendMessage(message);
+                mHandler.sendMessage(message);
                 break;
             case R.id.btn_send_delay_msg:
                 message = new Message();
@@ -112,21 +112,21 @@ public class HandlerActivity extends AppCompatActivity implements View.OnClickLi
                 bundle = new Bundle();
                 bundle.putString("key", "a delayed message with what 2");
                 message.setData(bundle);
-                handler.sendMessageDelayed(message, 2000);
+                mHandler.sendMessageDelayed(message, 2000);
                 break;
             case R.id.tv_time:
                 if (secondLeft != 6) {
                     return;
                 }
 
-                message = handler.obtainMessage(3);
-                handler.sendMessage(message);
+                message = mHandler.obtainMessage(3);
+                mHandler.sendMessage(message);
                 break;
             case R.id.btn_remove_timer:
-                handler.removeMessages(3);
+                mHandler.removeMessages(3);
                 break;
             case R.id.btn_handler_postDelayed:
-                handler_postDelayed.postDelayed(new MyRunnable(), 3000);
+                mHandlerPostDelayed.postDelayed(new MyRunnable(), 3000);
                 time = System.currentTimeMillis();
                 break;
             default:

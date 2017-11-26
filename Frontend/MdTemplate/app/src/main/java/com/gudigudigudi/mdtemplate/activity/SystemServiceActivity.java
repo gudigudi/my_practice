@@ -50,59 +50,59 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
     private static final int REQUEST_CODE_CHOOSE_PHOTO = 2;
     private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 3;
 
-    private Button btn_send_notification;
-    private Button btn_send_headsup_notification;
-    private Button btn_send_fold_notification;
+    private Button mBtnSendNotification;
+    private Button mBtnSendHeadsupNotification;
+    private Button mBtnSendFoldNotification;
 
-    private Button btn_take_photo;
-    private Uri imageUri;
-    private ImageView picture;
+    private Button mBtnTakePhoto;
+    private Uri mImageUri;
+    private ImageView mIVPicture;
 
-    private Button btn_choose_photo;
+    private Button mBtnChoosePhoto;
 
-    private MediaPlayer mediaPlayer = new MediaPlayer();
-    private Button btn_play;
-    private Button btn_pause;
-    private Button btn_stop;
+    private MediaPlayer mMediaPlayer = new MediaPlayer();
+    private Button mBtnPlay;
+    private Button mBtnPause;
+    private Button mBtnStop;
 
-    private Button btn_play_video;
-    private Button btn_pause_video;
-    private Button btn_replay_video;
-    private VideoView videoView;
+    private Button mBtnPlayVideo;
+    private Button mBtnPauseVideo;
+    private Button mBtnReplayVideo;
+    private VideoView mVideoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_service);
 
-        btn_send_notification = findViewById(R.id.send_notification);
-        btn_send_headsup_notification = findViewById(R.id.send_headsup_notification);
-        btn_send_fold_notification = findViewById(R.id.send_fold_notification);
+        mBtnSendNotification = findViewById(R.id.send_notification);
+        mBtnSendHeadsupNotification = findViewById(R.id.send_headsup_notification);
+        mBtnSendFoldNotification = findViewById(R.id.send_fold_notification);
 
-        btn_take_photo = findViewById(R.id.take_photo);
-        btn_choose_photo = findViewById(R.id.choose_from_album);
-        picture = findViewById(R.id.picture);
+        mBtnTakePhoto = findViewById(R.id.take_photo);
+        mBtnChoosePhoto = findViewById(R.id.choose_from_album);
+        mIVPicture = findViewById(R.id.picture);
 
-        btn_play = findViewById(R.id.play);
-        btn_pause = findViewById(R.id.pause);
-        btn_stop = findViewById(R.id.stop);
+        mBtnPlay = findViewById(R.id.play);
+        mBtnPause = findViewById(R.id.pause);
+        mBtnStop = findViewById(R.id.stop);
 
-        btn_play_video = findViewById(R.id.play_video);
-        btn_pause_video = findViewById(R.id.pause_video);
-        btn_replay_video = findViewById(R.id.replay_video);
-        videoView = findViewById(R.id.video_view);
+        mBtnPlayVideo = findViewById(R.id.play_video);
+        mBtnPauseVideo = findViewById(R.id.pause_video);
+        mBtnReplayVideo = findViewById(R.id.replay_video);
+        mVideoView = findViewById(R.id.video_view);
 
-        btn_send_notification.setOnClickListener(this);
-        btn_send_headsup_notification.setOnClickListener(this);
-        btn_send_fold_notification.setOnClickListener(this);
-        btn_take_photo.setOnClickListener(this);
-        btn_choose_photo.setOnClickListener(this);
-        btn_play.setOnClickListener(this);
-        btn_pause.setOnClickListener(this);
-        btn_stop.setOnClickListener(this);
-        btn_play_video.setOnClickListener(this);
-        btn_pause_video.setOnClickListener(this);
-        btn_replay_video.setOnClickListener(this);
+        mBtnSendNotification.setOnClickListener(this);
+        mBtnSendHeadsupNotification.setOnClickListener(this);
+        mBtnSendFoldNotification.setOnClickListener(this);
+        mBtnTakePhoto.setOnClickListener(this);
+        mBtnChoosePhoto.setOnClickListener(this);
+        mBtnPlay.setOnClickListener(this);
+        mBtnPause.setOnClickListener(this);
+        mBtnStop.setOnClickListener(this);
+        mBtnPlayVideo.setOnClickListener(this);
+        mBtnPauseVideo.setOnClickListener(this);
+        mBtnReplayVideo.setOnClickListener(this);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -117,12 +117,12 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
+        if (mMediaPlayer != null) {
+            mMediaPlayer.stop();
+            mMediaPlayer.release();
         }
-        if (videoView != null) {
-            videoView.suspend();
+        if (mVideoView != null) {
+            mVideoView.suspend();
         }
     }
 
@@ -132,9 +132,9 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
             case REQUEST_CODE_TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     try {
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-                        picture.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                                picture.getWidth(), picture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(mImageUri));
+                        mIVPicture.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                                mIVPicture.getWidth(), mIVPicture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -239,14 +239,14 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    imageUri = FileProvider.getUriForFile(SystemServiceActivity.this, FILE_PRIVIDER, outputImage);
+                    mImageUri = FileProvider.getUriForFile(SystemServiceActivity.this, FILE_PRIVIDER, outputImage);
                 } else {
-                    imageUri = Uri.fromFile(outputImage);
+                    mImageUri = Uri.fromFile(outputImage);
                 }
 
                 // start camera.
                 intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
                 startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
 
                 break;
@@ -261,34 +261,34 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
 
                 break;
             case R.id.play:
-                if (!mediaPlayer.isPlaying()) {
-                    mediaPlayer.start();
+                if (!mMediaPlayer.isPlaying()) {
+                    mMediaPlayer.start();
                 }
                 break;
             case R.id.pause:
-                if (mediaPlayer.isPlaying()) {
-                    mediaPlayer.pause();
+                if (mMediaPlayer.isPlaying()) {
+                    mMediaPlayer.pause();
                 }
                 break;
             case R.id.stop:
-                if (mediaPlayer.isPlaying()) {
-                    mediaPlayer.stop();
+                if (mMediaPlayer.isPlaying()) {
+                    mMediaPlayer.stop();
                     initMediaPlayer();
                 }
                 break;
             case R.id.play_video:
-                if (!videoView.isPlaying()) {
-                    videoView.start();
+                if (!mVideoView.isPlaying()) {
+                    mVideoView.start();
                 }
                 break;
             case R.id.pause_video:
-                if (videoView.isPlaying()) {
-                    videoView.pause();
+                if (mVideoView.isPlaying()) {
+                    mVideoView.pause();
                 }
                 break;
             case R.id.replay_video:
-                if (videoView.isPlaying()) {
-                    videoView.resume();
+                if (mVideoView.isPlaying()) {
+                    mVideoView.resume();
                 }
                 break;
             default:
@@ -361,8 +361,8 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
 
         if (path != null) {
             Bitmap bitmap = BitmapFactory.decodeFile(path);
-            picture.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                    picture.getWidth(), picture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
+            mIVPicture.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                    mIVPicture.getWidth(), mIVPicture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
         } else {
             Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
         }
@@ -371,8 +371,8 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
     private void initMediaPlayer() {
         try {
             File file = new File(Environment.getExternalStorageDirectory(), "music.mp3");
-            mediaPlayer.setDataSource(file.getPath());
-            mediaPlayer.prepare();
+            mMediaPlayer.setDataSource(file.getPath());
+            mMediaPlayer.prepare();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -380,6 +380,6 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
 
     private void initVideoView() {
         File file = new File(Environment.getExternalStorageDirectory(), "movie.mp4");
-        videoView.setVideoPath(file.getPath());
+        mVideoView.setVideoPath(file.getPath());
     }
 }

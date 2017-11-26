@@ -22,128 +22,130 @@ import com.orhanobut.logger.Logger;
 
 public class AnimationActivity extends AppCompatActivity implements Button.OnClickListener {
 
-    private ImageView imageView;
-    private Button btn_start, btn_cancel;
+    private ImageView mImageView;
+    private Button mBtnStart, mBtnCancel;
 
-    private Button btn_rotate;
-    private ImageView iv_rotate;
+    private Button mBtnRotate;
+    private ImageView mIvRotate;
 
-    private Button btn_scale;
-    private ImageView iv_scale;
+    private Button mBtnScale;
+    private ImageView mIvScale;
 
-    private Button btn_translate;
-    private ImageView iv_translate;
+    private Button mBtnTranslate;
+    private ImageView mIvTranslate;
 
-    private Animation alphaAnimation, rotateAnimation, scaleAnimation, translateAnimation;
-    private Button btn_accelerate_decelerate_interpolator, btn_accelerate_interpolator, btn_decelerate_interpolator, btn_bounce_interpolator, btn_cycle_interpolator, btn_linear_interpolator;
+    private Animation mAlphaAnimation, mRotateAnimation, mScaleAnimation, mTranslateAnimation;
+    private Button mBtnAccelerateDecelerateInterpolator, mBtnAccelerateInterpolator,
+            mBtnDecelerateInterpolator, mBtnBounceInterpolator, mBtnCycleInterpolator,
+            mBtnLinearInterpolator;
 
-    private Button btn_listener;
-    private TextView tv_listener;
+    private Button mBtnListener;
+    private TextView mTvListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
 
-        imageView = findViewById(R.id.image_view);
-        btn_start = findViewById(R.id.btn_start);
-        btn_cancel = findViewById(R.id.btn_cancel);
-        btn_rotate = findViewById(R.id.btn_rotate);
-        iv_rotate = findViewById(R.id.iv_rotate);
-        btn_scale = findViewById(R.id.btn_scale);
-        iv_scale = findViewById(R.id.iv_scale);
-        btn_translate = findViewById(R.id.btn_translate);
-        iv_translate = findViewById(R.id.iv_translate);
-        btn_accelerate_decelerate_interpolator = findViewById(R.id.btn_accelerate_decelerate_interpolator);
-        btn_accelerate_interpolator = findViewById(R.id.btn_accelerate_interpolator);
-        btn_decelerate_interpolator = findViewById(R.id.btn_decelerate_interpolator);
-        btn_bounce_interpolator = findViewById(R.id.btn_bounce_interpolator);
-        btn_cycle_interpolator = findViewById(R.id.btn_cycle_interpolator);
-        btn_linear_interpolator = findViewById(R.id.btn_linear_interpolator);
-        btn_listener = findViewById(R.id.btn_listener);
-        tv_listener = findViewById(R.id.tv_listener);
+        mImageView = findViewById(R.id.image_view);
+        mBtnStart = findViewById(R.id.btn_start);
+        mBtnCancel = findViewById(R.id.btn_cancel);
+        mBtnRotate = findViewById(R.id.btn_rotate);
+        mIvRotate = findViewById(R.id.iv_rotate);
+        mBtnScale = findViewById(R.id.btn_scale);
+        mIvScale = findViewById(R.id.iv_scale);
+        mBtnTranslate = findViewById(R.id.btn_translate);
+        mIvTranslate = findViewById(R.id.iv_translate);
+        mBtnAccelerateDecelerateInterpolator = findViewById(R.id.btn_accelerate_decelerate_interpolator);
+        mBtnAccelerateInterpolator = findViewById(R.id.btn_accelerate_interpolator);
+        mBtnDecelerateInterpolator = findViewById(R.id.btn_decelerate_interpolator);
+        mBtnBounceInterpolator = findViewById(R.id.btn_bounce_interpolator);
+        mBtnCycleInterpolator = findViewById(R.id.btn_cycle_interpolator);
+        mBtnLinearInterpolator = findViewById(R.id.btn_linear_interpolator);
+        mBtnListener = findViewById(R.id.btn_listener);
+        mTvListener = findViewById(R.id.tv_listener);
 
-        imageView.setBackgroundResource(R.mipmap.ic_launcher);
+        mImageView.setBackgroundResource(R.mipmap.ic_launcher);
 
-        alphaAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.alpha);
-        rotateAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.rotate);
-        scaleAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.scale);
-        translateAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.translate);
+        mAlphaAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.alpha);
+        mRotateAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.rotate);
+        mScaleAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.scale);
+        mTranslateAnimation = AnimationUtils.loadAnimation(AnimationActivity.this, R.anim.translate);
 
-        btn_start.setOnClickListener(this);
-        btn_cancel.setOnClickListener(this);
-        btn_rotate.setOnClickListener(this);
-        btn_scale.setOnClickListener(this);
-        btn_translate.setOnClickListener(this);
-        btn_accelerate_decelerate_interpolator.setOnClickListener(this);
-        btn_accelerate_interpolator.setOnClickListener(this);
-        btn_decelerate_interpolator.setOnClickListener(this);
-        btn_bounce_interpolator.setOnClickListener(this);
-        btn_cycle_interpolator.setOnClickListener(this);
-        btn_linear_interpolator.setOnClickListener(this);
-        btn_listener.setOnClickListener(this);
+        mBtnStart.setOnClickListener(this);
+        mBtnCancel.setOnClickListener(this);
+        mBtnRotate.setOnClickListener(this);
+        mBtnScale.setOnClickListener(this);
+        mBtnTranslate.setOnClickListener(this);
+        mBtnAccelerateDecelerateInterpolator.setOnClickListener(this);
+        mBtnAccelerateInterpolator.setOnClickListener(this);
+        mBtnDecelerateInterpolator.setOnClickListener(this);
+        mBtnBounceInterpolator.setOnClickListener(this);
+        mBtnCycleInterpolator.setOnClickListener(this);
+        mBtnLinearInterpolator.setOnClickListener(this);
+        mBtnListener.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_start:
-                imageView.startAnimation(alphaAnimation);
+                mImageView.startAnimation(mAlphaAnimation);
                 break;
             case R.id.btn_cancel:
-                alphaAnimation.cancel();
+                mAlphaAnimation.cancel();
                 break;
             case R.id.btn_rotate:
-                iv_rotate.startAnimation(rotateAnimation);
+                mIvRotate.startAnimation(mRotateAnimation);
                 break;
             case R.id.btn_scale:
-                iv_scale.startAnimation(scaleAnimation);
+                mIvScale.startAnimation(mScaleAnimation);
                 break;
             case R.id.btn_translate:
-                iv_translate.startAnimation(translateAnimation);
+                mIvTranslate.startAnimation(mTranslateAnimation);
                 break;
             case R.id.btn_accelerate_decelerate_interpolator:
-                rotateAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-                iv_rotate.startAnimation(rotateAnimation);
+                mRotateAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+                mIvRotate.startAnimation(mRotateAnimation);
                 break;
             case R.id.btn_accelerate_interpolator:
-                rotateAnimation.setInterpolator(new AccelerateInterpolator());
-                iv_rotate.startAnimation(rotateAnimation);
+                mRotateAnimation.setInterpolator(new AccelerateInterpolator());
+                mIvRotate.startAnimation(mRotateAnimation);
                 break;
             case R.id.btn_decelerate_interpolator:
-                rotateAnimation.setInterpolator(new DecelerateInterpolator());
-                iv_rotate.startAnimation(rotateAnimation);
+                mRotateAnimation.setInterpolator(new DecelerateInterpolator());
+                mIvRotate.startAnimation(mRotateAnimation);
                 break;
             case R.id.btn_bounce_interpolator:
-                rotateAnimation.setInterpolator(new BounceInterpolator());
-                iv_rotate.startAnimation(rotateAnimation);
+                mRotateAnimation.setInterpolator(new BounceInterpolator());
+                mIvRotate.startAnimation(mRotateAnimation);
                 break;
             case R.id.btn_cycle_interpolator:
-                rotateAnimation.setInterpolator(new CycleInterpolator(3.0f));
-                iv_rotate.startAnimation(rotateAnimation);
+                mRotateAnimation.setInterpolator(new CycleInterpolator(3.0f));
+                mIvRotate.startAnimation(mRotateAnimation);
                 break;
             case R.id.btn_linear_interpolator:
-                rotateAnimation.setInterpolator(new LinearInterpolator());
-                iv_rotate.startAnimation(rotateAnimation);
+                mRotateAnimation.setInterpolator(new LinearInterpolator());
+                mIvRotate.startAnimation(mRotateAnimation);
                 break;
             case R.id.btn_listener:
-                scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
+                mScaleAnimation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-                        tv_listener.setText("animation start...");
+                        mTvListener.setText("animation start...");
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        tv_listener.setText("animation end...");
+                        mTvListener.setText("animation end...");
                     }
 
                     @Override
                     public void onAnimationRepeat(Animation animation) {
-                        tv_listener.setText("animation repeat...");
+                        mTvListener.setText("animation repeat...");
                     }
                 });
-                iv_scale.startAnimation(scaleAnimation);
+                mIvScale.startAnimation(mScaleAnimation);
                 break;
             default:
                 Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);

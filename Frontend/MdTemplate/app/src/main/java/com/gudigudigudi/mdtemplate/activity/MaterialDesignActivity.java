@@ -32,11 +32,11 @@ import java.util.Random;
 public class MaterialDesignActivity extends AppCompatActivity {
     private static final String TAG = "MaterialDesignActivity";
 
-    private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private FloatingActionButton fab;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private Toolbar mToolbar;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+    private FloatingActionButton mFloatingActionButton;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private Fruit[] fruits = {
             new Fruit("Apple", R.drawable.apple),
@@ -59,19 +59,19 @@ public class MaterialDesignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_material_design);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_create);
         }
 
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setCheckedItem(R.id.nav_call);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        mNavigationView = findViewById(R.id.nav_view);
+        mNavigationView.setCheckedItem(R.id.nav_call);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -90,13 +90,13 @@ public class MaterialDesignActivity extends AppCompatActivity {
                         break;
                 }
 
-                drawerLayout.closeDrawers();
+                mDrawerLayout.closeDrawers();
                 return true;
             }
         });
 
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mFloatingActionButton = findViewById(R.id.fab);
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Snackbar is clicked", Snackbar.LENGTH_SHORT)
@@ -116,9 +116,9 @@ public class MaterialDesignActivity extends AppCompatActivity {
         adapter = new FruitRCAdapter(fruitList);
         recyclerView.setAdapter(adapter);
 
-        swipeRefreshLayout = findViewById(R.id.swipe_reflesh);
-        swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout = findViewById(R.id.swipe_reflesh);
+        mSwipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refreshFruits();
@@ -135,7 +135,7 @@ public class MaterialDesignActivity extends AppCompatActivity {
                     public void run() {
                         initFruits();
                         adapter.notifyDataSetChanged();
-                        swipeRefreshLayout.setRefreshing(false);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
@@ -161,7 +161,7 @@ public class MaterialDesignActivity extends AppCompatActivity {
                 Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "settings");
                 break;
             case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
+                mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             default:
                 Logger.d(LogUtil.LOG_UNKNOWN_MENU_ITEM_IS_CLICKED);

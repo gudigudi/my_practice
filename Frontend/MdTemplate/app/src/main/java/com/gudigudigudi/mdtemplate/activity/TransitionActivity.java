@@ -14,8 +14,8 @@ import com.gudigudigudi.mdtemplate.R;
 
 public class TransitionActivity extends AppCompatActivity {
 
-    private Scene scene1, scene2;
-    private Button button;
+    private Scene mScene1, mScene2;
+    private Button mButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +23,16 @@ public class TransitionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transition);
 
         RelativeLayout sceneRoot = findViewById(R.id.scene_container);
-        scene1 = Scene.getSceneForLayout(sceneRoot, R.layout.activity_transition, this);
-        scene2 = Scene.getSceneForLayout(sceneRoot, R.layout.activity_transition2, this);
+        mScene1 = Scene.getSceneForLayout(sceneRoot, R.layout.activity_transition, this);
+        mScene2 = Scene.getSceneForLayout(sceneRoot, R.layout.activity_transition2, this);
 
-        button = findViewById(R.id.button);
+        mButton = findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Transition transition_fade = TransitionInflater.from(TransitionActivity.this).inflateTransition(R.transition.fade);
-                TransitionManager.go(scene2, transition_fade);
+                TransitionManager.go(mScene2, transition_fade);
             }
         });
     }

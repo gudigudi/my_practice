@@ -34,26 +34,26 @@ public class ContentProviderActivity extends AppCompatActivity implements View.O
     private static final int PERMISSION_REQUESTCODE_CALL_PHONE = 1;
     private static final int PERMISSION_REQUESTCODE_READ_CONTACTS = 2;
 
-    private Button btn_make_call;
+    private Button mBtnMakeCall;
 
-    ArrayAdapter<String> adapter;
-    List<String> contactList = new ArrayList<>();
-    private ListView contactsView;
+    ArrayAdapter<String> mAdapter;
+    List<String> mContactList = new ArrayList<>();
+    private ListView mContactsView;
 
-    private String newId;
+    private String mNewId;
 
-    private Button addData, queryData, updateData, deleteData;
+    private Button mBtnAddData, mBtnQueryData, mBtnUpdateData, mBtnDeleteData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_provider);
 
-        btn_make_call = findViewById(R.id.make_call);
-        contactsView = findViewById(R.id.contacts_view);
+        mBtnMakeCall = findViewById(R.id.make_call);
+        mContactsView = findViewById(R.id.contacts_view);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contactList);
-        contactsView.setAdapter(adapter);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mContactList);
+        mContactsView.setAdapter(mAdapter);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ContentProviderActivity.this,
@@ -62,16 +62,16 @@ public class ContentProviderActivity extends AppCompatActivity implements View.O
             readContacts();
         }
 
-        addData = findViewById(R.id.add_data);
-        queryData = findViewById(R.id.query_data);
-        updateData = findViewById(R.id.update_data);
-        deleteData = findViewById(R.id.delete_data);
+        mBtnAddData = findViewById(R.id.add_data);
+        mBtnQueryData = findViewById(R.id.query_data);
+        mBtnUpdateData = findViewById(R.id.update_data);
+        mBtnDeleteData = findViewById(R.id.delete_data);
 
-        btn_make_call.setOnClickListener(this);
-        addData.setOnClickListener(this);
-        queryData.setOnClickListener(this);
-        updateData.setOnClickListener(this);
-        deleteData.setOnClickListener(this);
+        mBtnMakeCall.setOnClickListener(this);
+        mBtnAddData.setOnClickListener(this);
+        mBtnQueryData.setOnClickListener(this);
+        mBtnUpdateData.setOnClickListener(this);
+        mBtnDeleteData.setOnClickListener(this);
     }
 
     @Override
@@ -109,10 +109,10 @@ public class ContentProviderActivity extends AppCompatActivity implements View.O
                 while (cursor.moveToNext()) {
                     String display = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                     String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    contactList.add(display + '\n' + number);
+                    mContactList.add(display + '\n' + number);
                 }
 
-                adapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -155,7 +155,7 @@ public class ContentProviderActivity extends AppCompatActivity implements View.O
                 values.put("pages", 1040);
                 values.put("price", 22.85);
                 Uri newUri = getContentResolver().insert(uri, values);
-                newId = newUri.getPathSegments().get(1);
+                mNewId = newUri.getPathSegments().get(1);
                 values.clear();
                 break;
             case R.id.query_data:
@@ -176,7 +176,7 @@ public class ContentProviderActivity extends AppCompatActivity implements View.O
                 }
                 break;
             case R.id.update_data:
-                uri = Uri.parse("content://" + DatabaseContentProvider.AUTHORITY + "/book/" + newId);
+                uri = Uri.parse("content://" + DatabaseContentProvider.AUTHORITY + "/book/" + mNewId);
                 values.put("name", "A Storm of Swords");
                 values.put("pages", 1216);
                 values.put("price", 24.05);
@@ -184,7 +184,7 @@ public class ContentProviderActivity extends AppCompatActivity implements View.O
                 values.clear();
                 break;
             case R.id.delete_data:
-                uri = Uri.parse("content://" + DatabaseContentProvider.AUTHORITY + "/book/" + newId);
+                uri = Uri.parse("content://" + DatabaseContentProvider.AUTHORITY + "/book/" + mNewId);
                 getContentResolver().delete(uri, null, null);
                 break;
             default:

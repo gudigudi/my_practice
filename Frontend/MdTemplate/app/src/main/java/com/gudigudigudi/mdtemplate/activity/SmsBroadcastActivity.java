@@ -11,28 +11,28 @@ import com.orhanobut.logger.Logger;
 
 public class SmsBroadcastActivity extends AppCompatActivity {
 
-    private TextView textView;
-    private SmsBroadcastReceiver smsBroadcastReceiver;
+    private TextView mTextView;
+    private SmsBroadcastReceiver mSmsBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_broadcast);
 
-        textView = findViewById(R.id.text_view);
-        smsBroadcastReceiver = new SmsBroadcastReceiver();
+        mTextView = findViewById(R.id.text_view);
+        mSmsBroadcastReceiver = new SmsBroadcastReceiver();
 
         init();
 
-        registerReceiver(smsBroadcastReceiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
+        registerReceiver(mSmsBroadcastReceiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
         Logger.d("registerReceiver");
     }
 
     private void init() {
-        smsBroadcastReceiver.setOnReceiveMessageListener(new SmsBroadcastReceiver.MessageListener() {
+        mSmsBroadcastReceiver.setOnReceiveMessageListener(new SmsBroadcastReceiver.MessageListener() {
             @Override
             public void OnReceived(String message) {
-                textView.setText(message);
+                mTextView.setText(message);
             }
         });
     }

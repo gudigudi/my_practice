@@ -20,7 +20,7 @@ public class FragmentDemoActivity extends BaseActivity implements View.OnClickLi
 
     private final static String TAG = "FragmentDemoActivity";
 
-    private Fragment fragment;
+    private Fragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class FragmentDemoActivity extends BaseActivity implements View.OnClickLi
         Button btn_remove = findViewById(R.id.remove);
         Button btn_hide = findViewById(R.id.hide);
 
-        fragment = new Right2Fragment();
+        mFragment = new Right2Fragment();
 
         btn_replace.setOnClickListener(this);
         btn_remove.setOnClickListener(this);
@@ -50,13 +50,13 @@ public class FragmentDemoActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.replace:
-                replaceFragment(fragment);
+                replaceFragment(mFragment);
                 break;
             case R.id.remove:
-                removeFragment(fragment);
+                removeFragment(mFragment);
                 break;
             case R.id.hide:
-                hideFragment(fragment);
+                hideFragment(mFragment);
                 break;
             default:
                 Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);

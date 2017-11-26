@@ -20,16 +20,16 @@ import com.orhanobut.logger.Logger;
 
 public class DownloadActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btn_start_download;
-    private Button btn_pause_download;
-    private Button btn_cancel_download;
+    private Button mBtnStartDownload;
+    private Button mBtnPauseDownload;
+    private Button mBtnCancelDownload;
 
-    private DownloadService.DownloadBinder downloadBinder;
+    private DownloadService.DownloadBinder mDownloadBinder;
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
-            downloadBinder = (DownloadService.DownloadBinder) binder;
+            mDownloadBinder = (DownloadService.DownloadBinder) binder;
         }
 
         @Override
@@ -43,13 +43,13 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download);
 
-        btn_start_download = findViewById(R.id.start_download);
-        btn_pause_download = findViewById(R.id.pause_download);
-        btn_cancel_download = findViewById(R.id.cancel_download);
+        mBtnStartDownload = findViewById(R.id.start_download);
+        mBtnPauseDownload = findViewById(R.id.pause_download);
+        mBtnCancelDownload = findViewById(R.id.cancel_download);
 
-        btn_start_download.setOnClickListener(this);
-        btn_pause_download.setOnClickListener(this);
-        btn_cancel_download.setOnClickListener(this);
+        mBtnStartDownload.setOnClickListener(this);
+        mBtnPauseDownload.setOnClickListener(this);
+        mBtnCancelDownload.setOnClickListener(this);
 
         Intent intent = new Intent(this, DownloadService.class);
         startService(intent);
@@ -67,19 +67,19 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        if (downloadBinder == null) {
+        if (mDownloadBinder == null) {
             return;
         }
         switch (view.getId()) {
             case R.id.start_download:
                 String url = "https://www.baidu.com";
-                downloadBinder.startDownload(url);
+                mDownloadBinder.startDownload(url);
                 break;
             case R.id.pause_download:
-                downloadBinder.pauseDownload();
+                mDownloadBinder.pauseDownload();
                 break;
             case R.id.cancel_download:
-                downloadBinder.cancelDownload();
+                mDownloadBinder.cancelDownload();
                 break;
             default:
                 Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);

@@ -17,11 +17,11 @@ import java.util.List;
 
 public class IMActivity extends AppCompatActivity {
 
-    private List<Msg> msgList = new ArrayList<>();
-    private EditText inputText;
-    private Button send;
-    private RecyclerView msgRecyclerView;
-    private MsgAdapter adapter;
+    private List<Msg> mMsgList = new ArrayList<>();
+    private EditText mETInput;
+    private Button mBtnSend;
+    private RecyclerView mRecyclerViewMsg;
+    private MsgAdapter mMsgAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +30,25 @@ public class IMActivity extends AppCompatActivity {
 
         initMsgs(); // 初始化消息数据
 
-        inputText = findViewById(R.id.input_text);
-        send = findViewById(R.id.send);
+        mETInput = findViewById(R.id.input_text);
+        mBtnSend = findViewById(R.id.send);
 
-        msgRecyclerView = findViewById(R.id.msg_recycler_view);
+        mRecyclerViewMsg = findViewById(R.id.msg_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        msgRecyclerView.setLayoutManager(layoutManager);
-        adapter = new MsgAdapter(msgList);
-        msgRecyclerView.setAdapter(adapter);
+        mRecyclerViewMsg.setLayoutManager(layoutManager);
+        mMsgAdapter = new MsgAdapter(mMsgList);
+        mRecyclerViewMsg.setAdapter(mMsgAdapter);
 
-        send.setOnClickListener(new View.OnClickListener() {
+        mBtnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String content = inputText.getText().toString();
+                String content = mETInput.getText().toString();
                 if (!content.equals("")) {
                     Msg msg = new Msg(content, Msg.TYPE_SENT);
-                    msgList.add(msg);
-                    adapter.notifyItemInserted(msgList.size() - 1); // 当有新消息时，刷新RecyclerView中的显示
-                    msgRecyclerView.scrollToPosition(msgList.size() - 1); // 将RecyclerView定位到最后一行
-                    inputText.setText(""); // 清空输入框中的内容
+                    mMsgList.add(msg);
+                    mMsgAdapter.notifyItemInserted(mMsgList.size() - 1); // 当有新消息时，刷新RecyclerView中的显示
+                    mRecyclerViewMsg.scrollToPosition(mMsgList.size() - 1); // 将RecyclerView定位到最后一行
+                    mETInput.setText(""); // 清空输入框中的内容
                 }
             }
         });
@@ -59,8 +59,8 @@ public class IMActivity extends AppCompatActivity {
         Msg msg2 = new Msg("Hello. Who is that?", Msg.TYPE_SENT);
         Msg msg3 = new Msg("This is Tom. Nice talking to you.", Msg.TYPE_RECEIVED);
 
-        msgList.add(msg1);
-        msgList.add(msg2);
-        msgList.add(msg3);
+        mMsgList.add(msg1);
+        mMsgList.add(msg2);
+        mMsgList.add(msg3);
     }
 }
