@@ -10,27 +10,27 @@ import com.gudigudigudi.mdtemplate.view.AnimationLoadingDialog;
 
 public class LoadingAnimationActivity extends AppCompatActivity {
 
-    private Button button;
-    private AnimationLoadingDialog animationLoadingDialog;
+    private Button mButton;
+    private AnimationLoadingDialog mAnimationLoadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_animation);
 
-        button = findViewById(R.id.button);
+        mButton = findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                animationLoadingDialog = new AnimationLoadingDialog(LoadingAnimationActivity.this, "loading...", R.drawable.frame_animation);
-                animationLoadingDialog.show();
+                mAnimationLoadingDialog = new AnimationLoadingDialog(LoadingAnimationActivity.this, "loading...", R.drawable.frame_animation);
+                mAnimationLoadingDialog.show();
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        animationLoadingDialog.dismiss();
+                        mAnimationLoadingDialog.dismiss();
                     }
                 }, 3000);
             }

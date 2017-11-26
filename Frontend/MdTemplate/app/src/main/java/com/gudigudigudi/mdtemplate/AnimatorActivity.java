@@ -21,10 +21,10 @@ import com.orhanobut.logger.Logger;
 
 public class AnimatorActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button button;
-    private ImageView imageView;
-    private TextView textView;
-    private WebView webView;
+    private Button mButton;
+    private ImageView mImageView;
+    private TextView mTextView;
+    private WebView mWebView;
 
     private boolean isShow = false;
     private int height = 0;
@@ -34,18 +34,18 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animator);
 
-        button = findViewById(R.id.button);
-        imageView = findViewById(R.id.image_view);
-        textView = findViewById(R.id.text_view);
-        webView = findViewById(R.id.web_view);
+        mButton = findViewById(R.id.button);
+        mImageView = findViewById(R.id.image_view);
+        mTextView = findViewById(R.id.text_view);
+        mWebView = findViewById(R.id.web_view);
 
-        webView.setWebViewClient(new WebViewClient());
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.loadUrl("http://baidu.com");
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebChromeClient(new WebChromeClient());
+        mWebView.loadUrl("http://baidu.com");
 
-        imageView.setOnClickListener(this);
-        button.setOnClickListener(this);
-        textView.setOnClickListener(this);
+        mImageView.setOnClickListener(this);
+        mButton.setOnClickListener(this);
+        mTextView.setOnClickListener(this);
 
         new Thread(new Runnable() {
             @Override
@@ -55,7 +55,7 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                height = textView.getMeasuredHeight();
+                height = mTextView.getMeasuredHeight();
             }
         });
     }
@@ -69,7 +69,7 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
             case R.id.button:
                 ObjectAnimator objectAnimator = (ObjectAnimator) AnimatorInflater.loadAnimator(AnimatorActivity.this, R.animator.background);
                 objectAnimator.setEvaluator(new ArgbEvaluator());
-                objectAnimator.setTarget(imageView);
+                objectAnimator.setTarget(mImageView);
                 objectAnimator.start();
                 break;
             case R.id.text_view:
@@ -77,16 +77,16 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
                 final ValueAnimator valueAnimator;
                 if (isShow) {
                     valueAnimator = ValueAnimator.ofInt(height, 40);
-                    textView.setText("click to expand");
+                    mTextView.setText("click to expand");
                 } else {
                     valueAnimator = ValueAnimator.ofInt(40, height);
-                    textView.setText("click to shrink");
+                    mTextView.setText("click to shrink");
                 }
                 valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
-                        textView.getLayoutParams().height = (Integer) valueAnimator.getAnimatedValue();
-                        textView.requestLayout();
+                        mTextView.getLayoutParams().height = (Integer) valueAnimator.getAnimatedValue();
+                        mTextView.requestLayout();
                     }
                 });
                 valueAnimator.setInterpolator(new BounceInterpolator());
