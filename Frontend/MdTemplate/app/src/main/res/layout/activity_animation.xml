@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:text="取消动画"/>
     </LinearLayout>
+
     <Button
         android:id="@+id/btn_rotate"
         android:layout_width="match_parent"
@@ -87,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="匀速"/>
     </GridLayout>
+
     <ImageView
         android:id="@+id/iv_rotate"
         android:layout_width="100dp"
