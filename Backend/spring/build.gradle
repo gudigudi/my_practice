@@ -5,22 +5,30 @@ apply plugin: 'java'
 apply plugin: 'idea'
 
 sourceCompatibility = 1.8
-targetCompatibility=1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
 ext {
-    springVersion = '4.3.12.RELEASE'
+    springVersion = '4.3.13.RELEASE'
+    jacksonVersion = '2.9.2'
 }
 
 dependencies {
     compile "org.springframework:spring-core:$springVersion"
     compile "org.springframework:spring-context:$springVersion"
     compile "org.springframework:spring-webmvc:$springVersion"
-
+    compile "org.springframework:spring-websocket:$springVersion"
+    compile "org.springframework:spring-messaging:$springVersion"
     compile "org.springframework:spring-jdbc:$springVersion"
+
+    compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+
+    compile "javax.websocket:javax.websocket-api:1.1"
+
     compile "org.apache.commons:commons-dbcp2:2.1.1"
     compile "mysql:mysql-connector-java:6.0.6"
 
