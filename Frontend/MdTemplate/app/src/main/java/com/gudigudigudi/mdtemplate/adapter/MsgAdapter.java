@@ -50,10 +50,8 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-//        return 0;
         return msgList.size();
     }
-
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -65,10 +63,10 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            leftLayout = (LinearLayout) itemView.findViewById(R.id.left_layout);
-            rightLayout = (LinearLayout) itemView.findViewById(R.id.right_layout);
-            leftMsg = (TextView) itemView.findViewById(R.id.left_msg);
-            rightMsg = (TextView) itemView.findViewById(R.id.right_msg);
+            leftLayout = itemView.findViewById(R.id.left_layout);
+            rightLayout = itemView.findViewById(R.id.right_layout);
+            leftMsg = itemView.findViewById(R.id.left_msg);
+            rightMsg = itemView.findViewById(R.id.right_msg);
         }
     }
 }

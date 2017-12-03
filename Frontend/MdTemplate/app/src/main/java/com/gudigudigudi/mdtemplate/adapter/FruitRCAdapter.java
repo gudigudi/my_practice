@@ -59,7 +59,6 @@ public class FruitRCAdapter extends RecyclerView.Adapter<FruitRCAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
         Fruit fruit = fruitList.get(i);
-//        holder.fruitImage.setImageResource(fruit.getImageId());
         Glide.with(context).load(fruit.getImageId()).into(holder.fruitImage);
         holder.fruitName.setText(fruit.getName());
     }
@@ -78,8 +77,8 @@ public class FruitRCAdapter extends RecyclerView.Adapter<FruitRCAdapter.ViewHold
             super(itemView);
 
             cardView = (CardView) itemView;
-            fruitImage = (ImageView) itemView.findViewById(R.id.fruit_image);
-            fruitName = (TextView) itemView.findViewById(R.id.fruit_name);
+            fruitImage = itemView.findViewById(R.id.fruit_image);
+            fruitName = itemView.findViewById(R.id.fruit_name);
         }
     }
 }

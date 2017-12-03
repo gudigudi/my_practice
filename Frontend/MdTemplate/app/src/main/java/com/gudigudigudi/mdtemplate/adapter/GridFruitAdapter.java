@@ -31,16 +31,16 @@ public class GridFruitAdapter extends ArrayAdapter<Fruit> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        return super.getView(position, convertView, parent);
-        final Fruit fruit = getItem(position); // get current item
+        // get current item
+        final Fruit fruit = getItem(position);
         View view;
         GridFruitAdapter.ViewHolder viewHolder;
         if (convertView == null) {
             view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
             viewHolder = new GridFruitAdapter.ViewHolder();
-            viewHolder.fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
-            viewHolder.fruitName = (TextView) view.findViewById(R.id.fruit_name);
-            viewHolder.deleteImage = (ImageView) view.findViewById(R.id.iv_delete_fruit);
+            viewHolder.fruitImage = view.findViewById(R.id.fruit_image);
+            viewHolder.fruitName = view.findViewById(R.id.fruit_name);
+            viewHolder.deleteImage = view.findViewById(R.id.iv_delete_fruit);
 
             view.setTag(viewHolder);
         } else {
