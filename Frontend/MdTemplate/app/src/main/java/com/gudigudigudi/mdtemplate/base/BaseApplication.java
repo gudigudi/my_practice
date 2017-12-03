@@ -5,11 +5,15 @@ import android.content.Context;
 import android.support.text.emoji.EmojiCompat;
 import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.DiskLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
+
+import okhttp3.OkHttpClient;
 
 /**
  * Created by gu on 10/9/17.
@@ -32,11 +36,17 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // LeakCanary memory leak dectection tool.
+        // LeakCanary: memory leak dectection tool.
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         LeakCanary.install(this);
+
+        // Facebook stetho: debug with chrome dev-tool
+        Stetho.initializeWithDefaults(this);
+        new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
 
         // Emoji.
         EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
