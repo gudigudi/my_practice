@@ -6,12 +6,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+
     <!-- API4.4- -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <!-- dangerous permission -->
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
 
     <application
         android:name=".base.BaseApplication"
@@ -22,33 +25,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="android.webkit.WebView.EnableSafeBrowsing"
+            android:value="true"/>
+
+
         <activity
             android:name=".activity.MainActivity"
             android:label="Main">
-        </activity>
-        <activity
-            android:name=".activity.FirstActivity"
-            android:label="First"
-            android:launchMode="singleTask">
-        </activity>
-        <activity
-            android:name=".activity.SecondActivity"
-            android:label="Second"
-            android:launchMode="singleInstance">
-            <intent-filter>
-                <action android:name="com.gudigudigudi.mdtemplate.ACTION_START"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.ThirdActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data android:scheme="http"/>
-            </intent-filter>
         </activity>
         <activity android:name=".activity.IMActivity">
         </activity>
@@ -137,6 +122,51 @@
         </service>
 
         <activity android:name=".activity.DownloadActivity">
+        </activity>
+        <activity android:name=".activity.materialdesign.CardViewActivity">
+        </activity>
+        <activity android:name=".activity.materialdesign.AlertDialogActivity">
+        </activity>
+        <activity android:name=".activity.materialdesign.GridViewActivity">
+        </activity>
+        <activity android:name=".activity.materialdesign.ViewPagerActivity">
+        </activity>
+        <activity android:name=".activity.materialdesign.ToolbarActivity">
+        </activity>
+        <activity android:name=".activity.PermissionActivity">
+        </activity>
+        <activity android:name=".activity.materialdesign.TabLayoutActivity">
+        </activity>
+        <activity android:name=".activity.materialdesign.FragmentPagerAdapterActivity">
+        </activity>
+
+        <receiver
+            android:name=".receiver.SmsBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter android:priority="999">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".activity.SmsBroadcastActivity">
+        </activity>
+        <activity android:name=".activity.HandlerActivity">
+        </activity>
+        <activity android:name=".activity.AnimationActivity">
+        </activity>
+        <activity android:name=".activity.AnimationSetActivity">
+        </activity>
+        <activity android:name=".ViewAnimationActivity">
+        </activity>
+        <activity android:name=".LoadingAnimationActivity">
+        </activity>
+        <activity android:name=".AnimatorActivity">
+        </activity>
+        <activity android:name=".activity.TransitionActivity">
+        </activity>
+        <activity android:name=".CustomViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -147,6 +177,12 @@
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts"/>
+        </activity>
+        <activity android:name=".mvvm.DatabindingActivity">
+
+        </activity>
+        <activity android:name=".activity.CrimeActivity">
+
         </activity>
     </application>
 
