@@ -22,7 +22,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
         for (SmsMessage sm : smsMessages) {
             String content = sm.getMessageBody();
             Logger.d(content);
-            messageListener.OnReceived(content);
+            messageListener.onReceived(content);
         }
     }
 
@@ -30,6 +30,6 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
      * callback listener.
      */
     public interface MessageListener {
-        void OnReceived(String message);
+        void onReceived(String message);
     }
 }
