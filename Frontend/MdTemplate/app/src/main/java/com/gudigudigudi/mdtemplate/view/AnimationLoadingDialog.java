@@ -16,10 +16,10 @@ import com.gudigudigudi.mdtemplate.R;
 
 public class AnimationLoadingDialog extends AlertDialog {
 
-    private AnimationDrawable animationDrawable;
-    private ImageView iv_loading;
+    private AnimationDrawable mAnimationDrawable;
+    private ImageView mIvLoading;
     private String loadingTip;
-    private TextView tv_loading;
+    private TextView mTvLoading;
     private int resId;
 
     public AnimationLoadingDialog(@NonNull Context context, String loadingTip, int resId) {
@@ -36,18 +36,18 @@ public class AnimationLoadingDialog extends AlertDialog {
 
         // init view.
         setContentView(R.layout.animation_loading_dialog);
-        iv_loading = findViewById(R.id.iv_loading);
-        tv_loading = findViewById(R.id.tv_loading);
+        mIvLoading = findViewById(R.id.iv_loading);
+        mTvLoading = findViewById(R.id.tv_loading);
 
         // init data.
-        iv_loading.setBackgroundResource(resId);
-        animationDrawable = (AnimationDrawable) iv_loading.getBackground();
-        iv_loading.post(new Runnable() {
+        mIvLoading.setBackgroundResource(resId);
+        mAnimationDrawable = (AnimationDrawable) mIvLoading.getBackground();
+        mIvLoading.post(new Runnable() {
             @Override
             public void run() {
-                animationDrawable.start();
+                mAnimationDrawable.start();
             }
         });
-        tv_loading.setText(loadingTip);
+        mTvLoading.setText(loadingTip);
     }
 }
