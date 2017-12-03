@@ -8,6 +8,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Page 3"
-        android:textSize="30dp"/>
+        android:textSize="30sp"/>
 
 </RelativeLayout>

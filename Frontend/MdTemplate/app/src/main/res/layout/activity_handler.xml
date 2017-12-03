@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="24dp"/>
+        android:textSize="24sp"/>
 
     <Button
         android:id="@+id/btn_send_empty_msg"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="倒计时开始"
-        android:textSize="32dp"/>
+        android:textSize="32sp"/>
 
     <Button
         android:id="@+id/btn_remove_timer"

@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="内容界面"
-                android:textSize="36dp"
+                android:textSize="36sp"
                 android:textColor="@android:color/white"/>
         </LinearLayout>
 
@@ -45,6 +45,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:clickable="true"
+                android:focusable="true"
                 android:text="侧滑界面, 点击收回侧滑"
                 android:textColor="@android:color/white"/>
 

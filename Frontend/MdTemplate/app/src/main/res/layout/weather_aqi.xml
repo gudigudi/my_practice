@@ -18,6 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:layout_margin="15dp">
 
         <RelativeLayout
@@ -37,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textColor="#fff"
-                    android:textSize="40dp"/>
+                    android:textSize="40sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textColor="#fff"
-                    android:textSize="40dp"/>
+                    android:textSize="40sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
