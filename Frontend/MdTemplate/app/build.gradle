@@ -73,10 +73,10 @@ android {
             enable = true
             // Specifies a list of screen densities Gradle should not create multiple APKs for.
 //            exclude "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"
-            exclude "mdpi", "hdpi", "xhdpi", "xxhdpi"
+            exclude "hdpi", "xhdpi"
             // Specifies a list of compatible screen size settings for the manifest.
 //            compatibleScreens 'small', 'normal', 'large', 'xlarge'
-            compatibleScreens 'normal', 'large', 'xlarge'
+            compatibleScreens 'normal', 'large'
         }
         language {
             enable = true
@@ -99,12 +99,12 @@ ext {
     permissionsdispatcher_version = '2.4.0'
     glide_version = '4.3.1'
     dagger_version = '2.13'
+    leakcanary_version = '1.5.4'
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile("com.github.hotchemi:permissionsdispatcher:$permissionsdispatcher_version") {
-        // if you don't use android.app.Fragment you can exclude support for them
         exclude module: "support-v13"
     }
     androidTestCompile "com.android.support.test:runner:$android_test_version"
@@ -132,7 +132,7 @@ dependencies {
     compile "android.arch.lifecycle:runtime:$android_arch_component_version"
     compile "android.arch.lifecycle:extensions:$android_arch_component_version"
     compile "android.arch.persistence.room:runtime:$android_arch_component_version"
-    compile "android.arch.paging:runtime:$android_arch_component_version-alpha3"
+//    compile "android.arch.paging:runtime:$android_arch_component_version-alpha3"
     compile "com.github.bumptech.glide:glide:$glide_version"
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'com.google.code.gson:gson:2.8.2'
@@ -147,4 +147,6 @@ dependencies {
     compile "com.google.dagger:dagger-android:$dagger_version"
     compile "com.google.dagger:dagger-android-support:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
 }

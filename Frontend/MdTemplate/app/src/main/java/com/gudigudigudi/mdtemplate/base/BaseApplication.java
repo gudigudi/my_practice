@@ -9,6 +9,7 @@ import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.DiskLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by gu on 10/9/17.
@@ -30,6 +31,12 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // LeakCanary memory leak dectection tool.
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
 
         // Emoji.
         EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
