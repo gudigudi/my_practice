@@ -7,6 +7,7 @@ import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.gudigudigudi.mdtemplate.crash.AppUncaughtExceptionHandler;
 import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.DiskLogAdapter;
@@ -35,6 +36,8 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Thread.setDefaultUncaughtExceptionHandler(new AppUncaughtExceptionHandler());
 
         // LeakCanary: memory leak dectection tool.
         if (LeakCanary.isInAnalyzerProcess(this)) {
