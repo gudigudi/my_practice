@@ -135,7 +135,9 @@ dependencies {
     compile "android.arch.persistence.room:runtime:$android_arch_component_version"
 //    compile "android.arch.paging:runtime:$android_arch_component_version-alpha3"
     compile "com.github.bumptech.glide:glide:$glide_version"
+    compile "com.github.bumptech.glide:okhttp3-integration:$glide_version"
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.orhanobut:logger:2.1.1'
