@@ -81,7 +81,7 @@ public class NewsTitleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news_title, container, false);
-        RecyclerView newsTitleRecyclerView = (RecyclerView) view.findViewById(R.id.news_title_recyclerview);
+        RecyclerView newsTitleRecyclerView = view.findViewById(R.id.news_title_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         newsTitleRecyclerView.setLayoutManager(layoutManager);
 
@@ -177,19 +177,20 @@ public class NewsTitleFragment extends Fragment {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup group, int i) {
-//            return null;
-
             View view = LayoutInflater.from(group.getContext()).inflate(R.layout.news_item, group, false);
             final ViewHolder holder = new ViewHolder(view);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     News news = newsList.get(holder.getAdapterPosition());
-                    if (isTwoPane) { // pad mobile
+
+                    if (isTwoPane) {
+                        // pad mode
                         NewsContentFragment newsContentFragment = (NewsContentFragment)
                                 getFragmentManager().findFragmentById(R.id.news_content_fragment);
                         newsContentFragment.refresh(news.getTitle(), news.getContent());
-                    } else {// phone mode
+                    } else {
+                        // phone mode
                         NewsContentActivity.actionStart(getActivity(), news.getTitle(), news.getContent());
                     }
                 }
