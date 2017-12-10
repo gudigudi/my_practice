@@ -57,10 +57,10 @@ public class ChooseAreaFragment extends Fragment {
     private static final int LEVEL_CITY = 1;
     private static final int LEVEL_COUNTY = 2;
 
-    private AlertDialog progressAlertDialog;
-    private TextView titleText;
-    private Button btn_back;
-    private ListView listView;
+    private AlertDialog mProgressAlertDialog;
+    private TextView mTitletext;
+    private Button mBtnBack;
+    private ListView mListView;
     private ArrayAdapter<String> adapter;
     private List<String> dataList = new ArrayList<>();
 
@@ -103,12 +103,12 @@ public class ChooseAreaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_choose_area, container, false);
 
-        titleText = (TextView) view.findViewById(R.id.title_text);
-        btn_back = (Button) view.findViewById(R.id.back_button);
-        listView = (ListView) view.findViewById(R.id.list_view);
+        mTitletext = view.findViewById(R.id.title_text);
+        mBtnBack = view.findViewById(R.id.back_button);
+        mListView = view.findViewById(R.id.list_view);
 
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, dataList);
-        listView.setAdapter(adapter);
+        mListView.setAdapter(adapter);
 
         appDatabase = Room.databaseBuilder(getContext(),
                 AppDatabase.class, "app").build();
@@ -144,7 +144,7 @@ public class ChooseAreaFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> view, View view1, int i, long l) {
                 if (currentLevel == LEVEL_PROVINCE) {
@@ -182,7 +182,7 @@ public class ChooseAreaFragment extends Fragment {
             }
         });
 
-        btn_back.setOnClickListener(new View.OnClickListener() {
+        mBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "button back");
@@ -203,7 +203,7 @@ public class ChooseAreaFragment extends Fragment {
                         }
                     }.execute();
                 } else if (currentLevel == LEVEL_PROVINCE) {
-                    btn_back.setVisibility(View.GONE);
+                    mBtnBack.setVisibility(View.GONE);
                 }
             }
         });
@@ -228,8 +228,8 @@ public class ChooseAreaFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                titleText.setText("中国");
-                btn_back.setVisibility(View.GONE);
+                mTitletext.setText("中国");
+                mBtnBack.setVisibility(View.GONE);
             }
         });
 
@@ -246,7 +246,7 @@ public class ChooseAreaFragment extends Fragment {
                 @Override
                 public void run() {
                     adapter.notifyDataSetChanged();
-                    listView.setSelection(0);
+                    mListView.setSelection(0);
                 }
             });
             currentLevel = LEVEL_PROVINCE;
@@ -261,8 +261,8 @@ public class ChooseAreaFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                titleText.setText(currentProvince.getName());
-                btn_back.setVisibility(View.VISIBLE);
+                mTitletext.setText(currentProvince.getName());
+                mBtnBack.setVisibility(View.VISIBLE);
             }
         });
 
@@ -280,7 +280,7 @@ public class ChooseAreaFragment extends Fragment {
                 @Override
                 public void run() {
                     adapter.notifyDataSetChanged();
-                    listView.setSelection(0);
+                    mListView.setSelection(0);
                 }
             });
             currentLevel = LEVEL_CITY;
@@ -296,8 +296,8 @@ public class ChooseAreaFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                titleText.setText(currentCity.getName());
-                btn_back.setVisibility(View.VISIBLE);
+                mTitletext.setText(currentCity.getName());
+                mBtnBack.setVisibility(View.VISIBLE);
             }
         });
 
@@ -314,7 +314,7 @@ public class ChooseAreaFragment extends Fragment {
                 @Override
                 public void run() {
                     adapter.notifyDataSetChanged();
-                    listView.setSelection(0);
+                    mListView.setSelection(0);
                 }
             });
             currentLevel = LEVEL_COUNTY;
