@@ -8,6 +8,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -68,7 +69,7 @@ public class BaseWebView extends WebView {
 
     private void setJsNativeObject() {
         getSettings().setJavaScriptEnabled(true);
-        addJavascriptInterface(new JsNativeObject(), "injectedObject");
+        addJavascriptInterface(new JsNativeObject(), "JsNativeObject");
     }
 
     /**
@@ -94,6 +95,16 @@ public class BaseWebView extends WebView {
         @JavascriptInterface
         public void showShareWindow() {
 
+        }
+
+        @JavascriptInterface
+        public void printLog(String message) {
+            Log.d(TAG, message);
+        }
+
+        @JavascriptInterface
+        public void showToast(String message) {
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
         }
     }
 
