@@ -19,17 +19,6 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
-//        productFlavors {
-//            qihoo {
-//                applicationId "com.gudigudigudi.mdtemplate.qihoo"
-//                  resValue 'string' 'api_key' 'qihoo'
-//            }
-//            baidu {
-//                applicationId "com.gudigudigudi.mdtemplate.baidu"
-//            }
-//        }
-
-
     }
     signingConfigs {
         config {
@@ -39,6 +28,7 @@ android {
             keyPassword ALIAS_PASS
         }
     }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -86,72 +76,68 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    compileOptions {
+        encoding='utf-8'
+        sourceCompatibility=JavaVersion.VERSION_1_7
+        targetCompatibility=JavaVersion.VERSION_1_7
+    }
+
     dataBinding {
         enabled = true
     }
 }
 
-ext {
-    android_support_version = '27.0.2'
-    android_espresso_version = '3.0.1'
-    android_test_version = '1.0.1'
-    android_arch_component_version = '1.0.0'
-    permissionsdispatcher_version = '2.4.0'
-    glide_version = '4.3.1'
-    dagger_version = '2.13'
-    leakcanary_version = '1.5.4'
-    stetho_version = '1.5.0'
-}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile("com.github.hotchemi:permissionsdispatcher:$permissionsdispatcher_version") {
+    compile("com.github.hotchemi:permissionsdispatcher:$project.permissionsdispatcher_version") {
         exclude module: "support-v13"
     }
-    androidTestCompile "com.android.support.test:runner:$android_test_version"
-    androidTestCompile "com.android.support.test:rules:$android_test_version"
-    androidTestCompile "com.android.support.test.espresso:espresso-core:$android_espresso_version"
-    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$android_espresso_version"
-    androidTestCompile "com.android.support.test.espresso:espresso-intents:$android_espresso_version"
-    androidTestCompile "com.android.support.test.espresso:espresso-accessibility:$android_espresso_version"
-    androidTestCompile "com.android.support.test.espresso:espresso-web:$android_espresso_version"
-    androidTestCompile "com.android.support.test.espresso.idling:idling-concurrent:$android_espresso_version"
-    androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$android_espresso_version"
-    compile "com.android.support:support-v13:$android_support_version"
-    compile "com.android.support:support-annotations:$android_support_version"
-    compile "com.android.support:support-vector-drawable:$android_support_version"
-    compile "com.android.support:animated-vector-drawable:$android_support_version"
-    compile "com.android.support:appcompat-v7:$android_support_version"
-    compile "com.android.support:palette-v7:$android_support_version"
-    compile "com.android.support:cardview-v7:$android_support_version"
-    compile "com.android.support:recyclerview-v7:$android_support_version"
-    compile "com.android.support:design:$android_support_version"
-    compile "com.android.support:support-emoji:$android_support_version"
-    compile "com.android.support:support-emoji-bundled:$android_support_version"
-    compile "com.android.support:support-emoji-appcompat:$android_support_version"
-    compile "com.android.support:support-dynamic-animation:$android_support_version"
-    compile "android.arch.lifecycle:runtime:$android_arch_component_version"
-    compile "android.arch.lifecycle:extensions:$android_arch_component_version"
-    compile "android.arch.persistence.room:runtime:$android_arch_component_version"
+    androidTestCompile "com.android.support.test:runner:$project.android_test_version"
+    androidTestCompile "com.android.support.test:rules:$project.android_test_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$project.android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$project.android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$project.android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-accessibility:$project.android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-web:$project.android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso.idling:idling-concurrent:$project.android_espresso_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$project.android_espresso_version"
+    compile "com.android.support:support-v13:$project.android_support_version"
+    compile "com.android.support:support-annotations:$project.android_support_version"
+    compile "com.android.support:support-vector-drawable:$project.android_support_version"
+    compile "com.android.support:animated-vector-drawable:$project.android_support_version"
+    compile "com.android.support:appcompat-v7:$project.android_support_version"
+    compile "com.android.support:palette-v7:$project.android_support_version"
+    compile "com.android.support:cardview-v7:$project.android_support_version"
+    compile "com.android.support:recyclerview-v7:$project.android_support_version"
+    compile "com.android.support:design:$project.android_support_version"
+    compile "com.android.support:support-emoji:$project.android_support_version"
+    compile "com.android.support:support-emoji-bundled:$project.android_support_version"
+    compile "com.android.support:support-emoji-appcompat:$project.android_support_version"
+    compile "com.android.support:support-dynamic-animation:$project.android_support_version"
+    compile "android.arch.lifecycle:runtime:$project.android_arch_component_version"
+    compile "android.arch.lifecycle:extensions:$project.android_arch_component_version"
+    compile "android.arch.persistence.room:runtime:$project.android_arch_component_version"
 //    compile "android.arch.paging:runtime:$android_arch_component_version-alpha3"
-    compile "com.github.bumptech.glide:glide:$glide_version"
-    compile "com.github.bumptech.glide:okhttp3-integration:$glide_version"
+    compile "com.github.bumptech.glide:glide:$project.glide_version"
+    compile "com.github.bumptech.glide:okhttp3-integration:$project.glide_version"
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.orhanobut:logger:2.1.1'
     testCompile 'junit:junit:4.12'
-    testCompile "android.arch.persistence.room:testing:$android_arch_component_version"
-    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$permissionsdispatcher_version"
-    annotationProcessor "android.arch.lifecycle:compiler:$android_arch_component_version"
-    annotationProcessor "android.arch.persistence.room:compiler:$android_arch_component_version"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
-    compile "com.google.dagger:dagger-android:$dagger_version"
-    compile "com.google.dagger:dagger-android-support:$dagger_version"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
-    compile "com.facebook.stetho:stetho:$stetho_version"
-    compile "com.facebook.stetho:stetho-okhttp3:$stetho_version"
+    testCompile 'org.mockito:mockito-core:2.13.0'
+    testCompile "android.arch.persistence.room:testing:$project.android_arch_component_version"
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$project.permissionsdispatcher_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$project.android_arch_component_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$project.android_arch_component_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$project.glide_version"
+    compile "com.google.dagger:dagger-android:$project.dagger_version"
+    compile "com.google.dagger:dagger-android-support:$project.dagger_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$project.dagger_version"
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$project.leakcanary_version"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$project.leakcanary_version"
+    compile "com.facebook.stetho:stetho:$project.stetho_version"
+    compile "com.facebook.stetho:stetho-okhttp3:$project.stetho_version"
 }
