@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 /**
+ * WebView
  * Created by gu on 12/3/17.
  */
 
@@ -50,6 +53,21 @@ public class BaseWebView extends WebView {
     }
 
     private void configWebView() {
+
+        getSettings().setDomStorageEnabled(true);
+        getSettings().setDatabaseEnabled(true);
+
+        getSettings().setLoadsImagesAutomatically(true);
+
+        String appCacheDir = getContext().getDir("cache", Context.MODE_PRIVATE).getPath();
+        getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        getSettings().setAppCachePath(appCacheDir);
+        getSettings().setAppCacheEnabled(true);
+
+        getSettings().setSupportZoom(true);
+
+        getSettings().setAllowFileAccess(true);
+
         setWebViewClient(new BaseWebViewClient());
         try {
             setCertificate(this.getContext());
@@ -92,6 +110,12 @@ public class BaseWebView extends WebView {
 
     private class JsNativeObject {
 
+        private Context mContext;
+
+        public JsNativeObject(Context context) {
+            mContext = context;
+        }
+
         @JavascriptInterface
         public void showShareWindow() {
 
@@ -104,13 +128,11 @@ public class BaseWebView extends WebView {
 
         @JavascriptInterface
         public void showToast(String message) {
-            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
         }
     }
 
-    private class BaseWebViewClient extends WebViewClient {
-
-
+    private static class BaseWebViewClient extends WebViewClient {
         /**
          * ssl error.
          *
@@ -124,6 +146,10 @@ public class BaseWebView extends WebView {
             Log.e(TAG, "SSL Error: autostop web page loading...");
             handler.cancel();
         }
+    }
+
+    private static class BaseWebChromeClient extends WebChromeClient {
+
     }
 
     private static class BaseTrustManager implements X509TrustManager {
