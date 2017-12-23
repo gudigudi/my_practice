@@ -9,9 +9,9 @@
         <div class='color__slider__swatch-picker'
              :class="{'color__slider__swatch-picker--active': offset===activeOffset}"
              :style="{background: 'hsl(' + colors.hsl.h + ', 50%, ' + (offset * 100) + '%)'}">
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script>
