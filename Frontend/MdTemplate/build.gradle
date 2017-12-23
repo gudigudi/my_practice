@@ -37,7 +37,7 @@ ext {
     android_arch_component_version = '1.0.0'
     permissionsdispatcher_version = '2.4.0'
     glide_version = '4.3.1'
-    dagger_version = '2.13'
+    dagger_version = '2.14.1'
     leakcanary_version = '1.5.4'
     stetho_version = '1.5.0'
 }
