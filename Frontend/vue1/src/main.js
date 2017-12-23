@@ -8,6 +8,7 @@ import i18n from './i18n'
 import lodash from './plugins/lodash'
 import axios from './plugins/axios'
 import moment from './plugins/moment'
+import VueLazyload from 'vue-lazyload'
 
 Vue.config.productionTip = false
 
@@ -15,6 +16,12 @@ Vue.config.productionTip = false
 Vue.use(lodash)
 Vue.use(axios)
 Vue.use(moment)
+Vue.use(VueLazyload, {
+  preLoad: 1.5,
+  error: 'assets/error.svg',
+  loading: 'assets/loading.svg',
+  attempt: 1
+})
 
 // defined modules
 const ModuleA = {
