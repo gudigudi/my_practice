@@ -5,8 +5,10 @@ import android.content.Context;
 import android.support.text.emoji.EmojiCompat;
 import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.gudigudigudi.mdtemplate.BuildConfig;
 import com.gudigudigudi.mdtemplate.crash.AppUncaughtExceptionHandler;
 import com.gudigudigudi.mdtemplate.db.AppDBHelper;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -62,6 +64,14 @@ public class BaseApplication extends Application {
 
 //        appDBHelper= new AppDBHelper(context, APP_DB_NAME,null,APP_DB_VERSION);
 //        appDBHelper.getWritableDatabase();
+
+        // ARouter
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+            ARouter.printStackTrace();
+        }
+        ARouter.init(this);
     }
 
     public static Context getContext() {
