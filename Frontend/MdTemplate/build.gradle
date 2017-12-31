@@ -31,6 +31,10 @@ subprojects {
 }
 
 ext {
+    sdk_version = 27
+    min_sdk_version = 19
+    buildtool_version = "27.0.2"
+
     android_support_version = '27.0.2'
     android_espresso_version = '3.0.1'
     android_test_version = '1.0.1'
