@@ -9,3 +9,19 @@ $left:auto,$width:auto,$height:auto) {
   width: $width;
   height: $height;
 }
+
+/**
+layout
+ */
+
+// box width and height.
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin min-width($min-width) {
+  min-width: $min-width;
+}
+
+
