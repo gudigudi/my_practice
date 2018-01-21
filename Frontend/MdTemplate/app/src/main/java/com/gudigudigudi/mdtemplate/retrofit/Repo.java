@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate.model;
+package com.gudigudigudi.mdtemplate.retrofit;
 
 /**
  * Created by gu on 12/30/17.
