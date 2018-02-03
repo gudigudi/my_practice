@@ -133,9 +133,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.orhanobut:logger:2.1.1'
-    compile 'com.alibaba:arouter-api:1.2.4'
+    compile "com.alibaba:arouter-api:$project.alibaba_arouter_version"
     implementation "android.arch.lifecycle:common-java8:$project.android_arch_component_version"
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
+    annotationProcessor "com.alibaba:arouter-compiler:$project.alibaba_arouter_version"
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.13.0'
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$project.permissionsdispatcher_version"
@@ -143,6 +143,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$project.glide_version"
     compile "com.google.dagger:dagger-android:$project.dagger_version"
     compile "com.google.dagger:dagger-android-support:$project.dagger_version"
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     annotationProcessor "com.google.dagger:dagger-android-processor:$project.dagger_version"
     debugCompile "com.squareup.leakcanary:leakcanary-android:$project.leakcanary_version"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$project.leakcanary_version"
