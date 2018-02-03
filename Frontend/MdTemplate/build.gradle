@@ -2,8 +2,9 @@
 
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
+        maven { url "https://jitpack.io" }
         mavenCentral()
         mavenLocal()
     }
@@ -31,7 +32,7 @@ subprojects {
 }
 
 ext {
-    sdk_version = 27
+    sdk_version = 27    // compile and target.
     min_sdk_version = 19
     buildtool_version = "27.0.2"
 
@@ -39,9 +40,10 @@ ext {
     android_espresso_version = '3.0.1'
     android_test_version = '1.0.1'
     android_arch_component_version = '1.1.0'
-    permissionsdispatcher_version = '2.4.0'
-    glide_version = '4.5.0'
+    permissionsdispatcher_version = '3.1.0'
+    glide_version = '4.6.1'
     dagger_version = '2.14.1'
     leakcanary_version = '1.5.4'
     stetho_version = '1.5.0'
+    alibaba_arouter_version = '1.2.4'
 }
