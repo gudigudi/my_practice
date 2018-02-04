@@ -97,6 +97,6 @@ func main() {
 
 	for k := range strategies {
 		fmt.Printf("Wins, losses staying at k = % 4d: %s\n",
-			k + 1, ratioString(wins[k], games - wins[k])
+			k+1, ratioString(wins[k], games-wins[k]))
 	}
 }
