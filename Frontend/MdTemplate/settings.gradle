@@ -1,2 +1,10 @@
-include ':app', ':commonlib', ':business_login', ':feature_auth', ':feature_net', ':appdemojetpack', ':benchmark', ':apptestespresso', ':appnavigation'
+include ':commonlib'
+
+include ':feature_auth', ':feature_net'
+
+include ':benchmark'
+
 //include ':nativelib'
+
+include ':app',  ':appdemojetpack',  ':apptestespresso', ':appnavigation'
+
