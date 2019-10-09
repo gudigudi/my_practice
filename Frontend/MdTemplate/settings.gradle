@@ -1,1 +1,2 @@
-include ':app', ':lib_common', ':lib_coremodel', ':lib_opensource', ':imapplication'
+include ':app', ':commonlib', ':business_login', ':feature_auth', ':feature_net', ':appdemojetpack', ':benchmark', ':apptestespresso', ':appnavigation'
+//include ':nativelib'
