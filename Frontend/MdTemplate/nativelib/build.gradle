@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    defaultConfig {
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11 -frtti -fexceptions"
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {}
