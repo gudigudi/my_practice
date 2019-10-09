@@ -1,0 +1,29 @@
+/* theme color */
+$--color-primary: teal;
+
+/* icon font path, required */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
+
+// mobile 1px border
+.border-1px {
+  position: relative;
+
+  &::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1px solid rgb(217, 217, 217);
+    content: ' ';
+
+    @media (min-device-pixel-ratio: 1.5) {
+      transform: scaleY(0.7);
+    }
+    @media (min-device-pixel-ratio: 2) {
+      transform: scaleY(0.5);
+    }
+  }
+}

@@ -18,8 +18,4 @@ android {
 
 dependencies {
     implementation project(':commonlib')
-
-//    if (!isBusinessLoginModuleNeed.toBoolean()) {
-//        implementation project(':business_login')
-//    }
 }
