@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">AppTestEspresso</string>
+
+    <string name="middle">This is the middle!</string>
+    <string name="item_element_text">This is element #</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint">How do you like your coffee?</string>
+
+    <string-array name="bodies_of_water">
+        <item>Pacific Ocean</item>
+        <item>Atlantic Ocean</item>
+        <item>Indian Ocean</item>
+        <item>Southern Ocean</item>
+        <item>Arctic Ocean</item>
+        <item>Mediterranean Sea</item>
+        <item>Caribbean Sea</item>
+        <item>South China Sea</item>
+        <item>Bering Sea</item>
+        <item>Gulf of Mexico</item>
+        <item>Okhotsk Sea</item>
+        <item>East China Sea</item>
+        <item>Hudson Bay</item>
+        <item>Japan Sea</item>
+        <item>Andaman Sea</item>
+        <item>North Sea</item>
+        <item>Red Sea</item>
+        <item>Baltic Sea</item>
+    </string-array>
+</resources>

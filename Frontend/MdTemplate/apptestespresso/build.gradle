@@ -1,0 +1,11 @@
+apply plugin: 'com.android.application'
+
+android {
+    defaultConfig {
+        applicationId "com.gudigudigudi.apptestespresso"
+    }
+}
+
+dependencies {
+    implementation project(':commonlib')
+}
