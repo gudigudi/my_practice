@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.benchmark.junit4.AndroidBenchmarkRunner"
+    }
+}
+
+dependencies {
+    implementation project(':commonlib')
+    androidTestImplementation "androidx.benchmark:benchmark-junit4:1.0.0-alpha06"
+}
