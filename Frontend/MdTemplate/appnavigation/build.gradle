@@ -1,0 +1,12 @@
+apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs"
+
+android {
+    defaultConfig {
+        applicationId "com.gudigudigudi.appnavigation"
+    }
+}
+
+dependencies {
+    implementation project(':commonlib')
+}
