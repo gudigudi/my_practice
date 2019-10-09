@@ -10,5 +10,5 @@
         android:repeatCount="3"
         android:repeatMode="reverse"
         android:toXScale="2.0"
-        android:toYScale="2.0"/>
+        android:toYScale="2.0" />
 </set>

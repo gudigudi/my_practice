@@ -4,9 +4,14 @@ package com.gudigudigudi.mdtemplate.model;
  * Created by gu on 9/27/17.
  */
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * 消息实体类
  */
+@Getter
+@AllArgsConstructor
 public class Msg {
 
     public static final int TYPE_RECEIVED = 0;
@@ -16,17 +21,4 @@ public class Msg {
     private String content;
     // 消息类型
     private int type;
-
-    public Msg(String content, int type) {
-        this.content = content;
-        this.type = type;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public int getType() {
-        return type;
-    }
 }

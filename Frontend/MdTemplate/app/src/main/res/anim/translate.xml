@@ -6,5 +6,5 @@
         android:fromYDelta="0"
         android:repeatCount="3"
         android:toXDelta="400"
-        android:toYDelta="100"/>
+        android:toYDelta="100" />
 </set>

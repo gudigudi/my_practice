@@ -1,7 +1,6 @@
 package com.gudigudigudi.mdtemplate.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,17 +15,9 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,16 +25,26 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+
+import com.blankj.utilcode.util.FileUtils;
+import com.blankj.utilcode.util.PathUtils;
+import com.blankj.utilcode.util.UriUtils;
+import com.gudigudigudi.commonlib.base.BaseActivity;
+import com.gudigudigudi.commonlib.constants.LogTag;
 import com.gudigudigudi.mdtemplate.R;
-import com.gudigudigudi.mdtemplate.util.LogUtil;
-import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class SystemServiceActivity extends AppCompatActivity implements View.OnClickListener {
+import lombok.extern.slf4j.Slf4j;
 
-    private static final String TAG = "SystemServiceActivity";
+@Slf4j
+public class SystemServiceActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String FILE_PRIVIDER = "com.gudigudigudi.mdtemplate.fileprivider";
     private static final int REQUEST_CODE_TAKE_PHOTO = 1;
@@ -71,7 +72,7 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
     private VideoView mVideoView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_service);
 
@@ -128,6 +129,7 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_CODE_TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
@@ -136,21 +138,17 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                         mIVPicture.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
                                 mIVPicture.getWidth(), mIVPicture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
                     } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        log.error(e.getLocalizedMessage());
                     }
                 }
                 break;
             case REQUEST_CODE_CHOOSE_PHOTO:
                 if (resultCode == RESULT_OK) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        handleImageOnKitKat(data);
-                    } else {
-                        handleImageBeforeKitKat(data);
-                    }
+                    handleImage(data);
                 }
                 break;
             default:
-                Logger.d(LogUtil.LOG_UNKNOWN_REQUEST_CODE);
+                log.debug(LogTag.LOG_UNKNOWN_REQUEST_CODE);
                 break;
         }
     }
@@ -175,20 +173,20 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 }
                 break;
             default:
-                Logger.d(LogUtil.LOG_UNKNOWN_REQUEST_CODE);
+                log.debug(LogTag.LOG_UNKNOWN_REQUEST_CODE);
         }
     }
 
     @Override
     public void onClick(View view) {
-        Intent intent = null;
+        Intent intent;
         PendingIntent pi = null;
         Notification notification = null;
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         switch (view.getId()) {
             case R.id.send_notification:
-                intent = new Intent(SystemServiceActivity.this, NotificationToggledActivity.class);
+                intent = new Intent(SystemServiceActivity.this, MainActivity.class);
                 pi = PendingIntent.getActivity(SystemServiceActivity.this, 0, intent, 0);
                 notification = new NotificationCompat.Builder(getApplicationContext(), null)
                         .setContentIntent(pi)
@@ -228,27 +226,12 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.take_photo:
                 File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
-
-                try {
-                    if (outputImage.exists()) {
-                        outputImage.delete();
-                    }
-                    outputImage.createNewFile();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    mImageUri = FileProvider.getUriForFile(SystemServiceActivity.this, FILE_PRIVIDER, outputImage);
-                } else {
-                    mImageUri = Uri.fromFile(outputImage);
-                }
-
+                FileUtils.createFileByDeleteOldFile(outputImage);
+                mImageUri = UriUtils.file2Uri(outputImage);
                 // start camera.
                 intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
                 startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
-
                 break;
             case R.id.choose_from_album:
                 if (ContextCompat.checkSelfPermission(SystemServiceActivity.this,
@@ -292,7 +275,7 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
                 }
                 break;
             default:
-                Logger.d(LogUtil.LOG_UNKNOWN_VIEW_IS_CLICKED);
+                log.debug(LogTag.LOG_UNKNOWN_VIEW_IS_CLICKED);
         }
 
         if (notification != null) {
@@ -306,8 +289,7 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
         startActivityForResult(intent, REQUEST_CODE_CHOOSE_PHOTO);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    private void handleImageOnKitKat(Intent data) {
+    private void handleImage(Intent data) {
         String imagePath = null;
         Uri uri = data.getData();
 
@@ -330,13 +312,6 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
             // Uri type is file.
             imagePath = uri.getPath();
         }
-
-        displayImage(imagePath);
-    }
-
-    private void handleImageBeforeKitKat(Intent data) {
-        Uri uri = data.getData();
-        String imagePath = getImagePath(uri, null);
 
         displayImage(imagePath);
     }
@@ -370,16 +345,14 @@ public class SystemServiceActivity extends AppCompatActivity implements View.OnC
 
     private void initMediaPlayer() {
         try {
-            File file = new File(Environment.getExternalStorageDirectory(), "music.mp3");
-            mMediaPlayer.setDataSource(file.getPath());
+            mMediaPlayer.setDataSource(new File(PathUtils.getRootPath() + "music.mp3").getPath());
             mMediaPlayer.prepare();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getLocalizedMessage());
         }
     }
 
     private void initVideoView() {
-        File file = new File(Environment.getExternalStorageDirectory(), "movie.mp4");
-        mVideoView.setVideoPath(file.getPath());
+        mVideoView.setVideoPath(new File(PathUtils.getRootPath() + "movie.mp4").getPath());
     }
 }

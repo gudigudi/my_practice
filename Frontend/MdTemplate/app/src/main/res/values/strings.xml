@@ -3,14 +3,20 @@
 
     <string name="CUSTOM_BROADCAST">com.gudigudigudi.mdtemplate.CUSTOM_BROADCAST</string>
     <string name="LOCAL_BROADCAST">com.gudigudigudi.mdtemplate.LOCAL_BROADCAST</string>
-    <string name="FORCE_OFFLINE_BROADCAST">com.gudigudigudi.mdtemplate.FORCE_OFFLINE_BROADCAST</string>
 
     <string name="drawer_close">drawer_close</string>
     <string name="drawer_open">drawer_open</string>
 
-    <string name="crime_title_hint">Enter a title for the crime.</string>
-    <string name="crime_title_label">title</string>
-    <string name="crime_solved_label">Solved</string>
-    <string name="crime_details_label">details</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="account_prompt">Account prompt</string>
+    <string name="login">Login</string>
+    <string name="password_prompt">Password</string>
+    <string name="title">Title</string>
+    <string name="more">More</string>
+
+
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

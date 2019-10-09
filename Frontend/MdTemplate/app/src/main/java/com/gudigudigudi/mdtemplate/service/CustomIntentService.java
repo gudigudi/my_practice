@@ -2,14 +2,16 @@ package com.gudigudigudi.mdtemplate.service;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 
-import com.orhanobut.logger.Logger;
+import androidx.annotation.Nullable;
+
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * Created by gu on 10/14/17.
  */
-
+@Slf4j
 public class CustomIntentService extends IntentService {
 
     public CustomIntentService(String name) {
@@ -18,6 +20,6 @@ public class CustomIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        Logger.d("Thread id is " + Thread.currentThread().getId());
+        log.debug("Thread id is " + Thread.currentThread().getId());
     }
 }

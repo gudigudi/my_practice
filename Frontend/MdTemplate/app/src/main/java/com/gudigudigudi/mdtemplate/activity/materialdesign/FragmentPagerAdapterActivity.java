@@ -1,22 +1,33 @@
 package com.gudigudigudi.mdtemplate.activity.materialdesign;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerTabStrip;
+import androidx.viewpager.widget.ViewPager;
+
+import com.gudigudigudi.commonlib.base.BaseActivity;
 import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.fragment.AlertDialogFragment;
+import com.gudigudigudi.mdtemplate.fragment.AnimationFragment;
+import com.gudigudigudi.mdtemplate.fragment.AnimatorFragment;
+import com.gudigudigudi.mdtemplate.fragment.BroadcastFragment;
+import com.gudigudigudi.mdtemplate.fragment.DataStoreFragment;
+import com.gudigudigudi.mdtemplate.fragment.IMFragment;
+import com.gudigudigudi.mdtemplate.fragment.TransitionFragment;
+import com.gudigudigudi.mdtemplate.fragment.ViewAnimationFragment;
+import com.gudigudigudi.mdtemplate.fragment.adapter.CustomFragmentPagerAdapter;
+import com.gudigudigudi.mdtemplate.fragment.adapter.CustomFragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentPagerAdapterActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class FragmentPagerAdapterActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
 
     private ViewPager viewPager;
     private PagerTabStrip pagerTabStrip;
-    // data source
     private List<Fragment> fragments;
     private List<String> titles;
     private CustomFragmentPagerAdapter fragmentPagerAdapter;
@@ -30,32 +41,42 @@ public class FragmentPagerAdapterActivity extends AppCompatActivity implements V
         viewPager = findViewById(R.id.view_pager);
         pagerTabStrip = findViewById(R.id.pager_tab_strip);
 
-        // init.
+        init();
+        addFragmentStatePagerAdapter();
+//        addFragmentPagerAdapter();
+
+        viewPager.addOnPageChangeListener(this);
+    }
+
+    private void addFragmentPagerAdapter() {
+        fragmentPagerAdapter = new CustomFragmentPagerAdapter(getSupportFragmentManager(),  FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments, titles);
+        viewPager.setAdapter(fragmentPagerAdapter);
+    }
+
+    private void addFragmentStatePagerAdapter() {
+        fragmentStatePagerAdapter = new CustomFragmentStatePagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments, titles);
+        viewPager.setAdapter(fragmentStatePagerAdapter);
+    }
+
+    public void init() {
         fragments = new ArrayList<>();
         titles = new ArrayList<>();
-        fragments.add(new PageFragment1());
-        fragments.add(new PageFragment2());
-        fragments.add(new PageFragment3());
-        fragments.add(new PageFragment1());
-        fragments.add(new PageFragment2());
-        fragments.add(new PageFragment3());
-        titles.add("page1");
-        titles.add("page2");
-        titles.add("page3");
-        titles.add("page4");
-        titles.add("page5");
-        titles.add("page6");
-
-        fragmentPagerAdapter = new CustomFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles);
-        fragmentStatePagerAdapter = new CustomFragmentStatePagerAdapter(getSupportFragmentManager(), fragments, titles);
-//        viewPager.setAdapter(fragmentPagerAdapter);
-        viewPager.setAdapter(fragmentStatePagerAdapter);
-        viewPager.addOnPageChangeListener(this);
+        fragments.add(new TransitionFragment());
+        fragments.add(new AnimatorFragment());
+        fragments.add(new ViewAnimationFragment());
+        fragments.add(new AnimationFragment());
+        fragments.add(new AlertDialogFragment());
+        fragments.add(new BroadcastFragment());
+        fragments.add(new DataStoreFragment());
+        fragments.add(new IMFragment());
+        for (int i = 0; i < fragments.size(); i++) {
+            titles.add("page" + i);
+        }
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+        //TODO
     }
 
     @Override
@@ -65,6 +86,6 @@ public class FragmentPagerAdapterActivity extends AppCompatActivity implements V
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
+        //TODO
     }
 }

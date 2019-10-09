@@ -1,35 +1,38 @@
 package com.gudigudigudi.mdtemplate.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.blankj.utilcode.util.ColorUtils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.gudigudigudi.commonlib.base.BaseActivity;
+import com.gudigudigudi.commonlib.constants.LogTag;
 import com.gudigudigudi.mdtemplate.R;
-import com.gudigudigudi.mdtemplate.adapter.FruitRCAdapter;
 import com.gudigudigudi.mdtemplate.model.Fruit;
-import com.gudigudigudi.mdtemplate.util.LogUtil;
-import com.orhanobut.logger.Logger;
+import com.gudigudigudi.mdtemplate.view.adapter.FruitRCAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MaterialDesignActivity extends AppCompatActivity {
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class MaterialDesignActivity extends BaseActivity {
     private static final String TAG = "MaterialDesignActivity";
 
     private Toolbar mToolbar;
@@ -71,43 +74,30 @@ public class MaterialDesignActivity extends AppCompatActivity {
 
         mNavigationView = findViewById(R.id.nav_view);
         mNavigationView.setCheckedItem(R.id.nav_call);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_call:
-                        break;
-                    case R.id.nav_friends:
-                        break;
-                    case R.id.nav_location:
-                        break;
-                    case R.id.nav_mail:
-                        break;
-                    case R.id.nav_task:
-                        break;
-                    default:
-                        Log.d(TAG, "Unknown navigation menu item is clicked.");
-                        break;
-                }
-
-                mDrawerLayout.closeDrawers();
-                return true;
+        mNavigationView.setNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.nav_call:
+                    break;
+                case R.id.nav_friends:
+                    break;
+                case R.id.nav_location:
+                    break;
+                case R.id.nav_mail:
+                    break;
+                case R.id.nav_task:
+                    break;
+                default:
+                    Log.d(TAG, "Unknown navigation menu item is clicked.");
+                    break;
             }
+
+            mDrawerLayout.closeDrawers();
+            return true;
         });
 
         mFloatingActionButton = findViewById(R.id.fab);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Snackbar is clicked", Snackbar.LENGTH_SHORT)
-                        .setAction("OK", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Toast.makeText(MaterialDesignActivity.this, "FAB is clicked:OK", Toast.LENGTH_SHORT).show();
-                            }
-                        }).show();
-            }
-        });
+        mFloatingActionButton.setOnClickListener(view -> Snackbar.make(view, "Snackbar is clicked", Snackbar.LENGTH_SHORT)
+                .setAction("OK", view1 -> Toast.makeText(MaterialDesignActivity.this, "FAB is clicked:OK", Toast.LENGTH_SHORT).show()).show());
 
         initFruits();
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -117,29 +107,16 @@ public class MaterialDesignActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         mSwipeRefreshLayout = findViewById(R.id.swipe_reflesh);
-        mSwipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshFruits();
-            }
-        });
+        mSwipeRefreshLayout.setColorSchemeColors(ColorUtils.getColor(R.color.colorPrimary));
+        mSwipeRefreshLayout.setOnRefreshListener(() -> MaterialDesignActivity.this.refreshFruits());
     }
 
     private void refreshFruits() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        initFruits();
-                        adapter.notifyDataSetChanged();
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                });
-            }
-        }).start();
+        new Handler().post(() -> MaterialDesignActivity.this.runOnUiThread(() -> {
+            MaterialDesignActivity.this.initFruits();
+            adapter.notifyDataSetChanged();
+            mSwipeRefreshLayout.setRefreshing(false);
+        }));
     }
 
     @Override
@@ -152,19 +129,19 @@ public class MaterialDesignActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.backup:
-                Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "backup");
+                log.debug(LogTag.LOG_VIEW_IS_CLICKED, "backup");
                 break;
             case R.id.delete:
-                Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "delete");
+                log.debug(LogTag.LOG_VIEW_IS_CLICKED, "delete");
                 break;
             case R.id.settings:
-                Logger.d(LogUtil.LOG_VIEW_IS_CLICKED, "settings");
+                log.debug(LogTag.LOG_VIEW_IS_CLICKED, "settings");
                 break;
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             default:
-                Logger.d(LogUtil.LOG_UNKNOWN_MENU_ITEM_IS_CLICKED);
+                log.debug(LogTag.LOG_UNKNOWN_MENU_ITEM_IS_CLICKED);
         }
         return true;
     }

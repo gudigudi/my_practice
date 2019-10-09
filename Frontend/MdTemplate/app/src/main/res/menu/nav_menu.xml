@@ -5,22 +5,22 @@
         <item
             android:id="@+id/nav_call"
             android:icon="@drawable/ic_create"
-            android:title="Call"/>
+            android:title="Call" />
         <item
             android:id="@+id/nav_friends"
             android:icon="@drawable/ic_arrow_back"
-            android:title="Friends"/>
+            android:title="Friends" />
         <item
             android:id="@+id/nav_location"
             android:icon="@drawable/ic_create"
-            android:title="Location"/>
+            android:title="Location" />
         <item
             android:id="@+id/nav_mail"
             android:icon="@drawable/ic_arrow_back"
-            android:title="Mail"/>
+            android:title="Mail" />
         <item
             android:id="@+id/nav_task"
             android:icon="@drawable/ic_create"
-            android:title="Tasks"/>
+            android:title="Tasks" />
     </group>
 </menu>

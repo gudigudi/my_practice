@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,21 +18,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send notice"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/send_headsup_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send heads-up notice"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/send_fold_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send fold notice"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
@@ -48,7 +47,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Take photo"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/choose_from_album"
@@ -56,14 +55,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Choose from photo"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Play music with MediaPlayer"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Play"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/pause"
@@ -84,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Pause"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/stop"
@@ -92,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Stop"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
@@ -100,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Play video with VideoView"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -113,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Play"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/pause_video"
@@ -121,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Pause"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/replay_video"
@@ -129,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Replay"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
@@ -137,10 +136,10 @@
         android:id="@+id/picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal" />
 
     <VideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 </LinearLayout>
