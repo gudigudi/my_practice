@@ -1,24 +1,26 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "config.gradle"
 
 buildscript {
     repositories {
         google()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
         jcenter()
         maven { url "https://jitpack.io" }
-        mavenCentral()
-        mavenLocal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.1.0"
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
         google()
-        mavenCentral()
-        mavenLocal()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -26,24 +28,305 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-//对单个工程进行遍历和配置
-subprojects {
 
+// 声明buildProperty
+ext.buildProperty = null
+ext.appReleaseDir = ''
+
+def loadProperties() {
+    def proFile = file("gradle-build.properties")
+    Properties p = new Properties()
+    proFile.withInputStream { stream ->
+        p.load(stream)
+    }
+    buildProperty = p
+    appReleaseDir = p.appReleaseDir
 }
 
-ext {
-    sdk_version = 27    // compile and target.
-    min_sdk_version = 19
-    buildtool_version = "27.0.2"
 
-    android_support_version = '27.0.2'
-    android_espresso_version = '3.0.1'
-    android_test_version = '1.0.1'
-    android_arch_component_version = '1.1.0'
-    permissionsdispatcher_version = '3.1.0'
-    glide_version = '4.6.1'
-    dagger_version = '2.14.1'
-    leakcanary_version = '1.5.4'
-    stetho_version = '1.5.0'
-    alibaba_arouter_version = '1.2.4'
+subprojects {
+//    beforeEvaluate { project ->
+//        if (project.name.contains('feature')) {
+//            project.ext.isFeatureModule = true
+//        } else if (project.name.contains('business')) {
+//            project.ext.isBusinessModule = true
+//        }
+//    }
+
+    afterEvaluate { project ->
+        ext.pluginContainer = project.getPlugins()
+
+        android {
+            def app = rootProject.ext.android
+
+            compileSdkVersion app.compileSdkVersion
+
+            defaultConfig {
+                minSdkVersion app.minSdkVersion
+                targetSdkVersion app.targetSdkVersion
+                versionCode app.versionCode
+                versionName app.versionName
+                multiDexEnabled true
+
+                vectorDrawables.useSupportLibrary = true
+
+                testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+                javaCompileOptions {
+                    annotationProcessorOptions {
+                        arguments = [
+                                "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                                "room.incremental"     : "true",
+                                "room.expandProjection": "true"]
+                    }
+                }
+            }
+
+            loadProperties()//调用方法
+            signingConfigs {
+                debug {
+                    keyAlias buildProperty.keyAlias
+                    keyPassword buildProperty.keyPassword
+                    storeFile file(buildProperty.storeFile)
+                    storePassword buildProperty.storePassword
+                }
+                release {
+                    keyAlias buildProperty.keyAlias
+                    keyPassword buildProperty.keyPassword
+                    storeFile file(buildProperty.storeFile)
+                    storePassword buildProperty.storePassword
+                }
+            }
+
+            buildTypes {
+                debug {
+                    buildConfigField "boolean", "LOG_DEBUG", buildProperty.debug_LOG_DEBUG
+                    buildConfigField "boolean", "isDev", buildProperty.debug_isDev
+                    buildConfigField "String", "versionNameSuffix", buildProperty.debug_versionNameSuffix
+                    minifyEnabled Boolean.parseBoolean(buildProperty.debug_minifyEnabled)
+                    zipAlignEnabled Boolean.parseBoolean(buildProperty.debug_zipAlignEnabled)
+                    shrinkResources Boolean.parseBoolean(buildProperty.debug_shrinkResources)
+                    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                    signingConfig signingConfigs.debug
+
+                    splits.abi.enable = false
+                    splits.density.enable = false
+                    aaptOptions.cruncherEnabled = false
+                    ext.enableCrashlytics = false
+                    proguardFiles fileTree(dir: "${project.rootProject.rootDir}/proguards", include: ['*.pro']).asList().toArray()
+                }
+                release {
+                    buildConfigField "boolean", "LOG_DEBUG", buildProperty.release_LOG_DEBUG
+                    buildConfigField "boolean", "isDev", buildProperty.release_isDev
+                    buildConfigField "String", "versionNameSuffix", buildProperty.release_versionNameSuffix
+                    minifyEnabled Boolean.parseBoolean(buildProperty.release_minifyEnabled)
+                    zipAlignEnabled Boolean.parseBoolean(buildProperty.release_zipAlignEnabled)
+                    shrinkResources Boolean.parseBoolean(buildProperty.release_shrinkResources)
+                    signingConfig signingConfigs.release
+
+                    debuggable false
+                    jniDebuggable false
+                    renderscriptDebuggable false
+                    pseudoLocalesEnabled false
+                    generatePureSplits false
+                    splits {
+                        abi {
+                            enable true
+                            reset()
+//                            include "x86", "x86_64", "armabi", "armeabi-v7a", "arm64-v8a"
+                            include "armabi"
+                            universalApk false
+                        }
+                        density {
+                            enable = false
+//                            enable = true
+//                            exclude "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"
+//                            compatibleScreens "small", "normal", "large", "xlarge"
+                        }
+                    }
+
+                    if (project.pluginContainer.hasPlugin("com.android.application")) {
+                        //批量修改Apk名字
+                        applicationVariants.all {
+                            //判断是release还是debug版本
+                            def buildType = it.buildType.name
+                            def fileName
+                            //下面的channel是获取渠道号，你获取渠道号不一定会和我的代码一样，因为有可能你的渠道名称的规则和我的不一样，我的规则是${渠道名}-${applicationId}
+                            def channel = it.productFlavors[0].name.split("-")[0]
+                            //获取当前时间的"YYYY-MM-dd"格式。
+                            def createTime = new Date().format("YYYY-MM-dd-HH:mm:ss", TimeZone.getTimeZone("GMT+08:00"))
+                            //只对Release包起作用，如果不是Release包则不变更输出路径，否则可能导致AS无法自动安装debug包。
+                            if (buildType == "release") {
+                                getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/apks")
+
+                                //命名规则是：渠道名_项目名_版本名_创建时间_构建类型.apk
+                                //将名字打印出来，以便及时查看是否满意
+                                getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+                                    fileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +"${channel}_${defaultConfig.applicationId}_${defaultConfig.versionName}_${createTime}-${buildType}.apk"
+                                    println "文件名：-----------------${fileName}"
+
+                                    apkData.outputFileName=fileName
+                                }
+                            }
+                        }
+                    }
+                    proguardFiles fileTree(dir: "${project.rootProject.rootDir}/proguards", include: ['*.pro']).asList().toArray()
+                }
+            }
+            dataBinding {
+                enabled = true
+            }
+            testOptions {
+                unitTests.returnDefaultValues = true
+            }
+
+            compileOptions {
+                encoding = "utf-8"
+                sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
+            }
+
+            flavorDimensions "manifestPlaceholders"
+            productFlavors {//配置渠道包或者版本包
+                playStore {}
+                miui {}
+                wandoujia {}
+            }
+            productFlavors.all { flavors ->
+                flavors.manifestPlaceholders = [channelValue: name]
+            }
+
+            packagingOptions {
+                exclude 'META-INF/DEPENDENCIES'
+                exclude 'META-INF/LICENSE'
+                exclude 'META-INF/LICENSE.txt'
+                exclude 'META-INF/LICENSE.md'
+                exclude 'META-INF/LICENSE-notice.md'
+                exclude 'META-INF/license.txt'
+                exclude 'META-INF/NOTICE'
+                exclude 'META-INF/NOTICE.txt'
+                exclude 'META-INF/notice.txt'
+                exclude 'META-INF/ASL2.0'
+            }
+        }
+
+        dependencies {
+            def app = rootProject.ext.dependencies
+            def androidx = app.androidx
+
+            implementation fileTree(dir: 'libs', include: ['*.jar'])
+            implementation 'androidx.multidex:multidex:2.0.1'
+
+            // AndroidX Test
+            androidTestImplementation androidx.test.core
+            androidTestImplementation androidx.test.runner
+            androidTestImplementation androidx.test.rules
+            androidTestImplementation androidx.test.monitor
+            androidTestImplementation androidx.test.ext.junit
+            androidTestImplementation androidx.test.ext.truth
+
+            // Espresso
+            androidTestImplementation androidx.test.espresso.core
+            androidTestImplementation androidx.test.espresso.contrib
+            androidTestImplementation androidx.test.espresso.intents
+            androidTestImplementation androidx.test.espresso.accessibility
+            androidTestImplementation androidx.test.espresso.web
+            androidTestImplementation androidx.test.espresso.idling_concurrent
+            androidTestImplementation androidx.test.espresso.idling_resource
+            implementation androidx.test.espresso.idling_resource
+
+            // AndroidX support
+            implementation androidx.activity
+            implementation androidx.appcompat
+            implementation androidx.appcompat_resources
+            implementation androidx.core
+            implementation androidx.arch.core.runtime
+            implementation androidx.arch.core.common
+            implementation androidx.annotation
+            implementation androidx.collection
+            implementation androidx.legacy_support_v4
+            implementation androidx.preference
+            implementation androidx.fragment
+            implementation("androidx.fragment:fragment-testing:1.1.0"){
+                exclude group:"androidx.test"
+            }
+
+            // View & Layout
+            implementation androidx.palette
+            implementation androidx.cardview
+            implementation androidx.recyclerview
+            implementation androidx.constraintlayout
+            implementation androidx.material
+
+
+            // Lifecycle
+            implementation androidx.lifecycle.extensions
+            implementation androidx.lifecycle.common_java8
+            testImplementation androidx.arch.core.testing
+
+            // Room
+            implementation androidx.room.runtime
+            annotationProcessor androidx.room.compiler
+            testImplementation androidx.room.testing
+
+            // Paging
+            implementation androidx.paging.runtime
+            testImplementation androidx.paging.common
+
+            // WorkManager
+            implementation androidx.work.runtime
+            androidTestImplementation androidx.work.testing
+
+            // Navigation
+            implementation androidx.navigation.fragment
+            implementation androidx.navigation.ui
+
+            // Lombok
+            compileOnly app.lombok
+            annotationProcessor app.lombok
+
+            // Dagger2
+            implementation app.dagger.android
+            implementation app.dagger.android_support
+            implementation app.dagger.dagger
+            annotationProcessor app.dagger.compiler
+            annotationProcessor app.dagger.android_processor
+
+            // Glide
+            implementation app.glide.glide
+            annotationProcessor app.glide.compiler
+            implementation app.glide.okhttp3_integration
+
+            // Retrofit2
+            implementation app.retrofit2.retrofit
+            implementation app.retrofit2.converter_gson
+
+            // Log
+            implementation 'org.slf4j:slf4j-api:1.7.28'
+            implementation 'com.github.tony19:logback-android:2.0.0'
+
+            // Android Util
+            implementation "com.blankj:utilcodex:1.25.9"
+
+            // Gson
+            implementation "com.google.code.gson:gson:2.8.5"
+
+            // Okhttp
+            implementation "com.squareup.okhttp3:okhttp:4.2.0"
+            testImplementation "com.squareup.okhttp3:mockwebserver:4.2.0"
+
+            // Leak canary
+            debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
+            androidTestImplementation "com.squareup.leakcanary:leakcanary-android-instrumentation:2.0-beta-3"
+
+            // Junit5
+            def test = app.test
+
+            testImplementation test.junit.jupiter_api
+            testRuntimeOnly test.junit.jupiter_engine
+            testImplementation test.junit.jupiter_params
+            testImplementation test.mockito
+            testImplementation test.assertj
+        }
+    }
 }

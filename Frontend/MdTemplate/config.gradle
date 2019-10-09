@@ -1,0 +1,151 @@
+ext {
+    sdk_version = 29
+    min_sdk_version = 21
+
+    android = [
+            minSdkVersion    : 21,
+            compileSdkVersion: 29,
+            targetSdkVersion : 29,
+            buildToolsVersion: "29.0.2",
+            versionCode      : 1,
+            versionName      : "1.0",
+            resConfigs       : "zh"
+    ]
+    plug = [
+            mainVersion        : 1,
+            mainVersionName    : '1.0.0',
+
+            libBaseVersion     : 1,
+            libBaseVersionName : '1.0.0',
+
+            libStyleVersion    : 1,
+            libStyleVersionName: '1.0.0',
+
+            libUtilVersion     : 1,
+            libUtilVersionName : '1.0.0'
+    ]
+
+
+    def junit_version = "5.5.2"
+    def dagger_version = "2.24"
+    def lombok_version = "1.18.10"
+    def retrofit_version = "2.6.2"
+    def glide_version = "4.10.0"
+    def androidx_version = "2.1.0"
+    def androidx_test_version = "1.2.0"
+    def androidx_test_espresso_version = "3.2.0"
+
+    dependencies = [
+
+            // Lombok
+            lombok   : "org.projectlombok:lombok:$lombok_version",
+
+            androidx : [
+                    activity           : "androidx.activity:activity:1.0.0",
+                    appcompat          : "androidx.appcompat:appcompat:1.1.0",
+                    appcompat_resources: "androidx.appcompat:appcompat-resources:1.1.0",
+                    core               : "androidx.core:core:1.1.0",
+                    annotation         : "androidx.annotation:annotation:1.1.0",
+                    collection         : "androidx.collection:collection:1.1.0",
+                    legacy_support_v4  : "androidx.legacy:legacy-support-v4:1.0.0",
+                    preference         : "androidx.preference:preference:1.1.0",
+                    fragment           : "androidx.fragment:fragment:1.1.0",
+//                    fragment_testing   : "androidx.fragment:fragment-testing:1.1.0",
+
+                    palette            : "androidx.palette:palette:1.0.0",
+                    cardview           : "androidx.cardview:cardview:1.0.0",
+                    recyclerview       : "androidx.recyclerview:recyclerview:1.0.0",
+                    constraintlayout   : "androidx.constraintlayout:constraintlayout:2.0.0-beta2",
+                    material           : "com.google.android.material:material:1.0.0",
+
+                    arch               : [
+                            core: [
+                                    runtime: "androidx.arch.core:core-runtime:2.1.0",
+                                    common : "androidx.arch.core:core-common:2.1.0",
+                                    testing: "androidx.arch.core:core-testing:$androidx_version"
+                            ]
+                    ],
+
+                    lifecycle          : [
+                            extensions  : "androidx.lifecycle:lifecycle-extensions:$androidx_version", // include viewmodel&livedata&runtime
+                            viewmodel   : "androidx.lifecycle:lifecycle-viewmodel:$androidx_version",
+                            livedata    : "androidx.lifecycle:lifecycle-livedata:$androidx_version",
+                            runtime     : "androidx.lifecycle:lifecycle-runtime:$androidx_version",
+                            common_java8: "androidx.lifecycle:lifecycle-common-java8:$androidx_version"
+                    ],
+
+                    room               : [
+                            runtime : "androidx.room:room-runtime:$androidx_version",
+                            compiler: "androidx.room:room-compiler:$androidx_version",
+                            testing : "androidx.room:room-testing:$androidx_version"
+                    ],
+
+                    paging             : [
+                            runtime: "androidx.paging:paging-runtime:$androidx_version",
+                            common : "androidx.paging:paging-common:$androidx_version"
+                    ],
+                    work               : [
+                            runtime: "androidx.work:work-runtime:2.2.0",
+                            testing: "androidx.work:work-testing:2.2.0"
+                    ],
+                    navigation         : [
+                            fragment: "androidx.navigation:navigation-fragment:$androidx_version",
+                            ui      : "androidx.navigation:navigation-ui:$androidx_version"
+                    ],
+
+                    media              : "androidx.media:media:1.1.0",
+                    media2             : [
+                            media2: "androidx.media2:media2-session:1.0.0",
+                            widget: "androidx.media2:media2-widget:1.0.0",
+                            player: "androidx.media2:media2-player:1.0.0"
+                    ],
+                    mediarouter        : "androidx.mediarouter:mediarouter:1.1.0",
+
+                    test               : [
+                            core    : "androidx.test:core:$androidx_test_version",
+                            runner  : "androidx.test:runner:$androidx_test_version",
+                            rules   : "androidx.test:rules:$androidx_test_version",
+                            monitor : "androidx.test:monitor:$androidx_test_version",
+                            ext     : [
+                                    junit: "androidx.test.ext:junit:1.1.1",
+                                    truth: "androidx.test.ext:truth:$androidx_test_version"
+                            ],
+                            espresso: [
+                                    core             : "androidx.test.espresso:espresso-core:$androidx_test_espresso_version",
+                                    contrib          : "androidx.test.espresso:espresso-contrib:$androidx_test_espresso_version",
+                                    intents          : "androidx.test.espresso:espresso-intents:$androidx_test_espresso_version",
+                                    accessibility    : "androidx.test.espresso:espresso-accessibility:$androidx_test_espresso_version",
+                                    web              : "androidx.test.espresso:espresso-web:$androidx_test_espresso_version",
+                                    idling_concurrent: "androidx.test.espresso.idling:idling-concurrent:$androidx_test_espresso_version",
+                                    idling_resource  : "androidx.test.espresso:espresso-idling-resource:$androidx_test_espresso_version"
+                            ]
+                    ]
+            ],
+            dagger   : [
+                    android          : "com.google.dagger:dagger-android:$dagger_version",
+                    android_support  : "com.google.dagger:dagger-android-support:$dagger_version",
+                    dagger           : "com.google.dagger:dagger:$dagger_version",
+                    compiler         : "com.google.dagger:dagger-compiler:$dagger_version",
+                    android_processor: "com.google.dagger:dagger-android-processor:$dagger_version"
+            ],
+            glide    : [
+                    glide              : "com.github.bumptech.glide:glide:$glide_version",
+                    compiler           : "com.github.bumptech.glide:compiler:$glide_version",
+                    okhttp3_integration: "com.github.bumptech.glide:okhttp3-integration:$glide_version"
+            ],
+            retrofit2: [
+                    retrofit      : "com.squareup.retrofit2:retrofit:$retrofit_version",
+                    converter_gson: "com.squareup.retrofit2:converter-gson:$retrofit_version"
+            ],
+            test     : [
+                    junit  : [
+                            jupiter_api   : "org.junit.jupiter:junit-jupiter-api:$junit_version",
+                            jupiter_engine: "org.junit.jupiter:junit-jupiter-engine:$junit_version",
+                            jupiter_params: "org.junit.jupiter:junit-jupiter-params:$junit_version"
+                    ],
+                    mockito: "org.mockito:mockito-core:3.1.0",
+                    assertj: "org.assertj:assertj-core:3.13.2"
+            ]
+
+    ]
+}
