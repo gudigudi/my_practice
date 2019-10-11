@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: "androidx.benchmark"
 
 android {
     defaultConfig {
@@ -8,5 +9,5 @@ android {
 
 dependencies {
     implementation project(':commonlib')
-    androidTestImplementation "androidx.benchmark:benchmark-junit4:1.0.0-alpha06"
+    androidTestImplementation "androidx.benchmark:benchmark-junit4:1.0.0-beta01"
 }
