@@ -75,9 +75,9 @@ ext {
                     ],
 
                     room               : [
-                            runtime : "androidx.room:room-runtime:$androidx_version",
-                            compiler: "androidx.room:room-compiler:$androidx_version",
-                            testing : "androidx.room:room-testing:$androidx_version"
+                            runtime : "androidx.room:room-runtime:2.2.0",
+                            compiler: "androidx.room:room-compiler:2.2.0",
+                            testing : "androidx.room:room-testing:2.2.0"
                     ],
 
                     paging             : [
@@ -95,9 +95,9 @@ ext {
 
                     media              : "androidx.media:media:1.1.0",
                     media2             : [
-                            media2: "androidx.media2:media2-session:1.0.0",
-                            widget: "androidx.media2:media2-widget:1.0.0",
-                            player: "androidx.media2:media2-player:1.0.0"
+                            media2: "androidx.media2:media2-session:1.0.1",
+                            widget: "androidx.media2:media2-widget:1.0.1",
+                            player: "androidx.media2:media2-player:1.0.1"
                     ],
                     mediarouter        : "androidx.mediarouter:mediarouter:1.1.0",
 
