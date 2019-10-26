@@ -18,7 +18,7 @@ public class WebViewActivity extends BaseActivity {
     public static final String KEY_URL_TO_LOAD = "KEY_URL_TO_LOAD";
 
     @VisibleForTesting
-    protected static final String WEB_FORM_URL = "file://android_asset/web_form.html";
+    protected static final String WEB_FORM_URL = "file:///android_asset/web_form.html";
 
     private WebView mWebView;
 
