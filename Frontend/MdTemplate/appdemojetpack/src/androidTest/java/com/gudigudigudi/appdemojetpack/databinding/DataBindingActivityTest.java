@@ -27,12 +27,12 @@ public class DataBindingActivityTest {
     public ActivityScenarioRule<DataBindingActivity> mActivityScenarioRule = new ActivityScenarioRule<>(DataBindingActivity.class);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Intents.init();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Intents.release();
     }
 
