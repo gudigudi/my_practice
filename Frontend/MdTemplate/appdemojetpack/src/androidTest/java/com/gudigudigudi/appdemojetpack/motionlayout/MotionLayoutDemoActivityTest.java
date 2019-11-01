@@ -1,13 +1,5 @@
 package com.gudigudigudi.appdemojetpack.motionlayout;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.widget.ImageView;
-
-import androidx.annotation.DrawableRes;
-import androidx.appcompat.widget.DrawableUtils;
-import androidx.core.content.ContextCompat;
 import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.action.GeneralLocation;
 import androidx.test.espresso.action.GeneralSwipeAction;
@@ -19,11 +11,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import com.gudigudigudi.appdemojetpack.R;
-import com.gudigudigudi.appdemojetpack.viewpager2.ViewPager2Activity;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -35,18 +23,13 @@ import static androidx.test.espresso.assertion.PositionAssertions.isBottomAligne
 import static androidx.test.espresso.assertion.PositionAssertions.isCompletelyBelow;
 import static androidx.test.espresso.assertion.PositionAssertions.isCompletelyLeftOf;
 import static androidx.test.espresso.assertion.PositionAssertions.isLeftAlignedWith;
-import static androidx.test.espresso.assertion.PositionAssertions.isLeftOf;
 import static androidx.test.espresso.assertion.PositionAssertions.isRightAlignedWith;
 import static androidx.test.espresso.assertion.PositionAssertions.isTopAlignedWith;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.hasBackground;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withResourceName;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.*;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -73,7 +56,7 @@ public class MotionLayoutDemoActivityTest {
         int[] imageViewIds = {R.id.middle, R.id.left, R.id.right, R.id.windmill};
         for (int id : imageViewIds) {
             onView(withId(id)).check(matches(isDisplayed()));
-            onView(withId(id)).check(matches(withDrawableId(R.drawable.ic_arrow_back)));
+            onView(withId(id)).check(matches(MyViewMatchers.withDrawableId(R.drawable.ic_arrow_back)));
         }
 
         // TextView checks.
@@ -128,66 +111,5 @@ public class MotionLayoutDemoActivityTest {
                 .check(isBottomAlignedWith(withId(R.id.right)));
     }
 
-    public static Matcher<View> hasDrawable() {
-        return new TypeSafeMatcher<View>() {
 
-            @Override
-            public void describeTo(Description description) {
-            }
-
-            @Override
-            protected boolean matchesSafely(View item) {
-                ImageView imageView = (ImageView) item;
-                return imageView.getDrawable() != null;
-            }
-        };
-    }
-
-    public static Matcher<View> withDrawableId(@DrawableRes final int id) {
-        return new DrawableMatcher(id);
-    }
-
-    public static class DrawableMatcher extends TypeSafeMatcher<View> {
-
-        private final int expectedId;
-        private String resourceName;
-
-        public DrawableMatcher(@DrawableRes int expectedId) {
-            super(View.class);
-            this.expectedId = expectedId;
-        }
-
-        @Override
-        protected boolean matchesSafely(View target) {
-            if (!(target instanceof ImageView)) {
-                return false;
-            }
-            ImageView imageView = (ImageView) target;
-            if (expectedId < 0) {
-                return imageView.getDrawable() == null;
-            }
-            Resources resources = target.getContext().getResources();
-            Drawable expectedDrawable = resources.getDrawable(expectedId);
-            resourceName = resources.getResourceEntryName(expectedId);
-            if (expectedDrawable != null && expectedDrawable.getConstantState() != null) {
-                return expectedDrawable.getConstantState().equals(
-                        imageView.getDrawable().getConstantState()
-                );
-            } else {
-                return false;
-            }
-        }
-
-
-        @Override
-        public void describeTo(Description description) {
-            description.appendText("with drawable from resource id: ");
-            description.appendValue(expectedId);
-            if (resourceName != null) {
-                description.appendText("[");
-                description.appendText(resourceName);
-                description.appendText("]");
-            }
-        }
-    }
 }
