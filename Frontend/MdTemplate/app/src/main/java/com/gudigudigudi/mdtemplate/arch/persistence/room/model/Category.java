@@ -10,7 +10,6 @@ import lombok.Data;
  * Created by gu on 10/3/17.
  */
 
-@Data
 @Entity
 public class Category {
     @PrimaryKey(autoGenerate = true)
@@ -19,4 +18,28 @@ public class Category {
     private String name;
     @ColumnInfo(name = "code")
     private int code;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 }
