@@ -3,7 +3,7 @@ ext {
     min_sdk_version = 21
 
     android = [
-            minSdkVersion    : 21,
+            minSdkVersion    : 22,
             compileSdkVersion: 29,
             targetSdkVersion : 29,
             buildToolsVersion: "29.0.2",
@@ -13,21 +13,11 @@ ext {
     ]
     plug = [
             mainVersion        : 1,
-            mainVersionName    : '1.0.0',
-
-            libBaseVersion     : 1,
-            libBaseVersionName : '1.0.0',
-
-            libStyleVersion    : 1,
-            libStyleVersionName: '1.0.0',
-
-            libUtilVersion     : 1,
-            libUtilVersionName : '1.0.0'
+            mainVersionName    : '1.0.0'
     ]
 
-
     def junit_version = "5.5.2"
-    def dagger_version = "2.24"
+    def dagger_version = "2.25.2"
     def lombok_version = "1.18.10"
     def retrofit_version = "2.6.2"
     def glide_version = "4.10.0"
@@ -36,7 +26,6 @@ ext {
     def androidx_test_espresso_version = "3.2.0"
 
     dependencies = [
-
             // Lombok
             lombok   : "org.projectlombok:lombok:$lombok_version",
 
@@ -75,9 +64,9 @@ ext {
                     ],
 
                     room               : [
-                            runtime : "androidx.room:room-runtime:2.2.0",
-                            compiler: "androidx.room:room-compiler:2.2.0",
-                            testing : "androidx.room:room-testing:2.2.0"
+                            runtime : "androidx.room:room-runtime:2.2.1",
+                            compiler: "androidx.room:room-compiler:2.2.1",
+                            testing : "androidx.room:room-testing:2.2.1"
                     ],
 
                     paging             : [
@@ -144,8 +133,7 @@ ext {
                             jupiter_params: "org.junit.jupiter:junit-jupiter-params:$junit_version"
                     ],
                     mockito: "org.mockito:mockito-core:3.1.0",
-                    assertj: "org.assertj:assertj-core:3.13.2"
+                    assertj: "org.assertj:assertj-core:3.14.0"
             ]
-
     ]
 }

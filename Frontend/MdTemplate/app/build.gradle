@@ -4,16 +4,6 @@ android {
     defaultConfig {
         applicationId "com.gudigudigudi.mdtemplate"
     }
-
-    sourceSets {
-        main {
-            res.srcDirs = ['src/main/res',
-                           'src/main/res/layouts/chat',
-                           'src/main/res/layouts/home',
-                           'src/main/res/layouts/profile'
-            ]
-        }
-    }
 }
 
 dependencies {
