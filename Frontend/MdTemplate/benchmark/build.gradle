@@ -6,7 +6,9 @@ android {
         testInstrumentationRunner "androidx.benchmark.junit4.AndroidBenchmarkRunner"
     }
 }
-
+configurations {
+    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+}
 dependencies {
     implementation project(':commonlib')
     androidTestImplementation "androidx.benchmark:benchmark-junit4:1.0.0"

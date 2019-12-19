@@ -1,12 +1,8 @@
 ext {
-    sdk_version = 29
-    min_sdk_version = 21
-
     android = [
             minSdkVersion    : 22,
             compileSdkVersion: 29,
             targetSdkVersion : 29,
-            buildToolsVersion: "29.0.2",
             versionCode      : 1,
             versionName      : "1.0",
             resConfigs       : "zh"
@@ -24,30 +20,34 @@ ext {
     def androidx_version = "2.1.0"
     def androidx_test_version = "1.2.0"
     def androidx_test_espresso_version = "3.2.0"
+    def kotlin_version = "1.3.50"
 
     dependencies = [
-            // Lombok
-            lombok   : "org.projectlombok:lombok:$lombok_version",
+            lombok       : "org.projectlombok:lombok:$lombok_version",
+            kotlin_stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
 
-            androidx : [
+            androidx     : [
                     activity              : "androidx.activity:activity:1.0.0",
                     appcompat             : "androidx.appcompat:appcompat:1.1.0",
                     appcompat_resources   : "androidx.appcompat:appcompat-resources:1.1.0",
                     core                  : "androidx.core:core:1.1.0",
+                    core_ktx              : "androidx.core:core-ktx:1.1.0",
                     annotation            : "androidx.annotation:annotation:1.1.0",
                     collection            : "androidx.collection:collection:1.1.0",
                     legacy_support_v4     : "androidx.legacy:legacy-support-v4:1.0.0",
                     preference            : "androidx.preference:preference:1.1.0",
                     fragment              : "androidx.fragment:fragment:1.1.0",
-//                    fragment_testing   : "androidx.fragment:fragment-testing:1.1.0",
-
+                    fragment_ktx          : "androidx.fragment:fragment-ktx:1.1.0",
+                    fragment_testing      : "androidx.fragment:fragment-testing:1.1.0",
                     palette               : "androidx.palette:palette:1.0.0",
                     cardview              : "androidx.cardview:cardview:1.0.0",
                     recyclerview          : "androidx.recyclerview:recyclerview:1.1.0",
                     recyclerview_selection: "androidx.recyclerview:recyclerview-selection:1.1.0",
                     constraintlayout      : "androidx.constraintlayout:constraintlayout:2.0.0-beta2",
-                    material              : "com.google.android.material:material:1.0.0",
-
+                    coordinatorlayout     : "androidx.coordinatorlayout:coordinatorlayout:1.1.0",
+                    material              : "com.google.android.material:material:1.1.0-beta02",
+                    viewpager2            : "androidx.viewpager2:viewpager2:1.0.0",
+                    multidex              : "androidx.multidex:multidex:2.0.1",
                     arch                  : [
                             core: [
                                     runtime: "androidx.arch.core:core-runtime:2.1.0",
@@ -55,24 +55,23 @@ ext {
                                     testing: "androidx.arch.core:core-testing:$androidx_version"
                             ]
                     ],
-
                     lifecycle             : [
-                            extensions  : "androidx.lifecycle:lifecycle-extensions:$androidx_version", // include viewmodel&livedata&runtime
-                            viewmodel   : "androidx.lifecycle:lifecycle-viewmodel:$androidx_version",
-                            livedata    : "androidx.lifecycle:lifecycle-livedata:$androidx_version",
-                            runtime     : "androidx.lifecycle:lifecycle-runtime:$androidx_version",
-                            common_java8: "androidx.lifecycle:lifecycle-common-java8:$androidx_version"
+                            extensions   : "androidx.lifecycle:lifecycle-extensions:$androidx_version", // include viewmodel&livedata&runtime
+                            viewmodel    : "androidx.lifecycle:lifecycle-viewmodel:$androidx_version",
+                            viewmodel_ktx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_version",
+                            livedata     : "androidx.lifecycle:lifecycle-livedata:$androidx_version",
+                            livedata_ktx : "androidx.lifecycle:lifecycle-livedata-ktx:$androidx_version",
+                            runtime      : "androidx.lifecycle:lifecycle-runtime:$androidx_version",
+                            common_java8 : "androidx.lifecycle:lifecycle-common-java8:$androidx_version"
                     ],
-
                     room                  : [
-                            runtime : "androidx.room:room-runtime:2.2.2",
-                            compiler: "androidx.room:room-compiler:2.2.2",
-                            testing : "androidx.room:room-testing:2.2.2"
+                            runtime : "androidx.room:room-runtime:2.2.3",
+                            compiler: "androidx.room:room-compiler:2.2.3",
+                            testing : "androidx.room:room-testing:2.2.3"
                     ],
-
                     paging                : [
-                            runtime: "androidx.paging:paging-runtime:$androidx_version",
-                            common : "androidx.paging:paging-common:$androidx_version"
+                            runtime: "androidx.paging:paging-runtime:2.1.1",
+                            common : "androidx.paging:paging-common:2.1.1"
                     ],
                     work                  : [
                             runtime: "androidx.work:work-runtime:2.2.0",
@@ -82,7 +81,6 @@ ext {
                             fragment: "androidx.navigation:navigation-fragment:$androidx_version",
                             ui      : "androidx.navigation:navigation-ui:$androidx_version"
                     ],
-
                     media                 : "androidx.media:media:1.1.0",
                     media2                : [
                             media2: "androidx.media2:media2-session:1.0.1",
@@ -90,7 +88,11 @@ ext {
                             player: "androidx.media2:media2-player:1.0.1"
                     ],
                     mediarouter           : "androidx.mediarouter:mediarouter:1.1.0",
-
+                    enterprise            : [
+                            feedback        : "androidx.enterprise:enterprise-feedback:1.0.0",
+                            feedback_testing: "androidx.enterprise:enterprise-feedback-testing:1.0.0"
+                    ],
+                    browser               : "androidx.browser:browser:1.2.0",
                     test                  : [
                             core    : "androidx.test:core:$androidx_test_version",
                             runner  : "androidx.test:runner:$androidx_test_version",
@@ -111,29 +113,29 @@ ext {
                             ]
                     ]
             ],
-            dagger   : [
+            dagger       : [
                     android          : "com.google.dagger:dagger-android:$dagger_version",
                     android_support  : "com.google.dagger:dagger-android-support:$dagger_version",
                     dagger           : "com.google.dagger:dagger:$dagger_version",
                     compiler         : "com.google.dagger:dagger-compiler:$dagger_version",
                     android_processor: "com.google.dagger:dagger-android-processor:$dagger_version"
             ],
-            glide    : [
+            glide        : [
                     glide              : "com.github.bumptech.glide:glide:$glide_version",
                     compiler           : "com.github.bumptech.glide:compiler:$glide_version",
                     okhttp3_integration: "com.github.bumptech.glide:okhttp3-integration:$glide_version"
             ],
-            retrofit2: [
+            retrofit2    : [
                     retrofit      : "com.squareup.retrofit2:retrofit:$retrofit_version",
                     converter_gson: "com.squareup.retrofit2:converter-gson:$retrofit_version"
             ],
-            test     : [
+            test         : [
                     junit  : [
                             jupiter_api   : "org.junit.jupiter:junit-jupiter-api:$junit_version",
                             jupiter_engine: "org.junit.jupiter:junit-jupiter-engine:$junit_version",
                             jupiter_params: "org.junit.jupiter:junit-jupiter-params:$junit_version"
                     ],
-                    mockito: "org.mockito:mockito-core:3.1.0",
+                    mockito: "org.mockito:mockito-core:3.2.4",
                     assertj: "org.assertj:assertj-core:3.14.0"
             ]
     ]

@@ -12,6 +12,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.5.3'
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.1.0"
         classpath "androidx.benchmark:benchmark-gradle-plugin:1.0.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50"
     }
 }
 
@@ -46,6 +47,7 @@ def loadProperties() {
 
 
 subprojects {
+
 //    beforeEvaluate { project ->
 //        if (project.name.contains('feature')) {
 //            project.ext.isFeatureModule = true
@@ -56,6 +58,7 @@ subprojects {
 
     afterEvaluate { project ->
         ext.pluginContainer = project.getPlugins()
+
 
         android {
             def app = rootProject.ext.android
@@ -119,6 +122,8 @@ subprojects {
                     aaptOptions.cruncherEnabled = false
                     ext.enableCrashlytics = false
                     proguardFiles fileTree(dir: "${project.rootProject.rootDir}/proguards", include: ['*.pro']).asList().toArray()
+
+                    testCoverageEnabled = false // Breaks Kotlin compiler.
                 }
                 release {
                     buildConfigField "boolean", "LOG_DEBUG", buildProperty.release_LOG_DEBUG
@@ -181,7 +186,10 @@ subprojects {
                 enabled = true
             }
             testOptions {
-                unitTests.returnDefaultValues = true
+                unitTests {
+                    includeAndroidResources = true
+                    returnDefaultValues = true
+                }
             }
             compileOptions {
                 encoding = "utf-8"
@@ -198,7 +206,6 @@ subprojects {
                 productFlavors {//配置渠道包或者版本包
                     playStore {}
                     miui {}
-                    wandoujia {}
                 }
                 productFlavors.all { flavors ->
                     flavors.manifestPlaceholders = [channelValue: name]
@@ -224,7 +231,8 @@ subprojects {
             def androidx = app.androidx
 
             implementation fileTree(dir: 'libs', include: ['*.jar'])
-            implementation 'androidx.multidex:multidex:2.0.1'
+
+            implementation app.kotlin_stdlib
 
             // AndroidX Test
             androidTestImplementation androidx.test.core
@@ -248,14 +256,15 @@ subprojects {
             implementation androidx.activity
             implementation androidx.appcompat
             implementation androidx.appcompat_resources
-            implementation androidx.core
+            implementation androidx.core,androidx.core_ktx
             implementation androidx.arch.core.runtime
             implementation androidx.arch.core.common
             implementation androidx.annotation
             implementation androidx.collection
             implementation androidx.legacy_support_v4
             implementation androidx.preference
-            implementation androidx.fragment
+            implementation androidx.multidex
+            implementation androidx.fragment,androidx.fragment_ktx
             implementation("androidx.fragment:fragment-testing:1.1.0") {
                 exclude group: "androidx.test"
             }
@@ -270,7 +279,7 @@ subprojects {
 
 
             // Lifecycle
-            implementation androidx.lifecycle.extensions
+            implementation androidx.lifecycle.extensions,androidx.lifecycle.viewmodel_ktx,androidx.lifecycle.livedata_ktx
             implementation androidx.lifecycle.common_java8
             testImplementation androidx.arch.core.testing
 
@@ -299,7 +308,9 @@ subprojects {
             implementation app.dagger.android
             implementation app.dagger.android_support
             implementation app.dagger.dagger
+
             annotationProcessor app.dagger.compiler
+
             annotationProcessor app.dagger.android_processor
 
             // Glide
