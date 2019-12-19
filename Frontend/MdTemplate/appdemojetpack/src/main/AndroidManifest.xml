@@ -18,6 +18,7 @@
         <activity android:name=".work.WorkActivity"></activity>
         <activity android:name=".databinding.DataBindingActivity" />
         <activity android:name=".viewpager2.ViewPager2Activity" />
+        <activity android:name=".viewpager2.ScreenSlidePagerActivity" />
         <activity android:name=".motionlayout.MotionLayoutDemoActivity">
         </activity>
         <activity android:name=".business.weather.WeatherActivity" />

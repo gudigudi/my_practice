@@ -1,31 +1,29 @@
 package com.gudigudigudi.appdemojetpack.business.userProfile;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import javax.inject.Inject;
 
 
 public class UserProfileViewModel extends ViewModel {
 
     private String userId;
-    private LiveData<User> user;
+    private MutableLiveData<User> user;
     private UserRepository userRepo;
 
-    @Inject
-    public UserProfileViewModel(UserRepository userRepo) {
-        this.userRepo = userRepo;
-    }
-
-    public void init(String userId) {
-        if (this.user != null) {
-            return;
-        }
-        user = userRepo.getUser(userId);
-    }
 
     public LiveData<User> getUser() {
+        if (user == null) {
+            user = new MutableLiveData<>();
+            user.setValue(new User(12, "java", "jdk8"));
+        }
+
         return user;
     }
 
+    public void setUserName(String name) {
+        User u = user.getValue();
+        u.setName(name);
+        user.postValue(u);
+    }
 }
