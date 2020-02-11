@@ -33,6 +33,7 @@ import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.PathUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.UriUtils;
 import com.gudigudigudi.commonlib.base.BaseActivity;
 import com.gudigudigudi.commonlib.constants.LogTag;
@@ -46,7 +47,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SystemServiceActivity extends BaseActivity implements View.OnClickListener {
 
-    public static final String FILE_PRIVIDER = "com.gudigudigudi.mdtemplate.fileprivider";
     private static final int REQUEST_CODE_TAKE_PHOTO = 1;
     private static final int REQUEST_CODE_CHOOSE_PHOTO = 2;
     private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 3;
@@ -160,7 +160,7 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openAlbum();
                 } else {
-                    Toast.makeText(this, "You denied the permission", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort("You denied the permission");
                 }
                 break;
             case REQUEST_CODE_WRITE_EXTERNAL_STORAGE:
@@ -168,7 +168,7 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
                     initMediaPlayer();
                     initVideoView();
                 } else {
-                    Toast.makeText(this, "You denied the permission.", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort("You denied the permission");
                     finish();
                 }
                 break;

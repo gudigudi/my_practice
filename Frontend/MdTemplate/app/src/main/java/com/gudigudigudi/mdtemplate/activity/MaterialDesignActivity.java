@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.blankj.utilcode.util.ColorUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -97,7 +97,7 @@ public class MaterialDesignActivity extends BaseActivity {
 
         mFloatingActionButton = findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(view -> Snackbar.make(view, "Snackbar is clicked", Snackbar.LENGTH_SHORT)
-                .setAction("OK", view1 -> Toast.makeText(MaterialDesignActivity.this, "FAB is clicked:OK", Toast.LENGTH_SHORT).show()).show());
+                .setAction("OK", view1 -> ToastUtils.showShort("FAB is clicked:OK")).show());
 
         initFruits();
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -108,7 +108,7 @@ public class MaterialDesignActivity extends BaseActivity {
 
         mSwipeRefreshLayout = findViewById(R.id.swipe_reflesh);
         mSwipeRefreshLayout.setColorSchemeColors(ColorUtils.getColor(R.color.colorPrimary));
-        mSwipeRefreshLayout.setOnRefreshListener(() -> MaterialDesignActivity.this.refreshFruits());
+        mSwipeRefreshLayout.setOnRefreshListener(this::refreshFruits);
     }
 
     private void refreshFruits() {

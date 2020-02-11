@@ -11,13 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.mdtemplate.R;
 
@@ -91,9 +91,9 @@ public class BroadcastFragment extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (NetworkUtils.isConnected()) {
-                Toast.makeText(context, "network is available", Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort("network is available");
             } else {
-                Toast.makeText(context, "network is unavailable", Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort("network is unavailable");
             }
         }
     }
@@ -105,7 +105,7 @@ public class BroadcastFragment extends BaseFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Toast.makeText(context, "received local broadcast", Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort("received local broadcast");
         }
     }
 }

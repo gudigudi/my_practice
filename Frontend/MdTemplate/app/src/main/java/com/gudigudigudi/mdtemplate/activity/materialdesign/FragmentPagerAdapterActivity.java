@@ -1,20 +1,19 @@
 package com.gudigudigudi.mdtemplate.activity.materialdesign;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.PagerTabStrip;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.gudigudigudi.commonlib.base.BaseActivity;
 import com.gudigudigudi.mdtemplate.R;
 import com.gudigudigudi.mdtemplate.fragment.AlertDialogFragment;
 import com.gudigudigudi.mdtemplate.fragment.AnimationFragment;
 import com.gudigudigudi.mdtemplate.fragment.AnimatorFragment;
 import com.gudigudigudi.mdtemplate.fragment.BroadcastFragment;
-import com.gudigudigudi.mdtemplate.fragment.DataStoreFragment;
 import com.gudigudigudi.mdtemplate.fragment.IMFragment;
 import com.gudigudigudi.mdtemplate.fragment.TransitionFragment;
 import com.gudigudigudi.mdtemplate.fragment.ViewAnimationFragment;
@@ -67,7 +66,6 @@ public class FragmentPagerAdapterActivity extends BaseActivity implements ViewPa
         fragments.add(new AnimationFragment());
         fragments.add(new AlertDialogFragment());
         fragments.add(new BroadcastFragment());
-        fragments.add(new DataStoreFragment());
         fragments.add(new IMFragment());
         for (int i = 0; i < fragments.size(); i++) {
             titles.add("page" + i);
@@ -81,7 +79,7 @@ public class FragmentPagerAdapterActivity extends BaseActivity implements ViewPa
 
     @Override
     public void onPageSelected(int position) {
-        Toast.makeText(this, "page " + position, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort("page "+position);
     }
 
     @Override

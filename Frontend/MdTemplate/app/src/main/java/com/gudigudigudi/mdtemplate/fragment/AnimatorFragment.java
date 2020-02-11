@@ -14,11 +14,11 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.commonlib.constants.LogTag;
 import com.gudigudigudi.mdtemplate.R;
@@ -65,7 +65,7 @@ public class AnimatorFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.image_view:
-                Toast.makeText(getContext(), "clicked", Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort("clicked");
                 break;
             case R.id.button:
                 ObjectAnimator objectAnimator = (ObjectAnimator) AnimatorInflater.loadAnimator(getActivity(), R.animator.background);

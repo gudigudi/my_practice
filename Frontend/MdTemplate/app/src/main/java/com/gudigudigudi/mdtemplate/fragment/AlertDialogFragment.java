@@ -1,5 +1,6 @@
 package com.gudigudigudi.mdtemplate.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.commonlib.constants.LogTag;
 import com.gudigudigudi.mdtemplate.R;
@@ -62,6 +63,7 @@ public class AlertDialogFragment extends BaseFragment implements View.OnClickLis
         mBtnToggleLoadingDialog.setOnClickListener(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View view) {
         AlertDialog dialog;
@@ -70,7 +72,7 @@ public class AlertDialogFragment extends BaseFragment implements View.OnClickLis
                 dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
                         .setTitle("Single choise")
                         .setSingleChoiceItems(single, 0, (anInterface, i) -> mSingleChoise = single[i])
-                        .setPositiveButton("Yes", (anInterface, i) -> Toast.makeText(getActivity(), "You click " + mSingleChoise, Toast.LENGTH_SHORT).show()).create();
+                        .setPositiveButton("Yes", (anInterface, i) -> ToastUtils.showShort("You click " + mSingleChoise)).create();
                 dialog.show();
                 break;
             case R.id.btn_toggle_multi_choises_alertdialog:
@@ -83,10 +85,10 @@ public class AlertDialogFragment extends BaseFragment implements View.OnClickLis
                         })
                         .setPositiveButton("Yes", (anInterface, i) -> {
                             if (!"".equals(mMultiChoises)) {
-                                Toast.makeText(getActivity(), "You click " + mMultiChoises, Toast.LENGTH_SHORT).show();
+                                ToastUtils.showShort("You click " + mMultiChoises);
                                 mMultiChoises = "";
                             } else {
-                                Toast.makeText(getActivity(), "You click nothing.", Toast.LENGTH_SHORT).show();
+                                ToastUtils.showShort("You click nothing.");
                             }
 
                         })
