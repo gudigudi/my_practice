@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyFooter.vue renders component 1`] = `
+<div class="footer">
+  <p class="info">Click to modify</p>
+  <a-button-stub htmltype="button" size="default">Modify</a-button-stub>
+</div>
+`;

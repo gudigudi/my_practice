@@ -1,11 +1,9 @@
-package com.gudigudigudi.mdtemplate.arch.persistence.room.dao;
+package com.gudigudigudi.appdemojetpack.room;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-
-import com.gudigudigudi.mdtemplate.arch.persistence.room.model.Book;
 
 import java.util.List;
 

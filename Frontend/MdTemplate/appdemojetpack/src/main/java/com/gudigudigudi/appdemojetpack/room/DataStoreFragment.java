@@ -1,8 +1,7 @@
-package com.gudigudigudi.mdtemplate.fragment;
+package com.gudigudigudi.appdemojetpack.room;
 
 import android.content.ContentValues;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,13 +20,10 @@ import androidx.room.Room;
 
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.PathUtils;
+import com.blankj.utilcode.util.ToastUtils;
+import com.gudigudigudi.appdemojetpack.R;
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.commonlib.constants.LogTag;
-import com.gudigudigudi.mdtemplate.R;
-import com.gudigudigudi.mdtemplate.arch.persistence.room.AppDBHelper;
-import com.gudigudigudi.mdtemplate.arch.persistence.room.AppDatabase;
-import com.gudigudigudi.mdtemplate.arch.persistence.room.dao.BookDao;
-import com.gudigudigudi.mdtemplate.arch.persistence.room.model.Book;
 
 import java.util.List;
 
@@ -45,16 +41,10 @@ public class DataStoreFragment extends BaseFragment implements View.OnClickListe
     private Button mBtnSaveDataBySharedpreferences;
     private Button mBtnRestoreDataBySharedpreferences;
 
-    private AppDBHelper mDBHelper;
-    private Button mBtnCreateDB;
-    private Button mBtnAddDataToDB;
-    private Button mBtnUpdateDB;
-    private Button mBtnDeleteDataFromDB;
-    private Button mBtnQueryDataFromDB;
-
     private AppDatabase mAppDatabase;
     private BookDao mBookDao;
     private Button mBtnInsertRoom;
+
     private Button mBtnQueryRoom;
     private Button mBtnUpdateRoom;
     private Button mBtnDeleteRoom;
@@ -68,12 +58,6 @@ public class DataStoreFragment extends BaseFragment implements View.OnClickListe
 
         mBtnSaveDataBySharedpreferences = view.findViewById(R.id.btn_save_data_by_sharedpreferences);
         mBtnRestoreDataBySharedpreferences = view.findViewById(R.id.btn_restore_data_by_sharedpreferences);
-
-        mBtnCreateDB = view.findViewById(R.id.btn_create_db);
-        mBtnAddDataToDB = view.findViewById(R.id.btn_add_data_to_db);
-        mBtnUpdateDB = view.findViewById(R.id.btn_update_db);
-        mBtnDeleteDataFromDB = view.findViewById(R.id.btn_delete_data_from_db);
-        mBtnQueryDataFromDB = view.findViewById(R.id.btn_query_data_from_db);
 
         mBtnInsertRoom = view.findViewById(R.id.btn_insert_room);
         mBtnQueryRoom = view.findViewById(R.id.btn_query_room);
@@ -92,21 +76,14 @@ public class DataStoreFragment extends BaseFragment implements View.OnClickListe
         if (!TextUtils.isEmpty(inputText)) {
             mEditText.setText(inputText);
             mEditText.setSelection(inputText.length());
-            Toast.makeText(getContext(), "Restoring succeeded", Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort("Restoring succeeded");
         }
 
-        mDBHelper = new AppDBHelper(getContext(), "book.db", null, 3);
         mAppDatabase = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "book").build();
         mBookDao = mAppDatabase.bookDao();
 
         mBtnSaveDataBySharedpreferences.setOnClickListener(this);
         mBtnRestoreDataBySharedpreferences.setOnClickListener(this);
-
-        mBtnCreateDB.setOnClickListener(this);
-        mBtnAddDataToDB.setOnClickListener(this);
-        mBtnUpdateDB.setOnClickListener(this);
-        mBtnDeleteDataFromDB.setOnClickListener(this);
-        mBtnQueryDataFromDB.setOnClickListener(this);
 
         mBtnInsertRoom.setOnClickListener(this);
         mBtnQueryRoom.setOnClickListener(this);
@@ -123,8 +100,6 @@ public class DataStoreFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        SQLiteDatabase database;
-        ContentValues values;
 
         switch (view.getId()) {
             case R.id.btn_save_data_by_sharedpreferences:
@@ -143,68 +118,6 @@ public class DataStoreFragment extends BaseFragment implements View.OnClickListe
                 Log.d(TAG, "name is " + name);
                 Log.d(TAG, "age is " + age);
                 Log.d(TAG, "married is " + married);
-                break;
-            case R.id.btn_create_db:
-                mDBHelper.getWritableDatabase();
-                break;
-            case R.id.btn_add_data_to_db:
-                database = mDBHelper.getWritableDatabase();
-                values = new ContentValues();
-                values.put("name", "The Da Vinci Code");
-                values.put("author", "Dan Brown");
-                values.put("pages", 454);
-                values.put("price", 16.96);
-                values.put("press", "Unknown");
-                database.insert("book", null, values);
-
-                values.clear();
-
-                values.put("name", "The Lost Symbol");
-                values.put("author", "Dan Brown");
-                values.put("pages", 510);
-                values.put("price", 19.95);
-                values.put("press", "Unknown");
-                database.insert("book", null, values);
-
-                values.clear();
-
-                break;
-            case R.id.btn_update_db:
-                database = mDBHelper.getWritableDatabase();
-                values = new ContentValues();
-                values.put("price", 10.99);
-                database.update("book", values, "name = ?", new String[]{"The Da Vinci Code"});
-                values.clear();
-
-                break;
-            case R.id.btn_delete_data_from_db:
-                database = mDBHelper.getWritableDatabase();
-                database.delete("book", "pages > ?", new String[]{"500"});
-
-                break;
-            case R.id.btn_query_data_from_db:
-                database = mDBHelper.getWritableDatabase();
-                Log.d(TAG, "query data from Sqlite db.");
-
-                Log.d(TAG, "book database version is " + database.getVersion());
-
-                Cursor cursor = database.query("book", null, null, null, null, null, null, null);
-                if (cursor.moveToFirst()) {
-                    do {
-                        String name1 = cursor.getString(cursor.getColumnIndex("name"));
-                        String author = cursor.getString(cursor.getColumnIndex("author"));
-                        int pages = cursor.getInt(cursor.getColumnIndex("pages"));
-                        double price = cursor.getDouble(cursor.getColumnIndex("price"));
-                        String press = cursor.getString(cursor.getColumnIndex("press"));
-                        Log.d(TAG, "book name is " + name1);
-                        Log.d(TAG, "book author is " + author);
-                        Log.d(TAG, "book pages is " + pages);
-                        Log.d(TAG, "book price is " + price);
-                        Log.d(TAG, "book press is " + press);
-
-                    } while (cursor.moveToNext());
-                }
-                cursor.close();
                 break;
             case R.id.btn_insert_room:
                 new AsyncTask<Void, Void, Void>() {

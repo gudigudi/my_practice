@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HelloWorld.vue renders props.msg when passed 1`] = `
+<div class="hello">
+  <h1><span>new message</span></h1>
+  <p>count:0</p> <button>+1</button> <button>-1</button>
+</div>
+`;

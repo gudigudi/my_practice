@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate.arch.persistence.room;
+package com.gudigudigudi.appdemojetpack.room;
 
 /**
  * Created by gu on 10/2/17.

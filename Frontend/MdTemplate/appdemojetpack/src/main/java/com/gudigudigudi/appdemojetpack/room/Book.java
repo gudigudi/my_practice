@@ -1,4 +1,4 @@
-package com.gudigudigudi.mdtemplate.arch.persistence.room.model;
+package com.gudigudigudi.appdemojetpack.room;
 
 
 /**
@@ -8,8 +8,6 @@ package com.gudigudigudi.mdtemplate.arch.persistence.room.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import lombok.Data;
 
 /**
  * CREATE TABLE book (
