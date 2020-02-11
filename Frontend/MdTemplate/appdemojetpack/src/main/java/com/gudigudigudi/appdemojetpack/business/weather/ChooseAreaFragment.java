@@ -10,12 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Room;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.gudigudigudi.appdemojetpack.R;
@@ -160,7 +160,7 @@ public class ChooseAreaFragment extends BaseFragment {
 
         provinceList = appDatabase.provinceDao().getAll();
 
-        if (provinceList.size() > 0) {
+        if (!provinceList.isEmpty()) {
             log.debug("query from local db.");
             dataList.clear();
 
@@ -214,7 +214,7 @@ public class ChooseAreaFragment extends BaseFragment {
 
         countyList = appDatabase.countyDao().getCountyInCity(currentCity.getCode());
 
-        if (countyList.size() > 0) {
+        if (!countyList.isEmpty()) {
             dataList.clear();
             for (County county : countyList) {
                 dataList.add(county.getName());
@@ -236,7 +236,7 @@ public class ChooseAreaFragment extends BaseFragment {
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Fail to load", Toast.LENGTH_SHORT).show());
+                getActivity().runOnUiThread(() -> ToastUtils.showShort("Fail to load"));
             }
 
             @Override

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.gudigudigudi.mdtemplate.com.gudigudigudi.appdemojetpack.business.weather.WeatherActivity">
+    tools:context="com.gudigudigudi.appdemojetpack.business.weather.WeatherActivity">
 
     <ImageView
         android:id="@+id/bing_pic_img"

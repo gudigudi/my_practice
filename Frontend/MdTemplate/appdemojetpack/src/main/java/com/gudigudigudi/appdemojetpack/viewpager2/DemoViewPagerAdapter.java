@@ -1,5 +1,6 @@
 package com.gudigudigudi.appdemojetpack.viewpager2;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class DemoViewPagerAdapter extends RecyclerView.Adapter<DemoViewPagerAdapter.EventViewHolder> {
 
-    List<String> eventList=new ArrayList<>(Arrays.asList("0","1","2"));
+    private List<String> eventList = new ArrayList<>(Arrays.asList("0", "1", "2"));
 
     @NonNull
     @Override
@@ -27,13 +28,14 @@ public class DemoViewPagerAdapter extends RecyclerView.Adapter<DemoViewPagerAdap
         return new EventViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_demo_viewpager2_cell, parent, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
-        TextView textView=(TextView)holder.itemView;
-        textView.setText("Page "+eventList.get(position));
+        TextView textView = (TextView) holder.itemView;
+        textView.setText("Page " + eventList.get(position));
 
         @ColorRes
-        int backgroundColorResId = position % 2 == 0? R.color.blue: R.color.orange;
+        int backgroundColorResId = position % 2 == 0 ? R.color.blue : R.color.orange;
 
         textView.setBackgroundColor(ContextCompat.getColor(textView.getContext(), backgroundColorResId));
     }

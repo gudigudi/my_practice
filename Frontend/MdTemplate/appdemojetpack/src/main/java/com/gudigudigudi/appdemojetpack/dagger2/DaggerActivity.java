@@ -15,7 +15,6 @@ public class DaggerActivity extends AppCompatActivity {
     @Inject
     int testValue;
 
-
     Button mButton, mButton2, mButton3;
 
     @Override

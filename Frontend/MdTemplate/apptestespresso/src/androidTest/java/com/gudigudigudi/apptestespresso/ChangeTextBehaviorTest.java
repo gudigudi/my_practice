@@ -29,7 +29,7 @@ public class ChangeTextBehaviorTest {
     public static final String STRING_TO_BE_TYPED = "Espresso";
 
     @Rule
-    public ActivityScenarioRule<MainEspressoActivity> mActivityScenarioRule = new ActivityScenarioRule<MainEspressoActivity>(MainEspressoActivity.class);
+    public ActivityScenarioRule<MainEspressoActivity> mActivityScenarioRule = new ActivityScenarioRule<>(MainEspressoActivity.class);
 
     @Before
     public void intentsInit() {

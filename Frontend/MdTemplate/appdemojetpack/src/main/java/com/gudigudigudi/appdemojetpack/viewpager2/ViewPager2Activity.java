@@ -1,9 +1,9 @@
 package com.gudigudigudi.appdemojetpack.viewpager2;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.os.Bundle;
 
 import com.gudigudigudi.appdemojetpack.R;
 

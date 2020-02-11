@@ -30,44 +30,12 @@ import lombok.Data;
 }, indices = {@Index("provinceId")})
 public class City {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    public int id;
     @ColumnInfo(name = "name")
-    private String name;
+    public String name;
     @ColumnInfo(name = "code")
     @SerializedName("id")
-    private int code;
+    public int code;
     @ColumnInfo(name = "provinceId")
-    private int provinceId;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public int getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(int provinceId) {
-        this.provinceId = provinceId;
-    }
+    public int provinceId;
 }

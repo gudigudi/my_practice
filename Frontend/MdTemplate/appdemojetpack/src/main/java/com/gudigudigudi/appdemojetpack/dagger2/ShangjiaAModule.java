@@ -7,14 +7,18 @@ import lombok.AllArgsConstructor;
 /**
  * 提供豆沙包Baozi和统一方便面Noodle
  */
-@AllArgsConstructor
 @Module
 public class ShangjiaAModule {
 
     String restaurant;
 
+    public ShangjiaAModule(String restaurant) {
+        this.restaurant = restaurant;
+    }
+
     /**
      * 提供name为"豆沙包"的Baozi
+     *
      * @return
      */
     @Provides
@@ -24,6 +28,7 @@ public class ShangjiaAModule {
 
     /**
      * 提供Noodle，实际提供其继承类Tongyi("统一方便面")
+     *
      * @param noodle
      * @return
      */
@@ -39,10 +44,11 @@ public class ShangjiaAModule {
 
     /**
      * 提供String变量restaurant
+     *
      * @return
      */
     @Provides
-    public String provideRestaurant(){
+    public String provideRestaurant() {
         return restaurant;
     }
 }

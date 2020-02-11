@@ -1,7 +1,5 @@
 package com.gudigudigudi.appdemojetpack.dagger2;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -9,7 +7,7 @@ import dagger.Provides;
 public class ActivityModule {
 
     @Provides
-    public int provideActivityTest(){
+    public int provideActivityTest() {
         return 1234567890;
     }
 }

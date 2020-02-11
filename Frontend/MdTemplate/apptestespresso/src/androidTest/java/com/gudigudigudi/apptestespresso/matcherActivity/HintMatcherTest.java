@@ -38,7 +38,7 @@ public class HintMatcherTest {
     private String mValidStringToBeTyped;
 
     @Rule
-    public ActivityScenarioRule<MatcherActivity> mActivityScenarioRule = new ActivityScenarioRule<MatcherActivity>(MatcherActivity.class);
+    public ActivityScenarioRule<MatcherActivity> mActivityScenarioRule = new ActivityScenarioRule<>(MatcherActivity.class);
 
     @Before
     public void initValidStrings() {

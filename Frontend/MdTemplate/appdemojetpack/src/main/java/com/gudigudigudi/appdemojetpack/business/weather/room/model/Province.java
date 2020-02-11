@@ -22,34 +22,34 @@ import lombok.Data;
 @Entity
 public class Province {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    public int id;
     @ColumnInfo(name = "code")
     @SerializedName("id")
-    private int code;
+    public int code;
     @ColumnInfo(name = "name")
-    private String name;
+    public String name;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public int getCode() {
+//        return code;
+//    }
+//
+//    public void setCode(int code) {
+//        this.code = code;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 }

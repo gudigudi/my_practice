@@ -22,7 +22,7 @@ public class PasswordSetFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_phone_register, container, false);
-        
+
         return root;
     }
 
@@ -32,7 +32,6 @@ public class PasswordSetFragment extends BaseFragment {
         bundle.putString("nickname", nickname);
         setArguments(bundle);
     }
-
 
 
     /**

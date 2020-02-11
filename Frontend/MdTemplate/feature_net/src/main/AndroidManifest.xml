@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gudigudigudi.feature_net" />
+<manifest package="com.gudigudigudi.feature_net" />

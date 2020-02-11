@@ -31,54 +31,14 @@ import lombok.Data;
 }, indices = {@Index("cityId")})
 public class County {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    public int id;
     @ColumnInfo(name = "code")
-    private int code;
+    public int code;
     @ColumnInfo(name = "name")
-    private String name;
+    public String name;
     @ColumnInfo(name = "weatherId")
     @SerializedName("weather_id")
-    private String weatherId;
+    public String weatherId;
     @ColumnInfo(name = "cityId")
-    private int cityId;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getWeatherId() {
-        return weatherId;
-    }
-
-    public void setWeatherId(String weatherId) {
-        this.weatherId = weatherId;
-    }
-
-    public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
-    }
+    public int cityId;
 }

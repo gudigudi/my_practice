@@ -10,7 +10,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
+
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -119,7 +120,7 @@ public class BaseWebView extends WebView {
 
         @JavascriptInterface
         public void showToast(String message) {
-            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(message);
         }
     }
 

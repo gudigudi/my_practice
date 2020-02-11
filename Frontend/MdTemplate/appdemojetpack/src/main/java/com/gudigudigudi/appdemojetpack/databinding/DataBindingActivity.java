@@ -1,11 +1,10 @@
 package com.gudigudigudi.appdemojetpack.databinding;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.gudigudigudi.appdemojetpack.R;
 
@@ -22,6 +21,10 @@ public class DataBindingActivity extends AppCompatActivity implements View.OnCli
 
         binding.setTextStr("set data");
         binding.setOnClickListener(this);
+
+        User user = new User("java", 10);
+
+        binding.setUserFirst(user);
 
         View root = binding.getRoot();
     }

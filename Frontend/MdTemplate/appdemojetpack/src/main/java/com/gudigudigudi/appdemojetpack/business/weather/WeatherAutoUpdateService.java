@@ -20,17 +20,16 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Objects;
 
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+@NoArgsConstructor
 @Slf4j
 public class WeatherAutoUpdateService extends Service {
 
-    public WeatherAutoUpdateService() {
-        // TODO
-    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -67,7 +66,7 @@ public class WeatherAutoUpdateService extends Service {
                 weather = new Gson().fromJson(new JSONObject(weatherString).getJSONArray("HeWeather").getJSONObject(0).toString(), Weather.class);
             } catch (JSONException e) {
                 log.error(e.getMessage());
-                }
+            }
             final String weatherId = Objects.requireNonNull(weather).basic.weatherId;
             String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=bc0418b57b2d4918819d3974ac1285d9";
 
@@ -75,7 +74,7 @@ public class WeatherAutoUpdateService extends Service {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     log.error(e.getMessage());
-                    }
+                }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
