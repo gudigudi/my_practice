@@ -17,6 +17,28 @@ function AdapteProvinceDoc(obj: { name: string, demand: number, price: number, p
     return doc;
 }
 
+describe('producer', () => {
+    it('setter/getter', () => {
+        const data = {
+            name: 'Asia',
+            producers: [
+                { name: 'Byzantium', cost: 10, production: 9 },
+                { name: 'Attalia', cost: 12, production: 10 },
+                { name: 'Sinope', cost: 10, production: 6 },
+            ],
+            demand: 30,
+            price: 20,
+        };
+        const province = new Province(AdapteProvinceDoc(data));
+        const producerData = data.producers[0];
+        let producer = new Producer(province, producerData);
+        producer.name = "hello"
+        expect(producer.name).toBe('hello')
+        producer.cost = 100
+        expect(producer.cost).toBe(100)
+    })
+})
+
 describe('province', () => {
     let asia: Province;
 
@@ -33,7 +55,11 @@ describe('province', () => {
         };
         asia = new Province(AdapteProvinceDoc(data));
     });
-
+    it('setter/getter', () => {
+        expect(asia.name).toBe('Asia')
+        asia.price = 1000
+        expect(asia.price).toBe(1000)
+    });
     it('shortfall', () => {
         expect(asia.shortfall).toBe(5);
     });
