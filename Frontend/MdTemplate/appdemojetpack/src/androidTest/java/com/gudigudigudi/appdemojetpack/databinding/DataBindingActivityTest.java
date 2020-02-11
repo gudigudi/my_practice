@@ -15,6 +15,8 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -39,6 +41,8 @@ public class DataBindingActivityTest {
     @Test
     public void viewInited(){
         onView(withId(R.id.txt)).check(matches(withText("set data")));
+        onView(withId(R.id.user_name)).check(matches(withText("java")));
+        onView(withId(R.id.user_age)).check(matches(withText("10")));
     }
 
     @Test
