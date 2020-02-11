@@ -9,7 +9,6 @@ import com.gudigudigudi.appdemojetpack.R;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,7 +57,6 @@ public class ViewPager2ActivityTest {
                 .check(matches(withText("Page " + eventList.get(0))));
     }
 
-    @Ignore
     @Test
     public void swipeToNextPage() {
         onView(withId(R.id.viewpager))
@@ -75,15 +73,28 @@ public class ViewPager2ActivityTest {
                 .check(matches(withText("Page " + eventList.get(1))));
     }
 
-    @Ignore
     @Test
-    public void swipeToLastPage(){
+    public void swipeToLastPage() {
+        int size = eventList.size();
 
+        for (int i = 0; i < size - 1; i++) {
+            onView(withId(R.id.viewpager)).perform(swipeLeft());
+        }
+        onView(allOf(withId(R.id.textview), withClassName(endsWith("TextView"))))
+                .check(matches(withText("Page " + eventList.get(size - 1))));
     }
 
-    @Ignore
     @Test
-    public void swipeTofirstPage(){
+    public void swipeTofirstPage() {
+        int size = eventList.size();
 
+        for (int i = 0; i < size - 1; i++) {
+            onView(withId(R.id.viewpager)).perform(swipeLeft());
+        }
+        for (int i = 0; i < size - 1; i++) {
+            onView(withId(R.id.viewpager)).perform(swipeRight());
+        }
+        onView(allOf(withId(R.id.textview), withClassName(endsWith("TextView"))))
+                .check(matches(withText("Page " + eventList.get(0))));
     }
 }
