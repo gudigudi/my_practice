@@ -1,6 +1,6 @@
 import { Performance, Play } from '@/statement';
 
-abstract class PerformanceCalculator {
+export abstract class PerformanceCalculator {
     public performance: Performance;
     public play: Play;
 
@@ -16,7 +16,7 @@ abstract class PerformanceCalculator {
     }
 }
 
-class TragedyCalculator extends PerformanceCalculator {
+export class TragedyCalculator extends PerformanceCalculator {
     get amount(): number {
         let result = 40000;
         if (this.performance.audience > 30) {
@@ -27,7 +27,7 @@ class TragedyCalculator extends PerformanceCalculator {
     }
 }
 
-class ComedyCalculator extends PerformanceCalculator {
+export class ComedyCalculator extends PerformanceCalculator {
     get amount(): number {
         let result = 30000;
         if (this.performance.audience > 20) {
