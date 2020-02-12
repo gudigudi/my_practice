@@ -1,14 +1,16 @@
 import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import i18n from './i18n';
-import './plugins/element';
-import './plugins/composition_api';
-import axios from './utils/https';
-import urls from './utils/urls';
-
+import App from '@/App.vue';
+import router from '@/router';
+import store from '@/store';
+import i18n from '@/i18n';
+import '@/plugins/composition_api';
+import axios from '@/utils/https';
+import urls from '@/utils/urls';
 import VueLazyload from 'vue-lazyload';
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+
+Vue.use(Antd);
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,
