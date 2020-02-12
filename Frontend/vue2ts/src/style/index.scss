@@ -1,11 +1,3 @@
-/* theme color */
-$--color-primary: teal;
-
-/* icon font path, required */
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
-
-@import "~element-ui/packages/theme-chalk/src/index";
-
 // mobile 1px border
 .border-1px {
   position: relative;
@@ -22,6 +14,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
     @media (min-device-pixel-ratio: 1.5) {
       transform: scaleY(0.7);
     }
+
     @media (min-device-pixel-ratio: 2) {
       transform: scaleY(0.5);
     }
