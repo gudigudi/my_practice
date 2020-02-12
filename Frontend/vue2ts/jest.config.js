@@ -1,4 +1,5 @@
 module.exports = {
+  testTimeout: 60000,
   moduleFileExtensions: [
     'js',
     'jsx',
