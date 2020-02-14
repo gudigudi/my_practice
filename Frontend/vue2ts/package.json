@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@vue/composition-api": "^0.3.4",
-    "ant-design-vue": "^1.4.10",
+    "ant-design-vue": "^1.4.11",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "vue": "^2.6.11",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.5.0",
     "@types/jest": "25.1.2",
-    "@types/webpack": "^4.41.5",
+    "@types/webpack": "^4.41.6",
     "@vue/cli-plugin-babel": "^4.2.2",
     "@vue/cli-plugin-e2e-cypress": "^4.2.2",
     "@vue/cli-plugin-typescript": "^4.2.2",
@@ -48,6 +48,6 @@
     "typescript": "3.7.5",
     "vue-cli-plugin-i18n": "^0.6.1",
     "vue-template-compiler": "^2.6.11",
-    "webpack-cdn-plugin": "^3.2.0"
+    "webpack-cdn-plugin": "^3.2.2"
   }
 }
