@@ -14,6 +14,8 @@ import com.gudigudigudi.commonlib.base.BaseActivity;
 
 public class ImageViewerActivity extends BaseActivity {
 
+//    private ResultProfileBinding binding;
+
     @VisibleForTesting
     protected static final String KEY_IMAGE_DATA = "data";
 

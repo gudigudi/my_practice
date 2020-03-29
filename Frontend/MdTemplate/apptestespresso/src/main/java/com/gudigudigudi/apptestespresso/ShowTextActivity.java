@@ -7,7 +7,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ShowTextActivity extends AppCompatActivity {
+import com.gudigudigudi.apptestespresso.databinding.ActivityShowTextBinding;
+import com.gudigudigudi.commonlib.base.BaseActivity;
+
+public class ShowTextActivity extends BaseActivity {
 
     public final static String KEY_EXTRA_MESSAGE =
             "com.example.android.testing.espresso.basicsample.MESSAGE";

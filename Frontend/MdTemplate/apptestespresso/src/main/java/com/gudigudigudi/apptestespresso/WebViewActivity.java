@@ -10,39 +10,39 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
+import com.gudigudigudi.apptestespresso.databinding.ActivityWebViewBinding;
 import com.gudigudigudi.commonlib.base.BaseActivity;
 
-
 public class WebViewActivity extends BaseActivity {
+
+    private ActivityWebViewBinding binding;
 
     public static final String KEY_URL_TO_LOAD = "KEY_URL_TO_LOAD";
 
     @VisibleForTesting
     protected static final String WEB_FORM_URL = "file:///android_asset/web_form.html";
 
-    private WebView mWebView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding=ActivityWebViewBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_web_view);
 
-        mWebView = findViewById(R.id.web_view);
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.requestFocus();
-        mWebView.setWebViewClient(new WebViewClient() {
+        binding.webView.getSettings().setJavaScriptEnabled(true);
+        binding.webView.requestFocus();
+        binding.webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 return false;
             }
         });
 
-        mWebView.getSettings().setAllowFileAccess(true);
-        mWebView.getSettings().setAllowContentAccess(true);
-        mWebView.getSettings().setAllowFileAccessFromFileURLs(true);
-        mWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        binding.webView.getSettings().setAllowFileAccess(true);
+        binding.webView.getSettings().setAllowContentAccess(true);
+        binding.webView.getSettings().setAllowFileAccessFromFileURLs(true);
+        binding.webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 
-        mWebView.loadUrl(urlFromIntent(getIntent()));
+        binding.webView.loadUrl(urlFromIntent(getIntent()));
     }
 
     private static String urlFromIntent(@NonNull Intent intent) {

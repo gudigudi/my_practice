@@ -7,6 +7,8 @@ import android.widget.EditText;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gudigudigudi.apptestespresso.databinding.ActivityMatcherBinding;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,34 +21,29 @@ public class MatcherActivity extends AppCompatActivity implements View.OnClickLi
     @VisibleForTesting
     public static final String VALID_ENDING = "coffee";
 
-    private EditText mInputText;
-    private View mSuccessView;
-    private View mErrorView;
+    private ActivityMatcherBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding=ActivityMatcherBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_matcher);
 
-        findViewById(R.id.button).setOnClickListener(this);
-
-        mInputText = findViewById(R.id.editText);
-        mSuccessView = findViewById(R.id.inputValidationSuccess);
-        mErrorView = findViewById(R.id.inputValidationError);
+        binding.button.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button) {
-            final String inputText = mInputText.getText().toString();
+            final String inputText =binding.editText.getText().toString();
 
             showResult(validateText(inputText));
         }
     }
 
     private void showResult(boolean isValidResult) {
-        mSuccessView.setVisibility(isValidResult ? View.VISIBLE : View.GONE);
-        mErrorView.setVisibility(isValidResult ? View.GONE : View.VISIBLE);
+        binding.inputValidationSuccess.setVisibility(isValidResult ? View.VISIBLE : View.GONE);
+        binding.inputValidationError.setVisibility(isValidResult ? View.GONE : View.VISIBLE);
     }
 
     private static boolean validateText(String inputText) {
@@ -63,5 +60,4 @@ public class MatcherActivity extends AppCompatActivity implements View.OnClickLi
         }
         return false;
     }
-
 }
