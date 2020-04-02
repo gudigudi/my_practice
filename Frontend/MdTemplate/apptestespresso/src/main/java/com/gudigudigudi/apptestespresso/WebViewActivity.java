@@ -25,8 +25,8 @@ public class WebViewActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityWebViewBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_web_view);
+        binding = ActivityWebViewBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         binding.webView.getSettings().setJavaScriptEnabled(true);
         binding.webView.requestFocus();

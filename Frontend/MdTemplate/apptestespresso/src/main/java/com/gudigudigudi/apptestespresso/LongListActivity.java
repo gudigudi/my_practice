@@ -5,12 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.gudigudigudi.apptestespresso.databinding.ActivityLongListBinding;
 import com.gudigudigudi.commonlib.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -36,21 +35,24 @@ public class LongListActivity extends BaseActivity {
 
     private LayoutInflater layoutInflater;
 
+    private ActivityLongListBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_long_list);
+
+        layoutInflater = getLayoutInflater();
+        binding = ActivityLongListBinding.inflate(layoutInflater);
+        setContentView(binding.getRoot());
 
         populateData();
 
-        ListView listView = findViewById(R.id.list);
         String[] from = new String[]{ROW_TEXT, ROW_ENABLED};
         int[] to = new int[]{R.id.rowContentTextView, R.id.rowToggleButton};
-        layoutInflater = getLayoutInflater();
+
 
         ListAdapter adapter = new LongListAdapter(from, to);
-
-        listView.setAdapter(adapter);
+        binding.list.setAdapter(adapter);
     }
 
     @VisibleForTesting
@@ -80,7 +82,7 @@ public class LongListActivity extends BaseActivity {
             }
 
             convertView.setOnClickListener(v -> {
-                ((TextView) findViewById(R.id.selection_row_value)).setText(String.valueOf(position));
+                binding.selectionRowValue.setText(String.valueOf(position));
             });
 
             return super.getView(position, convertView, parent);

@@ -3,9 +3,6 @@ package com.gudigudigudi.apptestespresso;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.gudigudigudi.apptestespresso.databinding.ActivityShowTextBinding;
 import com.gudigudigudi.commonlib.base.BaseActivity;
@@ -14,16 +11,15 @@ public class ShowTextActivity extends BaseActivity {
 
     public final static String KEY_EXTRA_MESSAGE =
             "com.example.android.testing.espresso.basicsample.MESSAGE";
+    private ActivityShowTextBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_text);
+        binding = ActivityShowTextBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(KEY_EXTRA_MESSAGE);
-
-        ((TextView) findViewById(R.id.show_text_view)).setText(message);
+        binding.txtvShow.setText(getIntent().getStringExtra(KEY_EXTRA_MESSAGE));
     }
 
     /**

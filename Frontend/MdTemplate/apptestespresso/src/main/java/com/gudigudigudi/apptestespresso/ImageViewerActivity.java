@@ -5,29 +5,27 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
+import com.gudigudigudi.apptestespresso.databinding.ActivityImageViewerBinding;
 import com.gudigudigudi.commonlib.base.BaseActivity;
 
 public class ImageViewerActivity extends BaseActivity {
 
-//    private ResultProfileBinding binding;
+    private ActivityImageViewerBinding binding;
 
     @VisibleForTesting
     protected static final String KEY_IMAGE_DATA = "data";
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_viewer);
-
-        mImageView = findViewById(R.id.imageView);
+        binding = ActivityImageViewerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 
     @Override
@@ -38,7 +36,7 @@ public class ImageViewerActivity extends BaseActivity {
                 return;
             }
             Bitmap bitmap = (Bitmap) extras.get(KEY_IMAGE_DATA);
-            mImageView.setImageBitmap(bitmap);
+            binding.imageView.setImageBitmap(bitmap);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

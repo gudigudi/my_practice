@@ -7,7 +7,7 @@
     tools:context=".MainEspressoActivity">
 
     <TextView
-        android:id="@+id/textToBeChanged"
+        android:id="@+id/txtv_to_be_changed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -15,26 +15,26 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/editTextUserInput"
+        android:id="@+id/editt_user_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:hint="@string/app_name" />
 
     <Button
-        android:id="@+id/changeTextBtn"
+        android:id="@+id/btn_change_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/app_name"
+        android:text="change text"
         style="?android:attr/buttonStyleSmall" />
 
     <Button
-        android:id="@+id/activityChangeTextBtn"
+        android:id="@+id/btn_change_text_of_ShowTextActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/app_name"
+        android:text="change text of another activity"
         style="?android:attr/buttonStyleSmall" />
 
 </LinearLayout>

@@ -4,9 +4,6 @@ android {
     defaultConfig {
         applicationId "com.gudigudigudi.apptestespresso"
     }
-    viewBinding {
-        enabled = true
-    }
 }
 
 dependencies {

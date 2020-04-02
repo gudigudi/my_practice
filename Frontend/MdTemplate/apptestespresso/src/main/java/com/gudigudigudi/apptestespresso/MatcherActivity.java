@@ -2,7 +2,6 @@ package com.gudigudigudi.apptestespresso;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,8 +25,8 @@ public class MatcherActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityMatcherBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_matcher);
+        binding = ActivityMatcherBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         binding.button.setOnClickListener(this);
     }
@@ -35,7 +34,7 @@ public class MatcherActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button) {
-            final String inputText =binding.editText.getText().toString();
+            final String inputText = binding.editText.getText().toString();
 
             showResult(validateText(inputText));
         }

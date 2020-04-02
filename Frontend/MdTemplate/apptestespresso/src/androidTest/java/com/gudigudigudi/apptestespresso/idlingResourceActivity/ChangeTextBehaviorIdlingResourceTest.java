@@ -48,11 +48,11 @@ public class ChangeTextBehaviorIdlingResourceTest {
 
     @Test
     public void changeText_sameActivity() {
-        onView(ViewMatchers.withId(R.id.editTextUserInput))
+        onView(ViewMatchers.withId(R.id.editt_user_input))
                 .perform(typeText(STRING_TO_BE_TYPED), closeSoftKeyboard());
-        onView(ViewMatchers.withId(R.id.changeTextBtn))
+        onView(ViewMatchers.withId(R.id.btn_change_text))
                 .perform(click());
-        onView(ViewMatchers.withId(R.id.textToBeChanged))
+        onView(ViewMatchers.withId(R.id.txtv_to_be_changed))
                 .check(matches(withText(STRING_TO_BE_TYPED)));
     }
 }

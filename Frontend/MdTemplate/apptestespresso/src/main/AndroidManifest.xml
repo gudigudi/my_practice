@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".RecyclerViewActivity" />
         <activity android:name=".LongListActivity" />
@@ -23,7 +20,12 @@
         <activity android:name=".MatcherActivity" />
         <activity android:name=".IdlingResourceActivity" />
         <activity android:name=".ShowTextActivity" />
-        <activity android:name=".MainEspressoActivity" />
+        <activity android:name=".MainEspressoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

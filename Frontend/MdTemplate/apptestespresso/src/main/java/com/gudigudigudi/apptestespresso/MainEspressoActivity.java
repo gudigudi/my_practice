@@ -1,44 +1,36 @@
 package com.gudigudigudi.apptestespresso;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gudigudigudi.apptestespresso.databinding.ActivityMainEspressoBinding;
+
 public class MainEspressoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView mTextView;
-    private EditText mEditText;
+    private ActivityMainEspressoBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_espresso);
+        binding = ActivityMainEspressoBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        findViewById(R.id.changeTextBtn).setOnClickListener(this);
-        findViewById(R.id.activityChangeTextBtn).setOnClickListener(this);
-
-        mTextView = findViewById(R.id.textToBeChanged);
-        mEditText = findViewById(R.id.editTextUserInput);
+        binding.btnChangeText.setOnClickListener(this);
+        binding.btnChangeTextOfShowTextActivity.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        final String text = mEditText.getText().toString();
-
-        final int changeTextBtnId = R.id.changeTextBtn;
-        final int activityChangeTextBtnId = R.id.activityChangeTextBtn;
+        final String text = binding.edittUserInput.getText().toString();
 
         switch (v.getId()) {
-            case changeTextBtnId:
-                mTextView.setText(text);
+            case R.id.btn_change_text:
+                binding.txtvToBeChanged.setText(text);
                 break;
-            case activityChangeTextBtnId:
-                Intent intent = ShowTextActivity.newStartIntent(this, text);
-                startActivity(intent);
+            case R.id.btn_change_text_of_ShowTextActivity:
+                startActivity(ShowTextActivity.newStartIntent(this, text));
                 break;
         }
     }

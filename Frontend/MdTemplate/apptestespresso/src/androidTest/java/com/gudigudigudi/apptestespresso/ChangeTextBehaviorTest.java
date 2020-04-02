@@ -43,25 +43,25 @@ public class ChangeTextBehaviorTest {
 
     @Test
     public void changeText_sameActivity() {
-        onView(withId(R.id.editTextUserInput))
+        onView(withId(R.id.editt_user_input))
                 .perform(typeText(STRING_TO_BE_TYPED), closeSoftKeyboard());
 
-        onView(withId(R.id.changeTextBtn))
+        onView(withId(R.id.btn_change_text))
                 .perform(click());
 
-        onView(withId(R.id.textToBeChanged))
+        onView(withId(R.id.txtv_to_be_changed))
                 .check(matches(withText(STRING_TO_BE_TYPED)));
     }
 
     @Test
     public void changeText_newActivity() {
-        onView(withId(R.id.editTextUserInput))
+        onView(withId(R.id.editt_user_input))
                 .perform(typeText(STRING_TO_BE_TYPED), closeSoftKeyboard());
 
-        onView(withId(R.id.activityChangeTextBtn))
+        onView(withId(R.id.btn_change_text_of_ShowTextActivity))
                 .perform(click());
 
-        onView(ViewMatchers.withId(R.id.show_text_view))
+        onView(ViewMatchers.withId(R.id.txtv_show))
                 .check(matches(withText(STRING_TO_BE_TYPED)));
 
         assertThat(Iterables.getOnlyElement(Intents.getIntents()))
