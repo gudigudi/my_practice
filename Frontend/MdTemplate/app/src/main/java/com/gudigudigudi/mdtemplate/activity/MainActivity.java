@@ -3,11 +3,11 @@ package com.gudigudigudi.mdtemplate.activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.gudigudigudi.commonlib.base.BaseActivity;
 import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.databinding.ActivityMainBinding;
 import com.gudigudigudi.mdtemplate.model.Fruit;
 import com.gudigudigudi.mdtemplate.view.adapter.FruitRCAdapter;
 
@@ -21,20 +21,20 @@ public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
 
-    private List<Fruit> fruitList = new ArrayList<>();
+    private List<Fruit> fruitList;
+
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         initFruits(); // init data of fruits
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        FruitRCAdapter adapter = new FruitRCAdapter(fruitList);
-        recyclerView.setAdapter(adapter);
+        binding.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+        binding.recyclerView.setAdapter(new FruitRCAdapter(fruitList));
     }
 
     private void initFruits() {
@@ -49,6 +49,7 @@ public class MainActivity extends BaseActivity {
         Fruit cherry = new Fruit("Cherry", R.drawable.cherry);
         Fruit mango = new Fruit("Mango", R.drawable.mango);
 
+        fruitList = new ArrayList<>();
         fruitList.add(apple);
         fruitList.add(banana);
         fruitList.add(orange);

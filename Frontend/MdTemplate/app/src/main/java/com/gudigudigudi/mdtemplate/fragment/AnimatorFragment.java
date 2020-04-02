@@ -10,10 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,43 +18,35 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.commonlib.constants.LogTag;
 import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.databinding.FragmentAnimatorBinding;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class AnimatorFragment extends BaseFragment implements View.OnClickListener {
 
-    private Button mButton;
-    private ImageView mImageView;
-    private TextView mTextView;
-    private WebView mWebView;
+    private FragmentAnimatorBinding binding;
 
     private boolean isShow = false;
     private int height = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_animator, container, false);
-
-        mButton = view.findViewById(R.id.button);
-        mImageView = view.findViewById(R.id.image_view);
-        mTextView = view.findViewById(R.id.text_view);
-        mWebView = view.findViewById(R.id.web_view);
-
-        return view;
+        binding = FragmentAnimatorBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mImageView.setOnClickListener(this);
-        mButton.setOnClickListener(this);
-        mTextView.setOnClickListener(this);
+        binding.imageView.setOnClickListener(this);
+        binding.button.setOnClickListener(this);
+        binding.textView.setOnClickListener(this);
 
-        new Handler().postDelayed(() -> height = mTextView.getMeasuredHeight(), 1000);
+        new Handler().postDelayed(() -> height = binding.textView.getMeasuredHeight(), 1000);
 
-        mWebView.loadUrl("http://baidu.com");
+        binding.webView.loadUrl("http://baidu.com");
     }
 
     @Override
@@ -70,7 +58,7 @@ public class AnimatorFragment extends BaseFragment implements View.OnClickListen
             case R.id.button:
                 ObjectAnimator objectAnimator = (ObjectAnimator) AnimatorInflater.loadAnimator(getActivity(), R.animator.background);
                 objectAnimator.setEvaluator(new ArgbEvaluator());
-                objectAnimator.setTarget(mImageView);
+                objectAnimator.setTarget(binding.imageView);
                 objectAnimator.start();
                 break;
             case R.id.text_view:
@@ -78,14 +66,14 @@ public class AnimatorFragment extends BaseFragment implements View.OnClickListen
                 final ValueAnimator valueAnimator;
                 if (isShow) {
                     valueAnimator = ValueAnimator.ofInt(height, 40);
-                    mTextView.setText("click to expand");
+                    binding.textView.setText("click to expand");
                 } else {
                     valueAnimator = ValueAnimator.ofInt(40, height);
-                    mTextView.setText("click to shrink");
+                    binding.textView.setText("click to shrink");
                 }
                 valueAnimator.addUpdateListener(animation -> {
-                    mTextView.getLayoutParams().height = (Integer) valueAnimator.getAnimatedValue();
-                    mTextView.requestLayout();
+                    binding.textView.getLayoutParams().height = (Integer) valueAnimator.getAnimatedValue();
+                    binding.textView.requestLayout();
                 });
                 valueAnimator.setInterpolator(new BounceInterpolator());
                 valueAnimator.setDuration(1000);

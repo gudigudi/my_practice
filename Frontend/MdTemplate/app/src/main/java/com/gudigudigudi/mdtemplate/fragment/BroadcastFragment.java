@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,13 +19,13 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.databinding.FragmentBroadcastBinding;
 
 public class BroadcastFragment extends BaseFragment {
 
     private static final String TAG = "BroadcastFragment";
 
-    private Button button;
-    private Button button2;
+    private FragmentBroadcastBinding binding;
 
     private IntentFilter mIntentFilter;
     private NetworkChangeReceiver mNetworkChangeReceiver;
@@ -38,12 +37,8 @@ public class BroadcastFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_broadcast, container, false);
-
-        button = view.findViewById(R.id.replace);
-        button2 = view.findViewById(R.id.button2);
-
-        return view;
+        binding = FragmentBroadcastBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -55,7 +50,7 @@ public class BroadcastFragment extends BaseFragment {
         mNetworkChangeReceiver = new NetworkChangeReceiver();
         getActivity().registerReceiver(mNetworkChangeReceiver, mIntentFilter);
 
-        button.setOnClickListener(view1 -> {
+        binding.btnReplace.setOnClickListener(view1 -> {
             String intentStr = getResources().getString(R.string.CUSTOM_BROADCAST);
             Log.d(TAG, "send broadcast with intent " + intentStr);
             Intent intent = new Intent(intentStr);
@@ -68,7 +63,7 @@ public class BroadcastFragment extends BaseFragment {
         mLocalReceiver = new LocalReceiver();
         mLocalBroadcastManager.registerReceiver(mLocalReceiver, mIntentFilterLocal);
 
-        button2.setOnClickListener(view12 -> {
+        binding.button2.setOnClickListener(view12 -> {
             Intent intent = new Intent(getString(R.string.LOCAL_BROADCAST));
             // send local broadcast.
             mLocalBroadcastManager.sendBroadcast(intent);

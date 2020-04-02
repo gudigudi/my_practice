@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/msg_recycler_view"
+        android:id="@+id/recycler_view_msg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/input_text"
+            android:id="@+id/et_input_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -26,7 +26,7 @@
             android:maxLines="2" />
 
         <Button
-            android:id="@+id/send"
+            android:id="@+id/btn_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send" />

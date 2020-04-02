@@ -8,42 +8,38 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.databinding.FragmentViewAnimationBinding;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class ViewAnimationFragment extends BaseFragment {
 
-    private ListView mListView;
+    private FragmentViewAnimationBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_view_animation, container, false);
-
-        mListView = view.findViewById(R.id.list_view);
+        binding = FragmentViewAnimationBinding.inflate(inflater, container, false);
 
         ArrayList list = new ArrayList();
         for (int i = 0; i < 10; i++) {
             list.add("list item" + i);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Objects.requireNonNull(getActivity()), android.R.layout.simple_list_item_1, list);
-        mListView.setAdapter(adapter);
+        binding.listView.setAdapter(new ArrayAdapter<String>(requireActivity(), android.R.layout.simple_list_item_1, list));
 
         Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.animation_layout);
         LayoutAnimationController controller = new LayoutAnimationController(animation);
         controller.setOrder(LayoutAnimationController.ORDER_RANDOM);
-        mListView.setLayoutAnimation(controller);
-        mListView.startAnimation(animation);
+        binding.listView.setLayoutAnimation(controller);
+        binding.listView.startAnimation(animation);
 
-        return view;
+        return binding.getRoot();
     }
 }

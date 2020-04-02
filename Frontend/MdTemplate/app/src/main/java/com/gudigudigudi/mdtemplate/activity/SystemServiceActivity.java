@@ -19,11 +19,8 @@ import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +35,7 @@ import com.blankj.utilcode.util.UriUtils;
 import com.gudigudigudi.commonlib.base.BaseActivity;
 import com.gudigudigudi.commonlib.constants.LogTag;
 import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.databinding.ActivitySystemServiceBinding;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,59 +49,32 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
     private static final int REQUEST_CODE_CHOOSE_PHOTO = 2;
     private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 3;
 
-    private Button mBtnSendNotification;
-    private Button mBtnSendHeadsupNotification;
-    private Button mBtnSendFoldNotification;
-
-    private Button mBtnTakePhoto;
     private Uri mImageUri;
-    private ImageView mIVPicture;
-
-    private Button mBtnChoosePhoto;
 
     private MediaPlayer mMediaPlayer = new MediaPlayer();
-    private Button mBtnPlay;
-    private Button mBtnPause;
-    private Button mBtnStop;
 
-    private Button mBtnPlayVideo;
-    private Button mBtnPauseVideo;
-    private Button mBtnReplayVideo;
-    private VideoView mVideoView;
+    private ActivitySystemServiceBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_system_service);
+        binding = ActivitySystemServiceBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        mBtnSendNotification = findViewById(R.id.send_notification);
-        mBtnSendHeadsupNotification = findViewById(R.id.send_headsup_notification);
-        mBtnSendFoldNotification = findViewById(R.id.send_fold_notification);
+        binding.btnSendNotification.setOnClickListener(this);
+        binding.btnSendHeadsupNotification.setOnClickListener(this);
+        binding.btnSendFoldNotification.setOnClickListener(this);
 
-        mBtnTakePhoto = findViewById(R.id.take_photo);
-        mBtnChoosePhoto = findViewById(R.id.choose_from_album);
-        mIVPicture = findViewById(R.id.picture);
+        binding.btnTakePhoto.setOnClickListener(this);
+        binding.btnChooseFromAlbum.setOnClickListener(this);
 
-        mBtnPlay = findViewById(R.id.play);
-        mBtnPause = findViewById(R.id.pause);
-        mBtnStop = findViewById(R.id.stop);
+        binding.btnPlay.setOnClickListener(this);
+        binding.btnPause.setOnClickListener(this);
+        binding.btnStop.setOnClickListener(this);
 
-        mBtnPlayVideo = findViewById(R.id.play_video);
-        mBtnPauseVideo = findViewById(R.id.pause_video);
-        mBtnReplayVideo = findViewById(R.id.replay_video);
-        mVideoView = findViewById(R.id.video_view);
-
-        mBtnSendNotification.setOnClickListener(this);
-        mBtnSendHeadsupNotification.setOnClickListener(this);
-        mBtnSendFoldNotification.setOnClickListener(this);
-        mBtnTakePhoto.setOnClickListener(this);
-        mBtnChoosePhoto.setOnClickListener(this);
-        mBtnPlay.setOnClickListener(this);
-        mBtnPause.setOnClickListener(this);
-        mBtnStop.setOnClickListener(this);
-        mBtnPlayVideo.setOnClickListener(this);
-        mBtnPauseVideo.setOnClickListener(this);
-        mBtnReplayVideo.setOnClickListener(this);
+        binding.btnPlayVideo.setOnClickListener(this);
+        binding.btnPauseVideo.setOnClickListener(this);
+        binding.btnReplayVideo.setOnClickListener(this);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -122,8 +93,8 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
             mMediaPlayer.stop();
             mMediaPlayer.release();
         }
-        if (mVideoView != null) {
-            mVideoView.suspend();
+        if (binding.videoView != null) {
+            binding.videoView.suspend();
         }
     }
 
@@ -135,8 +106,7 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
                 if (resultCode == RESULT_OK) {
                     try {
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(mImageUri));
-                        mIVPicture.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                                mIVPicture.getWidth(), mIVPicture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
+                        binding.imgvPicture.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.imgvPicture.getWidth(), binding.imgvPicture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
                     } catch (FileNotFoundException e) {
                         log.error(e.getLocalizedMessage());
                     }
@@ -185,7 +155,7 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         switch (view.getId()) {
-            case R.id.send_notification:
+            case R.id.btn_send_notification:
                 intent = new Intent(SystemServiceActivity.this, MainActivity.class);
                 pi = PendingIntent.getActivity(SystemServiceActivity.this, 0, intent, 0);
                 notification = new NotificationCompat.Builder(getApplicationContext(), null)
@@ -201,7 +171,7 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
                         .setLights(Color.GREEN, 1000, 1000)
                         .build();
                 break;
-            case R.id.send_headsup_notification:
+            case R.id.btn_send_headsup_notification:
                 notification = new NotificationCompat.Builder(getApplicationContext(), null)
                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                         .setSmallIcon(R.drawable.ic_create)
@@ -213,7 +183,7 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.apple))
                         .build();
                 break;
-            case R.id.send_fold_notification:
+            case R.id.btn_send_fold_notification:
                 RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_fold);
 
                 notification = new NotificationCompat.Builder(getApplicationContext(), null)
@@ -224,7 +194,7 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.apple))
                         .build();
                 break;
-            case R.id.take_photo:
+            case R.id.btn_take_photo:
                 File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
                 FileUtils.createFileByDeleteOldFile(outputImage);
                 mImageUri = UriUtils.file2Uri(outputImage);
@@ -233,7 +203,7 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
                 startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
                 break;
-            case R.id.choose_from_album:
+            case R.id.btn_choose_from_album:
                 if (ContextCompat.checkSelfPermission(SystemServiceActivity.this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(SystemServiceActivity.this,
@@ -243,12 +213,12 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
                 }
 
                 break;
-            case R.id.play:
+            case R.id.btn_play:
                 if (!mMediaPlayer.isPlaying()) {
                     mMediaPlayer.start();
                 }
                 break;
-            case R.id.pause:
+            case R.id.btn_pause:
                 if (mMediaPlayer.isPlaying()) {
                     mMediaPlayer.pause();
                 }
@@ -259,19 +229,19 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
                     initMediaPlayer();
                 }
                 break;
-            case R.id.play_video:
-                if (!mVideoView.isPlaying()) {
-                    mVideoView.start();
+            case R.id.btn_play_video:
+                if (!binding.videoView.isPlaying()) {
+                    binding.videoView.start();
                 }
                 break;
-            case R.id.pause_video:
-                if (mVideoView.isPlaying()) {
-                    mVideoView.pause();
+            case R.id.btn_pause_video:
+                if (binding.videoView.isPlaying()) {
+                    binding.videoView.pause();
                 }
                 break;
-            case R.id.replay_video:
-                if (mVideoView.isPlaying()) {
-                    mVideoView.resume();
+            case R.id.btn_replay_video:
+                if (binding.videoView.isPlaying()) {
+                    binding.videoView.resume();
                 }
                 break;
             default:
@@ -325,7 +295,6 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
             if (cursor.moveToFirst()) {
                 path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
             }
-
             cursor.close();
         }
 
@@ -336,8 +305,8 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
 
         if (path != null) {
             Bitmap bitmap = BitmapFactory.decodeFile(path);
-            mIVPicture.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                    mIVPicture.getWidth(), mIVPicture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
+            binding.imgvPicture.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                    binding.imgvPicture.getWidth(), binding.imgvPicture.getWidth() * bitmap.getHeight() / bitmap.getWidth(), false));
         } else {
             Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
         }
@@ -353,6 +322,6 @@ public class SystemServiceActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initVideoView() {
-        mVideoView.setVideoPath(new File(PathUtils.getRootPath() + "movie.mp4").getPath());
+        binding.videoView.setVideoPath(new File(PathUtils.getRootPath() + "movie.mp4").getPath());
     }
 }

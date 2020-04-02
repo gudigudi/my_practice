@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,8 +19,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.commonlib.constants.LogTag;
 import com.gudigudigudi.mdtemplate.R;
-
-import java.util.Objects;
+import com.gudigudigudi.mdtemplate.databinding.FragmentAlertDialogBinding;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,33 +32,23 @@ public class AlertDialogFragment extends BaseFragment implements View.OnClickLis
     private String mMultiChoises = "";
     private String mSingleChoise = single[0];
 
-    private Button mBtnToggleSingleChoiseAlertdialog;
-    private Button mBtnToggleMultiChoisesAlertdialog;
-    private Button mBtnToggleProgressDialog;
-    private Button mBtnToggleLoadingDialog;
-
+    private FragmentAlertDialogBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_alert_dialog, container, false);
-
-        mBtnToggleSingleChoiseAlertdialog = view.findViewById(R.id.btn_toggle_single_choise_alertdialog);
-        mBtnToggleMultiChoisesAlertdialog = view.findViewById(R.id.btn_toggle_multi_choises_alertdialog);
-        mBtnToggleProgressDialog = view.findViewById(R.id.btn_toggle_progress_dialog);
-        mBtnToggleLoadingDialog = view.findViewById(R.id.btn_toggle_loading_dialog);
-
-        return view;
+        binding = FragmentAlertDialogBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mBtnToggleSingleChoiseAlertdialog.setOnClickListener(this);
-        mBtnToggleMultiChoisesAlertdialog.setOnClickListener(this);
-        mBtnToggleProgressDialog.setOnClickListener(this);
-        mBtnToggleLoadingDialog.setOnClickListener(this);
+        binding.btnToggleSingleChoiseAlertdialog.setOnClickListener(this);
+        binding.btnToggleMultiChoisesAlertdialog.setOnClickListener(this);
+        binding.btnToggleProgressDialog.setOnClickListener(this);
+        binding.btnToggleLoadingDialog.setOnClickListener(this);
     }
 
     @SuppressLint("SetTextI18n")
@@ -69,14 +57,14 @@ public class AlertDialogFragment extends BaseFragment implements View.OnClickLis
         AlertDialog dialog;
         switch (view.getId()) {
             case R.id.btn_toggle_single_choise_alertdialog:
-                dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
+                dialog = new AlertDialog.Builder(requireActivity())
                         .setTitle("Single choise")
                         .setSingleChoiceItems(single, 0, (anInterface, i) -> mSingleChoise = single[i])
                         .setPositiveButton("Yes", (anInterface, i) -> ToastUtils.showShort("You click " + mSingleChoise)).create();
                 dialog.show();
                 break;
             case R.id.btn_toggle_multi_choises_alertdialog:
-                dialog = new AlertDialog.Builder(getActivity())
+                dialog = new AlertDialog.Builder(requireActivity())
                         .setTitle("Multi choises")
                         .setMultiChoiceItems(multi, null, (anInterface, i, b) -> {
                             if (b) {
@@ -104,7 +92,7 @@ public class AlertDialogFragment extends BaseFragment implements View.OnClickLis
                 tvPercentage.setText(progressBar.getProgress() + "%");
                 tvPercentage2.setText(progressBar.getProgress() + "/" + progressBar.getMax());
 
-                dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
+                dialog = new AlertDialog.Builder(requireActivity())
                         .setTitle("Progress dialog")
                         .setView(progressView)
                         .create();
@@ -114,7 +102,7 @@ public class AlertDialogFragment extends BaseFragment implements View.OnClickLis
                 View loadingView = LayoutInflater.from(getContext()).inflate(R.layout.loading_dialog, null);
                 TextView tvLoadingTip = loadingView.findViewById(R.id.loading_tip);
                 ImageView ivLoading = loadingView.findViewById(R.id.loading_image);
-                Animation animation = AnimationUtils.loadAnimation(Objects.requireNonNull(getActivity()).getApplicationContext(), R.anim.loading);
+                Animation animation = AnimationUtils.loadAnimation(requireActivity().getApplicationContext(), R.anim.loading);
 
                 ivLoading.setVisibility(View.VISIBLE);
                 ivLoading.setAnimation(animation);

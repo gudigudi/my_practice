@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/replace"
+        android:id="@+id/btn_replace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Send Custom Broadcast"

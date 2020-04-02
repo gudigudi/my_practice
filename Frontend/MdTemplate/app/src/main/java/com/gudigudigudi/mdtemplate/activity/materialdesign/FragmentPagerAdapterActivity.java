@@ -4,12 +4,11 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.PagerTabStrip;
 import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.gudigudigudi.commonlib.base.BaseActivity;
-import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.databinding.ActivityFragmentPagerAdapterBinding;
 import com.gudigudigudi.mdtemplate.fragment.AlertDialogFragment;
 import com.gudigudigudi.mdtemplate.fragment.AnimationFragment;
 import com.gudigudigudi.mdtemplate.fragment.AnimatorFragment;
@@ -25,36 +24,35 @@ import java.util.List;
 
 public class FragmentPagerAdapterActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
 
-    private ViewPager viewPager;
-    private PagerTabStrip pagerTabStrip;
     private List<Fragment> fragments;
     private List<String> titles;
     private CustomFragmentPagerAdapter fragmentPagerAdapter;
     private CustomFragmentStatePagerAdapter fragmentStatePagerAdapter;
 
+    private ActivityFragmentPagerAdapterBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment_pager_adapter);
-
-        viewPager = findViewById(R.id.view_pager);
-        pagerTabStrip = findViewById(R.id.pager_tab_strip);
+        binding = ActivityFragmentPagerAdapterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         init();
+
         addFragmentStatePagerAdapter();
 //        addFragmentPagerAdapter();
 
-        viewPager.addOnPageChangeListener(this);
+        binding.viewPager.addOnPageChangeListener(this);
     }
 
     private void addFragmentPagerAdapter() {
-        fragmentPagerAdapter = new CustomFragmentPagerAdapter(getSupportFragmentManager(),  FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments, titles);
-        viewPager.setAdapter(fragmentPagerAdapter);
+        fragmentPagerAdapter = new CustomFragmentPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments, titles);
+        binding.viewPager.setAdapter(fragmentPagerAdapter);
     }
 
     private void addFragmentStatePagerAdapter() {
         fragmentStatePagerAdapter = new CustomFragmentStatePagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments, titles);
-        viewPager.setAdapter(fragmentStatePagerAdapter);
+        binding.viewPager.setAdapter(fragmentStatePagerAdapter);
     }
 
     public void init() {
@@ -79,7 +77,7 @@ public class FragmentPagerAdapterActivity extends BaseActivity implements ViewPa
 
     @Override
     public void onPageSelected(int position) {
-        ToastUtils.showShort("page "+position);
+        ToastUtils.showShort("page " + position);
     }
 
     @Override

@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import androidx.viewpager.widget.PagerTabStrip;
-import androidx.viewpager.widget.ViewPager;
-
 import com.gudigudigudi.commonlib.base.BaseActivity;
 import com.gudigudigudi.mdtemplate.R;
+import com.gudigudigudi.mdtemplate.databinding.ActivityViewPagerBinding;
 import com.gudigudigudi.mdtemplate.view.adapter.ViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -19,23 +17,19 @@ public class ViewPagerActivity extends BaseActivity {
 
     private List<View> viewList;
     private List<String> titleList;
-    private ViewPager viewPager;
-    private ViewPagerAdapter viewPagerAdapter;
-    private PagerTabStrip pagerTabStrip;
+
+    private ActivityViewPagerBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_pager);
+        binding = ActivityViewPagerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        viewPager = findViewById(R.id.vp);
-        pagerTabStrip = findViewById(R.id.pager_tab_strip);
-        pagerTabStrip.setTextSize(1, 24);
+        binding.pagerTabStrip.setTextSize(1, 24);
 
         initPagers();
-
-        viewPagerAdapter = new ViewPagerAdapter(viewList, titleList);
-        viewPager.setAdapter(viewPagerAdapter);
+        binding.viewpager.setAdapter(new ViewPagerAdapter(viewList, titleList));
     }
 
     private void initPagers() {
