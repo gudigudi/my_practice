@@ -9,7 +9,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
+        classpath 'com.android.tools.build:gradle:3.6.2'
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.2.1"
         classpath "androidx.benchmark:benchmark-gradle-plugin:1.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61"
@@ -175,13 +175,13 @@ subprojects {
                     proguardFiles fileTree(dir: "${project.rootProject.rootDir}/proguards", include: ['*.pro']).asList().toArray()
                 }
             }
-//            dataBinding {
-//                enabled = true
+            // Android Studio 4.0+
+//            buildFeatures {
+//                viewBinding = true
 //            }
-
-//            viewBinding {
-//                enabled = true
-//            }
+            viewBinding {
+                enabled = true
+            }
 
             testOptions {
                 unitTests {
