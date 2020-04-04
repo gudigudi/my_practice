@@ -1,8 +1,5 @@
 package com.gudigudigudi.appdemojetpack.databinding;
 
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -25,7 +25,7 @@ import org.junit.runner.RunWith
 class UserProfileFragmentTest {
 
     @Before
-    fun setUp(){
+    fun setUp() {
         val scenario = launchFragmentInContainer<UserProfileFragment>()
     }
 
@@ -35,7 +35,7 @@ class UserProfileFragmentTest {
     }
 
     @Test
-    fun clickBtn(){
+    fun clickBtn() {
         onView(withId(R.id.btn)).perform(click())
 
         val s1 = getText(onView(withId(R.id.user_name)))

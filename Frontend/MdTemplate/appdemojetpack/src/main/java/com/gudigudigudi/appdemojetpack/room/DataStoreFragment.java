@@ -1,8 +1,6 @@
 package com.gudigudigudi.appdemojetpack.room;
 
-import android.content.ContentValues;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,9 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +17,7 @@ import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.PathUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.gudigudigudi.appdemojetpack.R;
+import com.gudigudigudi.appdemojetpack.databinding.FragmentDataStoreBinding;
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.commonlib.constants.LogTag;
 
@@ -35,36 +31,20 @@ import static android.content.Context.MODE_PRIVATE;
 public class DataStoreFragment extends BaseFragment implements View.OnClickListener {
 
     private static final String TAG = "DataStoreFragment";
-    private static final String TMP_FILE_NAME = "tmp.txt";
-    private EditText mEditText;
 
-    private Button mBtnSaveDataBySharedpreferences;
-    private Button mBtnRestoreDataBySharedpreferences;
+    private static final String TMP_FILE_NAME = "tmp.txt";
 
     private AppDatabase mAppDatabase;
     private BookDao mBookDao;
-    private Button mBtnInsertRoom;
 
-    private Button mBtnQueryRoom;
-    private Button mBtnUpdateRoom;
-    private Button mBtnDeleteRoom;
+    private FragmentDataStoreBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_data_store, container, false);
+        binding = FragmentDataStoreBinding.inflate(inflater, container, false);
 
-        mEditText = view.findViewById(R.id.edit);
-
-        mBtnSaveDataBySharedpreferences = view.findViewById(R.id.btn_save_data_by_sharedpreferences);
-        mBtnRestoreDataBySharedpreferences = view.findViewById(R.id.btn_restore_data_by_sharedpreferences);
-
-        mBtnInsertRoom = view.findViewById(R.id.btn_insert_room);
-        mBtnQueryRoom = view.findViewById(R.id.btn_query_room);
-        mBtnUpdateRoom = view.findViewById(R.id.btn_update_room);
-        mBtnDeleteRoom = view.findViewById(R.id.btn_delete_room);
-
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -74,33 +54,31 @@ public class DataStoreFragment extends BaseFragment implements View.OnClickListe
         String inputText = FileIOUtils.readFile2String(PathUtils.getDataPath() + TMP_FILE_NAME);
 
         if (!TextUtils.isEmpty(inputText)) {
-            mEditText.setText(inputText);
-            mEditText.setSelection(inputText.length());
+            binding.editText.setText(inputText);
+            binding.editText.setSelection(inputText.length());
             ToastUtils.showShort("Restoring succeeded");
         }
 
         mAppDatabase = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "book").build();
         mBookDao = mAppDatabase.bookDao();
 
-        mBtnSaveDataBySharedpreferences.setOnClickListener(this);
-        mBtnRestoreDataBySharedpreferences.setOnClickListener(this);
+        binding.btnSaveDataBySharedpreferences.setOnClickListener(this);
+        binding.btnRestoreDataBySharedpreferences.setOnClickListener(this);
 
-        mBtnInsertRoom.setOnClickListener(this);
-        mBtnQueryRoom.setOnClickListener(this);
-        mBtnUpdateRoom.setOnClickListener(this);
-        mBtnDeleteRoom.setOnClickListener(this);
+        binding.btnInsertRoom.setOnClickListener(this);
+        binding.btnQueryRoom.setOnClickListener(this);
+        binding.btnUpdateRoom.setOnClickListener(this);
+        binding.btnDeleteRoom.setOnClickListener(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        FileIOUtils.writeFileFromString(PathUtils.getDataPath() + TMP_FILE_NAME, mEditText.getText().toString());
+        FileIOUtils.writeFileFromString(PathUtils.getDataPath() + TMP_FILE_NAME, binding.editText.getText().toString());
     }
 
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
             case R.id.btn_save_data_by_sharedpreferences:
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("data", MODE_PRIVATE).edit();
@@ -111,13 +89,10 @@ public class DataStoreFragment extends BaseFragment implements View.OnClickListe
                 break;
             case R.id.btn_restore_data_by_sharedpreferences:
                 SharedPreferences prefs = getActivity().getSharedPreferences("data", MODE_PRIVATE);
-                String name = prefs.getString("name", "");
-                int age = prefs.getInt("age", 0);
-                boolean married = prefs.getBoolean("married", false);
 
-                Log.d(TAG, "name is " + name);
-                Log.d(TAG, "age is " + age);
-                Log.d(TAG, "married is " + married);
+                Log.d(TAG, "name is " + prefs.getString("name", ""));
+                Log.d(TAG, "age is " + prefs.getInt("age", 0));
+                Log.d(TAG, "married is " + prefs.getBoolean("married", false));
                 break;
             case R.id.btn_insert_room:
                 new AsyncTask<Void, Void, Void>() {

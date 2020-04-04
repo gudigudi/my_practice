@@ -2,7 +2,6 @@ package com.gudigudigudi.appdemojetpack.dagger2;
 
 import dagger.Module;
 import dagger.Provides;
-import lombok.AllArgsConstructor;
 
 /**
  * 提供豆沙包Baozi和统一方便面Noodle

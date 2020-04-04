@@ -1,12 +1,11 @@
 package com.gudigudigudi.appdemojetpack.dagger2;
 
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.gudigudigudi.appdemojetpack.R;
+import com.gudigudigudi.appdemojetpack.databinding.ActivityDaggerBinding;
 
 import javax.inject.Inject;
 
@@ -15,16 +14,13 @@ public class DaggerActivity extends AppCompatActivity {
     @Inject
     int testValue;
 
-    Button mButton, mButton2, mButton3;
+    private ActivityDaggerBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dagger);
-
-        mButton = findViewById(R.id.btn);
-        mButton2 = findViewById(R.id.btn2);
-        mButton3 = findViewById(R.id.btn3);
+        binding = ActivityDaggerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         ZhaiNan zhaiNan = DaggerWaimaiPingTai.builder()
                 .shangjiaAModule(new ShangjiaAModule("王小二包子店"))
@@ -39,8 +35,8 @@ public class DaggerActivity extends AppCompatActivity {
 
         waimaiPingTai.inject(this);
 
-        mButton.setOnClickListener(v -> ToastUtils.showShort(zhaiNan.eat()));
-        mButton2.setOnClickListener(v -> ToastUtils.showShort(zhaiNan2.eat()));
-        mButton3.setOnClickListener(v -> ToastUtils.showShort("testValue is " + testValue));
+        binding.btn.setOnClickListener(v -> ToastUtils.showShort(zhaiNan.eat()));
+        binding.btn2.setOnClickListener(v -> ToastUtils.showShort(zhaiNan2.eat()));
+        binding.btn3.setOnClickListener(v -> ToastUtils.showShort("testValue is " + testValue));
     }
 }

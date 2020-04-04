@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.gudigudigudi.appdemojetpack.databinding.User"/>
+
+        <import type="com.gudigudigudi.appdemojetpack.databinding.User" />
+
         <variable
             name="textStr"
             type="String" />
@@ -11,7 +13,7 @@
         <variable
             name="onClickListener"
             type="android.view.View.OnClickListener" />
-    
+
         <variable
             name="user_first"
             type="User" />
@@ -28,16 +30,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{textStr,default=预览文字}"
-            android:onClick="@{onClickListener}"/>
+            android:onClick="@{onClickListener}" />
+
         <TextView
             android:id="@+id/user_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(user_first.age)}"/>
+            android:text="@{String.valueOf(user_first.age)}" />
+
         <TextView
             android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{user_first.name}"/>
+            android:text="@{user_first.name}" />
     </LinearLayout>
 </layout>

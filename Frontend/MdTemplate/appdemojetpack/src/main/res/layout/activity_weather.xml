@@ -7,7 +7,7 @@
     tools:context="com.gudigudigudi.appdemojetpack.business.weather.WeatherActivity">
 
     <ImageView
-        android:id="@+id/bing_pic_img"
+        android:id="@+id/imgv_bing_pic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
@@ -18,12 +18,12 @@
         android:layout_height="match_parent">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_reflesh"
+            android:id="@+id/swipe_reflesh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ScrollView
-                android:id="@+id/weather_layout"
+                android:id="@+id/scrollv_weather"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:overScrollMode="never"
@@ -35,15 +35,25 @@
                     android:fitsSystemWindows="true"
                     android:orientation="vertical">
 
-                    <include layout="@layout/weather_title" />
+                    <include
+                        android:id="@+id/weather_title"
+                        layout="@layout/weather_title" />
 
-                    <include layout="@layout/weather_now" />
+                    <include
+                        android:id="@+id/weather_now"
+                        layout="@layout/weather_now" />
 
-                    <include layout="@layout/weather_forecast" />
+                    <include
+                        android:id="@+id/weather_forecast"
+                        layout="@layout/weather_forecast" />
 
-                    <include layout="@layout/weather_aqi" />
+                    <include
+                        android:id="@+id/weather_aqi"
+                        layout="@layout/weather_aqi" />
 
-                    <include layout="@layout/weather_suggestion" />
+                    <include
+                        android:id="@+id/weather_suggestion"
+                        layout="@layout/weather_suggestion" />
 
                 </LinearLayout>
             </ScrollView>

@@ -7,34 +7,30 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.gudigudigudi.appdemojetpack.R;
+import com.gudigudigudi.appdemojetpack.databinding.ActivityScreenSlideBinding;
 
 public class ScreenSlidePagerActivity extends FragmentActivity {
 
     private static final int NUM_PAGES = 5;
 
-    private ViewPager2 viewPager;
-
-    private FragmentStateAdapter pagerAdapter;
+    private ActivityScreenSlideBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_screen_slide);
+        binding = ActivityScreenSlideBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        viewPager = findViewById(R.id.pager);
-        pagerAdapter = new ScreenSlidePagerAdapter(this);
-        viewPager.setAdapter(pagerAdapter);
+        binding.viewPager.setAdapter(new ScreenSlidePagerAdapter(this));
     }
 
     @Override
     public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
+        if (binding.viewPager.getCurrentItem() == 0) {
             super.onBackPressed();
         } else {
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+            binding.viewPager.setCurrentItem(binding.viewPager.getCurrentItem() - 1);
         }
     }
 

@@ -20,7 +20,7 @@ class DataStoreFragmentTest {
 
     @Test
     fun viewInited() {
-        var viewIds = intArrayOf(R.id.edit, R.id.btn_save_data_by_sharedpreferences, R.id.btn_restore_data_by_sharedpreferences, R.id.btn_insert_room, R.id.btn_query_room, R.id.btn_update_room,R.id.btn_delete_room)
+        var viewIds = intArrayOf(R.id.edit, R.id.btn_save_data_by_sharedpreferences, R.id.btn_restore_data_by_sharedpreferences, R.id.btn_insert_room, R.id.btn_query_room, R.id.btn_update_room, R.id.btn_delete_room)
         MatcherUtil.checkMultiViews(isDisplayed(), viewIds)
     }
 }

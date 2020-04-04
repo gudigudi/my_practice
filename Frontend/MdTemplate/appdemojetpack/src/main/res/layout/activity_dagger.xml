@@ -10,23 +10,24 @@
         android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TEXT1"/>
+        android:text="TEXT1" />
 
     <Button
         android:id="@+id/btn2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TEXT2"/>
+        android:text="TEXT2" />
 
     <Button
         android:id="@+id/btn3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TEXT3"/>
+        android:text="TEXT3" />
+
     <Button
         android:id="@+id/btn4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TEXT4"/>
+        android:text="TEXT4" />
 
 </LinearLayout>

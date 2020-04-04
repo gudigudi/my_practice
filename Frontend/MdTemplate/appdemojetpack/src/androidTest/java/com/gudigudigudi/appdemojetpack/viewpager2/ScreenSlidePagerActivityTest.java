@@ -45,7 +45,7 @@ public class ScreenSlidePagerActivityTest {
     }
 
     @Test
-    public void swipe(){
+    public void swipe() {
         onView(withId(R.id.pager)).perform(swipeLeft());
         onView(withId(R.id.pager)).perform(swipeLeft());
         onView(withId(R.id.pager)).perform(swipeLeft());

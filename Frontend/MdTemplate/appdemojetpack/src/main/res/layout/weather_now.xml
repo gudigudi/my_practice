@@ -6,7 +6,7 @@
     android:layout_margin="15sp">
 
     <TextView
-        android:id="@+id/degree_text"
+        android:id="@+id/txtv_degree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -14,7 +14,7 @@
         android:textSize="60sp" />
 
     <TextView
-        android:id="@+id/weather_info_text"
+        android:id="@+id/txtv_weather_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"

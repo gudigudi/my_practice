@@ -5,16 +5,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.preference.PreferenceManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
@@ -22,6 +16,7 @@ import com.google.gson.Gson;
 import com.gudigudigudi.appdemojetpack.R;
 import com.gudigudigudi.appdemojetpack.business.weather.model.Forecast;
 import com.gudigudigudi.appdemojetpack.business.weather.model.Weather;
+import com.gudigudigudi.appdemojetpack.databinding.ActivityWeatherBinding;
 import com.gudigudigudi.commonlib.base.BaseActivity;
 import com.gudigudigudi.commonlib.util.HttpUtil;
 
@@ -40,46 +35,18 @@ public class WeatherActivity extends BaseActivity {
 
     private final static String MSG_GET_WEATHER_DETAILS_FAILED = "获取天气信息失败";
 
-    public DrawerLayout mDrawerLayout;
-    private Button mBtnNav;
-    private ImageView mIVBingPicImg;
-    public SwipeRefreshLayout mSwipeRefreshLayout;
-    private ScrollView mSVWeatherLayout;
-    private TextView mTVTitleCity;
-    private TextView mTVTitleUpdateTime;
-    private TextView mTVDegreeText;
-    private TextView mTVWeatherInfoText;
-    private LinearLayout mLLForecastLayout;
-    private TextView mTVaqiText;
-    private TextView mTVpm25Text;
-    private TextView mTVcomfortText;
-    private TextView mTVcarWashText;
-    private TextView mTVsportText;
+    // TODO : binding for inside fragments.
+    public ActivityWeatherBinding binding;
 
     public String weatherId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weather);
+        binding = ActivityWeatherBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        mIVBingPicImg = findViewById(R.id.bing_pic_img);
-        mSwipeRefreshLayout = findViewById(R.id.swipe_reflesh);
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        mBtnNav = findViewById(R.id.nav_btn);
-        mSVWeatherLayout = findViewById(R.id.weather_layout);
-        mTVTitleCity = findViewById(R.id.title_city);
-        mTVTitleUpdateTime = findViewById(R.id.title_update_time);
-        mTVDegreeText = findViewById(R.id.degree_text);
-        mTVWeatherInfoText = findViewById(R.id.weather_info_text);
-        mLLForecastLayout = findViewById(R.id.forecast_layout);
-        mTVaqiText = findViewById(R.id.aqi_text);
-        mTVpm25Text = findViewById(R.id.pm25_text);
-        mTVcomfortText = findViewById(R.id.comfort_text);
-        mTVcarWashText = findViewById(R.id.car_wash_text);
-        mTVsportText = findViewById(R.id.sport_text);
-
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        binding.swipeRefleshLayout.setColorSchemeResources(R.color.colorPrimary);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = preferences.getString("weather", null);
@@ -97,22 +64,21 @@ public class WeatherActivity extends BaseActivity {
             }
         } else {
             weatherId = getIntent().getStringExtra("weather_id");
-            mSVWeatherLayout.setVisibility(View.INVISIBLE);
+            binding.scrollvWeather.setVisibility(View.INVISIBLE);
             requestWeather(weatherId);
         }
 
         String bingPic = preferences.getString("bing_pic", null);
         if (bingPic != null) {
-            Glide.with(this).load(bingPic).into(mIVBingPicImg);
+            Glide.with(this).load(bingPic).into(binding.imgvBingPic);
         } else {
             loadBingPic();
         }
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> WeatherActivity.this.requestWeather(weatherId));
+        binding.swipeRefleshLayout.setOnRefreshListener(() -> WeatherActivity.this.requestWeather(weatherId));
 
-        mBtnNav.setOnClickListener(view -> mDrawerLayout.openDrawer(GravityCompat.START));
+        binding.weatherTitle.btnNav.setOnClickListener(view -> binding.drawerLayout.openDrawer(GravityCompat.START));
     }
-
 
     public void requestWeather(String weatherId) {
         String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=bc0418b57b2d4918819d3974ac1285d9";
@@ -122,7 +88,7 @@ public class WeatherActivity extends BaseActivity {
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(() -> {
                     ToastUtils.showShort(MSG_GET_WEATHER_DETAILS_FAILED);
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    binding.swipeRefleshLayout.setRefreshing(false);
                 });
             }
 
@@ -146,7 +112,7 @@ public class WeatherActivity extends BaseActivity {
                     } else {
                         ToastUtils.showShort(MSG_GET_WEATHER_DETAILS_FAILED);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    binding.swipeRefleshLayout.setRefreshing(false);
                 });
             }
         });
@@ -159,44 +125,37 @@ public class WeatherActivity extends BaseActivity {
             String degree = weather.now.temperature + " C";
             String weatherInfo = weather.now.more.info;
 
-            mTVTitleCity.setText(cityName);
-            mTVTitleUpdateTime.setText(updateTime);
-            mTVDegreeText.setText(degree);
-            mTVWeatherInfoText.setText(weatherInfo);
+            binding.weatherTitle.txtvTitleCity.setText(cityName);
+            binding.weatherTitle.txtvTitleUpdateTime.setText(updateTime);
 
-            mLLForecastLayout.removeAllViews();
+            binding.weatherNow.txtvDegree.setText(degree);
+            binding.weatherNow.txtvWeatherInfo.setText(weatherInfo);
+
+            binding.weatherForecast.layoutForecast.removeAllViews();
 
             for (Forecast forecast : weather.forecastList) {
-                View view = LayoutInflater.from(this).inflate(R.layout.weather_forecast_item, mLLForecastLayout, false);
-                TextView dateText = view.findViewById(R.id.date_text);
-                TextView infoText = view.findViewById(R.id.info_text);
-                TextView maxText = view.findViewById(R.id.max_text);
-                TextView minText = view.findViewById(R.id.min_text);
+                View view = LayoutInflater.from(this).inflate(R.layout.weather_forecast_item, binding.weatherForecast.layoutForecast, false);
 
-                dateText.setText(forecast.date);
-                infoText.setText(forecast.more.info);
-                maxText.setText(forecast.temperature.max);
-                minText.setText(forecast.temperature.min);
+                view.<TextView>findViewById(R.id.date_text).setText(forecast.date);
+                view.<TextView>findViewById(R.id.info_text).setText(forecast.more.info);
+                view.<TextView>findViewById(R.id.max_text).setText(forecast.temperature.max);
+                view.<TextView>findViewById(R.id.min_text).setText(forecast.temperature.min);
 
-                mLLForecastLayout.addView(view);
+                binding.weatherForecast.layoutForecast.addView(view);
             }
 
             if (weather.aqi != null) {
-                mTVaqiText.setText(weather.aqi.city.aqi);
-                mTVpm25Text.setText(weather.aqi.city.pm25);
+                binding.weatherAqi.txtvAqi.setText(weather.aqi.city.aqi);
+                binding.weatherAqi.txtvPm25.setText(weather.aqi.city.pm25);
             }
 
-            String comfort = "舒适度: " + weather.suggestion.comfort.info;
-            String carWash = "洗车指数: " + weather.suggestion.carWash.info;
-            String sport = "运动建议: " + weather.suggestion.sport.info;
-            mTVcomfortText.setText(comfort);
-            mTVcarWashText.setText(carWash);
-            mTVsportText.setText(sport);
+            binding.weatherSuggestion.txtvComfort.setText("舒适度: " + weather.suggestion.comfort.info);
+            binding.weatherSuggestion.txtvCarWash.setText("洗车指数: " + weather.suggestion.carWash.info);
+            binding.weatherSuggestion.txtvSport.setText("运动建议: " + weather.suggestion.sport.info);
 
-            mSVWeatherLayout.setVisibility(View.VISIBLE);
+            binding.scrollvWeather.setVisibility(View.VISIBLE);
 
-            Intent intent = new Intent(this, WeatherAutoUpdateService.class);
-            startService(intent);
+            startService(new Intent(this, WeatherAutoUpdateService.class));
         } else {
             ToastUtils.showShort(MSG_GET_WEATHER_DETAILS_FAILED);
         }
@@ -217,7 +176,7 @@ public class WeatherActivity extends BaseActivity {
                 editor.putString("bing_pic", bingPic);
                 editor.apply();
 
-                runOnUiThread(() -> Glide.with(WeatherActivity.this).load(bingPic).into(mIVBingPicImg));
+                runOnUiThread(() -> Glide.with(WeatherActivity.this).load(bingPic).into(binding.imgvBingPic));
             }
         });
     }

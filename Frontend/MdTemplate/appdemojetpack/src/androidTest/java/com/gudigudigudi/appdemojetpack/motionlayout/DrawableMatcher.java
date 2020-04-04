@@ -30,7 +30,7 @@ public class DrawableMatcher extends TypeSafeMatcher<View> {
             return imageView.getDrawable() == null;
         }
         Resources resources = target.getContext().getResources();
-        Drawable expectedDrawable = resources.getDrawable(expectedId,null);
+        Drawable expectedDrawable = resources.getDrawable(expectedId, null);
         resourceName = resources.getResourceEntryName(expectedId);
         if (expectedDrawable != null && expectedDrawable.getConstantState() != null) {
             return expectedDrawable.getConstantState().equals(

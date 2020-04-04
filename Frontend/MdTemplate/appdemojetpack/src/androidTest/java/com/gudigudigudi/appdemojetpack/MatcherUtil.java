@@ -14,10 +14,11 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 public class MatcherUtil {
     /**
      * 根据视图id对多个视图进行统一匹配验证
+     *
      * @param viewIds 视图id数组
      * @param matcher 匹配器
      */
-    public static void checkMultiViews(Matcher<View> matcher,int[] viewIds){
+    public static void checkMultiViews(Matcher<View> matcher, int[] viewIds) {
         for (int id : viewIds) {
             onView(withId(id)).check(matches(matcher));
         }

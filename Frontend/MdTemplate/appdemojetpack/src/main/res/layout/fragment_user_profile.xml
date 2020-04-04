@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.gudigudigudi.appdemojetpack.business.userProfile.User"/>
+
+        <import type="com.gudigudigudi.appdemojetpack.business.userProfile.User" />
 
         <variable
             name="user"
@@ -20,7 +21,7 @@
             android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{user.name}"/>
+            android:text="@{user.name}" />
 
         <EditText
             android:id="@+id/edit_text"
@@ -32,6 +33,6 @@
             android:id="@+id/btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="click"/>
+            android:text="click" />
     </LinearLayout>
 </layout>

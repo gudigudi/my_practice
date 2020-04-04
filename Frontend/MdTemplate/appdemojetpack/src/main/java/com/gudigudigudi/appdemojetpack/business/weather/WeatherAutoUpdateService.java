@@ -30,7 +30,6 @@ import okhttp3.Response;
 @Slf4j
 public class WeatherAutoUpdateService extends Service {
 
-
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -38,7 +37,6 @@ public class WeatherAutoUpdateService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         updateWeather();
         updateBingPic();
 

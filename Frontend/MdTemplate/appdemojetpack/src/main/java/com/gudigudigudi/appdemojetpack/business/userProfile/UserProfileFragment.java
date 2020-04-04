@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.gudigudigudi.appdemojetpack.R;
 import com.gudigudigudi.appdemojetpack.databinding.FragmentUserProfileBinding;
@@ -22,9 +22,8 @@ public class UserProfileFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel = ViewModelProviders.of(this).get(UserProfileViewModel.class);
-        viewModel.getUser().observe(this, user -> {
-            // 当数据改变时，更新UI
+        viewModel = new ViewModelProvider(this).get(UserProfileViewModel.class);
+        viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
             binding.userName.setText(user.name);
         });
     }

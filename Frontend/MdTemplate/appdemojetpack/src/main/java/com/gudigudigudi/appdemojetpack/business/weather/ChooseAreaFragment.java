@@ -7,9 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,10 +15,10 @@ import androidx.room.Room;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.gudigudigudi.appdemojetpack.R;
 import com.gudigudigudi.appdemojetpack.business.weather.room.model.City;
 import com.gudigudigudi.appdemojetpack.business.weather.room.model.County;
 import com.gudigudigudi.appdemojetpack.business.weather.room.model.Province;
+import com.gudigudigudi.appdemojetpack.databinding.FragmentChooseAreaBinding;
 import com.gudigudigudi.commonlib.base.BaseFragment;
 import com.gudigudigudi.commonlib.constants.LogTag;
 import com.gudigudigudi.commonlib.util.HttpUtil;
@@ -42,9 +39,6 @@ public class ChooseAreaFragment extends BaseFragment {
     private static final int LEVEL_CITY = 1;
     private static final int LEVEL_COUNTY = 2;
 
-    private TextView mTitletext;
-    private Button mBtnBack;
-    private ListView mListView;
     private ArrayAdapter<String> adapter;
     private List<String> dataList = new ArrayList<>();
 
@@ -59,22 +53,18 @@ public class ChooseAreaFragment extends BaseFragment {
     private AppDatabase appDatabase;
 
     private final String API_URL = "http://guolin.tech/api/china";
+    private FragmentChooseAreaBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_choose_area, container, false);
-
-        mTitletext = view.findViewById(R.id.title_text);
-        mBtnBack = view.findViewById(R.id.back_button);
-        mListView = view.findViewById(R.id.list_view);
+        binding = FragmentChooseAreaBinding.inflate(inflater, container, false);
 
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);
-        mListView.setAdapter(adapter);
+        binding.listView.setAdapter(adapter);
 
-        return view;
+        return binding.getRoot();
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -82,7 +72,7 @@ public class ChooseAreaFragment extends BaseFragment {
 
         appDatabase = Room.databaseBuilder(getContext(), AppDatabase.class, "app").build();
 
-        mListView.setOnItemClickListener((view12, view1, i, l) -> {
+        binding.listView.setOnItemClickListener((view12, view1, i, l) -> {
             if (currentLevel == LEVEL_PROVINCE) {
                 currentProvince = provinceList.get(i);
                 new AsyncTask<Void, Void, Void>() {
@@ -110,14 +100,14 @@ public class ChooseAreaFragment extends BaseFragment {
                     getActivity().finish();
                 } else if (getActivity() instanceof WeatherActivity) {
                     WeatherActivity activity = (WeatherActivity) getActivity();
-                    activity.mDrawerLayout.closeDrawers();
-                    activity.mSwipeRefreshLayout.setRefreshing(true);
+                    activity.binding.drawerLayout.closeDrawers();
+                    activity.binding.swipeRefleshLayout.setRefreshing(true);
                     activity.requestWeather(weatherId);
                 }
             }
         });
 
-        mBtnBack.setOnClickListener(view13 -> {
+        binding.btnBack.setOnClickListener(view13 -> {
             log.debug(LogTag.LOG_VIEW_IS_CLICKED, "button back");
             if (currentLevel == LEVEL_COUNTY) {
                 new AsyncTask<Void, Void, Void>() {
@@ -136,7 +126,7 @@ public class ChooseAreaFragment extends BaseFragment {
                     }
                 }.execute();
             } else if (currentLevel == LEVEL_PROVINCE) {
-                mBtnBack.setVisibility(View.GONE);
+                binding.btnBack.setVisibility(View.GONE);
             }
         });
 
@@ -154,8 +144,8 @@ public class ChooseAreaFragment extends BaseFragment {
 
     private void queryProvinces() {
         getActivity().runOnUiThread(() -> {
-            mTitletext.setText("中国");
-            mBtnBack.setVisibility(View.GONE);
+            binding.txtvTitle.setText("中国");
+            binding.btnBack.setVisibility(View.GONE);
         });
 
         provinceList = appDatabase.provinceDao().getAll();
@@ -169,20 +159,19 @@ public class ChooseAreaFragment extends BaseFragment {
             }
             getActivity().runOnUiThread(() -> {
                 adapter.notifyDataSetChanged();
-                mListView.setSelection(0);
+                binding.listView.setSelection(0);
             });
             currentLevel = LEVEL_PROVINCE;
         } else {
             log.debug("query from server api.");
-
             queryFromServer(API_URL, "province");
         }
     }
 
     private void queryCities() {
         getActivity().runOnUiThread(() -> {
-            mTitletext.setText(currentProvince.getName());
-            mBtnBack.setVisibility(View.VISIBLE);
+            binding.txtvTitle.setText(currentProvince.getName());
+            binding.btnBack.setVisibility(View.VISIBLE);
         });
 
         cityList = appDatabase.cityDao().getCityInProvince(currentProvince.getCode());
@@ -195,7 +184,7 @@ public class ChooseAreaFragment extends BaseFragment {
             }
             getActivity().runOnUiThread(() -> {
                 adapter.notifyDataSetChanged();
-                mListView.setSelection(0);
+                binding.listView.setSelection(0);
             });
             currentLevel = LEVEL_CITY;
         } else {
@@ -208,8 +197,8 @@ public class ChooseAreaFragment extends BaseFragment {
 
     private void queryCounties() {
         getActivity().runOnUiThread(() -> {
-            mTitletext.setText(currentCity.getName());
-            mBtnBack.setVisibility(View.VISIBLE);
+            binding.txtvTitle.setText(currentCity.getName());
+            binding.btnBack.setVisibility(View.VISIBLE);
         });
 
         countyList = appDatabase.countyDao().getCountyInCity(currentCity.getCode());
@@ -221,7 +210,7 @@ public class ChooseAreaFragment extends BaseFragment {
             }
             getActivity().runOnUiThread(() -> {
                 adapter.notifyDataSetChanged();
-                mListView.setSelection(0);
+                binding.listView.setSelection(0);
             });
             currentLevel = LEVEL_COUNTY;
         } else {
