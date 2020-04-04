@@ -16,6 +16,9 @@ import com.gudigudigudi.appdemojetpack.R;
 import java.util.Arrays;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class WorkActivity extends AppCompatActivity {
 
     static final String TIME = "time";
@@ -43,17 +46,12 @@ public class WorkActivity extends AppCompatActivity {
 
         LiveData<List<WorkInfo>> liveData = WorkManager.getInstance(this).getWorkInfosByTagLiveData(TAG);
         liveData.observe(this, workInfos -> {
-            System.out.println("长度:" + workInfos.size());
+            log.info("长度:" + workInfos.size());
 
             for (WorkInfo info : workInfos) {
                 if (info.getState() == WorkInfo.State.SUCCEEDED) {
                     Data data = info.getOutputData();
-
-                    String s = data.getString(DATA);
-                    Long time = data.getLong(TIME, -1);
-                    String id = data.getString(ID);
-
-                    System.out.println("onChanged:" + id + " " + s + " " + time);
+                    log.info("onChanged:" + data.getString(ID) + " " + data.getString(DATA) + " " + data.getLong(TIME, -1));
                 }
             }
         });
