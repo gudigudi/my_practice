@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainEspressoActivity">
 
@@ -10,7 +11,9 @@
         android:id="@+id/txtv_to_be_changed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -18,14 +21,18 @@
         android:id="@+id/editt_user_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtv_to_be_changed"
         android:hint="@string/app_name" />
 
     <Button
         android:id="@+id/btn_change_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editt_user_input"
         android:text="change text"
         style="?android:attr/buttonStyleSmall" />
 
@@ -33,8 +40,10 @@
         android:id="@+id/btn_change_text_of_ShowTextActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_change_text"
         android:text="change text of another activity"
         style="?android:attr/buttonStyleSmall" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

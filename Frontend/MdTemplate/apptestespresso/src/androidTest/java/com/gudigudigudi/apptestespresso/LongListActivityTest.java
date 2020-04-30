@@ -64,7 +64,7 @@ public class LongListActivityTest {
         onRow(TEXT_ITEM_30).onChildView(ViewMatchers.withId(R.id.rowContentTextView))
                 .perform(click());
 
-        onView(ViewMatchers.withId(R.id.selection_row_value))
+        onView(ViewMatchers.withId(R.id.txtv_selection_row_value))
                 .check(matches(withText(TEXT_ITEM_30_SELECTED)));
     }
 
@@ -91,7 +91,7 @@ public class LongListActivityTest {
         onRow(TEXT_ITEM_30).onChildView(ViewMatchers.withId(R.id.rowContentTextView))
                 .perform(click());
 
-        onView(ViewMatchers.withId(R.id.selection_row_value))
+        onView(ViewMatchers.withId(R.id.txtv_selection_row_value))
                 .check(matches(withText(TEXT_ITEM_30_SELECTED)));
     }
 }

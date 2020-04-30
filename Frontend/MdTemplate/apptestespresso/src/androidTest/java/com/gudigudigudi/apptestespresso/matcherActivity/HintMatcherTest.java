@@ -74,8 +74,8 @@ public class HintMatcherTest {
 
         onView(withId(R.id.button)).perform(click());
 
-        onView(withId(R.id.inputValidationSuccess)).check(matches(isDisplayed()));
-        onView(withId(R.id.inputValidationError)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.txtv_input_validation_success)).check(matches(isDisplayed()));
+        onView(withId(R.id.txtv_input_validation_error)).check(matches(not(isDisplayed())));
     }
 
     @Test
@@ -84,8 +84,8 @@ public class HintMatcherTest {
                 .perform(typeText(mStringWithValidEnding), closeSoftKeyboard());
         onView(withId(R.id.button)).perform(click());
 
-        onView(withId(R.id.inputValidationSuccess)).check(matches(isDisplayed()));
-        onView(withId(R.id.inputValidationError)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.txtv_input_validation_success)).check(matches(isDisplayed()));
+        onView(withId(R.id.txtv_input_validation_error)).check(matches(not(isDisplayed())));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class HintMatcherTest {
                 .perform(typeText(INVALID_STRING_TO_BE_TYPED), closeSoftKeyboard());
         onView(withId(R.id.button)).perform(click());
 
-        onView(withId(R.id.inputValidationSuccess)).check(matches(not(isDisplayed())));
-        onView(withId(R.id.inputValidationError)).check(matches(isDisplayed()));
+        onView(withId(R.id.txtv_input_validation_success)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.txtv_input_validation_error)).check(matches(isDisplayed()));
     }
 }

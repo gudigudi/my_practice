@@ -40,24 +40,18 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:label="Main" >
-        </activity>
-        <activity android:name=".activity.SystemServiceActivity" >
-        </activity>
-        <activity android:name=".activity.FruitContentActivity">
-        </activity>
-        <activity android:name=".activity.MaterialDesignActivity" >
-        </activity>
-        <activity android:name=".activity.materialdesign.ViewPagerActivity" >
-        </activity>
+            android:label="Main"></activity>
+        <activity android:name=".activity.SystemServiceActivity"></activity>
+        <activity android:name=".activity.FruitContentActivity"></activity>
+        <activity android:name=".activity.MaterialDesignActivity"></activity>
+        <activity android:name=".activity.materialdesign.ViewPagerActivity"></activity>
         <activity android:name=".activity.materialdesign.TabLayoutActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.materialdesign.FragmentPagerAdapterActivity" >
-        </activity>
+        <activity android:name=".activity.materialdesign.FragmentPagerAdapterActivity"></activity>
     </application>
 
 </manifest>

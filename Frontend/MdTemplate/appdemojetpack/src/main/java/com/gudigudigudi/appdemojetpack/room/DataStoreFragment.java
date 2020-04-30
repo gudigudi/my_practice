@@ -157,6 +157,5 @@ public class DataStoreFragment extends BaseFragment implements View.OnClickListe
             default:
                 log.debug(LogTag.LOG_UNKNOWN_VIEW_IS_CLICKED);
         }
-
     }
 }
