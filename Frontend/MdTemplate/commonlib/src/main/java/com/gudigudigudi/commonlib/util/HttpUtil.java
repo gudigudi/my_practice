@@ -14,7 +14,7 @@ public class HttpUtil {
     private static final int CONNECTION_TIMEOUT = 8000;
     private static final int READ_TIMEOUT = 8000;
 
-    public static void sendOkHttpRequest(String address, Callback callback) {
+    public static void sendRequest(String address, Callback callback) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(address).build();
         client.newCall(request).enqueue(callback);

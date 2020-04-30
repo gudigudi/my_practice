@@ -68,7 +68,7 @@ public class WeatherAutoUpdateService extends Service {
             final String weatherId = Objects.requireNonNull(weather).basic.weatherId;
             String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=bc0418b57b2d4918819d3974ac1285d9";
 
-            HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
+            HttpUtil.sendRequest(weatherUrl, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     log.error(e.getMessage());
@@ -99,7 +99,7 @@ public class WeatherAutoUpdateService extends Service {
      */
     private void updateBingPic() {
         String requestBingPic = "http://guolin.tech/api/bing_pic";
-        HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
+        HttpUtil.sendRequest(requestBingPic, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 log.error(e.getMessage());

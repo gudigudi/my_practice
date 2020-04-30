@@ -83,7 +83,7 @@ public class WeatherActivity extends BaseActivity {
     public void requestWeather(String weatherId) {
         String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=bc0418b57b2d4918819d3974ac1285d9";
 
-        HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
+        HttpUtil.sendRequest(weatherUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(() -> {
@@ -163,7 +163,7 @@ public class WeatherActivity extends BaseActivity {
 
     private void loadBingPic() {
         String requestBingPic = "http://guolin.tech/api/bing_pic";
-        HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
+        HttpUtil.sendRequest(requestBingPic, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 log.error(e.getLocalizedMessage());
