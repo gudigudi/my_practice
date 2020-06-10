@@ -31,7 +31,7 @@ public class LongListActivity extends BaseActivity {
     @VisibleForTesting
     protected static final String ITEM_TEXT_FORMAT = "item: %d";
 
-    private List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+    private List<Map<String, Object>> data = new ArrayList<>();
 
     private LayoutInflater layoutInflater;
 
@@ -45,14 +45,13 @@ public class LongListActivity extends BaseActivity {
         binding = ActivityLongListBinding.inflate(layoutInflater);
         setContentView(binding.getRoot());
 
-        populateData();
+        // populate data
+        for (int i = 0; i < NUMBER_OF_ITEMS; i++) {
+            data.add(makeItem(i));
+        }
 
-        String[] from = new String[]{ROW_TEXT, ROW_ENABLED};
-        int[] to = new int[]{R.id.rowContentTextView, R.id.rowToggleButton};
-
-
-        ListAdapter adapter = new LongListAdapter(from, to);
-        binding.list.setAdapter(adapter);
+        ListAdapter adapter = new LongListAdapter(new String[]{ROW_TEXT, ROW_ENABLED}, new int[]{R.id.rowContentTextView, R.id.rowToggleButton});
+        binding.listView.setAdapter(adapter);
     }
 
     @VisibleForTesting
@@ -61,12 +60,6 @@ public class LongListActivity extends BaseActivity {
         dataRow.put(ROW_TEXT, String.format(ITEM_TEXT_FORMAT, forRow));
         dataRow.put(ROW_ENABLED, forRow == 1);
         return dataRow;
-    }
-
-    private void populateData() {
-        for (int i = 0; i < NUMBER_OF_ITEMS; i++) {
-            data.add(makeItem(i));
-        }
     }
 
     private class LongListAdapter extends SimpleAdapter {
@@ -82,7 +75,7 @@ public class LongListActivity extends BaseActivity {
             }
 
             convertView.setOnClickListener(v -> {
-                binding.selectionRowValue.setText(String.valueOf(position));
+                binding.txtvSelectionRowValue.setText(String.valueOf(position));
             });
 
             return super.getView(position, convertView, parent);

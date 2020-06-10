@@ -11,7 +11,7 @@ import com.gudigudigudi.apptestespresso.databinding.ActivityMatcherBinding;
 import java.util.Arrays;
 import java.util.List;
 
-public class MatcherActivity extends AppCompatActivity implements View.OnClickListener {
+public class MatcherActivity extends AppCompatActivity {
 
     @VisibleForTesting
     public static final List<String> COFFEE_PREPARATIONS =
@@ -28,21 +28,11 @@ public class MatcherActivity extends AppCompatActivity implements View.OnClickLi
         binding = ActivityMatcherBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.button.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.button) {
-            final String inputText = binding.editText.getText().toString();
-
-            showResult(validateText(inputText));
-        }
-    }
-
-    private void showResult(boolean isValidResult) {
-        binding.inputValidationSuccess.setVisibility(isValidResult ? View.VISIBLE : View.GONE);
-        binding.inputValidationError.setVisibility(isValidResult ? View.GONE : View.VISIBLE);
+        binding.button.setOnClickListener((view) -> {
+            boolean isValidResult = validateText(binding.editText.getText().toString());
+            binding.txtvInputValidationSuccess.setVisibility(isValidResult ? View.VISIBLE : View.GONE);
+            binding.txtvInputValidationError.setVisibility(isValidResult ? View.GONE : View.VISIBLE);
+        });
     }
 
     private static boolean validateText(String inputText) {
