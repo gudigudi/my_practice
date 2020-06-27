@@ -13,7 +13,7 @@ ext {
     ]
 
     def junit_version = "5.6.2"
-    def dagger_version = "2.28"
+    def dagger_version = "2.28.1"
     def lombok_version = "1.18.12"
     def retrofit_version = "2.9.0"
     def glide_version = "4.11.0"
@@ -43,9 +43,12 @@ ext {
                     cardview              : "androidx.cardview:cardview:1.0.0",
                     recyclerview          : "androidx.recyclerview:recyclerview:1.1.0",
                     recyclerview_selection: "androidx.recyclerview:recyclerview-selection:1.1.0",
-                    constraintlayout      : "androidx.constraintlayout:constraintlayout:2.0.0-beta6",
+                    constraintlayout      : "androidx.constraintlayout:constraintlayout:2.0.0-beta7",
                     coordinatorlayout     : "androidx.coordinatorlayout:coordinatorlayout:1.1.0",
-                    swiperefreshlayout    : "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0",
+                    swiperefreshlayout    : "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0",
+                    slidingpanelayout     : "androidx.slidingpanelayout:slidingpanelayout:1.1.0",
+                    customview            : "androidx.customview:customview:1.1.0",
+                    drawerlayout          : "androidx.drawerlayout:drawerlayout:1.1.0",
                     material              : "com.google.android.material:material:1.1.0-rc02",
                     viewpager2            : "androidx.viewpager2:viewpager2:1.0.0",
                     multidex              : "androidx.multidex:multidex:2.0.1",
@@ -80,8 +83,9 @@ ext {
                             testing: "androidx.work:work-testing:2.3.4"
                     ],
                     navigation            : [
-                            fragment: "androidx.navigation:navigation-fragment:2.2.2",
-                            ui      : "androidx.navigation:navigation-ui:2.2.2"
+                            fragment: "androidx.navigation:navigation-fragment:2.3.0",
+                            ui      : "androidx.navigation:navigation-ui:2.3.0",
+                            testing : "androidx.navigation:navigation-testing:2.3.0"
                     ],
                     media                 : "androidx.media:media:1.1.0",
                     media2                : [
