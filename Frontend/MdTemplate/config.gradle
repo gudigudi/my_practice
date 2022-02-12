@@ -12,47 +12,47 @@ ext {
             mainVersionName: '1.0.0'
     ]
 
-    def junit_version = "5.6.2"
-    def dagger_version = "2.28.1"
-    def lombok_version = "1.18.12"
+    def junit_version = "5.8.2"
+    def dagger_version = "2.40.5"
+    def lombok_version = "1.18.22"
     def retrofit_version = "2.9.0"
-    def glide_version = "4.11.0"
+    def glide_version = "4.13.0"
     def androidx_version = "2.1.0"
-    def androidx_test_version = "1.2.0"
-    def androidx_test_espresso_version = "3.2.0"
-    def kotlin_version = "1.3.72"
+    def androidx_test_version = "1.3.0"
+    def androidx_test_espresso_version = "3.4.0"
+    def kotlin_version = "1.6.10"
 
     dependencies = [
             lombok       : "org.projectlombok:lombok:$lombok_version",
             kotlin_stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
 
             androidx     : [
-                    activity              : "androidx.activity:activity:1.1.0",
-                    appcompat             : "androidx.appcompat:appcompat:1.1.0",
-                    appcompat_resources   : "androidx.appcompat:appcompat-resources:1.1.0",
-                    core                  : "androidx.core:core:1.3.0",
-                    core_ktx              : "androidx.core:core-ktx:1.3.0",
-                    annotation            : "androidx.annotation:annotation:1.1.0",
-                    collection            : "androidx.collection:collection:1.1.0",
+                    activity              : "androidx.activity:activity:1.4.0",
+                    appcompat             : "androidx.appcompat:appcompat:1.4.1",
+                    appcompat_resources   : "androidx.appcompat:appcompat-resources:1.4.1",
+                    core                  : "androidx.core:core:1.7.0",
+                    core_ktx              : "androidx.core:core-ktx:1.7.0",
+                    annotation            : "androidx.annotation:annotation:1.3.0",
+                    collection            : "androidx.collection:collection:1.2.0",
                     legacy_support_v4     : "androidx.legacy:legacy-support-v4:1.0.0",
-                    preference            : "androidx.preference:preference:1.1.1",
-                    fragment              : "androidx.fragment:fragment:1.2.5",
-                    fragment_ktx          : "androidx.fragment:fragment-ktx:1.2.5",
-                    fragment_testing      : "androidx.fragment:fragment-testing:1.2.5",
+                    preference            : "androidx.preference:preference:1.2.0",
+                    fragment              : "androidx.fragment:fragment:1.4.1",
+                    fragment_ktx          : "androidx.fragment:fragment-ktx:1.4.1",
+                    fragment_testing      : "androidx.fragment:fragment-testing:1.4.1",
                     palette               : "androidx.palette:palette:1.0.0",
                     cardview              : "androidx.cardview:cardview:1.0.0",
-                    recyclerview          : "androidx.recyclerview:recyclerview:1.1.0",
+                    recyclerview          : "androidx.recyclerview:recyclerview:1.2.0",
                     recyclerview_selection: "androidx.recyclerview:recyclerview-selection:1.1.0",
-                    constraintlayout      : "androidx.constraintlayout:constraintlayout:2.0.0-beta7",
-                    coordinatorlayout     : "androidx.coordinatorlayout:coordinatorlayout:1.1.0",
+                    constraintlayout      : "androidx.constraintlayout:constraintlayout:2.1.3",
+                    coordinatorlayout     : "androidx.coordinatorlayout:coordinatorlayout:1.2.0",
                     swiperefreshlayout    : "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0",
-                    slidingpanelayout     : "androidx.slidingpanelayout:slidingpanelayout:1.1.0",
+                    slidingpanelayout     : "androidx.slidingpanelayout:slidingpanelayout:1.2.0",
                     customview            : "androidx.customview:customview:1.1.0",
-                    drawerlayout          : "androidx.drawerlayout:drawerlayout:1.1.0",
-                    material              : "com.google.android.material:material:1.1.0-rc02",
+                    drawerlayout          : "androidx.drawerlayout:drawerlayout:1.1.1",
+                    material              : "com.google.android.material:material:1.5.0",
                     viewpager2            : "androidx.viewpager2:viewpager2:1.0.0",
                     multidex              : "androidx.multidex:multidex:2.0.1",
-                    transition            : "androidx.transition:transition:1.3.1",
+                    transition            : "androidx.transition:transition:1.4.1",
                     arch                  : [
                             core: [
                                     runtime: "androidx.arch.core:core-runtime:$androidx_version",
@@ -70,42 +70,42 @@ ext {
                             common_java8 : "androidx.lifecycle:lifecycle-common-java8:2.2.0"
                     ],
                     room                  : [
-                            runtime : "androidx.room:room-runtime:2.2.5",
-                            compiler: "androidx.room:room-compiler:2.2.5",
-                            testing : "androidx.room:room-testing:2.2.5"
+                            runtime : "androidx.room:room-runtime:2.4.1",
+                            compiler: "androidx.room:room-compiler:2.4.1",
+                            testing : "androidx.room:room-testing:2.4.1"
                     ],
                     paging                : [
-                            runtime: "androidx.paging:paging-runtime:2.1.2",
-                            common : "androidx.paging:paging-common:2.1.2"
+                            runtime: "androidx.paging:paging-runtime:3.1.0",
+                            common : "androidx.paging:paging-common:3.1.0"
                     ],
                     work                  : [
-                            runtime: "androidx.work:work-runtime:2.3.4",
-                            testing: "androidx.work:work-testing:2.3.4"
+                            runtime: "androidx.work:work-runtime:2.7.1",
+                            testing: "androidx.work:work-testing:2.7.1"
                     ],
                     navigation            : [
-                            fragment: "androidx.navigation:navigation-fragment:2.3.0",
-                            ui      : "androidx.navigation:navigation-ui:2.3.0",
-                            testing : "androidx.navigation:navigation-testing:2.3.0"
+                            fragment: "androidx.navigation:navigation-fragment:2.4.0",
+                            ui      : "androidx.navigation:navigation-ui:2.4.0",
+                            testing : "androidx.navigation:navigation-testing:2.4.0"
                     ],
-                    media                 : "androidx.media:media:1.1.0",
+                    media                 : "androidx.media:media:1.4.3",
                     media2                : [
-                            media2: "androidx.media2:media2-session:1.0.3",
-                            widget: "androidx.media2:media2-widget:1.0.3",
-                            player: "androidx.media2:media2-player:1.0.3"
+                            media2: "androidx.media2:media2-session:1.2.0",
+                            widget: "androidx.media2:media2-widget:1.2.0",
+                            player: "androidx.media2:media2-player:1.2.0"
                     ],
-                    mediarouter           : "androidx.mediarouter:mediarouter:1.1.0",
+                    mediarouter           : "androidx.mediarouter:mediarouter:1.2.6",
                     enterprise            : [
-                            feedback        : "androidx.enterprise:enterprise-feedback:1.0.0",
-                            feedback_testing: "androidx.enterprise:enterprise-feedback-testing:1.0.0"
+                            feedback        : "androidx.enterprise:enterprise-feedback:1.1.0",
+                            feedback_testing: "androidx.enterprise:enterprise-feedback-testing:1.1.0"
                     ],
-                    browser               : "androidx.browser:browser:1.2.0",
+                    browser               : "androidx.browser:browser:1.4.0",
                     test                  : [
                             core    : "androidx.test:core:$androidx_test_version",
                             runner  : "androidx.test:runner:$androidx_test_version",
                             rules   : "androidx.test:rules:$androidx_test_version",
                             monitor : "androidx.test:monitor:$androidx_test_version",
                             ext     : [
-                                    junit: "androidx.test.ext:junit:1.1.1",
+                                    junit: "androidx.test.ext:junit:1.1.2",
                                     truth: "androidx.test.ext:truth:$androidx_test_version"
                             ],
                             espresso: [
@@ -141,8 +141,8 @@ ext {
                             jupiter_engine: "org.junit.jupiter:junit-jupiter-engine:$junit_version",
                             jupiter_params: "org.junit.jupiter:junit-jupiter-params:$junit_version"
                     ],
-                    mockito: "org.mockito:mockito-core:3.3.3",
-                    assertj: "org.assertj:assertj-core:3.16.1"
+                    mockito: "org.mockito:mockito-core:4.3.1",
+                    assertj: "org.assertj:assertj-core:3.22.0"
             ]
     ]
 }
